@@ -1,0 +1,158 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>gov.pnnl.svf</groupId>
+    <artifactId>sci-vis-framework</artifactId>
+    <version>1.7.01-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>sci-vis-framework</name>
+    <description>Sci-Vis Framework (SVF) is a full featured OpenGL 3d framework that allows for rapid creation of complex visualizations. The framework handles much of the lifecycle and complex tasks required for a 3d visualization. Unlike a game framework, SVF was designed to use fewer resources, work well in a windowed environment, and only render when necessary. The scene also takes advantage of multiple threads to free up the UI thread as much as possible. Shapes (actors) in the scene are created by adding or removing functionality (through support objects) during runtime. This allows a highly flexible and dynamic means of creating highly complex actors without the code complexity (it also helps overcome the lack of multiple inheritance in Java.) All classes are highly customizable and there are abstract classes which are intended to be subclassed to allow a developer to create more complex and highly performant actors. There are multiple demos included in the framework to help the developer get started and shows off nearly all of the functionality. Some simple shapes (actors) are already created for you such as text, bordered text, radial text, text area, complex paths, NURBS paths, cube, disk, grid, plane, geometric shapes, and volumetric area. It also comes with various camera types for viewing that can be dragged, zoomed, and rotated. Picking or selecting items in the scene can be accomplished in various ways depending on your needs (raycasting or color picking.) The framework currently has functionality for tooltips, animation, actor pools, color gradients, 2d physics, text, 1d/2d/3d textures, children, blending, clipping planes, view frustum culling, custom shaders, and custom actor states. </description>
+    <url>http://www.pnnl.gov/</url>
+
+    <licenses>
+        <license>
+            <name>Battelle Memorial Institute</name>
+            <url>LICENSE.txt</url>
+        </license>
+        <license>
+            <name>Department of Homeland Security</name>
+            <url>DISCLAIMER.txt</url>
+        </license>
+    </licenses>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.target.jdk>1.7</project.build.target.jdk>
+        <targetJdk>1.7</targetJdk>
+        <jogl.version>2.2.0</jogl.version>
+    </properties>
+
+    <organization>
+        <!-- Used as the 'Vendor' for JNLP generation -->
+        <name>Pacific Northwest National Laboratory (PNNL)</name>
+    </organization>
+
+    <profiles>
+        <!-- Prevents the release from performing a second unit test run -->
+        <profile>
+            <id>release</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.5.3</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Import-Package>*;resolution:=optional</Import-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-changelog-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <connectionType>developerConnection</connectionType>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>2.4</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>2.5.5</version>
+                <configuration>
+                    <failOnError>false</failOnError>
+                    <xmlOutput>true</xmlOutput>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <distributionManagement>
+        <repository>
+            <id>Artifactory @ Developer Central</id>
+            <name>Artifactory @ Developer Central-releases</name>
+            <url>https://maven.pnnl.gov/artifactory/mvn-pnnl-releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>Artifactory @ Developer Central</id>
+            <name>Artifactory @ Developer Central-snapshots</name>
+            <url>https://maven.pnnl.gov/artifactory/mvn-pnnl-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <modules>
+        <module>../svf-test</module>
+        <module>../svf-core</module>
+        <module>../svf</module>
+        <module>../svf-jbox2d</module>
+        <module>../svf-awt</module>
+        <module>../svf-fx</module>
+        <module>../svf-newt</module>
+        <module>../svf-swt</module>
+        <module>../svf-demo</module>
+    </modules>
+
+</project>
