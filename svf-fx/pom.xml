@@ -13,19 +13,6 @@
     <packaging>bundle</packaging>
     <name>svf-fx</name>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.zenjava</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>8.1.3</version>
-                <configuration>
-                    <mainClass>gov.pnnl.svf.demo.FxWindowDemo</mainClass>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
     <dependencies>
         <dependency>
             <groupId>org.osgi</groupId>
