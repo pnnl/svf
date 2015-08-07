@@ -1,0 +1,11 @@
+/svf-test/target/
+/svf-core/target/
+/svf/target/
+/svf-awt/target/
+/svf-jbox2d/target/
+/svf-fx/target/
+/svf-newt/target/
+/svf-swt/target/
+/svf-demo/target/
+/svf/performance.properties
+/svf-core/performance.properties
