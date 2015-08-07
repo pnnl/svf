@@ -16,8 +16,8 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicLong;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**

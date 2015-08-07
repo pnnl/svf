@@ -20,8 +20,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Support for actors that need to draw that require performance enhancement

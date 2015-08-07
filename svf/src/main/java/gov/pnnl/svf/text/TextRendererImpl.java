@@ -37,11 +37,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
-import javax.media.opengl.GLProfile;
-import javax.media.opengl.fixedfunc.GLLightingFunc;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.fixedfunc.GLLightingFunc;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.apache.commons.collections.primitives.DoubleList;
 
 /**

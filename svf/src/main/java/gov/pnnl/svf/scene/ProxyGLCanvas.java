@@ -1,21 +1,21 @@
 package gov.pnnl.svf.scene;
 
 import com.jogamp.common.util.locks.RecursiveLock;
+import com.jogamp.nativewindow.NativeSurface;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GLAnimatorControl;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GLCapabilitiesImmutable;
+import com.jogamp.opengl.GLContext;
+import com.jogamp.opengl.GLDrawable;
+import com.jogamp.opengl.GLDrawableFactory;
+import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.GLException;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.GLRunnable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.media.nativewindow.NativeSurface;
-import javax.media.opengl.GL;
-import javax.media.opengl.GLAnimatorControl;
-import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.GLCapabilities;
-import javax.media.opengl.GLCapabilitiesImmutable;
-import javax.media.opengl.GLContext;
-import javax.media.opengl.GLDrawable;
-import javax.media.opengl.GLDrawableFactory;
-import javax.media.opengl.GLEventListener;
-import javax.media.opengl.GLException;
-import javax.media.opengl.GLProfile;
-import javax.media.opengl.GLRunnable;
 import jogamp.common.util.locks.RecursiveLockImplJava5;
 
 /**

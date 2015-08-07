@@ -16,12 +16,12 @@ import gov.pnnl.svf.geometry.RoundedRectangle2D;
 import gov.pnnl.svf.geometry.Text2D;
 import java.util.List;
 import java.util.logging.Logger;
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.GLU;
-import javax.media.opengl.glu.GLUnurbs;
-import javax.media.opengl.glu.GLUtessellator;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.GLU;
+import com.jogamp.opengl.glu.GLUnurbs;
+import com.jogamp.opengl.glu.GLUtessellator;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Utility class containing all of the 2D shape methods.

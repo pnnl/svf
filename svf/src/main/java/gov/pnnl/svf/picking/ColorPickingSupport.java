@@ -11,8 +11,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * This class provides color picking support for an actor. A color picking

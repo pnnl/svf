@@ -2,7 +2,7 @@ package gov.pnnl.svf.geometry;
 
 import gov.pnnl.svf.core.geometry.Border;
 import gov.pnnl.svf.picking.ColorPickingSupport;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 /**
  * Renderer for a geometry shape type.

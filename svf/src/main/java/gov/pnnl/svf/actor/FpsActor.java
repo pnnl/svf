@@ -14,8 +14,8 @@ import gov.pnnl.svf.service.DrawableService;
 import java.awt.Font;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Will draw the current fps of the scene.

@@ -5,9 +5,9 @@ import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.picking.ColorPickingUtils;
 import java.util.Collection;
 import java.util.Set;
-import javax.media.opengl.GL;
-import javax.media.opengl.GLProfile;
-import javax.media.opengl.glu.GLU;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.glu.GLU;
 
 /**
  * Extended interface for the scene that exposes less used properties.

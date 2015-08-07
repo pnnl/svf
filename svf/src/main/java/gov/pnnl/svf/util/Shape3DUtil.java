@@ -12,11 +12,11 @@ import gov.pnnl.svf.geometry.Volume3D;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
-import javax.media.opengl.fixedfunc.GLMatrixFunc;
-import javax.media.opengl.glu.GLUnurbs;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
+import com.jogamp.opengl.glu.GLUnurbs;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**

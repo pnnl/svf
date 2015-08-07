@@ -1,7 +1,7 @@
 package gov.pnnl.svf.picking;
 
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Interface for a camera that is used for item picking. Item picking only works

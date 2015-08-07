@@ -4,8 +4,8 @@ import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.scene.Updatable;
 import gov.pnnl.svf.service.AbstractDrawableService;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Abstract class for all logger services.

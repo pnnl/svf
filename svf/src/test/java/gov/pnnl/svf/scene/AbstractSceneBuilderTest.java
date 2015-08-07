@@ -7,8 +7,8 @@ import gov.pnnl.svf.hint.CameraHint;
 import gov.pnnl.svf.test.AbstractObjectTestBase;
 import java.util.EnumSet;
 import java.util.Random;
-import javax.media.opengl.GLCapabilities;
-import javax.media.opengl.GLProfile;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GLProfile;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -6,7 +6,7 @@ import gov.pnnl.svf.demo.TextDemoLoader;
 import gov.pnnl.svf.scene.AbstractScene;
 import gov.pnnl.svf.scene.SceneBuilder;
 import java.lang.reflect.Constructor;
-import javax.media.opengl.awt.GLJPanel;
+import com.jogamp.opengl.awt.GLJPanel;
 import javax.swing.JFrame;
 
 /**

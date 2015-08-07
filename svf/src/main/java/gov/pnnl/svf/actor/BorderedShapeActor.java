@@ -12,8 +12,8 @@ import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.util.LayoutUtil;
 import gov.pnnl.svf.util.ShapeUtil;
 import java.util.Set;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Draws a geometry shape with a border.

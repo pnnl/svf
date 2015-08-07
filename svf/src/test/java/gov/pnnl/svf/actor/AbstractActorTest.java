@@ -9,8 +9,8 @@ import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.test.AbstractObjectTestBase;
 import gov.pnnl.svf.util.ConfigUtil;
 import java.util.Random;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.junit.Assert;
 import org.junit.Test;
 

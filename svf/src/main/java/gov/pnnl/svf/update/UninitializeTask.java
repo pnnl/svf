@@ -6,8 +6,8 @@ import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.scene.SceneExt;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * This class used to uninitialize an object in the scene. Any time this class

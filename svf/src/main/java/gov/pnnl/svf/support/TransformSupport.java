@@ -2,8 +2,8 @@ package gov.pnnl.svf.support;
 
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.camera.Camera;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**

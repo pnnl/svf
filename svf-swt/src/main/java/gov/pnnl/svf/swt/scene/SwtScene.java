@@ -6,7 +6,7 @@ import gov.pnnl.svf.scene.SceneBuilder;
 import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.ControlListener;
 import org.eclipse.swt.events.DisposeEvent;

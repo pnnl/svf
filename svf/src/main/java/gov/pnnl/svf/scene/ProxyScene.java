@@ -1,6 +1,6 @@
 package gov.pnnl.svf.scene;
 
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 /**
  * Dummy implementation of a scene. This object is mainly used for testing.

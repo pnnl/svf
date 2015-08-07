@@ -1,6 +1,6 @@
 package gov.pnnl.svf.texture;
 
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 /**
  * Interface used for overriding the texture parameters during texture

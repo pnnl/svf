@@ -21,9 +21,9 @@ import gov.pnnl.svf.util.FpsLogger;
 import gov.pnnl.svf.util.PerfLogger;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.apache.commons.math.geometry.Vector3D;
 
 public class JBox2dDistanceJointLoader implements DemoLoader {

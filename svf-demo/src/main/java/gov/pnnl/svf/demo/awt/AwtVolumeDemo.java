@@ -6,9 +6,9 @@ import gov.pnnl.svf.demo.VolumeDemoLoader;
 import gov.pnnl.svf.scene.AbstractScene;
 import gov.pnnl.svf.scene.SceneBuilder;
 import java.lang.reflect.Constructor;
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
-import javax.media.opengl.awt.GLCanvas;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.awt.GLCanvas;
 import javax.swing.JFrame;
 
 /**

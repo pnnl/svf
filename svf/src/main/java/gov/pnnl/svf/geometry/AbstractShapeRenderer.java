@@ -5,7 +5,7 @@ import gov.pnnl.svf.core.geometry.Border;
 import gov.pnnl.svf.picking.ColorPickingSupport;
 import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.util.ShapeUtil;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 /**
  * Abstract base class for a shape renderer.

@@ -6,10 +6,10 @@ import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.core.texture.TextureType;
 import java.net.URL;
 import java.nio.ByteBuffer;
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
-import javax.media.opengl.GL2ES1;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GL2ES1;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * This class provides texturing of an object. Add this class to actor's that

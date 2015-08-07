@@ -10,8 +10,8 @@ import gov.pnnl.svf.update.UninitializeTask;
 import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Abstract base class for text services.

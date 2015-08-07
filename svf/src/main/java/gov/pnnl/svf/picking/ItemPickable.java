@@ -2,8 +2,8 @@ package gov.pnnl.svf.picking;
 
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.event.PickingCameraEvent;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Interface for objects that perform a picking render that maps items to an

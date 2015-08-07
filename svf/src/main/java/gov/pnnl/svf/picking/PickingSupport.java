@@ -4,8 +4,8 @@ import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.event.PickingCameraEvent;
 import gov.pnnl.svf.support.AbstractSupport;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * This class provides picking support for an actor. A picking camera must be

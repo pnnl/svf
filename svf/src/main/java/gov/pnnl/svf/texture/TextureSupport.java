@@ -9,8 +9,8 @@ import gov.pnnl.svf.scene.Initializable;
 import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.support.AbstractSupport;
 import gov.pnnl.svf.update.UninitializeTask;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Abstract base class for textures.

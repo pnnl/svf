@@ -6,7 +6,7 @@ import gov.pnnl.svf.util.ConfigUtil;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.media.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLAutoDrawable;
 
 /**
  * Abstract base class for an SVF demo.

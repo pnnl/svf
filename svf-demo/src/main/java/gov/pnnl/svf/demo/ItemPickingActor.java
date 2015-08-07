@@ -10,8 +10,8 @@ import gov.pnnl.svf.picking.ItemPickableActor;
 import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.util.Shape2DUtil;
 import java.util.Map;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  *

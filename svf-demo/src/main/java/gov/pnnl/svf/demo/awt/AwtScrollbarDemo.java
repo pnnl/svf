@@ -25,7 +25,7 @@ import gov.pnnl.svf.util.PerfLogger;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.lang.reflect.Constructor;
-import javax.media.opengl.awt.GLCanvas;
+import com.jogamp.opengl.awt.GLCanvas;
 import javax.swing.JFrame;
 import org.apache.commons.math.geometry.Vector3D;
 

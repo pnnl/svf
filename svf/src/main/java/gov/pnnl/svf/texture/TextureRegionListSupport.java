@@ -7,8 +7,8 @@ import gov.pnnl.svf.scene.Drawable;
 import gov.pnnl.svf.scene.DrawingPass;
 import gov.pnnl.svf.scene.Scene;
 import java.util.List;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Support object for creating a list of texture regions.

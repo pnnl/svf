@@ -3,7 +3,7 @@ package gov.pnnl.svf.geometry;
 import gov.pnnl.svf.core.geometry.Border;
 import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.util.Shape3DUtil;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 /**
  * Shape renderer implementation.

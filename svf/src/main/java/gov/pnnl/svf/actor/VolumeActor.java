@@ -16,9 +16,9 @@ import gov.pnnl.svf.util.LayoutUtil;
 import gov.pnnl.svf.util.ShapeUtil;
 import java.util.Collections;
 import java.util.Set;
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * This actor will render volumetric data by drawing a series of slices that are

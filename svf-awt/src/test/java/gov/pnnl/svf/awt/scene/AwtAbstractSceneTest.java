@@ -18,7 +18,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.lang.reflect.InvocationTargetException;
-import javax.media.opengl.awt.GLCanvas;
+import com.jogamp.opengl.awt.GLCanvas;
 import javax.swing.SwingUtilities;
 import junit.framework.Assert;
 import org.junit.AfterClass;

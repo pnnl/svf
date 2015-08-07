@@ -12,7 +12,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.Set;
-import javax.media.opengl.awt.GLJPanel;
+import com.jogamp.opengl.awt.GLJPanel;
 import javax.swing.JFrame;
 
 /**

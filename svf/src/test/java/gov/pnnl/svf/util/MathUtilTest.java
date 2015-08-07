@@ -7,7 +7,7 @@ import gov.pnnl.svf.update.UpdateTaskAdapter;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

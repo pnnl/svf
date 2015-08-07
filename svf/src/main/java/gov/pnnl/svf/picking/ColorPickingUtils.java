@@ -22,14 +22,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
-import javax.media.opengl.GL2ES1;
-import javax.media.opengl.GL2ES2;
-import javax.media.opengl.GL2ES3;
-import javax.media.opengl.GL2GL3;
-import javax.media.opengl.GLException;
-import javax.media.opengl.fixedfunc.GLLightingFunc;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GL2ES1;
+import com.jogamp.opengl.GL2ES2;
+import com.jogamp.opengl.GL2ES3;
+import com.jogamp.opengl.GL2GL3;
+import com.jogamp.opengl.GLException;
+import com.jogamp.opengl.fixedfunc.GLLightingFunc;
 
 /**
  * Utility class for working with color picking in a scene. This class is not

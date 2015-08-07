@@ -3,8 +3,8 @@ package gov.pnnl.svf.actor;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.scene.DrawingPass;
 import gov.pnnl.svf.scene.Scene;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * This is an actor that does not draw anything in the scene. It can still

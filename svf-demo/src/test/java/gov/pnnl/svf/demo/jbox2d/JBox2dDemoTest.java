@@ -5,7 +5,7 @@ import gov.pnnl.svf.scene.AbstractScene;
 import gov.pnnl.svf.scene.SceneBuilder;
 import gov.pnnl.svf.test.AbstractDemoHelper;
 import java.text.MessageFormat;
-import javax.media.opengl.awt.GLCanvas;
+import com.jogamp.opengl.awt.GLCanvas;
 import javax.swing.JFrame;
 import org.junit.Rule;
 import org.junit.Test;

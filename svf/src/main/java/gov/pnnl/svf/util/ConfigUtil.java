@@ -25,17 +25,17 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-import javax.media.opengl.DebugGL2;
-import javax.media.opengl.DebugGL3;
-import javax.media.opengl.DebugGL3bc;
-import javax.media.opengl.DebugGL4;
-import javax.media.opengl.DebugGL4bc;
-import javax.media.opengl.DebugGLES1;
-import javax.media.opengl.DebugGLES2;
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
-import javax.media.opengl.GLCapabilities;
-import javax.media.opengl.GLProfile;
+import com.jogamp.opengl.DebugGL2;
+import com.jogamp.opengl.DebugGL3;
+import com.jogamp.opengl.DebugGL3bc;
+import com.jogamp.opengl.DebugGL4;
+import com.jogamp.opengl.DebugGL4bc;
+import com.jogamp.opengl.DebugGLES1;
+import com.jogamp.opengl.DebugGLES2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GLProfile;
 import org.apache.commons.io.IOUtils;
 
 /**

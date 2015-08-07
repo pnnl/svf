@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 import org.apache.commons.collections.primitives.ArrayDoubleList;
 import org.apache.commons.collections.primitives.DoubleList;
 import org.apache.commons.math.geometry.Vector3D;

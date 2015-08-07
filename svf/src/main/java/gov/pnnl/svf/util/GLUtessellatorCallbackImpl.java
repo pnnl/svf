@@ -2,8 +2,8 @@ package gov.pnnl.svf.util;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.GLUtessellatorCallbackAdapter;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.GLUtessellatorCallbackAdapter;
 
 /**
  * Default implementation of the GLUtessellatorCallback.

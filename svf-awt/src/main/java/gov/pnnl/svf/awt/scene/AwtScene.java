@@ -10,7 +10,7 @@ import java.awt.event.WindowStateListener;
 import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.media.opengl.awt.GLCanvas;
+import com.jogamp.opengl.awt.GLCanvas;
 import javax.swing.SwingUtilities;
 
 /**

@@ -4,8 +4,8 @@ import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.core.util.Transformer;
 import gov.pnnl.svf.geometry.Frustum;
 import gov.pnnl.svf.geometry.Rectangle;
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**

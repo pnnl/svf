@@ -14,7 +14,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 /**
  * Default implementation of the Screenshot interface.

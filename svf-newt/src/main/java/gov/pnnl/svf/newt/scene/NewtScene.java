@@ -3,7 +3,7 @@ package gov.pnnl.svf.newt.scene;
 import com.jogamp.newt.opengl.GLWindow;
 import gov.pnnl.svf.scene.AbstractScene;
 import gov.pnnl.svf.scene.SceneBuilder;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 /**
  * <p>

@@ -6,7 +6,7 @@ import gov.pnnl.svf.geometry.Text;
 import gov.pnnl.svf.scene.Disposable;
 import gov.pnnl.svf.scene.Initializable;
 import java.awt.Font;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 /**
  * Interface for drawing text in a scene using either orthographic or 3D

@@ -1,7 +1,7 @@
 package gov.pnnl.svf.scene;
 
-import javax.media.opengl.GL2;
-import javax.media.opengl.GLOffscreenAutoDrawable;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLOffscreenAutoDrawable;
 
 /**
  * Offscreen implementation of a scene. Use the following to get an offscreen

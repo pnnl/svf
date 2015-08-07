@@ -6,9 +6,9 @@ import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.support.MatrixTransformSupport;
 import gov.pnnl.svf.support.ParentSupport;
 import gov.pnnl.svf.support.TransformSupport;
-import javax.media.opengl.GL2;
-import javax.media.opengl.fixedfunc.GLMatrixFunc;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**

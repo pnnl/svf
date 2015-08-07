@@ -10,10 +10,10 @@ import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.util.Shape2DUtil;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
-import javax.media.opengl.fixedfunc.GLLightingFunc;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.fixedfunc.GLLightingFunc;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**

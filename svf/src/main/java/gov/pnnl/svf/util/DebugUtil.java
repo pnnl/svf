@@ -4,10 +4,10 @@ import com.jogamp.opengl.JoglVersion;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
-import javax.media.opengl.GL2ES2;
-import javax.media.opengl.GLException;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GL2ES2;
+import com.jogamp.opengl.GLException;
 
 /**
  * Utility class for working with the GLScene.
@@ -175,11 +175,11 @@ public class DebugUtil {
                 return "GL_INVALID_VALUE";
             case GL.GL_INVALID_OPERATION:
                 return "GL_INVALID_OPERATION";
-            case javax.media.opengl.GL2ES1.GL_STACK_OVERFLOW:
-                //            case javax.media.opengl.GL2ES2.GL_STACK_OVERFLOW:
+            case com.jogamp.opengl.GL2ES1.GL_STACK_OVERFLOW:
+                //            case com.jogamp.opengl.GL2ES2.GL_STACK_OVERFLOW:
                 return "GL_STACK_OVERFLOW";
-            case javax.media.opengl.GL2ES1.GL_STACK_UNDERFLOW:
-                //            case javax.media.opengl.GL2ES2.GL_STACK_UNDERFLOW:
+            case com.jogamp.opengl.GL2ES1.GL_STACK_UNDERFLOW:
+                //            case com.jogamp.opengl.GL2ES2.GL_STACK_UNDERFLOW:
                 return "GL_STACK_UNDERFLOW";
             case GL.GL_OUT_OF_MEMORY:
                 return "GL_OUT_OF_MEMORY";

@@ -24,7 +24,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.target.jdk>1.7</project.build.target.jdk>
         <targetJdk>1.7</targetJdk>
-        <jogl.version>2.2.0</jogl.version>
+        <jogl.version>2.3.1</jogl.version>
     </properties>
 
     <organization>

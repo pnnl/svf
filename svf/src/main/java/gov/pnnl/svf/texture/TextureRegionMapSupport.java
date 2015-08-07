@@ -4,7 +4,7 @@ import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.geometry.Rectangle;
 import java.util.ArrayList;
 import java.util.Map;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 /**
  * Support object for mapping specific texture regions.

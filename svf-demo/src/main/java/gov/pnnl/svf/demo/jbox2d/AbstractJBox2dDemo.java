@@ -5,7 +5,7 @@ import gov.pnnl.svf.scene.AbstractScene;
 import gov.pnnl.svf.scene.SceneBuilder;
 import gov.pnnl.svf.util.StringUtil;
 import java.awt.BorderLayout;
-import javax.media.opengl.awt.GLCanvas;
+import com.jogamp.opengl.awt.GLCanvas;
 import javax.swing.JFrame;
 
 /**

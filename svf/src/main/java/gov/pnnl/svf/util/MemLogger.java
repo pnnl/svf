@@ -8,9 +8,9 @@ import java.nio.IntBuffer;
 import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.media.opengl.GL2;
-import javax.media.opengl.GLException;
-import javax.media.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLException;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import jogamp.opengl.windows.wgl.WGLExt;
 
 /**

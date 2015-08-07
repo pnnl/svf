@@ -1,7 +1,7 @@
 package gov.pnnl.svf.demo;
 
 import gov.pnnl.svf.scene.FxAbstractScene;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 /**
  *
