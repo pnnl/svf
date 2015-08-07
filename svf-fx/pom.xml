@@ -13,11 +13,6 @@
     <packaging>bundle</packaging>
     <name>svf-fx</name>
 
-    <properties>
-        <project.build.target.jdk>1.8</project.build.target.jdk>
-        <targetJdk>1.8</targetJdk>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.osgi</groupId>

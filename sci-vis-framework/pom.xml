@@ -214,7 +214,7 @@
         <module>../svf</module>
         <module>../svf-jbox2d</module>
         <module>../svf-awt</module>
-        <module>../svf-fx</module>
+        <!--<module>../svf-fx</module>-->
         <module>../svf-newt</module>
         <module>../svf-swt</module>
         <module>../svf-demo</module>
