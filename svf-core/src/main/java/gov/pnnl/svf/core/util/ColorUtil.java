@@ -320,18 +320,6 @@ public class ColorUtil {
         return true;
     }
 
-    private static boolean isValid(final float hue, final float[] exclude, final float prev) {
-        for (int i = -1; i < exclude.length; i++) {
-            final float temp = i == -1 ? prev : exclude[i];
-            if (hue > temp - HUE_DELTA && hue < temp - HUE_DELTA
-                || hue + 1.0f > temp - HUE_DELTA && hue + 1.0f < temp - HUE_DELTA
-                || hue - 1.0f > temp - HUE_DELTA && hue - 1.0f < temp - HUE_DELTA) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     private static float nextFloat(final float min, final float max) {
         return random.nextFloat() * (max - min) + min;
     }

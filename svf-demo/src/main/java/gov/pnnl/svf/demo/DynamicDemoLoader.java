@@ -77,6 +77,7 @@ public class DynamicDemoLoader implements DemoLoader {
     private static final String TOOLTIP_ID = "apd-tooltip";
     private static final double PADDING = 1.2;
     private static final int DATA_POINTS = 16;
+    private static final double OFFSET = 9.0;
     // immutable collection static for flyweight pattern
     private static final List<Color> COLORS = new ArrayList<>(25);
 
@@ -120,6 +121,7 @@ public class DynamicDemoLoader implements DemoLoader {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void load(final Scene scene) {
         // create a camera
         final Camera camera = scene.getFactory().createCamera(scene, DraggingCamera.class);
@@ -208,26 +210,25 @@ public class DynamicDemoLoader implements DemoLoader {
         newActor(scene, new Chart2D(0.0 * PADDING, -1.0 * PADDING, Chart.NONE, new Point2D(0.0, -0.5), new Point2D(1.0, 2.0), dataArray))
                 .setThickness(7.0f);
         // shapes
-        final double offset = 9.0;
         // zero column
-        newBorderedActor(scene, new Rectangle2D(offset + -3.0 * PADDING, 1.0 * PADDING, 0.5, 0.5));
-        newBorderedActor(scene, new Circle2D(offset + -3.0 * PADDING, 0.0 * PADDING, 0.25));
-        newBorderedActor(scene, new Rectangle2D(offset + -3.0 * PADDING, -1.0 * PADDING, 0.5, 0.5))
+        newBorderedActor(scene, new Rectangle2D(OFFSET + -3.0 * PADDING, 1.0 * PADDING, 0.5, 0.5));
+        newBorderedActor(scene, new Circle2D(OFFSET + -3.0 * PADDING, 0.0 * PADDING, 0.25));
+        newBorderedActor(scene, new Rectangle2D(OFFSET + -3.0 * PADDING, -1.0 * PADDING, 0.5, 0.5))
                 .setBorder(Border.getBorder(true, false, false, true));
         // first column
-        newActor(scene, new Rectangle2D(offset + -2.0 * PADDING, 1.0 * PADDING, 0.5, 0.5));
-        newActor(scene, new Rectangle2D(offset + -2.0 * PADDING, 0.0 * PADDING, 1.0, 0.5));
-        newActor(scene, new Rectangle2D(offset + -2.0 * PADDING, -1.0 * PADDING, 0.5, 1.0));
+        newActor(scene, new Rectangle2D(OFFSET + -2.0 * PADDING, 1.0 * PADDING, 0.5, 0.5));
+        newActor(scene, new Rectangle2D(OFFSET + -2.0 * PADDING, 0.0 * PADDING, 1.0, 0.5));
+        newActor(scene, new Rectangle2D(OFFSET + -2.0 * PADDING, -1.0 * PADDING, 0.5, 1.0));
         // second column
-        newActor(scene, Arc2D.newInstance(offset + -1.0 * PADDING, 1.0 * PADDING, 45.0, 180.0, 0.2, 0.5));
-        newActor(scene, new Circle2D(offset + -1.0 * PADDING, 0.0 * PADDING, 0.5));
-        newActor(scene, Arc2D.newInstance(offset + -1.0 * PADDING, -1.0 * PADDING, 45.0, 180.0, 0.0, 0.5));
+        newActor(scene, Arc2D.newInstance(OFFSET + -1.0 * PADDING, 1.0 * PADDING, 45.0, 180.0, 0.2, 0.5));
+        newActor(scene, new Circle2D(OFFSET + -1.0 * PADDING, 0.0 * PADDING, 0.5));
+        newActor(scene, Arc2D.newInstance(OFFSET + -1.0 * PADDING, -1.0 * PADDING, 45.0, 180.0, 0.0, 0.5));
         // third column
-        newActor(scene, new Point2D(offset + 0.0 * PADDING, 1.0 * PADDING))
+        newActor(scene, new Point2D(OFFSET + 0.0 * PADDING, 1.0 * PADDING))
                 .setThickness(7.0f);
-        newActor(scene, new Rectangle2D(offset + Rectangle2D.ONE.getX(), Rectangle2D.ONE.getY(), Rectangle2D.ONE))
+        newActor(scene, new Rectangle2D(OFFSET + Rectangle2D.ONE.getX(), Rectangle2D.ONE.getY(), Rectangle2D.ONE))
                 .setThickness(7.0f);
-        newActor(scene, new Rectangle2D(offset + 0.0 * PADDING, -1.0 * PADDING, 0.0, 0.0))
+        newActor(scene, new Rectangle2D(OFFSET + 0.0 * PADDING, -1.0 * PADDING, 0.0, 0.0))
                 .setThickness(7.0f);
         // fourth column
         final List<Point2D> star = Arrays.asList(new Point2D(-0.3, -0.5),
@@ -235,9 +236,9 @@ public class DynamicDemoLoader implements DemoLoader {
                                                  new Point2D(0.3, -0.5),
                                                  new Point2D(-0.45, 0.0),
                                                  new Point2D(0.45, 0.0));
-        newActor(scene, new Polygon2D(offset + 1.0 * PADDING, 1.0 * PADDING, star));
-        newActor(scene, new Polygon2D(offset + 1.0 * PADDING, 0.0 * PADDING, star));
-        newActor(scene, new Polygon2D(offset + 1.0 * PADDING, -1.0 * PADDING, star));
+        newActor(scene, new Polygon2D(OFFSET + 1.0 * PADDING, 1.0 * PADDING, star));
+        newActor(scene, new Polygon2D(OFFSET + 1.0 * PADDING, 0.0 * PADDING, star));
+        newActor(scene, new Polygon2D(OFFSET + 1.0 * PADDING, -1.0 * PADDING, star));
         // fifth column
         final List<Point2D> s = Arrays.asList(new Point2D(0.5, 0.5),
                                               new Point2D(-0.5, 0.5),
@@ -245,86 +246,86 @@ public class DynamicDemoLoader implements DemoLoader {
                                               new Point2D(0.5, 0.0),
                                               new Point2D(0.5, -0.5),
                                               new Point2D(-0.5, -0.5));
-        newActor(scene, new Path2D(offset + 2.0 * PADDING, 1.0 * PADDING, s.toArray(new Point2D[s.size()])))
+        newActor(scene, new Path2D(OFFSET + 2.0 * PADDING, 1.0 * PADDING, s.toArray(new Point2D[s.size()])))
                 .setThickness(3.0f);
-        newActor(scene, new Path2D(offset + 2.0 * PADDING, 0.0 * PADDING, Path.BEZIER, s.toArray(new Point2D[s.size()])))
+        newActor(scene, new Path2D(OFFSET + 2.0 * PADDING, 0.0 * PADDING, Path.BEZIER, s.toArray(new Point2D[s.size()])))
                 .setThickness(3.0f);
-        newActor(scene, new Path2D(offset + 2.0 * PADDING, 0.0 * PADDING, Path.POINTS, s.toArray(new Point2D[s.size()])))
+        newActor(scene, new Path2D(OFFSET + 2.0 * PADDING, 0.0 * PADDING, Path.POINTS, s.toArray(new Point2D[s.size()])))
                 .setThickness(5.0f);
-        newActor(scene, new Path2D(offset + 2.0 * PADDING, -1.0 * PADDING, Path.NURBS, s.toArray(new Point2D[s.size()])))
+        newActor(scene, new Path2D(OFFSET + 2.0 * PADDING, -1.0 * PADDING, Path.NURBS, s.toArray(new Point2D[s.size()])))
                 .setThickness(3.0f);
-        newActor(scene, new Path2D(offset + 2.0 * PADDING, -1.0 * PADDING, Path.POINTS, s.toArray(new Point2D[s.size()])))
+        newActor(scene, new Path2D(OFFSET + 2.0 * PADDING, -1.0 * PADDING, Path.POINTS, s.toArray(new Point2D[s.size()])))
                 .setThickness(5.0f);
         // sixth column
-        newActor(scene, new Path2D(offset + 3.0 * PADDING, 1.0 * PADDING, Path.NURBS, BundlingUtil.createBundledPoint2D(s, 0.75, true).toArray(new Point2D[s.size()])))
+        newActor(scene, new Path2D(OFFSET + 3.0 * PADDING, 1.0 * PADDING, Path.NURBS, BundlingUtil.createBundledPoint2D(s, 0.75, true).toArray(new Point2D[s.size()])))
                 .setThickness(3.0f);
-        newActor(scene, new Path2D(offset + 3.0 * PADDING, 1.0 * PADDING, Path.POINTS, BundlingUtil.createBundledPoint2D(s, 0.75, true).toArray(new Point2D[s.size()])))
+        newActor(scene, new Path2D(OFFSET + 3.0 * PADDING, 1.0 * PADDING, Path.POINTS, BundlingUtil.createBundledPoint2D(s, 0.75, true).toArray(new Point2D[s.size()])))
                 .setThickness(5.0f);
-        newActor(scene, new Path2D(offset + 3.0 * PADDING, 0.0 * PADDING, Path.NURBS, BundlingUtil.createBundledPoint2D(s, 0.5, true).toArray(new Point2D[s.size()])))
+        newActor(scene, new Path2D(OFFSET + 3.0 * PADDING, 0.0 * PADDING, Path.NURBS, BundlingUtil.createBundledPoint2D(s, 0.5, true).toArray(new Point2D[s.size()])))
                 .setThickness(3.0f);
-        newActor(scene, new Path2D(offset + 3.0 * PADDING, 0.0 * PADDING, Path.POINTS, BundlingUtil.createBundledPoint2D(s, 0.5, true).toArray(new Point2D[s.size()])))
+        newActor(scene, new Path2D(OFFSET + 3.0 * PADDING, 0.0 * PADDING, Path.POINTS, BundlingUtil.createBundledPoint2D(s, 0.5, true).toArray(new Point2D[s.size()])))
                 .setThickness(5.0f);
-        newActor(scene, new Path2D(offset + 3.0 * PADDING, -1.0 * PADDING, Path.NURBS, BundlingUtil.createBundledPoint2D(s, 0.0, true).toArray(new Point2D[s.size()])))
+        newActor(scene, new Path2D(OFFSET + 3.0 * PADDING, -1.0 * PADDING, Path.NURBS, BundlingUtil.createBundledPoint2D(s, 0.0, true).toArray(new Point2D[s.size()])))
                 .setThickness(3.0f);
-        newActor(scene, new Path2D(offset + 3.0 * PADDING, -1.0 * PADDING, Path.POINTS, BundlingUtil.createBundledPoint2D(s, 0.0, true).toArray(new Point2D[s.size()])))
+        newActor(scene, new Path2D(OFFSET + 3.0 * PADDING, -1.0 * PADDING, Path.POINTS, BundlingUtil.createBundledPoint2D(s, 0.0, true).toArray(new Point2D[s.size()])))
                 .setThickness(5.0f);
         // seventh column
-        newActor(scene, new RoundedRectangle2D(offset + 4.0 * PADDING, 1.0 * PADDING, 1.0, 0.8, 0.1));
-        newBorderedActor(scene, new RoundedRectangle2D(offset + 4.0 * PADDING, 0.0 * PADDING, 0.5, 0.5, 0.1));
-        newBorderedActor(scene, new RoundedRectangle2D(offset + 4.0 * PADDING, -1.0 * PADDING, 0.75, 0.5, 1.0))
+        newActor(scene, new RoundedRectangle2D(OFFSET + 4.0 * PADDING, 1.0 * PADDING, 1.0, 0.8, 0.1));
+        newBorderedActor(scene, new RoundedRectangle2D(OFFSET + 4.0 * PADDING, 0.0 * PADDING, 0.5, 0.5, 0.1));
+        newBorderedActor(scene, new RoundedRectangle2D(OFFSET + 4.0 * PADDING, -1.0 * PADDING, 0.75, 0.5, 1.0))
                 .setBorder(Border.getBorder(true, false, false, true));
         // top text rows
         DynamicBorderedShapeActor bordered;
-        bordered = newBorderedActor(scene, new Text3D(offset + -3.0 * PADDING, 3.0 * PADDING, 0.0, new Font("Vivaldi", Font.PLAIN, Text3D.DEFAULT_FONT.getSize()),
+        bordered = newBorderedActor(scene, new Text3D(OFFSET + -3.0 * PADDING, 3.0 * PADDING, 0.0, new Font("Vivaldi", Font.PLAIN, Text3D.DEFAULT_FONT.getSize()),
                                                       "Text3D Shape3DActor"));
         bordered.setBorder(Border.TOP_LEFT);
         bordered.setBorderThickness(0.04f);
-        bordered = newBorderedActor(scene, new Text3D(offset + 0.0 * PADDING, 3.0 * PADDING, 0.0, new Font("Cambria", Font.PLAIN, Text3D.DEFAULT_FONT.getSize()),
+        bordered = newBorderedActor(scene, new Text3D(OFFSET + 0.0 * PADDING, 3.0 * PADDING, 0.0, new Font("Cambria", Font.PLAIN, Text3D.DEFAULT_FONT.getSize()),
                                                       "Text3D Shape3DActor"));
         bordered.setColor(Color.WHITE);
         bordered.setBackgroundColor(Color.GRAY);
         bordered.setBorder(Border.TOP);
         bordered.setBorderColor(Color.WHITE);
         bordered.setBorderThickness(0.04f);
-        bordered = newBorderedActor(scene, new Text3D(offset + 3.0 * PADDING, 3.0 * PADDING, 0.0, new Font("Calibri", Font.PLAIN, Text3D.DEFAULT_FONT.getSize()),
+        bordered = newBorderedActor(scene, new Text3D(OFFSET + 3.0 * PADDING, 3.0 * PADDING, 0.0, new Font("Calibri", Font.PLAIN, Text3D.DEFAULT_FONT.getSize()),
                                                       "Text3D Shape3DActor"));
         bordered.setBorder(Border.TOP_RIGHT);
         bordered.setBorderThickness(0.04f);
-        bordered = newBorderedActor(scene, new Text3D(offset + -3.0 * PADDING, 2.5 * PADDING, 0.0, new Font("Comic Sans MS", Font.PLAIN, Text3D.DEFAULT_FONT.getSize()),
+        bordered = newBorderedActor(scene, new Text3D(OFFSET + -3.0 * PADDING, 2.5 * PADDING, 0.0, new Font("Comic Sans MS", Font.PLAIN, Text3D.DEFAULT_FONT.getSize()),
                                                       "Text3D Shape3DActor"));
         bordered.setColor(Color.WHITE);
         bordered.setBackgroundColor(Color.GRAY);
         bordered.setBorder(Border.LEFT);
         bordered.setBorderColor(Color.WHITE);
         bordered.setBorderThickness(0.04f);
-        final DynamicShapeActor actor = newActor(scene, new Text3D(offset + 0.0 * PADDING, 2.5 * PADDING, 0.0, Text3D.DEFAULT_FONT, "Text3D Shape3DActor"));
+        final DynamicShapeActor actor = newActor(scene, new Text3D(OFFSET + 0.0 * PADDING, 2.5 * PADDING, 0.0, Text3D.DEFAULT_FONT, "Text3D Shape3DActor"));
         actor.setBackgroundColor(Color.WHITE);
-        bordered = newBorderedActor(scene, new Text3D(offset + 3.0 * PADDING, 2.5 * PADDING, 0.0, new Font("Lucida Console", Font.PLAIN, Text3D.DEFAULT_FONT.getSize()),
+        bordered = newBorderedActor(scene, new Text3D(OFFSET + 3.0 * PADDING, 2.5 * PADDING, 0.0, new Font("Lucida Console", Font.PLAIN, Text3D.DEFAULT_FONT.getSize()),
                                                       "Text3D Shape3DActor"));
         bordered.setColor(Color.WHITE);
         bordered.setBackgroundColor(Color.GRAY);
         bordered.setBorder(Border.RIGHT);
         bordered.setBorderColor(Color.WHITE);
         bordered.setBorderThickness(0.04f);
-        bordered = newBorderedActor(scene, new Text3D(offset + -3.0 * PADDING, 2.0 * PADDING, 0.0, new Font("Courier New", Font.PLAIN, Text3D.DEFAULT_FONT.getSize()),
+        bordered = newBorderedActor(scene, new Text3D(OFFSET + -3.0 * PADDING, 2.0 * PADDING, 0.0, new Font("Courier New", Font.PLAIN, Text3D.DEFAULT_FONT.getSize()),
                                                       "Text3D Shape3DActor"));
         bordered.setBorder(Border.BOTTOM_LEFT);
         bordered.setBorderThickness(0.04f);
-        bordered = newBorderedActor(scene, new Text3D(offset + 0.0 * PADDING, 2.0 * PADDING, 0.0, new Font("Georgia", Font.PLAIN, Text3D.DEFAULT_FONT.getSize()),
+        bordered = newBorderedActor(scene, new Text3D(OFFSET + 0.0 * PADDING, 2.0 * PADDING, 0.0, new Font("Georgia", Font.PLAIN, Text3D.DEFAULT_FONT.getSize()),
                                                       "Text3D Shape3DActor"));
         bordered.setColor(Color.WHITE);
         bordered.setBackgroundColor(Color.GRAY);
         bordered.setBorder(Border.BOTTOM);
         bordered.setBorderColor(Color.WHITE);
         bordered.setBorderThickness(0.04f);
-        bordered = newBorderedActor(scene, new Text3D(offset + 3.0 * PADDING, 2.0 * PADDING, 0.0,
+        bordered = newBorderedActor(scene, new Text3D(OFFSET + 3.0 * PADDING, 2.0 * PADDING, 0.0,
                                                       new Font("Times New Roman", Font.PLAIN, Text3D.DEFAULT_FONT.getSize()), "Text3D Shape3DActor"));
         bordered.setBorder(Border.BOTTOM_RIGHT);
         bordered.setBorderThickness(0.04f);
         // bottom row
-        newBorderedActor(scene, Arc2D.newInstance(offset + -3.0 * PADDING, -2.0 * PADDING, 45.0, 180.0, 0.2, 0.5))
+        newBorderedActor(scene, Arc2D.newInstance(OFFSET + -3.0 * PADDING, -2.0 * PADDING, 45.0, 180.0, 0.2, 0.5))
                 .setBorderThickness(0.04f);
-        final Text3D text3D = new Text3D(offset + 0.0 * PADDING, -2.0 * PADDING, 0.0, Text3D.DEFAULT_FONT, "Text3D Shape3DActor that will need to be truncated to fit.");
+        final Text3D text3D = new Text3D(OFFSET + 0.0 * PADDING, -2.0 * PADDING, 0.0, Text3D.DEFAULT_FONT, "Text3D Shape3DActor that will need to be truncated to fit.");
         bordered = newBorderedActor(scene, TextUtil.fitText(text3D, 6.0));
         bordered.setBorderThickness(0.04f);
         // test for jogl text implementations

@@ -170,8 +170,8 @@ public abstract class FxAbstractScene extends Canvas implements SceneExt {
             if (constructed) {
                 throw new IllegalStateException("Scene can only be constructed once.");
             }
+            this.builder = new ImmutableSceneBuilder(builder);
         }
-        this.builder = new ImmutableSceneBuilder(builder);
         this.multiscreen = multiscreen;
         capabilities = builder.getGLCapabilities();
         capabilities.setPBuffer(true);
