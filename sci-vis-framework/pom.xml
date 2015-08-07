@@ -130,6 +130,12 @@
         </plugins>
     </reporting>
 
+    <scm>
+        <url>https://github.com/pnnl/svf.git</url>
+        <connection>scm:git:git://github.com/pnnl/svf.git</connection>
+        <developerConnection>scm:git:git@github.com:pnnl/svf.git</developerConnection>
+    </scm>
+
     <distributionManagement>
         <repository>
             <id>Artifactory @ Developer Central</id>
