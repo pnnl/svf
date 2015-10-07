@@ -120,7 +120,7 @@ public class NamedThreadFactory implements ThreadFactory {
 
     private static String createThreadName(final Class<?> type) {
         final String[] parts = type.getName().split("\\.");
-        if (parts == null || parts.length == 0) {
+        if (parts.length == 0) {
             throw new IllegalArgumentException("type");
         }
         return parts[parts.length - 1];

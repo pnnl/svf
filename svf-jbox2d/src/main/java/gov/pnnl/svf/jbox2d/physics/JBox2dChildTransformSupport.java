@@ -1,14 +1,14 @@
 package gov.pnnl.svf.jbox2d.physics;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.camera.AbstractCamera;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.support.MatrixTransformSupport;
 import gov.pnnl.svf.support.ParentSupport;
 import gov.pnnl.svf.support.TransformSupport;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**
@@ -134,7 +134,7 @@ public class JBox2dChildTransformSupport extends MatrixTransformSupport {
         if (!oldScale.equals(newScale)) {
             getPropertyChangeSupport().firePropertyChange(SCALE, oldScale, newScale);
         }
-        if (oldRotation != newRotation) {
+        if (Double.compare(oldRotation, newRotation) != 0) {
             getPropertyChangeSupport().firePropertyChange(ROTATION, oldRotation, newRotation);
         }
     }

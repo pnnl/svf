@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 /**
- * Default implementation of the vertex buffer object.
+ * Default implementation of the vertex buffer object. This version exposes
+ * mutable internal state for performance reasons.
  *
  * @author Arthur Bleeker
  */

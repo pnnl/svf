@@ -1,5 +1,7 @@
 package gov.pnnl.svf.actor;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.event.PickingCameraEvent;
 import gov.pnnl.svf.hint.OpenGLHint;
@@ -17,8 +19,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.HashSet;
 import java.util.Set;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Abstract base class for actors that need to draw that require performance
@@ -146,7 +146,11 @@ public abstract class AbstractDynamicActor extends AbstractActor implements VboD
      */
     protected abstract OpenGLHint overrideOpenGLHint(final Set<OpenGLHint> openGLHints, OpenGLHint openGLHint);
 
-    private void updateSupport() {
+    /**
+     * Updates the drawable support object. This is automatically called when
+     * necessary.
+     */
+    protected void updateSupport() {
         final Set<OpenGLHint> openGLHints = getScene().getExtended().getSceneBuilder().copyHints(OpenGLHint.class);
         // find the highest priority OpenGL hint
         OpenGLHint openGLHint = OpenGLHint.IMMEDIATE_DRAW;

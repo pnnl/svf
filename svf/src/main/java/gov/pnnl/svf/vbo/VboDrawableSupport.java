@@ -1,5 +1,8 @@
 package gov.pnnl.svf.vbo;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.event.PickingCameraEvent;
@@ -22,9 +25,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Support for actors that need to draw that require performance enhancement
@@ -349,27 +349,27 @@ public class VboDrawableSupport extends AbstractSupport<Object> implements Initi
                 final DoubleBuffer texCoordsBuffer = DoubleBuffer.wrap(vbo.getTexCoords());
                 texCoordsBuffer.rewind();
                 gl.glBindBuffer(GL.GL_ARRAY_BUFFER, buffers[index++]);
-                gl.glBufferData(GL.GL_ARRAY_BUFFER, vbo.getTexCoords().length * 8, texCoordsBuffer, GL.GL_STATIC_DRAW);
+                gl.glBufferData(GL.GL_ARRAY_BUFFER, vbo.getTexCoords().length * 8L, texCoordsBuffer, GL.GL_STATIC_DRAW);
             }
             // colors
             if (vbo.getColorDataType() == VboDataType.PER_VERTEX) {
                 final FloatBuffer colorsBuffer = FloatBuffer.wrap(vbo.getColors());
                 colorsBuffer.rewind();
                 gl.glBindBuffer(GL.GL_ARRAY_BUFFER, buffers[index++]);
-                gl.glBufferData(GL.GL_ARRAY_BUFFER, vbo.getColors().length * 4, colorsBuffer, GL.GL_STATIC_DRAW);
+                gl.glBufferData(GL.GL_ARRAY_BUFFER, vbo.getColors().length * 4L, colorsBuffer, GL.GL_STATIC_DRAW);
             }
             // normals
             if (vbo.getNormalDataType() == VboDataType.PER_VERTEX) {
                 final DoubleBuffer normalsBuffer = DoubleBuffer.wrap(vbo.getVertices());
                 normalsBuffer.rewind();
                 gl.glBindBuffer(GL.GL_ARRAY_BUFFER, buffers[index++]);
-                gl.glBufferData(GL.GL_ARRAY_BUFFER, vbo.getNormals().length * 8, normalsBuffer, GL.GL_STATIC_DRAW);
+                gl.glBufferData(GL.GL_ARRAY_BUFFER, vbo.getNormals().length * 8L, normalsBuffer, GL.GL_STATIC_DRAW);
             }
             // vertices
             final DoubleBuffer verticesBuffer = DoubleBuffer.wrap(vbo.getVertices());
             verticesBuffer.rewind();
             gl.glBindBuffer(GL.GL_ARRAY_BUFFER, buffers[index++]);
-            gl.glBufferData(GL.GL_ARRAY_BUFFER, vbo.getVertices().length * 8, verticesBuffer, GL.GL_STATIC_DRAW);
+            gl.glBufferData(GL.GL_ARRAY_BUFFER, vbo.getVertices().length * 8L, verticesBuffer, GL.GL_STATIC_DRAW);
             // calculate vertices
             vertices += vbo.getVertices().length / vbo.getVertexDimension();
         }
