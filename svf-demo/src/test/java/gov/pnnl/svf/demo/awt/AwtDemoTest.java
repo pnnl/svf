@@ -1,10 +1,10 @@
 package gov.pnnl.svf.demo.awt;
 
+import com.jogamp.opengl.awt.GLCanvas;
 import gov.pnnl.svf.scene.AbstractScene;
 import gov.pnnl.svf.scene.SceneBuilder;
 import gov.pnnl.svf.test.AbstractDemoHelper;
 import java.text.MessageFormat;
-import com.jogamp.opengl.awt.GLCanvas;
 import javax.swing.JFrame;
 import org.junit.Rule;
 import org.junit.Test;
@@ -66,12 +66,6 @@ public class AwtDemoTest extends AbstractDemoHelper<AbstractAwtDemo, JFrame, Sce
 
     @Override
     protected void disposeScene() {
-        if (scene != null) {
-            scene.dispose();
-        }
-        if (window != null && scene != null) {
-            window.remove(scene.getComponent());
-        }
         if (window != null) {
             window.dispose();
         }
