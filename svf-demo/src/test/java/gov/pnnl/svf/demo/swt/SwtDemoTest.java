@@ -113,9 +113,6 @@ public class SwtDemoTest extends AbstractDemoHelper<AbstractSwtDemo, Shell, Scen
             @Override
             public void run() {
                 // dispose
-                if (scene != null) {
-                    scene.dispose();
-                }
                 if (window != null) {
                     for (final Control control : window.getChildren()) {
                         control.dispose();

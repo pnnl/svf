@@ -1,5 +1,9 @@
 package gov.pnnl.svf.support;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GL2ES2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.scene.Drawable;
@@ -14,10 +18,6 @@ import java.nio.IntBuffer;
 import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.GL2ES2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * You must override this class in order to provide functionality for setting
@@ -157,7 +157,7 @@ public abstract class AbstractShaderSupport extends AbstractSupport<Object> impl
                 gl.glLinkProgram(shaderProgram);
                 gl.glValidateProgram(shaderProgram);
                 final String log = readProgramInfoLog(gl, shaderProgram);
-                if ((log != null) && !log.isEmpty() && getActor().getScene().getExtended().getSceneBuilder().isVerbose()) {
+                if (!log.isEmpty() && getActor().getScene().getExtended().getSceneBuilder().isVerbose()) {
                     logger.log(Level.INFO, String.format("Shader Program Info Log: %n%s", log));
                 }
             } else {
@@ -190,7 +190,7 @@ public abstract class AbstractShaderSupport extends AbstractSupport<Object> impl
         final IntBuffer buffer = IntBuffer.allocate(1);
         gl.glGetShaderiv(program, GL2ES2.GL_COMPILE_STATUS, buffer);
         final String log = readShaderInfoLog(gl, program);
-        if ((log != null) && !log.isEmpty()) {
+        if (!log.isEmpty()) {
             logger.log(Level.INFO, String.format("%s Shader Message Info: %n%s", type == GL2ES2.GL_VERTEX_SHADER ? "Vertex" : "Fragment", log));
         }
         if (buffer.get() == GL.GL_FALSE) {

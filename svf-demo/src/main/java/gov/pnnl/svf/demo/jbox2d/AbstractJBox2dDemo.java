@@ -1,11 +1,13 @@
 package gov.pnnl.svf.demo.jbox2d;
 
+import com.jogamp.opengl.awt.GLCanvas;
 import gov.pnnl.svf.demo.AbstractDemo;
 import gov.pnnl.svf.scene.AbstractScene;
 import gov.pnnl.svf.scene.SceneBuilder;
 import gov.pnnl.svf.util.StringUtil;
 import java.awt.BorderLayout;
-import com.jogamp.opengl.awt.GLCanvas;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 
 /**
@@ -22,13 +24,19 @@ public abstract class AbstractJBox2dDemo extends AbstractDemo<JFrame, GLCanvas> 
         window.validate();
         window.setTitle("Scientific Visualization Framework " + StringUtil.getHumanReadableName(scene));
         window.setVisible(true);
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+        window.addWindowListener(new WindowAdapter() {
 
             @Override
-            public void run() {
+            public void windowClosed(final WindowEvent we) {
                 scene.dispose();
             }
-        }, "Shutdown"));
+
+            @Override
+            public void windowClosing(final WindowEvent we) {
+                scene.dispose();
+            }
+
+        });
         scene.start();
     }
 

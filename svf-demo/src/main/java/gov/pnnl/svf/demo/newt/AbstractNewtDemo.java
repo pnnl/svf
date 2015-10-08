@@ -20,13 +20,13 @@ public abstract class AbstractNewtDemo extends AbstractDemo<GLWindow, GLWindow> 
     public void startDemo(final GLWindow window, final AbstractScene<GLWindow> scene) {
         window.setTitle("Scientific Visualization Framework " + StringUtil.getHumanReadableName(scene));
         window.setVisible(true);
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+        window.addWindowListener(new WindowAdapter() {
 
             @Override
-            public void run() {
+            public void windowDestroyNotify(final WindowEvent we) {
                 scene.dispose();
             }
-        }, "Shutdown"));
+        });
         scene.start();
     }
 
@@ -42,14 +42,6 @@ public abstract class AbstractNewtDemo extends AbstractDemo<GLWindow, GLWindow> 
     public GLWindow createWindow(final SceneBuilder builder) {
         final GLWindow window = GLWindow.create(builder.getGLCapabilities());
         window.setSize(WINDOW_SIZE_WIDTH, WINDOW_SIZE_HEIGHT);
-        window.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowDestroyNotify(final WindowEvent event) {
-                // throwing an exception doesn't work
-                //                throw new RuntimeException("Shutdown");
-                System.exit(0);
-            }
-        });
         return window;
     }
 }

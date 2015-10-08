@@ -1,5 +1,10 @@
 package gov.pnnl.svf.text;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.fixedfunc.GLLightingFunc;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import com.jogamp.opengl.util.texture.TextureData;
 import com.jogamp.opengl.util.texture.awt.AWTTextureData;
 import gov.pnnl.svf.actor.Actor;
@@ -37,11 +42,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.GLProfile;
-import com.jogamp.opengl.fixedfunc.GLLightingFunc;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.apache.commons.collections.primitives.DoubleList;
 
 /**
@@ -212,39 +212,37 @@ public class TextRendererImpl extends AbstractText {
         for (int i = 0; i < str.length(); i++) {
             final Integer c = (int) str.charAt(i);
             final Tuple2<Integer, Rectangle> item = findCharacter(gl, c, false);
-            if (item != null) {
-                //                region = regions.get(item.getFirst());
-                final Texture2dSupport temp = textures.get(item.getFirst());
-                if (texture != temp) {
-                    if (texture != null) {
-                        texture.endDraw(gl, null, null);
-                    }
-                    texture = temp;
-                    texture.draw(gl, null, null);
+            //                region = regions.get(item.getFirst());
+            final Texture2dSupport temp = textures.get(item.getFirst());
+            if (texture != temp) {
+                if (texture != null) {
+                    texture.endDraw(gl, null, null);
                 }
-                final Rectangle region = item.getSecond();
-                // verts
-                xLeft = x - (w / 2.0) + offsets.get(i);
-                verts[0][0] = xLeft;
-                verts[1][0] = xLeft;
-                xLeft += region.getWidth() * scale;
-                verts[2][0] = xLeft;
-                verts[3][0] = xLeft;
-                // texture coords
-                // texture can't be null at this point
-                texCoords[0][0] = (double) region.getX() / (double) texture.getWidth();
-                texCoords[0][1] = (double) (region.getY() + region.getHeight()) / (double) texture.getHeight();
-                texCoords[1][0] = (double) region.getX() / (double) texture.getWidth();
-                texCoords[1][1] = (double) region.getY() / (double) texture.getHeight();
-                texCoords[2][0] = (double) (region.getX() + region.getWidth()) / (double) texture.getWidth();
-                texCoords[2][1] = (double) region.getY() / (double) texture.getHeight();
-                texCoords[3][0] = (double) (region.getX() + region.getWidth()) / (double) texture.getWidth();
-                texCoords[3][1] = (double) (region.getY() + region.getHeight()) / (double) texture.getHeight();
-                // draw
-                //                region.setTextureRegion(gl, c);
-                GeometryUtil.drawPolygon(gl, verts, texCoords, NORMAL);
-                //                region.unsetTextureRegion(gl);
+                texture = temp;
+                texture.draw(gl, null, null);
             }
+            final Rectangle region = item.getSecond();
+            // verts
+            xLeft = x - (w / 2.0) + offsets.get(i);
+            verts[0][0] = xLeft;
+            verts[1][0] = xLeft;
+            xLeft += region.getWidth() * scale;
+            verts[2][0] = xLeft;
+            verts[3][0] = xLeft;
+                // texture coords
+            // texture can't be null at this point
+            texCoords[0][0] = (double) region.getX() / (double) texture.getWidth();
+            texCoords[0][1] = (double) (region.getY() + region.getHeight()) / (double) texture.getHeight();
+            texCoords[1][0] = (double) region.getX() / (double) texture.getWidth();
+            texCoords[1][1] = (double) region.getY() / (double) texture.getHeight();
+            texCoords[2][0] = (double) (region.getX() + region.getWidth()) / (double) texture.getWidth();
+            texCoords[2][1] = (double) region.getY() / (double) texture.getHeight();
+            texCoords[3][0] = (double) (region.getX() + region.getWidth()) / (double) texture.getWidth();
+            texCoords[3][1] = (double) (region.getY() + region.getHeight()) / (double) texture.getHeight();
+                // draw
+            //                region.setTextureRegion(gl, c);
+            GeometryUtil.drawPolygon(gl, verts, texCoords, NORMAL);
+            //                region.unsetTextureRegion(gl);
         }
         if (texture != null) {
             texture.endDraw(gl, null, null);

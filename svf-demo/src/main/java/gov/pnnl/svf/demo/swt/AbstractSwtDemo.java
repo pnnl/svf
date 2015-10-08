@@ -30,9 +30,9 @@ public abstract class AbstractSwtDemo extends AbstractDemo<Shell, GLCanvas> {
                 display.sleep();
             }
         }
+        scene.dispose();
         display.dispose();
         window.dispose();
-        scene.dispose();
     }
 
     @Override

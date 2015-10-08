@@ -65,9 +65,6 @@ public class NewtDemoTest extends AbstractDemoHelper<AbstractNewtDemo, GLWindow,
 
     @Override
     protected void disposeScene() {
-        if (scene != null) {
-            scene.dispose();
-        }
         if (window != null) {
             window.setVisible(false);
             window.destroy();

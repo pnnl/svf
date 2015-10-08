@@ -1,5 +1,6 @@
 package gov.pnnl.svf.demo.awt;
 
+import com.jogamp.opengl.awt.GLCanvas;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.demo.AbstractDemo;
 import gov.pnnl.svf.scene.AbstractScene;
@@ -10,9 +11,10 @@ import gov.pnnl.svf.util.StringUtil;
 import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.Set;
-import com.jogamp.opengl.awt.GLCanvas;
 import javax.swing.JFrame;
 
 /**
@@ -29,6 +31,19 @@ public abstract class AbstractAwtDemo extends AbstractDemo<JFrame, GLCanvas> {
         window.validate();
         window.setTitle("Scientific Visualization Framework " + StringUtil.getHumanReadableName(scene));
         window.setVisible(true);
+        window.addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosed(final WindowEvent we) {
+                scene.dispose();
+            }
+
+            @Override
+            public void windowClosing(final WindowEvent we) {
+                scene.dispose();
+            }
+
+        });
         scene.start();
     }
 
@@ -59,13 +74,6 @@ public abstract class AbstractAwtDemo extends AbstractDemo<JFrame, GLCanvas> {
                 }
             }
         });
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                scene.dispose();
-            }
-        }, "Shutdown"));
         startDemo(window, scene);
     }
 
