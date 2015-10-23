@@ -10,3 +10,7 @@
 /svf/performance.properties
 /svf-core/performance.properties
 /sci-vis-framework/nbactions.xml
+
+.project
+.classpath
+.settings/
