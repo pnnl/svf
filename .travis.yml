@@ -1,5 +1,6 @@
 language: java
 jdk: oraclejdk7
+sudo: false
 install: mvn -f sci-vis-framework install -DskipTests=true
 script: mvn -f sci-vis-framework test
 before_script:
