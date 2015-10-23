@@ -84,12 +84,12 @@ public abstract class AbstractObjectTestBase<T extends Object> {
     public TestRule watcher = new TestWatcher() {
         @Override
         protected void starting(final Description description) {
-            System.out.println(MessageFormat.format("Starting test {0}", description.getMethodName()));
+            logger.info(MessageFormat.format("Starting test {0}", description.getMethodName()));
         }
 
         @Override
         protected void finished(final Description description) {
-            System.out.println(MessageFormat.format("Finished test {0}", description.getMethodName()));
+            logger.info(MessageFormat.format("Finished test {0}", description.getMethodName()));
         }
     };
 
