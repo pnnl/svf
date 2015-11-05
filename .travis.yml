@@ -5,6 +5,9 @@ addons:
   apt:
     packages:
       - mesa-utils
+cache:
+  directories:
+    - $HOME/.m2
 install: mvn -f sci-vis-framework install -DskipTests=true
 before_script:
 #  - "export DISPLAY=:99.0"
