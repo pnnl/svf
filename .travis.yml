@@ -1,6 +1,6 @@
 language: java
-#jdk: oraclejdk7
-os: osx
+jdk: oraclejdk7
+os: linux
 sudo: false
 #cache:
 #  directories:
