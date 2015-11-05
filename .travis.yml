@@ -12,4 +12,4 @@ before_script:
 #  - sleep 3 # give xvfb some time to start
 #  - glxinfo
   - echo 'MAVEN_OPTS="-Xms2G -Xmx2G -XX:MaxPermSize=256m"' > ~/.mavenrc
-script: xvfb-run -s "-screen 0 1024x768x24" mvn -f sci-vis-framework test -Dmaven.test.failure.ignore=true
+script: xvfb-run -s "-screen 0 1024x768x24" mvn -f sci-vis-framework test -Dsvf.demo.skip.tests=true
