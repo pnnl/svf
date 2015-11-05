@@ -10,5 +10,6 @@ before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
+  - glxinfo
   - echo 'MAVEN_OPTS="-Xms2G -Xmx2G -XX:MaxPermSize=256m"' > ~/.mavenrc
 script: mvn -f sci-vis-framework test
