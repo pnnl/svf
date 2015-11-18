@@ -1,5 +1,7 @@
 package gov.pnnl.svf.support;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.camera.CountingCamera;
@@ -10,13 +12,12 @@ import gov.pnnl.svf.scene.DrawableSupport;
 import gov.pnnl.svf.scene.DrawingPass;
 import gov.pnnl.svf.scene.Initializable;
 import gov.pnnl.svf.scene.Scene;
+import gov.pnnl.svf.scene.SceneMetrics;
 import gov.pnnl.svf.update.UninitializeTask;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.HashSet;
 import java.util.Set;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Support for dynamic actors that need to draw that require performance
@@ -111,9 +112,9 @@ public class DisplayListDrawableSupport extends AbstractSupport<Object> implemen
 
     @Override
     public void dispose() {
-        super.dispose();
         actor.getPropertyChangeSupport().removePropertyChangeListener(uninitializeListener);
         uninitializeListener.propertyChange(new PropertyChangeEvent(this, DISPOSE, null, this));
+        super.dispose();
     }
 
     @Override
@@ -161,6 +162,13 @@ public class DisplayListDrawableSupport extends AbstractSupport<Object> implemen
             return;
         }
         initializeLists(gl, glu);
+        if ((list != UNINITIALIZED) && (count > 0)) {
+            // update metrics
+            final SceneMetrics metrics = getScene().getExtended().getSceneMetrics();
+            for (int i = 0; i < count; i++) {
+                metrics.incrementDisplayListCount();
+            }
+        }
         final boolean initialized = list != UNINITIALIZED;
         synchronized (this) {
             supportState.setInitialized(initialized);
@@ -183,6 +191,11 @@ public class DisplayListDrawableSupport extends AbstractSupport<Object> implemen
     public void unInitialize(final GL2 gl, final GLUgl2 glu) {
         if ((list != UNINITIALIZED) && (count > 0)) {
             gl.glDeleteLists(list, count);
+            // update metrics
+            final SceneMetrics metrics = getScene().getExtended().getSceneMetrics();
+            for (int i = 0; i < count; i++) {
+                metrics.decrementDisplayListCount();
+            }
         }
         list = UNINITIALIZED;
         countingCamera.resetVerticesCounter();

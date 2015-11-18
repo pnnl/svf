@@ -1,5 +1,8 @@
 package gov.pnnl.svf.demo;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.actor.AbstractActor;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.animation.AnimationSupportListener;
@@ -21,9 +24,6 @@ import gov.pnnl.svf.util.FpsLogger;
 import gov.pnnl.svf.util.PerfLogger;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.apache.commons.math.geometry.Vector3D;
 
 public class JBox2dDistanceJointLoader implements DemoLoader {
@@ -211,6 +211,12 @@ public class JBox2dDistanceJointLoader implements DemoLoader {
     private static void createScaleAnimation(final Actor actor, final Vector3D scale) {
         ScaleAnimationSupport.newInstance(actor, 5L * 1000L, 0L, false, scale).
                 addListener(new AnimationSupportListener() {
+
+                    @Override
+                    public void iterationCompleted() {
+                        // no operation
+                    }
+
                     @Override
                     public void animationCompleted() {
                         JBox2dDistanceJointLoader.createScaleAnimation(actor, SCALES[0].equals(scale) ? SCALES[1] : SCALES[0]);

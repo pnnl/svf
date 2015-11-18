@@ -8,6 +8,12 @@ package gov.pnnl.svf.animation;
 public interface AnimationSupportListener {
 
     /**
+     * Use this method to receive notification when the current iteration is
+     * completed.
+     */
+    void iterationCompleted();
+
+    /**
      * Use this method to receive notification when the animation is completed.
      */
     void animationCompleted();

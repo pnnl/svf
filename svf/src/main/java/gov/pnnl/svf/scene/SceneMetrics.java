@@ -8,6 +8,36 @@ package gov.pnnl.svf.scene;
 public interface SceneMetrics {
 
     /**
+     * Increment the current vbo buffer count
+     */
+    void incrementVboBufferCount();
+
+    /**
+     * Increment the current display list count
+     */
+    void incrementDisplayListCount();
+
+    /**
+     * Decrement the current vbo buffer count
+     */
+    void decrementVboBufferCount();
+
+    /**
+     * Decrement the current display list count
+     */
+    void decrementDisplayListCount();
+
+    /**
+     * @return the current vbo buffer count
+     */
+    int getVboBufferCount();
+
+    /**
+     * @return the current display list count
+     */
+    int getDisplayListCount();
+
+    /**
      * @return the total number of actors culled last draw cycle
      */
     long getLastCulledActors();

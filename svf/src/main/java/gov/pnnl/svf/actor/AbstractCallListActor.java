@@ -1,15 +1,18 @@
 package gov.pnnl.svf.actor;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.scene.Initializable;
 import gov.pnnl.svf.scene.Scene;
+import gov.pnnl.svf.scene.SceneMetrics;
 import gov.pnnl.svf.update.UninitializeTask;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.HashSet;
 import java.util.Set;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Abstract base class for actors that need to draw that require performance
@@ -19,6 +22,7 @@ import com.jogamp.opengl.glu.gl2.GLUgl2;
  */
 public abstract class AbstractCallListActor extends AbstractActor implements Initializable {
 
+    private static final Logger logger = Logger.getLogger(AbstractCallListActor.class.toString());
     /**
      * String representation of a field in this object.
      */
@@ -64,6 +68,15 @@ public abstract class AbstractCallListActor extends AbstractActor implements Ini
 
     {
         getPropertyChangeSupport().addPropertyChangeListener(listener);
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        // just used for unmanaged resource disposal validation
+        if (list != UNINITIALIZED) {
+            logger.log(Level.WARNING, "Unmanaged resource not disposed properly for actor {0} {1}", new Object[]{getType(), getId()});
+        }
+        super.finalize();
     }
 
     @Override
@@ -128,6 +141,13 @@ public abstract class AbstractCallListActor extends AbstractActor implements Ini
             return;
         }
         initializeLists(gl, glu);
+        if ((list != UNINITIALIZED) && (count > 0)) {
+            // update metrics
+            final SceneMetrics metrics = getScene().getExtended().getSceneMetrics();
+            for (int i = 0; i < count; i++) {
+                metrics.incrementDisplayListCount();
+            }
+        }
         final boolean initialized = list != UNINITIALIZED;
         synchronized (this) {
             actorState.setInitialized(initialized);
@@ -150,6 +170,11 @@ public abstract class AbstractCallListActor extends AbstractActor implements Ini
     public void unInitialize(final GL2 gl, final GLUgl2 glu) {
         if ((list != UNINITIALIZED) && (count > 0)) {
             gl.glDeleteLists(list, count);
+            // update metrics
+            final SceneMetrics metrics = getScene().getExtended().getSceneMetrics();
+            for (int i = 0; i < count; i++) {
+                metrics.decrementDisplayListCount();
+            }
         }
         list = UNINITIALIZED;
         vertices = 0;

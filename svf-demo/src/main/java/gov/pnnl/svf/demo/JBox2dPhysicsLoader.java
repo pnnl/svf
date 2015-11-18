@@ -285,6 +285,12 @@ public class JBox2dPhysicsLoader implements DemoLoader {
     private static void createScaleAnimation(final Actor actor, final Vector3D scale) {
         ScaleAnimationSupport.newInstance(actor, 5L * 1000L, 0L, false, scale).
                 addListener(new AnimationSupportListener() {
+
+                    @Override
+                    public void iterationCompleted() {
+                        // no operation
+                    }
+
                     @Override
                     public void animationCompleted() {
                         JBox2dPhysicsLoader.createScaleAnimation(actor, SCALES[0].equals(scale) ? SCALES[1] : SCALES[0]);

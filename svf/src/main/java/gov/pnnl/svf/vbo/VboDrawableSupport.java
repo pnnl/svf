@@ -12,6 +12,7 @@ import gov.pnnl.svf.scene.DrawableSupport;
 import gov.pnnl.svf.scene.DrawingPass;
 import gov.pnnl.svf.scene.Initializable;
 import gov.pnnl.svf.scene.Scene;
+import gov.pnnl.svf.scene.SceneMetrics;
 import gov.pnnl.svf.support.AbstractSupport;
 import gov.pnnl.svf.update.Task;
 import gov.pnnl.svf.update.UninitializeTask;
@@ -115,9 +116,9 @@ public class VboDrawableSupport extends AbstractSupport<Object> implements Initi
 
     @Override
     public void dispose() {
-        super.dispose();
         actor.getPropertyChangeSupport().removePropertyChangeListener(uninitializeListener);
         uninitializeListener.propertyChange(new PropertyChangeEvent(this, DISPOSE, null, this));
+        super.dispose();
     }
 
     @Override
@@ -211,12 +212,27 @@ public class VboDrawableSupport extends AbstractSupport<Object> implements Initi
     public void unInitialize(final GL2 gl, final GLUgl2 glu) {
         if (vboBuffers != null && vboBuffers.length > 0) {
             gl.glDeleteBuffers(vboBuffers.length, vboBuffers, 0);
+            // update metrics
+            final SceneMetrics metrics = getScene().getExtended().getSceneMetrics();
+            for (int i = 0; i < vboBuffers.length; i++) {
+                metrics.decrementVboBufferCount();
+            }
         }
         if (pickingVboBuffers != null && pickingVboBuffers.length > 0) {
             gl.glDeleteBuffers(pickingVboBuffers.length, pickingVboBuffers, 0);
+            // update metrics
+            final SceneMetrics metrics = getScene().getExtended().getSceneMetrics();
+            for (int i = 0; i < pickingVboBuffers.length; i++) {
+                metrics.decrementVboBufferCount();
+            }
         }
         if (colorPickingVboBuffers != null && colorPickingVboBuffers.length > 0) {
             gl.glDeleteBuffers(colorPickingVboBuffers.length, colorPickingVboBuffers, 0);
+            // update metrics
+            final SceneMetrics metrics = getScene().getExtended().getSceneMetrics();
+            for (int i = 0; i < colorPickingVboBuffers.length; i++) {
+                metrics.decrementVboBufferCount();
+            }
         }
         vboBuffers = null;
         pickingVboBuffers = null;
@@ -334,6 +350,11 @@ public class VboDrawableSupport extends AbstractSupport<Object> implements Initi
         }
         final int[] buffers = new int[size];
         gl.glGenBuffers(buffers.length, buffers, 0);
+        // update metrics
+        final SceneMetrics metrics = getScene().getExtended().getSceneMetrics();
+        for (int i = 0; i < size; i++) {
+            metrics.incrementVboBufferCount();
+        }
         return buffers;
     }
 

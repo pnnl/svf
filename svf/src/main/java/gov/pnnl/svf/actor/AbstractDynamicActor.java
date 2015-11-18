@@ -6,6 +6,7 @@ import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.event.PickingCameraEvent;
 import gov.pnnl.svf.hint.OpenGLHint;
 import gov.pnnl.svf.picking.ColorPickingSupport;
+import gov.pnnl.svf.scene.Disposable;
 import gov.pnnl.svf.scene.DrawableSupport;
 import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.support.DisplayListDrawableItem;
@@ -168,6 +169,9 @@ public abstract class AbstractDynamicActor extends AbstractActor implements VboD
             this.drawableSupport = null;
         }
         if (drawableSupport != null) {
+            if (drawableSupport instanceof Disposable) {
+                ((Disposable) drawableSupport).dispose();
+            }
             remove(drawableSupport);
         }
         switch (openGLHint) {

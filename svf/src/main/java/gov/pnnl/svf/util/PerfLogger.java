@@ -1,5 +1,7 @@
 package gov.pnnl.svf.util;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.scene.DrawableItem;
 import gov.pnnl.svf.scene.DrawingPass;
@@ -8,8 +10,6 @@ import gov.pnnl.svf.scene.SceneExt;
 import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * This class will log the average number of rendered vertices per second at the
@@ -30,6 +30,8 @@ public class PerfLogger extends AbstractLogger implements DrawableItem {
     private int maxUnclearedProjection = 0;
     private int maxUnclearedTexture = 0;
     private int maxErrorsReported = 0;
+    private int vboBufferCount = 0;
+    private int displayListCount = 0;
     private int vps = 0;
 
     private PerfLogger(final Scene scene, final long interval) {
@@ -44,7 +46,9 @@ public class PerfLogger extends AbstractLogger implements DrawableItem {
                + "\nMax Uncleared Modelview Matrices Per Frame: {6}"
                + "\nMax Uncleared Projection Matrices Per Frame: {7}"
                + "\nMax Uncleared Texture Matrices Per Frame: {8}"
-               + "\nMax Errors Reported Per Frame: {9}";
+               + "\nMax Errors Reported Per Frame: {9}"
+               + "\nVBO Buffers Currently In Use: {10}"
+               + "\nDisplay Lists Currently In Use: {11}";
     }
 
     /**
@@ -80,6 +84,8 @@ public class PerfLogger extends AbstractLogger implements DrawableItem {
             maxUnclearedProjection = Math.max(maxUnclearedProjection, scene.getSceneMetrics().getLastProjectionStackDepth());
             maxUnclearedTexture = Math.max(maxUnclearedTexture, scene.getSceneMetrics().getLastTextureStackDepth());
             maxErrorsReported = Math.max(maxErrorsReported, scene.getSceneMetrics().getLastErrorsReported());
+            vboBufferCount = scene.getSceneMetrics().getVboBufferCount();
+            displayListCount = scene.getSceneMetrics().getDisplayListCount();
         }
     }
 
@@ -132,7 +138,9 @@ public class PerfLogger extends AbstractLogger implements DrawableItem {
                         maxUnclearedModelview,
                         maxUnclearedProjection,
                         maxUnclearedTexture,
-                        maxErrorsReported);
+                        maxErrorsReported,
+                        vboBufferCount,
+                        displayListCount);
                 logger.log(Level.INFO, output);
                 logger.log(Level.INFO, scene.getSceneMetrics().getCollectionsInfo());
                 // reset counts

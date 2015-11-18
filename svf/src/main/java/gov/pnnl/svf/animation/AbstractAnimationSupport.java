@@ -39,11 +39,11 @@ public abstract class AbstractAnimationSupport extends AbstractSupport<Animation
 
     /**
      * Implement this function to handle the animation. This function is called
-     * only when the animation is started and won't be called when the animation
-     * is finished. This animation will also be removed from the lookup when
-     * completed.
+     * when the animation is started, during updates, and won't be called when
+     * the animation is finished. This animation will also be removed from the
+     * lookup when completed.
      *
-     * @param fraction Amount of time in milliseconds since last update.
+     * @param fraction the current fraction (0 to 1) of the animation
      */
     protected abstract void animate(double fraction);
 
@@ -73,6 +73,9 @@ public abstract class AbstractAnimationSupport extends AbstractSupport<Animation
                 } else {
                     // repeat this animation
                     step -= duration;
+                    for (final AnimationSupportListener listener : getListeners()) {
+                        listener.iterationCompleted();
+                    }
                 }
             }
         }
