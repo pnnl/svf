@@ -157,8 +157,10 @@ public class BatchWorkerUpdateTask extends AbstractWorkerTask implements BatchWo
     @Override
     public void dispose() {
         super.dispose();
-        for (final WorkerUpdateTaskRunnable runnable : runnables) {
-            runnable.disposed(this);
+        synchronized (this) {
+            for (final WorkerUpdateTaskRunnable runnable : runnables) {
+                runnable.disposed(this);
+            }
         }
     }
 
