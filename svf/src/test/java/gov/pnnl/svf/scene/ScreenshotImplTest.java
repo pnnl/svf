@@ -87,7 +87,7 @@ public class ScreenshotImplTest {
         final long start = System.currentTimeMillis();
         while (file.length() <= 0L && System.currentTimeMillis() <= start + 5000L) {
             try {
-                Thread.sleep(100L);
+                Thread.sleep(1000L);
             } catch (final InterruptedException ex) {
                 // ignore exception
             }
@@ -108,19 +108,19 @@ public class ScreenshotImplTest {
         final CountDownLatch latch = new CountDownLatch(1);
         scene.getScreenshot().capture(file, new ScreenshotListener() {
 
-            @Override
-            public void succeeded(final File file) {
-                value.set(file);
-                latch.countDown();
-            }
+                                  @Override
+                                  public void succeeded(final File file) {
+                                      value.set(file);
+                                      latch.countDown();
+                                  }
 
-            @Override
-            public void failed(final File file, final Exception ex) {
-                value.set(file);
-                fault.set(ex);
-                latch.countDown();
-            }
-        });
+                                  @Override
+                                  public void failed(final File file, final Exception ex) {
+                                      value.set(file);
+                                      fault.set(ex);
+                                      latch.countDown();
+                                  }
+                              });
         // we have to wait until the file is there since we aren't using a callback
         final long start = System.currentTimeMillis();
         while (latch.getCount() > 0 && System.currentTimeMillis() <= start + 5000L) {
@@ -146,19 +146,19 @@ public class ScreenshotImplTest {
         final CountDownLatch latch = new CountDownLatch(1);
         scene.getScreenshot().capture(invalid, new ScreenshotListener() {
 
-            @Override
-            public void succeeded(final File file) {
-                value.set(file);
-                latch.countDown();
-            }
+                                  @Override
+                                  public void succeeded(final File file) {
+                                      value.set(file);
+                                      latch.countDown();
+                                  }
 
-            @Override
-            public void failed(final File file, final Exception ex) {
-                value.set(file);
-                fault.set(ex);
-                latch.countDown();
-            }
-        });
+                                  @Override
+                                  public void failed(final File file, final Exception ex) {
+                                      value.set(file);
+                                      fault.set(ex);
+                                      latch.countDown();
+                                  }
+                              });
         // we have to wait until the file is there since we aren't using a callback
         final long start = System.currentTimeMillis();
         while (latch.getCount() > 0 && System.currentTimeMillis() <= start + 5000L) {
