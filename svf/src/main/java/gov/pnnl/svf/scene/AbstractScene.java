@@ -1,5 +1,14 @@
 package gov.pnnl.svf.scene;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLAnimatorControl;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.GLException;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.glu.GLU;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import com.jogamp.opengl.util.FPSAnimator;
 import com.jogamp.opengl.util.gl2.GLUT;
 import gov.pnnl.svf.actor.Actor;
@@ -34,15 +43,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.GLAnimatorControl;
-import com.jogamp.opengl.GLAutoDrawable;
-import com.jogamp.opengl.GLEventListener;
-import com.jogamp.opengl.GLException;
-import com.jogamp.opengl.GLProfile;
-import com.jogamp.opengl.glu.GLU;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**
@@ -100,7 +100,7 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
     protected final SceneFactory factory;
     protected final BusyService busyService;
     protected final C component;
-    protected final GLUT glut;
+    protected GLUT glut;
     protected GLUgl2 glu;
     protected GL2 gl;
 
@@ -168,8 +168,8 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
         this.id = id;
         this.factory = factory;
         this.component = component;
+        this.glut = new GLUT();
         sceneListenerUtils = new SceneListenerUtils(this);
-        glut = new GLUT();
         listener = new GLEventListenerImpl(this, builder);
         sceneUtil = new SceneUtil(this, builder);
         sceneRenderer = new SceneRenderer(this, builder);
@@ -640,18 +640,16 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
         @Override
         public void init(final GLAutoDrawable drawable) {
             logger.log(Level.FINE, "{0}: Initializing the scene.", this);
-            final GLUgl2 glu;
-            synchronized (scene) {
-                glu = new GLUgl2();
-                scene.glu = glu;
-            }
-            // reset all of the OpenGL scene options
             // set up the gl fields
             final GL2 gl;
+            final GLUgl2 glu;
             synchronized (scene) {
                 scene.gl = drawable.getGL() != null ? drawable.getGL().getGL2() : null;
                 final GL glt = scene.getGL();
                 gl = glt != null ? glt.getGL2() : null;
+                glu = new GLUgl2();
+                scene.glu = glu;
+                scene.glut = new GLUT();
             }
             // initialize OpenGL
             scene.sceneRenderer.initialize(gl, glu);
@@ -679,12 +677,17 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
         @Override
         public void dispose(final GLAutoDrawable drawable) {
             logger.log(Level.FINE, "{0}: Disposing the scene.", this);
+            // set up the gl fields
+            final GL2 gl;
             final GLUgl2 glu;
             synchronized (scene) {
-                glu = scene.glu;
+                scene.gl = drawable.getGL() != null ? drawable.getGL().getGL2() : null;
+                final GL glt = scene.getGL();
+                gl = glt != null ? glt.getGL2() : null;
+                glu = new GLUgl2();
+                scene.glu = glu;
+                scene.glut = new GLUT();
             }
-            final GL glt = scene.getGL();
-            final GL2 gl = glt != null ? glt.getGL2() : null;
             if (gl != null) {
                 // dispose objects
                 final Set<Disposable> disposables = scene.lookupAll(Disposable.class);
@@ -707,12 +710,17 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
         public void display(final GLAutoDrawable drawable) {
             final Rectangle viewport = scene.sceneUtil.getViewport();
             if (viewport.getWidth() > 0 && viewport.getHeight() > 0) {
+                // set up the gl fields
+                final GL2 gl;
                 final GLUgl2 glu;
                 synchronized (scene) {
-                    glu = scene.glu;
+                    scene.gl = drawable.getGL() != null ? drawable.getGL().getGL2() : null;
+                    final GL glt = scene.getGL();
+                    gl = glt != null ? glt.getGL2() : null;
+                    glu = new GLUgl2();
+                    scene.glu = glu;
+                    scene.glut = new GLUT();
                 }
-                final GL glt = scene.getGL();
-                final GL2 gl = glt != null ? glt.getGL2() : null;
                 // schedule update
                 synchronized (this) {
                     if (running == null || running.isDone()) {

@@ -22,6 +22,8 @@ public class SceneTimersImpl implements SceneTimers {
     private final AtomicInteger lastProjectionStackDepth = new AtomicInteger(0);
     private final AtomicInteger lastTextureStackDepth = new AtomicInteger(0);
     private final AtomicInteger lastErrorsReported = new AtomicInteger(0);
+    private final AtomicInteger vboBufferCount = new AtomicInteger(0);
+    private final AtomicInteger displayListCount = new AtomicInteger(0);
     private final AtomicReference<String> lastCollectionsInfo = new AtomicReference<>("");
     private final AtomicBoolean updating = new AtomicBoolean(false);
     private final AtomicBoolean drawing = new AtomicBoolean(false);
@@ -190,5 +192,35 @@ public class SceneTimersImpl implements SceneTimers {
     @Override
     public void setCollectionsInfo(final String info) {
         lastCollectionsInfo.set(info == null ? "" : info);
+    }
+
+    @Override
+    public void incrementVboBufferCount() {
+        vboBufferCount.incrementAndGet();
+    }
+
+    @Override
+    public void incrementDisplayListCount() {
+        displayListCount.incrementAndGet();
+    }
+
+    @Override
+    public void decrementVboBufferCount() {
+        vboBufferCount.decrementAndGet();
+    }
+
+    @Override
+    public void decrementDisplayListCount() {
+        displayListCount.decrementAndGet();
+    }
+
+    @Override
+    public int getVboBufferCount() {
+        return vboBufferCount.get();
+    }
+
+    @Override
+    public int getDisplayListCount() {
+        return displayListCount.get();
     }
 }

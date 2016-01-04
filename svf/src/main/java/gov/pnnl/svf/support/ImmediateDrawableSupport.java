@@ -1,5 +1,7 @@
 package gov.pnnl.svf.support;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.event.PickingCameraEvent;
@@ -14,8 +16,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.HashSet;
 import java.util.Set;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Support for dynamic actors that need to draw using immediate mode.
@@ -89,9 +89,9 @@ public class ImmediateDrawableSupport extends AbstractSupport<Object> implements
 
     @Override
     public void dispose() {
-        super.dispose();
         actor.getPropertyChangeSupport().removePropertyChangeListener(uninitializeListener);
         uninitializeListener.propertyChange(new PropertyChangeEvent(this, DISPOSE, null, this));
+        super.dispose();
     }
 
     @Override

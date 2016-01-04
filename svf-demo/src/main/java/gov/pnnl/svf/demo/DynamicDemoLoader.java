@@ -3,6 +3,8 @@ package gov.pnnl.svf.demo;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.actor.DynamicBorderedShapeActor;
 import gov.pnnl.svf.actor.DynamicShapeActor;
+import gov.pnnl.svf.animation.AbstractAnimationSupport;
+import gov.pnnl.svf.animation.AnimationSupportListener;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.camera.DraggingCamera;
 import gov.pnnl.svf.core.color.Color;
@@ -62,6 +64,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.math.geometry.Vector3D;
@@ -165,6 +168,45 @@ public class DynamicDemoLoader implements DemoLoader {
         final Point2D[] colorArray = color.toArray(new Point2D[color.size()]);
         final Point2D[] noColorArray = noColor.toArray(new Point2D[noColor.size()]);
         // shapes
+        final List<Point2D> chartData = new ArrayList<>(DATA_POINTS * 1000);
+        for (int i = 0; i < DATA_POINTS * 1000; i++) {
+            final double x = random.nextDouble();
+            final double y = random.nextDouble();
+            chartData.add(new Point2D(x, y));
+        }
+        final DynamicShapeActor chartActor = newActor(scene, new Chart2D(0.0 * PADDING, 4.0 * PADDING, Chart.AREA, chartData));
+        chartActor.setOrigin(Alignment.CENTER);
+        chartActor.setThickness(1.0f);
+        chartActor.lookup(TransformSupport.class)
+                .setScale(new Vector3D(10.0, 1.0, 1.0))
+                .setTranslation(new Vector3D(5.0, 0.0, 0.0));
+        final AtomicInteger iteration = new AtomicInteger(0);
+        final AbstractAnimationSupport chartAnimation = new AbstractAnimationSupport(chartActor, 1000L, 0L, true) {
+
+            @Override
+            protected void animate(double fraction) {
+                final boolean forward = iteration.get() % 2 == 0;
+                fraction = forward ? fraction : 1.0 - fraction;
+                final Point2D[] temp = chartData.toArray(new Point2D[chartData.size()]);
+                for (int i = 0; i < temp.length; i++) {
+                    temp[i] = new Point2D(temp[i].getX(), temp[i].getY() + (fraction * temp[i].getX()));
+                }
+                chartActor.setShape(new Chart2D(0.0 * PADDING, 4.0 * PADDING, Chart.AREA, temp));
+            }
+        };
+        chartAnimation.addListener(new AnimationSupportListener() {
+
+            @Override
+            public void iterationCompleted() {
+                iteration.incrementAndGet();
+            }
+
+            @Override
+            public void animationCompleted() {
+                // no operation
+            }
+        });
+        chartActor.add(chartAnimation);
         // zero column
         newBorderedActor(scene, new Chart2D(-3.0 * PADDING, 2.0 * PADDING, Chart.PIE, colorArray))
                 .setBorderThickness(0.02);

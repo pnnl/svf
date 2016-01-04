@@ -1,5 +1,7 @@
 package gov.pnnl.svf.vbo;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.event.PickingCameraEvent;
@@ -20,8 +22,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Support for actors that need to draw that require performance enhancement
@@ -104,9 +104,9 @@ public class ArrayDrawableSupport extends AbstractSupport<Object> implements Ini
 
     @Override
     public void dispose() {
-        super.dispose();
         actor.getPropertyChangeSupport().removePropertyChangeListener(uninitializeListener);
         uninitializeListener.propertyChange(new PropertyChangeEvent(this, DISPOSE, null, this));
+        super.dispose();
     }
 
     @Override
