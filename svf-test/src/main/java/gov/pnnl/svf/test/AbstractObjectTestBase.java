@@ -441,7 +441,9 @@ public abstract class AbstractObjectTestBase<T extends Object> {
             final long start = System.currentTimeMillis();
             while (latch.getCount() > 0 && (start + eventTimeout) > System.currentTimeMillis()) {
                 try {
-                    latch.await(10, TimeUnit.MILLISECONDS);
+                    if (latch.await(10, TimeUnit.MILLISECONDS)) {
+                        // timed  out 
+                    }
                 } catch (final InterruptedException ex) {
                     // ignore thread inturuption
                 }
