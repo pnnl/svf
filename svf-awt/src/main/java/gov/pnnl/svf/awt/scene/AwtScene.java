@@ -1,5 +1,6 @@
 package gov.pnnl.svf.awt.scene;
 
+import com.jogamp.opengl.awt.GLCanvas;
 import static gov.pnnl.svf.scene.AbstractScene.DEFAULT_TYPE;
 import gov.pnnl.svf.scene.SceneBuilder;
 import java.awt.Window;
@@ -10,7 +11,6 @@ import java.awt.event.WindowStateListener;
 import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.jogamp.opengl.awt.GLCanvas;
 import javax.swing.SwingUtilities;
 
 /**
@@ -128,17 +128,17 @@ public class AwtScene extends AbstractAwtScene<GLCanvas> {
     @Override
     public void dispose() {
         getFactory().runOnUiThread(this, new Runnable() {
-            @Override
-            public void run() {
-                // remove the resize behavior
-                try {
-                    final Window window = (Window) SwingUtilities.getRoot(getComponent());
-                    window.removeWindowStateListener(awtListener);
-                } catch (final RuntimeException ex) {
-                    logger.log(Level.WARNING, MessageFormat.format("{0}: Exception while removing window listener.", AwtScene.this), ex);
-                }
-            }
-        });
+                               @Override
+                               public void run() {
+                                   // remove the resize behavior
+                                   try {
+                                       final Window window = (Window) SwingUtilities.getRoot(getComponent());
+                                       window.removeWindowStateListener(awtListener);
+                                   } catch (final RuntimeException ex) {
+                                       logger.log(Level.WARNING, MessageFormat.format("{0}: Exception while removing window listener.", AwtScene.this), ex);
+                                   }
+                               }
+                           });
         super.dispose();
     }
 

@@ -139,20 +139,16 @@ public abstract class AbstractShaderSupport extends AbstractSupport<Object> impl
                     if (getActor().getScene().getExtended().getSceneBuilder().isVerbose()) {
                         logger.log(Level.INFO, "{0}: Custom vertex shader program enabled.", getScene());
                     }
-                } else {
-                    if (getActor().getScene().getExtended().getSceneBuilder().isVerbose()) {
-                        logger.log(Level.INFO, "{0}: Fixed function vertex shader program enabled.", getScene());
-                    }
+                } else if (getActor().getScene().getExtended().getSceneBuilder().isVerbose()) {
+                    logger.log(Level.INFO, "{0}: Fixed function vertex shader program enabled.", getScene());
                 }
                 if (fragmentProgram > 0) {
                     gl.glAttachShader(shaderProgram, fragmentProgram);
                     if (getActor().getScene().getExtended().getSceneBuilder().isVerbose()) {
                         logger.log(Level.INFO, "{0}: Custom fragment shader program enabled.", getScene());
                     }
-                } else {
-                    if (getActor().getScene().getExtended().getSceneBuilder().isVerbose()) {
-                        logger.log(Level.INFO, "{0}: Fixed function fragment shader program enabled.", getScene());
-                    }
+                } else if (getActor().getScene().getExtended().getSceneBuilder().isVerbose()) {
+                    logger.log(Level.INFO, "{0}: Fixed function fragment shader program enabled.", getScene());
                 }
                 gl.glLinkProgram(shaderProgram);
                 gl.glValidateProgram(shaderProgram);

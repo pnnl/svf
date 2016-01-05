@@ -1,5 +1,7 @@
 package gov.pnnl.svf.texture;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.TextureData;
 import com.jogamp.opengl.util.texture.TextureIO;
@@ -10,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Multi-texture support object allows an actor to select various texture

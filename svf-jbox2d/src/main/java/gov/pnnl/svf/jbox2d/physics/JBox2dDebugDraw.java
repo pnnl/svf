@@ -1,17 +1,17 @@
 package gov.pnnl.svf.jbox2d.physics;
 
-import gov.pnnl.svf.geometry.Text2D;
-import gov.pnnl.svf.scene.Scene;
-import gov.pnnl.svf.scene.SceneExt;
-import gov.pnnl.svf.text.TextRenderer;
-import gov.pnnl.svf.text.TextService;
-import java.awt.Font;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GL2GL3;
 import com.jogamp.opengl.fixedfunc.GLLightingFunc;
 import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.glu.GLUquadric;
+import gov.pnnl.svf.geometry.Text2D;
+import gov.pnnl.svf.scene.Scene;
+import gov.pnnl.svf.scene.SceneExt;
+import gov.pnnl.svf.text.TextRenderer;
+import gov.pnnl.svf.text.TextService;
+import java.awt.Font;
 import org.jbox2d.callbacks.DebugDraw;
 import org.jbox2d.common.Color3f;
 import org.jbox2d.common.OBBViewportTransform;

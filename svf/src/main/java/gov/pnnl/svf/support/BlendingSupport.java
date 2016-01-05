@@ -1,13 +1,13 @@
 package gov.pnnl.svf.support;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.scene.Drawable;
 import gov.pnnl.svf.scene.DrawingPass;
 import gov.pnnl.svf.scene.Scene;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * This class provides a way to specify how to blend colors using alpha for

@@ -1,5 +1,7 @@
 package gov.pnnl.svf.actor;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.core.color.Color;
 import gov.pnnl.svf.core.geometry.Alignment;
@@ -14,8 +16,6 @@ import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.util.LayoutUtil;
 import gov.pnnl.svf.util.ShapeUtil;
 import java.util.Set;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Draws a geometry shape.

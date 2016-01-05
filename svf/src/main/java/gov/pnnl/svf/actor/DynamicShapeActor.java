@@ -1,5 +1,7 @@
 package gov.pnnl.svf.actor;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.core.color.Color;
 import gov.pnnl.svf.core.geometry.Alignment;
@@ -7,7 +9,6 @@ import gov.pnnl.svf.core.geometry.Path;
 import gov.pnnl.svf.geometry.Path2D;
 import gov.pnnl.svf.geometry.Path3D;
 import gov.pnnl.svf.geometry.Point2D;
-import gov.pnnl.svf.geometry.Polygon2D;
 import gov.pnnl.svf.geometry.Shape;
 import gov.pnnl.svf.geometry.ShapeRenderer;
 import gov.pnnl.svf.geometry.ShapeService;
@@ -26,8 +27,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Draws a geometry shape.
@@ -112,7 +111,6 @@ public class DynamicShapeActor extends AbstractDynamicActor {
         }
         // text and NURBS needs to use display lists or immediate mode
         if (shape instanceof Text
-            || shape instanceof Polygon2D
             || (shape instanceof Path2D && ((Path2D) shape).getStyle() == Path.NURBS)
             || (shape instanceof Path3D && ((Path3D) shape).getStyle() == Path.NURBS)) {
             switch (openGLHint) {

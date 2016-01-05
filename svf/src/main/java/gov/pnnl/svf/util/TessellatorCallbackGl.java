@@ -1,18 +1,18 @@
 package gov.pnnl.svf.util;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.glu.GLUtessellatorCallbackAdapter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Default implementation of the GLUtessellatorCallback.
  *
  * @author Arthur Bleeker
  */
-public class GLUtessellatorCallbackImpl extends GLUtessellatorCallbackAdapter {
+public class TessellatorCallbackGl extends GLUtessellatorCallbackAdapter {
 
-    private static final Logger logger = Logger.getLogger(GLUtessellatorCallbackImpl.class.getName());
+    private static final Logger logger = Logger.getLogger(TessellatorCallbackGl.class.getName());
     private final GL2 gl;
 
     /**
@@ -22,7 +22,7 @@ public class GLUtessellatorCallbackImpl extends GLUtessellatorCallbackAdapter {
      *
      * @throws NullPointerException
      */
-    public GLUtessellatorCallbackImpl(final GL2 gl) {
+    public TessellatorCallbackGl(final GL2 gl) {
         super();
         if (gl == null) {
             throw new NullPointerException("gl");

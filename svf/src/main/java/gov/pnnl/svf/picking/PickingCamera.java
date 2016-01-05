@@ -1,12 +1,12 @@
 package gov.pnnl.svf.picking;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.camera.CameraExt;
 import gov.pnnl.svf.event.CameraEventType;
 import gov.pnnl.svf.event.PickingCameraEvent;
 import java.util.Set;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Interface that represents a picking camera in the scene. Picking only works

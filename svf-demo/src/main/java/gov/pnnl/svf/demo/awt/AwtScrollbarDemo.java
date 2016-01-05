@@ -1,5 +1,6 @@
 package gov.pnnl.svf.demo.awt;
 
+import com.jogamp.opengl.awt.GLCanvas;
 import gov.pnnl.svf.actor.ScrollbarActor;
 import gov.pnnl.svf.animation.RotationAnimationSupport;
 import gov.pnnl.svf.awt.actor.AwtScrollbarActor;
@@ -25,7 +26,6 @@ import gov.pnnl.svf.util.PerfLogger;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.lang.reflect.Constructor;
-import com.jogamp.opengl.awt.GLCanvas;
 import javax.swing.JFrame;
 import org.apache.commons.math.geometry.Vector3D;
 

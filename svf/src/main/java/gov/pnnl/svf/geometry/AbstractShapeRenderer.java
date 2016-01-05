@@ -1,11 +1,11 @@
 package gov.pnnl.svf.geometry;
 
+import com.jogamp.opengl.GL2;
 import gov.pnnl.svf.core.color.Color;
 import gov.pnnl.svf.core.geometry.Border;
 import gov.pnnl.svf.picking.ColorPickingSupport;
 import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.util.ShapeUtil;
-import com.jogamp.opengl.GL2;
 
 /**
  * Abstract base class for a shape renderer.

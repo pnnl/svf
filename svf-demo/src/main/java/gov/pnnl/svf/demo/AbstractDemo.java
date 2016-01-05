@@ -1,12 +1,12 @@
 package gov.pnnl.svf.demo;
 
+import com.jogamp.opengl.GLAutoDrawable;
 import gov.pnnl.svf.core.color.Color;
 import gov.pnnl.svf.scene.SceneBuilder;
 import gov.pnnl.svf.util.ConfigUtil;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GLAutoDrawable;
 
 /**
  * Abstract base class for an SVF demo.

@@ -1,5 +1,7 @@
 package gov.pnnl.svf.actor;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.camera.SimpleCamera;
 import gov.pnnl.svf.scene.DrawingPass;
@@ -9,8 +11,6 @@ import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.test.AbstractObjectTestBase;
 import gov.pnnl.svf.util.ConfigUtil;
 import java.util.Random;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.junit.Assert;
 import org.junit.Test;
 

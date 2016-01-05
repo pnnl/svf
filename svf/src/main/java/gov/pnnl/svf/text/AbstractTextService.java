@@ -1,5 +1,7 @@
 package gov.pnnl.svf.text;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.core.util.TextState;
 import gov.pnnl.svf.scene.DrawingPass;
@@ -10,8 +12,6 @@ import gov.pnnl.svf.update.UninitializeTask;
 import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Abstract base class for text services.

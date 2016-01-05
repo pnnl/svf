@@ -274,15 +274,15 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
         }
         // remove the GL event listener
         factory.runOnUiThread(this, new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    component.removeGLEventListener(listener);
-                } catch (final RuntimeException ex) {
-                    logger.log(Level.WARNING, MessageFormat.format("{0}: Exception while removing GLEventListener.", this), ex);
-                }
-            }
-        });
+                          @Override
+                          public void run() {
+                              try {
+                                  component.removeGLEventListener(listener);
+                              } catch (final RuntimeException ex) {
+                                  logger.log(Level.WARNING, MessageFormat.format("{0}: Exception while removing GLEventListener.", this), ex);
+                              }
+                          }
+                      });
         // remove the scene reference from the global lookup
         Lookup.getLookup().remove(this);
         // remove listener types
@@ -307,21 +307,21 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
     @Override
     public void addListeners(final Object object) {
         factory.runOnUiThread(this, new Runnable() {
-            @Override
-            public void run() {
-                sceneListenerUtils.addListener(object);
-            }
-        });
+                          @Override
+                          public void run() {
+                              sceneListenerUtils.addListener(object);
+                          }
+                      });
     }
 
     @Override
     public void removeListeners(final Object object) {
         factory.runOnUiThread(this, new Runnable() {
-            @Override
-            public void run() {
-                sceneListenerUtils.removeListener(object);
-            }
-        });
+                          @Override
+                          public void run() {
+                              sceneListenerUtils.removeListener(object);
+                          }
+                      });
     }
 
     @Override

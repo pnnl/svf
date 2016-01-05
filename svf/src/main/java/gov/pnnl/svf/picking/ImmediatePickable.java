@@ -1,8 +1,8 @@
 package gov.pnnl.svf.picking;
 
-import gov.pnnl.svf.camera.Camera;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.glu.gl2.GLUgl2;
+import gov.pnnl.svf.camera.Camera;
 
 /**
  * Interface for objects that perform a picking render for an actor using

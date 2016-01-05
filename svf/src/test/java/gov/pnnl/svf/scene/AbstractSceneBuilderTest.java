@@ -1,5 +1,7 @@
 package gov.pnnl.svf.scene;
 
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GLProfile;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.core.color.Color;
 import gov.pnnl.svf.core.util.ColorUtil;
@@ -7,8 +9,6 @@ import gov.pnnl.svf.hint.CameraHint;
 import gov.pnnl.svf.test.AbstractObjectTestBase;
 import java.util.EnumSet;
 import java.util.Random;
-import com.jogamp.opengl.GLCapabilities;
-import com.jogamp.opengl.GLProfile;
 import org.junit.Assert;
 import org.junit.Test;
 

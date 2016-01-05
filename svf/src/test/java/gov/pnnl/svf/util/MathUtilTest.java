@@ -1,5 +1,6 @@
 package gov.pnnl.svf.util;
 
+import com.jogamp.opengl.GL2;
 import gov.pnnl.svf.OffscreenTestScene;
 import gov.pnnl.svf.core.util.MathUtil;
 import gov.pnnl.svf.update.Task;
@@ -7,7 +8,6 @@ import gov.pnnl.svf.update.UpdateTaskAdapter;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
-import com.jogamp.opengl.GL2;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

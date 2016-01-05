@@ -1,5 +1,11 @@
 package gov.pnnl.svf.util;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.GLU;
+import com.jogamp.opengl.glu.GLUnurbs;
+import com.jogamp.opengl.glu.GLUtessellator;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.core.color.Color;
 import gov.pnnl.svf.core.geometry.Border;
 import gov.pnnl.svf.core.util.BezierCurveEvaluator;
@@ -16,12 +22,6 @@ import gov.pnnl.svf.geometry.RoundedRectangle2D;
 import gov.pnnl.svf.geometry.Text2D;
 import java.util.List;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.GLU;
-import com.jogamp.opengl.glu.GLUnurbs;
-import com.jogamp.opengl.glu.GLUtessellator;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Utility class containing all of the 2D shape methods.
@@ -349,7 +349,7 @@ public class Shape2DUtil extends ShapeUtil {
         final GLUtessellator tessellator = GLU.gluNewTess();
         GLU.gluTessNormal(tessellator, NORMAL[0], NORMAL[1], NORMAL[2]);
         GLU.gluTessProperty(tessellator, GLU.GLU_TESS_WINDING_RULE, GLU.GLU_TESS_WINDING_ODD);
-        final GLUtessellatorCallbackImpl callback = new GLUtessellatorCallbackImpl(gl);
+        final TessellatorCallbackGl callback = new TessellatorCallbackGl(gl);
         GLU.gluTessCallback(tessellator, GLU.GLU_TESS_VERTEX, callback);
         GLU.gluTessCallback(tessellator, GLU.GLU_TESS_BEGIN, callback);
         GLU.gluTessCallback(tessellator, GLU.GLU_TESS_END, callback);

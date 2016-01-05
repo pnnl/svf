@@ -1,15 +1,15 @@
 package gov.pnnl.svf.util;
 
-import gov.pnnl.svf.scene.Scene;
-import gov.pnnl.svf.scene.SceneExt;
-import java.nio.FloatBuffer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GL2ES2;
 import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
 import com.jogamp.opengl.glu.gl2.GLUgl2;
+import gov.pnnl.svf.scene.Scene;
+import gov.pnnl.svf.scene.SceneExt;
+import java.nio.FloatBuffer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**

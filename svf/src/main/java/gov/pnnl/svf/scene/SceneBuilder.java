@@ -1,8 +1,8 @@
 package gov.pnnl.svf.scene;
 
+import com.jogamp.opengl.GLCapabilities;
 import gov.pnnl.svf.core.color.Color;
 import java.util.Set;
-import com.jogamp.opengl.GLCapabilities;
 
 /**
  * Interface for the scene builder object.

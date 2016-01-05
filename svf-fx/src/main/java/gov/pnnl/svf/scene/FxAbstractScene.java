@@ -1,5 +1,19 @@
 package gov.pnnl.svf.scene;
 
+import com.jogamp.opengl.DebugGL2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GL2ES3;
+import com.jogamp.opengl.GL2GL3;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GLContext;
+import com.jogamp.opengl.GLDrawable;
+import com.jogamp.opengl.GLDrawableFactory;
+import com.jogamp.opengl.GLException;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.glu.GLU;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import com.jogamp.opengl.util.gl2.GLUT;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.camera.Camera;
@@ -43,20 +57,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.PixelFormat;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
-import com.jogamp.opengl.DebugGL2;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.GL2ES3;
-import com.jogamp.opengl.GL2GL3;
-import com.jogamp.opengl.GLAutoDrawable;
-import com.jogamp.opengl.GLCapabilities;
-import com.jogamp.opengl.GLContext;
-import com.jogamp.opengl.GLDrawable;
-import com.jogamp.opengl.GLDrawableFactory;
-import com.jogamp.opengl.GLException;
-import com.jogamp.opengl.GLProfile;
-import com.jogamp.opengl.glu.GLU;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**

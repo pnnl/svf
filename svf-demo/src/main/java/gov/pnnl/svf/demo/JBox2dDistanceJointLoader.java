@@ -80,9 +80,9 @@ public class JBox2dDistanceJointLoader implements DemoLoader {
             ColorSupport.newInstance(user).setColor(Color.BLUE);
             final TransformSupport transform = TransformSupport.newInstance(user).
                     setTranslation(new Vector3D(
-                                    0.66 * scene.getBoundary().getX() - scene.getBoundary().getX() / 2.0,
-                                    0.5 * scene.getBoundary().getY() - scene.getBoundary().getY() / 2.0,
-                                    z)).
+                            0.66 * scene.getBoundary().getX() - scene.getBoundary().getX() / 2.0,
+                            0.5 * scene.getBoundary().getY() - scene.getBoundary().getY() / 2.0,
+                            z)).
                     setScale(new Vector3D(0.5, 0.5, 1.0)).
                     setRotationAxis(Vector3D.PLUS_K).
                     setRotation(0.0);
@@ -153,9 +153,9 @@ public class JBox2dDistanceJointLoader implements DemoLoader {
         ColorSupport.newInstance(disk1).setColor(Color.INDIGO);
         final TransformSupport transform1 = TransformSupport.newInstance(disk1).
                 setTranslation(new Vector3D(
-                                0.33 * scene.getBoundary().getX() - scene.getBoundary().getX() / 2.0,
-                                0.5 * scene.getBoundary().getY() - scene.getBoundary().getY() / 2.0,
-                                z)).
+                        0.33 * scene.getBoundary().getX() - scene.getBoundary().getX() / 2.0,
+                        0.5 * scene.getBoundary().getY() - scene.getBoundary().getY() / 2.0,
+                        z)).
                 setScale(new Vector3D(1.0, 1.0, 1.0)).
                 setRotationAxis(Vector3D.PLUS_K).
                 setRotation(0.0);
@@ -175,9 +175,9 @@ public class JBox2dDistanceJointLoader implements DemoLoader {
             final double y = Math.cos(2.0 * Math.PI * ((double) i / (double) NUM_BARNICLES));
             final TransformSupport transform2 = TransformSupport.newInstance(disk2).
                     setTranslation(new Vector3D(
-                                    x * 10.0 + transform1.getTranslation().getX(),
-                                    y * 10.0 + transform1.getTranslation().getY(),
-                                    z)).
+                            x * 10.0 + transform1.getTranslation().getX(),
+                            y * 10.0 + transform1.getTranslation().getY(),
+                            z)).
                     setScale(new Vector3D(0.5, 0.5, 1.0)).
                     setRotationAxis(Vector3D.PLUS_K).
                     setRotation(0.0);

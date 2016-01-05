@@ -1,5 +1,8 @@
 package gov.pnnl.svf.util;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.glu.GLU;
+import com.jogamp.opengl.glu.GLUtessellator;
 import gov.pnnl.svf.core.color.Color;
 import gov.pnnl.svf.core.constant.DimensionConst;
 import gov.pnnl.svf.core.geometry.Border;
@@ -10,6 +13,7 @@ import gov.pnnl.svf.geometry.Chart2D;
 import gov.pnnl.svf.geometry.Circle2D;
 import gov.pnnl.svf.geometry.Path2D;
 import gov.pnnl.svf.geometry.Point2D;
+import gov.pnnl.svf.geometry.Polygon2D;
 import gov.pnnl.svf.geometry.Rectangle;
 import gov.pnnl.svf.geometry.Rectangle2D;
 import gov.pnnl.svf.geometry.RoundedRectangle2D;
@@ -20,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GL;
 import org.apache.commons.collections.primitives.ArrayDoubleList;
 import org.apache.commons.collections.primitives.DoubleList;
 
@@ -462,6 +465,41 @@ public class Vbo2DUtil extends VboUtil implements DimensionConst {
                     .texCoordDimension(TWO_D);
             return buildVbo(vbo, NORMAL, null, color);
         }
+    }
+
+    /**
+     * Create a polygon using the supplied shape.
+     *
+     * @param polygon the polygon to draw
+     * @param color   the optional color
+     *
+     * @return the vertex buffer objects
+     *
+     * @throws NullPointerException if shape is null
+     */
+    public static List<VertexBufferObject> createShape(final Polygon2D polygon, final Color color) {
+        final GLUtessellator tessellator = GLU.gluNewTess();
+        GLU.gluTessNormal(tessellator, NORMAL[0], NORMAL[1], NORMAL[2]);
+        GLU.gluTessProperty(tessellator, GLU.GLU_TESS_WINDING_RULE, GLU.GLU_TESS_WINDING_ODD);
+        final TessellatorCallbackVbo callback = new TessellatorCallbackVbo(color);
+        GLU.gluTessCallback(tessellator, GLU.GLU_TESS_VERTEX, callback);
+        GLU.gluTessCallback(tessellator, GLU.GLU_TESS_BEGIN, callback);
+        GLU.gluTessCallback(tessellator, GLU.GLU_TESS_END, callback);
+        GLU.gluTessCallback(tessellator, GLU.GLU_TESS_ERROR, callback);
+        GLU.gluTessCallback(tessellator, GLU.GLU_TESS_COMBINE, callback);
+        GLU.gluTessBeginPolygon(tessellator, null);
+        for (final List<Point2D> points : polygon.getContours()) {
+            GLU.gluTessBeginContour(tessellator);
+            for (final Point2D point : points) {
+                final double[] tess = new double[]{polygon.getX() + point.getX(), polygon.getY() + point.getY(), 0.0};
+                GLU.gluTessVertex(tessellator, tess, 0, tess);
+            }
+            GLU.gluTessEndContour(tessellator);
+        }
+        GLU.gluTessEndPolygon(tessellator);
+        // cleanup
+        GLU.gluDeleteTess(tessellator);
+        return callback.getVbos();
     }
 
     /**

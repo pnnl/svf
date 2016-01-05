@@ -1,5 +1,7 @@
 package gov.pnnl.svf.util;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.util.texture.TextureData;
 import com.jogamp.opengl.util.texture.awt.AWTTextureData;
 import gov.pnnl.svf.actor.Actor;
@@ -30,8 +32,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GLProfile;
 import org.apache.commons.lang.StringUtils;
 
 /**

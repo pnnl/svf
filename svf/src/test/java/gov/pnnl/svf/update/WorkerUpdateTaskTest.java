@@ -43,32 +43,32 @@ public class WorkerUpdateTaskTest {
         final AtomicBoolean after = new AtomicBoolean(false);
         final Task task = WorkerUpdateTask.schedule(scene, new WorkerUpdateTaskRunnable() {
 
-            @Override
-            public void disposed(final Task task) {
-                // no operation
-            }
+                                                @Override
+                                                public void disposed(final Task task) {
+                                                    // no operation
+                                                }
 
-            @Override
-            public boolean runBefore(final Task task) {
-                if (task.isUpdating()) {
-                    before.set(true);
-                }
-                return true;
-            }
+                                                @Override
+                                                public boolean runBefore(final Task task) {
+                                                    if (task.isUpdating()) {
+                                                        before.set(true);
+                                                    }
+                                                    return true;
+                                                }
 
-            @Override
-            public void run(final Task task) {
-                run.set(true);
-            }
+                                                @Override
+                                                public void run(final Task task) {
+                                                    run.set(true);
+                                                }
 
-            @Override
-            public boolean runAfter(final Task task) {
-                if (task.isUpdating()) {
-                    after.set(true);
-                }
-                return true;
-            }
-        });
+                                                @Override
+                                                public boolean runAfter(final Task task) {
+                                                    if (task.isUpdating()) {
+                                                        after.set(true);
+                                                    }
+                                                    return true;
+                                                }
+                                            });
         final long start = System.currentTimeMillis();
         while (System.currentTimeMillis() - start < WAIT_TIMEOUT) {
             try {
@@ -97,32 +97,32 @@ public class WorkerUpdateTaskTest {
         final AtomicBoolean after = new AtomicBoolean(false);
         final Task task = WorkerUpdateTask.schedule(scene, new WorkerUpdateTaskRunnable() {
 
-            @Override
-            public void disposed(final Task task) {
-                // no operation
-            }
+                                                @Override
+                                                public void disposed(final Task task) {
+                                                    // no operation
+                                                }
 
-            @Override
-            public boolean runBefore(final Task task) {
-                if (task.isUpdating()) {
-                    before.set(true);
-                }
-                return true;
-            }
+                                                @Override
+                                                public boolean runBefore(final Task task) {
+                                                    if (task.isUpdating()) {
+                                                        before.set(true);
+                                                    }
+                                                    return true;
+                                                }
 
-            @Override
-            public void run(final Task task) {
-                run.set(true);
-            }
+                                                @Override
+                                                public void run(final Task task) {
+                                                    run.set(true);
+                                                }
 
-            @Override
-            public boolean runAfter(final Task task) {
-                if (task.isUpdating()) {
-                    after.set(true);
-                }
-                return true;
-            }
-        }, DELAY_TIME);
+                                                @Override
+                                                public boolean runAfter(final Task task) {
+                                                    if (task.isUpdating()) {
+                                                        after.set(true);
+                                                    }
+                                                    return true;
+                                                }
+                                            }, DELAY_TIME);
         try {
             Thread.sleep(DELAY_SLEEP_TIME);
         } catch (final InterruptedException ex) {
@@ -160,25 +160,25 @@ public class WorkerUpdateTaskTest {
     public void testCancelSchedule_Scene_UpdateTaskRunnable() {
         final Task task = WorkerUpdateTask.schedule(scene, new WorkerUpdateTaskRunnable() {
 
-            @Override
-            public void disposed(final Task task) {
-                // no operation
-            }
+                                                @Override
+                                                public void disposed(final Task task) {
+                                                    // no operation
+                                                }
 
-            @Override
-            public boolean runBefore(final Task task) {
-                return true;
-            }
+                                                @Override
+                                                public boolean runBefore(final Task task) {
+                                                    return true;
+                                                }
 
-            @Override
-            public void run(final Task task) {
-            }
+                                                @Override
+                                                public void run(final Task task) {
+                                                }
 
-            @Override
-            public boolean runAfter(final Task task) {
-                return true;
-            }
-        });
+                                                @Override
+                                                public boolean runAfter(final Task task) {
+                                                    return true;
+                                                }
+                                            });
         task.cancel();
         final long start = System.currentTimeMillis();
         while (System.currentTimeMillis() - start < WAIT_TIMEOUT) {
@@ -202,28 +202,28 @@ public class WorkerUpdateTaskTest {
         final AtomicBoolean passed = new AtomicBoolean(true);
         final Task task = WorkerUpdateTask.schedule(scene, new WorkerUpdateTaskRunnable() {
 
-            @Override
-            public void disposed(final Task task) {
-                // no operation
-            }
+                                                @Override
+                                                public void disposed(final Task task) {
+                                                    // no operation
+                                                }
 
-            @Override
-            public boolean runBefore(final Task task) {
-                passed.set(false);
-                return true;
-            }
+                                                @Override
+                                                public boolean runBefore(final Task task) {
+                                                    passed.set(false);
+                                                    return true;
+                                                }
 
-            @Override
-            public void run(final Task task) {
-                passed.set(false);
-            }
+                                                @Override
+                                                public void run(final Task task) {
+                                                    passed.set(false);
+                                                }
 
-            @Override
-            public boolean runAfter(final Task task) {
-                passed.set(false);
-                return true;
-            }
-        }, 100L);
+                                                @Override
+                                                public boolean runAfter(final Task task) {
+                                                    passed.set(false);
+                                                    return true;
+                                                }
+                                            }, 100L);
         task.cancel();
         final long start = System.currentTimeMillis();
         while (System.currentTimeMillis() - start < WAIT_TIMEOUT) {

@@ -378,12 +378,12 @@ public class DynamicDemoLoader implements DemoLoader {
         jogl2d.setShape(new Text2D(viewport.getWidth(), 0.0, "JOGL 2D Text"));
         scene.getPropertyChangeSupport().addPropertyChangeListener(Scene.VIEWPORT, new PropertyChangeListener() {
 
-            @Override
-            public void propertyChange(final PropertyChangeEvent evt) {
-                final Rectangle viewport = (Rectangle) evt.getNewValue();
-                jogl2d.setShape(new Text2D(viewport.getWidth(), 0.0, "JOGL 2D Text"));
-            }
-        });
+                                                               @Override
+                                                               public void propertyChange(final PropertyChangeEvent evt) {
+                                                                   final Rectangle viewport = (Rectangle) evt.getNewValue();
+                                                                   jogl2d.setShape(new Text2D(viewport.getWidth(), 0.0, "JOGL 2D Text"));
+                                                               }
+                                                           });
         ColorSupport.newInstance(jogl2d).setColor(palette.next());
         TransformSupport.newInstance(jogl2d);
         ColorPickingSupport.newInstance(jogl2d).addListener(listener);

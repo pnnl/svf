@@ -1,5 +1,6 @@
 package gov.pnnl.svf.scene;
 
+import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.util.GLReadBufferUtil;
 import gov.pnnl.svf.core.util.NamedThreadFactory;
 import java.io.File;
@@ -14,7 +15,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GL2;
 
 /**
  * Default implementation of the Screenshot interface.

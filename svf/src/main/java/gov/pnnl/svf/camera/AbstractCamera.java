@@ -1,5 +1,8 @@
 package gov.pnnl.svf.camera;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.actor.AbstractActor;
 import gov.pnnl.svf.core.util.Transformer;
 import gov.pnnl.svf.event.CameraEvent;
@@ -13,9 +16,6 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**

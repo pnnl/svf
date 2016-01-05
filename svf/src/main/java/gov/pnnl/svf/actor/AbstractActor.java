@@ -1,5 +1,7 @@
 package gov.pnnl.svf.actor;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.core.color.Color;
 import gov.pnnl.svf.core.lookup.LookupProvider;
@@ -25,8 +27,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * <p>

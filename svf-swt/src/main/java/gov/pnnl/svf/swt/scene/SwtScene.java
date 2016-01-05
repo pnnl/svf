@@ -1,12 +1,12 @@
 package gov.pnnl.svf.swt.scene;
 
+import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.swt.GLCanvas;
 import gov.pnnl.svf.scene.AbstractScene;
 import gov.pnnl.svf.scene.SceneBuilder;
 import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GL2;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.ControlListener;
 import org.eclipse.swt.events.DisposeEvent;
@@ -133,20 +133,20 @@ public class SwtScene extends AbstractScene<GLCanvas> {
     @Override
     public void dispose() {
         getFactory().runOnUiThread(this, new Runnable() {
-            @Override
-            public void run() {
-                // remove the resize behavior
-                try {
-                    getComponent().removeControlListener(swtListener);
-                    getComponent().removeDisposeListener(swtListener);
-                    getComponent().getShell().removeShellListener(swtListener);
-                } catch (final RuntimeException ex) {
-                    if (getSceneBuilder().isVerbose()) {
-                        logger.log(Level.WARNING, MessageFormat.format("{0}: Exception while removing shell listener.", SwtScene.this), ex);
-                    }
-                }
-            }
-        });
+                               @Override
+                               public void run() {
+                                   // remove the resize behavior
+                                   try {
+                                       getComponent().removeControlListener(swtListener);
+                                       getComponent().removeDisposeListener(swtListener);
+                                       getComponent().getShell().removeShellListener(swtListener);
+                                   } catch (final RuntimeException ex) {
+                                       if (getSceneBuilder().isVerbose()) {
+                                           logger.log(Level.WARNING, MessageFormat.format("{0}: Exception while removing shell listener.", SwtScene.this), ex);
+                                       }
+                                   }
+                               }
+                           });
         super.dispose();
     }
 
