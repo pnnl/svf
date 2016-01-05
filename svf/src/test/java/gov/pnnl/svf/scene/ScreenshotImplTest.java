@@ -125,7 +125,7 @@ public class ScreenshotImplTest {
         final long start = System.currentTimeMillis();
         while (latch.getCount() > 0 && System.currentTimeMillis() <= start + 5000L) {
             try {
-                Thread.sleep(100L);
+                Thread.sleep(1000L);
             } catch (final InterruptedException ex) {
                 // ignore exception
             }
@@ -163,7 +163,7 @@ public class ScreenshotImplTest {
         final long start = System.currentTimeMillis();
         while (latch.getCount() > 0 && System.currentTimeMillis() <= start + 5000L) {
             try {
-                Thread.sleep(100L);
+                Thread.sleep(1000L);
             } catch (final InterruptedException ex) {
                 // ignore exception
             }
