@@ -81,6 +81,7 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
      * State mask for boolean field in this actor.
      */
     protected static final byte DISPOSED_MASK = StateUtil.getMasks()[1];
+    private static final long DISPOSE_TIMEOUT = 30L * 1000L;
     /**
      * State used by flags in this actor to save memory space. Up to 8 states
      * can be used and should go in the following order: 0x01, 0x02, 0x04, 0x08,
@@ -265,26 +266,6 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
             state = StateUtil.setValue(state, DISPOSED_MASK);
         }
         logger.log(Level.FINE, "{0}: Shutting down the AbstractScene.", this);
-        try {
-            animator.stop();
-        } catch (final RuntimeException ex) {
-            // ignore, animator can have problems here in the
-            // underlying implementation
-            logger.log(Level.WARNING, MessageFormat.format("{0}: Error occurred when attempting to stop animator.", this), ex);
-        }
-        // remove the GL event listener
-        factory.runOnUiThread(this, new Runnable() {
-                          @Override
-                          public void run() {
-                              try {
-                                  component.removeGLEventListener(listener);
-                              } catch (final RuntimeException ex) {
-                                  logger.log(Level.WARNING, MessageFormat.format("{0}: Exception while removing GLEventListener.", this), ex);
-                              }
-                          }
-                      });
-        // remove the scene reference from the global lookup
-        Lookup.getLookup().remove(this);
         // remove listener types
         final Set<EventListener> objects = lookupAll(EventListener.class);
         for (final Object object : objects) {
@@ -295,33 +276,63 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
         for (final Disposable disposable : disposables) {
             disposable.dispose();
         }
-        // clear the lookup
-        clear();
+        // wait for items to be disposed
+        final long start = System.currentTimeMillis();
+        while (animator.isStarted() && !isShutdown(lookupAll(Disposable.class)) && System.currentTimeMillis() < start + DISPOSE_TIMEOUT) {
+            try {
+                Thread.sleep(100L);
+            } catch (final InterruptedException ex) {
+                // ignore exception
+            }
+        }
         // stop the services
         busyService.dispose();
         sceneUtil.dispose();
         sceneRenderer.dispose();
         tooltip.dispose();
+        // stop the animator
+        try {
+            animator.stop();
+        } catch (final RuntimeException ex) {
+            // ignore, animator can have problems here in the
+            // underlying implementation
+            logger.log(Level.WARNING, MessageFormat.format("{0}: Error occurred when attempting to stop animator.", this), ex);
+        }
+        // remove the GL event listener
+        factory.runOnUiThread(this, new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    component.removeGLEventListener(listener);
+                } catch (final RuntimeException ex) {
+                    logger.log(Level.WARNING, MessageFormat.format("{0}: Exception while removing GLEventListener.", this), ex);
+                }
+            }
+        });
+        // clear the lookup
+        clear();
+        // remove the scene reference from the global lookup
+        Lookup.getLookup().remove(this);
     }
 
     @Override
     public void addListeners(final Object object) {
         factory.runOnUiThread(this, new Runnable() {
-                          @Override
-                          public void run() {
-                              sceneListenerUtils.addListener(object);
-                          }
-                      });
+            @Override
+            public void run() {
+                sceneListenerUtils.addListener(object);
+            }
+        });
     }
 
     @Override
     public void removeListeners(final Object object) {
         factory.runOnUiThread(this, new Runnable() {
-                          @Override
-                          public void run() {
-                              sceneListenerUtils.removeListener(object);
-                          }
-                      });
+            @Override
+            public void run() {
+                sceneListenerUtils.removeListener(object);
+            }
+        });
     }
 
     @Override
@@ -622,6 +633,17 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
                 add(picking);
             }
         }
+    }
+
+    private boolean isShutdown(final Set<Disposable> disposables) {
+        boolean shutdown = true;
+        for (final Disposable disposable : disposables) {
+            if (!disposable.isDisposed()) {
+                disposable.dispose();
+                shutdown = false;
+            }
+        }
+        return shutdown;
     }
 
     protected static class GLEventListenerImpl implements GLEventListener {

@@ -2,10 +2,11 @@ package gov.pnnl.svf.pool;
 
 import gov.pnnl.svf.core.collections.KeyValuePair;
 import gov.pnnl.svf.core.util.StateUtil;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * This class manages all of the actor pools. This class is thread safe.
@@ -63,11 +64,13 @@ public class ActorPoolManagerImpl implements ActorPoolManager {
             }
             state = StateUtil.setValue(state, DISPOSED_MASK);
         }
+        final List<ActorPool<?>> temp;
         synchronized (pools) {
-            for (final Entry<KeyValuePair<Class<?>, String>, ActorPool<?>> entry : pools.entrySet()) {
-                entry.getValue().dispose();
-            }
-            pools.clear();
+            temp = new ArrayList<>(pools.values());
         }
+        for (final ActorPool<?> pool : temp) {
+            pool.dispose();
+        }
+        pools.clear();
     }
 }

@@ -116,9 +116,9 @@ public class VboDrawableSupport extends AbstractSupport<Object> implements Initi
 
     @Override
     public void dispose() {
+        super.dispose();
         actor.getPropertyChangeSupport().removePropertyChangeListener(uninitializeListener);
         uninitializeListener.propertyChange(new PropertyChangeEvent(this, DISPOSE, null, this));
-        super.dispose();
     }
 
     @Override

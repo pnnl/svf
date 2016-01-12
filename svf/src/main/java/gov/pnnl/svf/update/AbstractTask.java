@@ -82,9 +82,9 @@ public abstract class AbstractTask implements Task {
         // but don't remove it from the scene yet
         if (!isUpdating()) {
             // it can be removed from the scene
-            scene.remove(this);
             stopBusy();
             dispose();
+            scene.remove(this);
         }
         return true;
     }
@@ -103,9 +103,9 @@ public abstract class AbstractTask implements Task {
                 // check if this task was finished
                 if (isFinished() || isCanceled()) {
                     // remove it from the scene if it is finished
-                    scene.remove(this);
                     stopBusy();
                     dispose();
+                    scene.remove(this);
                 }
             }
         }
