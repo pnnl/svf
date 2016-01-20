@@ -1,16 +1,16 @@
 package gov.pnnl.svf.texture;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GL2ES1;
+import com.jogamp.opengl.GL2ES2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.actor.AbstractActor;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.core.texture.TextureType;
 import java.nio.ByteBuffer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.GL2ES1;
-import com.jogamp.opengl.GL2ES2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Support for a volumetric 3d texture.

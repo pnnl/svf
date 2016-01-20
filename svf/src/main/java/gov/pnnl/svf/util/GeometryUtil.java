@@ -1,8 +1,8 @@
 package gov.pnnl.svf.util;
 
-import gov.pnnl.svf.core.geometry.Border;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
+import gov.pnnl.svf.core.geometry.Border;
 
 /**
  * Utility class for working with Apache Commons Math and SVF geometry.

@@ -1,9 +1,9 @@
 package gov.pnnl.svf.newt.scene;
 
 import com.jogamp.newt.opengl.GLWindow;
+import com.jogamp.opengl.GL2;
 import gov.pnnl.svf.scene.AbstractScene;
 import gov.pnnl.svf.scene.SceneBuilder;
-import com.jogamp.opengl.GL2;
 
 /**
  * <p>

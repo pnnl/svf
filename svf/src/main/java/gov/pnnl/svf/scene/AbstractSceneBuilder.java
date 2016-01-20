@@ -1,5 +1,6 @@
 package gov.pnnl.svf.scene;
 
+import com.jogamp.opengl.GLCapabilities;
 import gov.pnnl.svf.core.color.Color;
 import gov.pnnl.svf.hint.CameraHint;
 import gov.pnnl.svf.hint.PickingHint;
@@ -17,7 +18,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GLCapabilities;
 
 /**
  * Builder object used for instantiating a new GLScene.

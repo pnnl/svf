@@ -1,5 +1,16 @@
 package gov.pnnl.svf.util;
 
+import com.jogamp.opengl.DebugGL2;
+import com.jogamp.opengl.DebugGL3;
+import com.jogamp.opengl.DebugGL3bc;
+import com.jogamp.opengl.DebugGL4;
+import com.jogamp.opengl.DebugGL4bc;
+import com.jogamp.opengl.DebugGLES1;
+import com.jogamp.opengl.DebugGLES2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GLProfile;
 import gov.pnnl.svf.core.util.ClassUtil;
 import gov.pnnl.svf.hint.AutoConfigHint;
 import gov.pnnl.svf.hint.CameraHint;
@@ -25,17 +36,6 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-import com.jogamp.opengl.DebugGL2;
-import com.jogamp.opengl.DebugGL3;
-import com.jogamp.opengl.DebugGL3bc;
-import com.jogamp.opengl.DebugGL4;
-import com.jogamp.opengl.DebugGL4bc;
-import com.jogamp.opengl.DebugGLES1;
-import com.jogamp.opengl.DebugGLES2;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.GLCapabilities;
-import com.jogamp.opengl.GLProfile;
 import org.apache.commons.io.IOUtils;
 
 /**

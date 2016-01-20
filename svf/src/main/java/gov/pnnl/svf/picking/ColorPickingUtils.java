@@ -1,5 +1,13 @@
 package gov.pnnl.svf.picking;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GL2ES1;
+import com.jogamp.opengl.GL2ES2;
+import com.jogamp.opengl.GL2ES3;
+import com.jogamp.opengl.GL2GL3;
+import com.jogamp.opengl.GLException;
+import com.jogamp.opengl.fixedfunc.GLLightingFunc;
 import gov.pnnl.svf.core.collections.CountingHashSet;
 import gov.pnnl.svf.core.collections.CountingSet;
 import gov.pnnl.svf.core.collections.KeyValuePair;
@@ -22,14 +30,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.GL2ES1;
-import com.jogamp.opengl.GL2ES2;
-import com.jogamp.opengl.GL2ES3;
-import com.jogamp.opengl.GL2GL3;
-import com.jogamp.opengl.GLException;
-import com.jogamp.opengl.fixedfunc.GLLightingFunc;
 
 /**
  * Utility class for working with color picking in a scene. This class is not
@@ -324,10 +324,8 @@ public class ColorPickingUtils implements Disposable {
             // verify
             if (gl.glCheckFramebufferStatus(GL2.GL_FRAMEBUFFER) == GL2.GL_FRAMEBUFFER_COMPLETE) {
                 this.buffer[0] = GL2.GL_COLOR_ATTACHMENT0;
-            } else {
-                if (scene.getSceneBuilder().isVerbose()) {
-                    logger.log(Level.WARNING, "{0}: Framebuffer for rendering color picking layer is not complete!", scene);
-                }
+            } else if (scene.getSceneBuilder().isVerbose()) {
+                logger.log(Level.WARNING, "{0}: Framebuffer for rendering color picking layer is not complete!", scene);
             }
         } catch (final GLException ex) {
             if (scene.getSceneBuilder().isVerbose()) {

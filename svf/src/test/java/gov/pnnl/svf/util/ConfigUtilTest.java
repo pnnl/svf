@@ -1,5 +1,6 @@
 package gov.pnnl.svf.util;
 
+import com.jogamp.opengl.GLCapabilities;
 import gov.pnnl.svf.scene.SceneBuilder;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -9,7 +10,6 @@ import java.io.RandomAccessFile;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GLCapabilities;
 import junit.framework.Assert;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.io.IOUtils;

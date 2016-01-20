@@ -229,7 +229,7 @@ public class TextRendererImpl extends AbstractText {
             xLeft += region.getWidth() * scale;
             verts[2][0] = xLeft;
             verts[3][0] = xLeft;
-                // texture coords
+            // texture coords
             // texture can't be null at this point
             texCoords[0][0] = (double) region.getX() / (double) texture.getWidth();
             texCoords[0][1] = (double) (region.getY() + region.getHeight()) / (double) texture.getHeight();
@@ -239,7 +239,7 @@ public class TextRendererImpl extends AbstractText {
             texCoords[2][1] = (double) region.getY() / (double) texture.getHeight();
             texCoords[3][0] = (double) (region.getX() + region.getWidth()) / (double) texture.getWidth();
             texCoords[3][1] = (double) (region.getY() + region.getHeight()) / (double) texture.getHeight();
-                // draw
+            // draw
             //                region.setTextureRegion(gl, c);
             GeometryUtil.drawPolygon(gl, verts, texCoords, NORMAL);
             //                region.unsetTextureRegion(gl);

@@ -1,13 +1,13 @@
 package gov.pnnl.svf.util;
 
-import com.jogamp.opengl.JoglVersion;
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GL2ES2;
 import com.jogamp.opengl.GLException;
+import com.jogamp.opengl.JoglVersion;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Utility class for working with the GLScene.

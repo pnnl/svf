@@ -1,7 +1,7 @@
 package gov.pnnl.svf.awt.scene;
 
-import gov.pnnl.svf.scene.SceneBuilder;
 import com.jogamp.opengl.awt.GLJPanel;
+import gov.pnnl.svf.scene.SceneBuilder;
 
 /**
  * <p>

@@ -93,10 +93,8 @@ public abstract class AbstractStateSupport<T extends Enum> extends AbstractSuppo
             if (states.add(state)) {
                 fireEvent(state, active);
             }
-        } else {
-            if (states.remove(state)) {
-                fireEvent(state, active);
-            }
+        } else if (states.remove(state)) {
+            fireEvent(state, active);
         }
         return this;
     }

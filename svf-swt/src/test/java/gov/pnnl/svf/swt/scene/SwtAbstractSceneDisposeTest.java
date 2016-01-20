@@ -1,5 +1,7 @@
 package gov.pnnl.svf.swt.scene;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.actor.AbstractActor;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.camera.Camera;
@@ -8,8 +10,6 @@ import gov.pnnl.svf.support.ChildSupport;
 import gov.pnnl.svf.support.ColorSupport;
 import gov.pnnl.svf.support.TransformSupport;
 import gov.pnnl.svf.swt.SwtTestScene;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;

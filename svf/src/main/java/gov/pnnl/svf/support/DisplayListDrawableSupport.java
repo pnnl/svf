@@ -112,9 +112,9 @@ public class DisplayListDrawableSupport extends AbstractSupport<Object> implemen
 
     @Override
     public void dispose() {
+        super.dispose();
         actor.getPropertyChangeSupport().removePropertyChangeListener(uninitializeListener);
         uninitializeListener.propertyChange(new PropertyChangeEvent(this, DISPOSE, null, this));
-        super.dispose();
     }
 
     @Override

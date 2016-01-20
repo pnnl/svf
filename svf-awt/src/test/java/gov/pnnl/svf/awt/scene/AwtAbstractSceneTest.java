@@ -1,5 +1,6 @@
 package gov.pnnl.svf.awt.scene;
 
+import com.jogamp.opengl.awt.GLCanvas;
 import gov.pnnl.svf.actor.ShapeActor;
 import gov.pnnl.svf.awt.AwtTestScene;
 import gov.pnnl.svf.geometry.Rectangle2D;
@@ -18,7 +19,6 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.lang.reflect.InvocationTargetException;
-import com.jogamp.opengl.awt.GLCanvas;
 import javax.swing.SwingUtilities;
 import junit.framework.Assert;
 import org.junit.AfterClass;

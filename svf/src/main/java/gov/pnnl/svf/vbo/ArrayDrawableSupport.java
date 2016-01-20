@@ -104,9 +104,9 @@ public class ArrayDrawableSupport extends AbstractSupport<Object> implements Ini
 
     @Override
     public void dispose() {
+        super.dispose();
         actor.getPropertyChangeSupport().removePropertyChangeListener(uninitializeListener);
         uninitializeListener.propertyChange(new PropertyChangeEvent(this, DISPOSE, null, this));
-        super.dispose();
     }
 
     @Override

@@ -1,13 +1,13 @@
 package gov.pnnl.svf.util;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
 import gov.pnnl.svf.core.color.Color;
 import gov.pnnl.svf.core.constant.DimensionConst;
 import gov.pnnl.svf.core.geometry.Border;
 import gov.pnnl.svf.vbo.VertexBufferObject;
 import java.util.List;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
 import org.apache.commons.collections.primitives.ArrayDoubleList;
 import org.apache.commons.collections.primitives.ArrayIntList;
 import org.apache.commons.collections.primitives.DoubleList;

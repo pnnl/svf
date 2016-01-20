@@ -1,8 +1,8 @@
 package gov.pnnl.svf.geometry;
 
+import com.jogamp.opengl.GL2;
 import gov.pnnl.svf.core.geometry.Border;
 import gov.pnnl.svf.picking.ColorPickingSupport;
-import com.jogamp.opengl.GL2;
 
 /**
  * Renderer for a geometry shape type.

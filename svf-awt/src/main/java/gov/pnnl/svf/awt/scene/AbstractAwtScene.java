@@ -1,9 +1,9 @@
 package gov.pnnl.svf.awt.scene;
 
-import gov.pnnl.svf.scene.AbstractScene;
-import gov.pnnl.svf.scene.SceneBuilder;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
+import gov.pnnl.svf.scene.AbstractScene;
+import gov.pnnl.svf.scene.SceneBuilder;
 
 /**
  * <p>

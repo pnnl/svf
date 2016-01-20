@@ -1,10 +1,10 @@
 package gov.pnnl.svf.pool;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.actor.AbstractActor;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.scene.Scene;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Actor used as a parent for a support object that can be shared in a scene.

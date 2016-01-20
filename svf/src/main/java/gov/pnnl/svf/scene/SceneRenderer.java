@@ -1,5 +1,8 @@
 package gov.pnnl.svf.scene;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.actor.FpsActor;
 import gov.pnnl.svf.camera.Camera;
@@ -46,9 +49,6 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**
@@ -661,8 +661,8 @@ public class SceneRenderer implements Disposable {
                         initialized = initialized.addDrawingPass(initializable.getDrawingPass());
                     }
                 }
-            } else {
-                // not visible so uninitialize
+            } else // not visible so uninitialize
+            {
                 if (initializable.isInitialized()) {
                     initializable.unInitialize(gl, glu);
                 }

@@ -41,19 +41,19 @@ public class UpdateTaskTest {
         final AtomicBoolean passed = new AtomicBoolean(false);
         final Task task = UpdateTask.schedule(scene, new UpdateTaskRunnable() {
 
-            @Override
-            public void disposed(final Task task) {
-                // no operation
-            }
+                                          @Override
+                                          public void disposed(final Task task) {
+                                              // no operation
+                                          }
 
-            @Override
-            public boolean run(final Task task) {
-                if (task.isUpdating()) {
-                    passed.set(true);
-                }
-                return true;
-            }
-        });
+                                          @Override
+                                          public boolean run(final Task task) {
+                                              if (task.isUpdating()) {
+                                                  passed.set(true);
+                                              }
+                                              return true;
+                                          }
+                                      });
         final long start = System.currentTimeMillis();
         while (System.currentTimeMillis() - start < WAIT_TIMEOUT) {
             try {
@@ -78,19 +78,19 @@ public class UpdateTaskTest {
         final AtomicBoolean passed = new AtomicBoolean(false);
         final Task task = UpdateTask.schedule(scene, new UpdateTaskRunnable() {
 
-            @Override
-            public void disposed(final Task task) {
-                // no operation
-            }
+                                          @Override
+                                          public void disposed(final Task task) {
+                                              // no operation
+                                          }
 
-            @Override
-            public boolean run(final Task task) {
-                if (task.isUpdating()) {
-                    passed.set(true);
-                }
-                return true;
-            }
-        }, DELAY_TIME);
+                                          @Override
+                                          public boolean run(final Task task) {
+                                              if (task.isUpdating()) {
+                                                  passed.set(true);
+                                              }
+                                              return true;
+                                          }
+                                      }, DELAY_TIME);
         try {
             Thread.sleep(DELAY_SLEEP_TIME);
         } catch (final InterruptedException ex) {
@@ -124,16 +124,16 @@ public class UpdateTaskTest {
     public void testCancelSchedule_Scene_UpdateTaskRunnable() {
         final Task task = UpdateTask.schedule(scene, new UpdateTaskRunnable() {
 
-            @Override
-            public void disposed(final Task task) {
-                // no operation
-            }
+                                          @Override
+                                          public void disposed(final Task task) {
+                                              // no operation
+                                          }
 
-            @Override
-            public boolean run(final Task task) {
-                return true;
-            }
-        });
+                                          @Override
+                                          public boolean run(final Task task) {
+                                              return true;
+                                          }
+                                      });
         task.cancel();
         final long start = System.currentTimeMillis();
         while (System.currentTimeMillis() - start < WAIT_TIMEOUT) {
@@ -157,17 +157,17 @@ public class UpdateTaskTest {
         final AtomicBoolean passed = new AtomicBoolean(true);
         final Task task = UpdateTask.schedule(scene, new UpdateTaskRunnable() {
 
-            @Override
-            public void disposed(final Task task) {
-                // no operation
-            }
+                                          @Override
+                                          public void disposed(final Task task) {
+                                              // no operation
+                                          }
 
-            @Override
-            public boolean run(final Task task) {
-                passed.set(false);
-                return true;
-            }
-        }, 100L);
+                                          @Override
+                                          public boolean run(final Task task) {
+                                              passed.set(false);
+                                              return true;
+                                          }
+                                      }, 100L);
         task.cancel();
         final long start = System.currentTimeMillis();
         while (System.currentTimeMillis() - start < WAIT_TIMEOUT) {

@@ -74,12 +74,12 @@ public class TextDemoLoader implements DemoLoader {
             final CullingSupport culling = CullingSupport.newInstance(text, transform);
             culling.setScale(Math.max(shape.getWidth(), shape.getHeight()));
             text.getPropertyChangeSupport().addPropertyChangeListener(ShapeActor.SHAPE, new PropertyChangeListener() {
-                @Override
-                public void propertyChange(final PropertyChangeEvent evt) {
-                    final Text3D shape = (Text3D) evt.getNewValue();
-                    culling.setScale(Math.max(shape.getWidth(), shape.getHeight()) / 2.0);
-                }
-            });
+                                                                  @Override
+                                                                  public void propertyChange(final PropertyChangeEvent evt) {
+                                                                      final Text3D shape = (Text3D) evt.getNewValue();
+                                                                      culling.setScale(Math.max(shape.getWidth(), shape.getHeight()) / 2.0);
+                                                                  }
+                                                              });
             scene.add(text);
         }
     }

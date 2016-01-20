@@ -1,5 +1,7 @@
 package gov.pnnl.svf.demo;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.actor.ShapeActor;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.core.color.Color;
@@ -10,8 +12,6 @@ import gov.pnnl.svf.picking.ItemPickableActor;
 import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.util.Shape2DUtil;
 import java.util.Map;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  *

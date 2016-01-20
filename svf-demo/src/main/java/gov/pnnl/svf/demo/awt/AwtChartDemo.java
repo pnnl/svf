@@ -1,12 +1,12 @@
 package gov.pnnl.svf.demo.awt;
 
+import com.jogamp.opengl.awt.GLCanvas;
 import gov.pnnl.svf.awt.scene.AwtScene;
 import gov.pnnl.svf.demo.ChartDemoLoader;
 import gov.pnnl.svf.demo.Demo;
 import gov.pnnl.svf.scene.AbstractScene;
 import gov.pnnl.svf.scene.SceneBuilder;
 import java.lang.reflect.Constructor;
-import com.jogamp.opengl.awt.GLCanvas;
 import javax.swing.JFrame;
 
 /**

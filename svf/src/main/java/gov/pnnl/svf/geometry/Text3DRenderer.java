@@ -1,11 +1,11 @@
 package gov.pnnl.svf.geometry;
 
+import com.jogamp.opengl.GL2;
 import gov.pnnl.svf.core.geometry.Border;
 import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.text.TextRenderer;
 import gov.pnnl.svf.text.TextService;
 import gov.pnnl.svf.util.Shape3DUtil;
-import com.jogamp.opengl.GL2;
 
 /**
  * Shape renderer implementation.

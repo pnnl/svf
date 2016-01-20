@@ -1,5 +1,8 @@
 package gov.pnnl.svf.util;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.fixedfunc.GLLightingFunc;
 import com.jogamp.opengl.util.gl2.GLUT;
 import gov.pnnl.svf.constant.NurbsConst;
 import gov.pnnl.svf.core.color.Color;
@@ -8,9 +11,6 @@ import gov.pnnl.svf.geometry.Point2D;
 import gov.pnnl.svf.geometry.Point3D;
 import java.util.ArrayList;
 import java.util.List;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.fixedfunc.GLLightingFunc;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**

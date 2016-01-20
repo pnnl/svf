@@ -81,6 +81,7 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
      * State mask for boolean field in this actor.
      */
     protected static final byte DISPOSED_MASK = StateUtil.getMasks()[1];
+    private static final long DISPOSE_TIMEOUT = 30L * 1000L;
     /**
      * State used by flags in this actor to save memory space. Up to 8 states
      * can be used and should go in the following order: 0x01, 0x02, 0x04, 0x08,
@@ -265,6 +266,31 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
             state = StateUtil.setValue(state, DISPOSED_MASK);
         }
         logger.log(Level.FINE, "{0}: Shutting down the AbstractScene.", this);
+        // remove listener types
+        final Set<EventListener> objects = lookupAll(EventListener.class);
+        for (final Object object : objects) {
+            removeListeners(object);
+        }
+        // disposables
+        final Set<Disposable> disposables = lookupAll(Disposable.class);
+        for (final Disposable disposable : disposables) {
+            disposable.dispose();
+        }
+        // wait for items to be disposed
+        final long start = System.currentTimeMillis();
+        while (animator.isStarted() && !isShutdown(lookupAll(Disposable.class)) && System.currentTimeMillis() < start + DISPOSE_TIMEOUT) {
+            try {
+                Thread.sleep(100L);
+            } catch (final InterruptedException ex) {
+                // ignore exception
+            }
+        }
+        // stop the services
+        busyService.dispose();
+        sceneUtil.dispose();
+        sceneRenderer.dispose();
+        tooltip.dispose();
+        // stop the animator
         try {
             animator.stop();
         } catch (final RuntimeException ex) {
@@ -283,25 +309,10 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
                 }
             }
         });
-        // remove the scene reference from the global lookup
-        Lookup.getLookup().remove(this);
-        // remove listener types
-        final Set<EventListener> objects = lookupAll(EventListener.class);
-        for (final Object object : objects) {
-            removeListeners(object);
-        }
-        // disposables
-        final Set<Disposable> disposables = lookupAll(Disposable.class);
-        for (final Disposable disposable : disposables) {
-            disposable.dispose();
-        }
         // clear the lookup
         clear();
-        // stop the services
-        busyService.dispose();
-        sceneUtil.dispose();
-        sceneRenderer.dispose();
-        tooltip.dispose();
+        // remove the scene reference from the global lookup
+        Lookup.getLookup().remove(this);
     }
 
     @Override
@@ -622,6 +633,17 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
                 add(picking);
             }
         }
+    }
+
+    private boolean isShutdown(final Set<Disposable> disposables) {
+        boolean shutdown = true;
+        for (final Disposable disposable : disposables) {
+            if (!disposable.isDisposed()) {
+                disposable.dispose();
+                shutdown = false;
+            }
+        }
+        return shutdown;
     }
 
     protected static class GLEventListenerImpl implements GLEventListener {

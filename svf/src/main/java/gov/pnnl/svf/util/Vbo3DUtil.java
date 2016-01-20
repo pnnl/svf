@@ -1,5 +1,6 @@
 package gov.pnnl.svf.util;
 
+import com.jogamp.opengl.GL;
 import gov.pnnl.svf.core.color.Color;
 import gov.pnnl.svf.core.geometry.Border;
 import gov.pnnl.svf.core.util.BezierCurveEvaluator;
@@ -12,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GL;
 import org.apache.commons.collections.primitives.ArrayDoubleList;
 import org.apache.commons.collections.primitives.DoubleList;
 import org.apache.commons.math.geometry.Vector3D;

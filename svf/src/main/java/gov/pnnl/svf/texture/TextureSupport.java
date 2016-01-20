@@ -1,5 +1,7 @@
 package gov.pnnl.svf.texture;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.core.texture.TextureType;
@@ -9,8 +11,6 @@ import gov.pnnl.svf.scene.Initializable;
 import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.support.AbstractSupport;
 import gov.pnnl.svf.update.UninitializeTask;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 
 /**
  * Abstract base class for textures.

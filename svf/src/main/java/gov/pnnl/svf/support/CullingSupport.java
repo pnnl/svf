@@ -1,5 +1,9 @@
 package gov.pnnl.svf.support;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.fixedfunc.GLLightingFunc;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.core.color.Color;
@@ -10,10 +14,6 @@ import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.util.Shape2DUtil;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.fixedfunc.GLLightingFunc;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**

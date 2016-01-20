@@ -1,13 +1,13 @@
 package gov.pnnl.svf.scene;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.util.gl2.GLUT;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.picking.ColorPickingUtils;
 import java.util.Collection;
 import java.util.Set;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GLProfile;
-import com.jogamp.opengl.glu.GLU;
 
 /**
  * Extended interface for the scene that exposes less used properties.

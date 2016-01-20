@@ -1,10 +1,10 @@
 package gov.pnnl.svf.scene;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLAutoDrawable;
 import gov.pnnl.svf.core.color.Color;
 import gov.pnnl.svf.geometry.Rectangle;
 import gov.pnnl.svf.update.TaskManager;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.GLAutoDrawable;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**

@@ -77,9 +77,9 @@ public class JBox2dRevoluteJointLoader implements DemoLoader {
             ColorSupport.newInstance(user).setColor(Color.BLUE);
             final TransformSupport transform = TransformSupport.newInstance(user).
                     setTranslation(new Vector3D(
-                                    (0.5 * scene.getBoundary().getX()) - (scene.getBoundary().getX() / 2.0),
-                                    6.0 - (scene.getBoundary().getY() / 2.0),
-                                    z)).
+                            (0.5 * scene.getBoundary().getX()) - (scene.getBoundary().getX() / 2.0),
+                            6.0 - (scene.getBoundary().getY() / 2.0),
+                            z)).
                     setScale(new Vector3D(0.5, 0.5, 1.0)).
                     setRotationAxis(Vector3D.PLUS_K).
                     setRotation(0.0);
@@ -227,9 +227,9 @@ public class JBox2dRevoluteJointLoader implements DemoLoader {
             ColorSupport.newInstance(plane).setColor(Color.GREEN);
             final TransformSupport transform = TransformSupport.newInstance(plane).
                     setTranslation(new Vector3D(
-                                    (i * 2.0) - ((NUM_SQUARES * 2.0) / 2.0),
-                                    2.0,
-                                    z)).
+                            (i * 2.0) - ((NUM_SQUARES * 2.0) / 2.0),
+                            2.0,
+                            z)).
                     setScale(new Vector3D(3.0, 1.0, 1.0)).
                     setRotationAxis(Vector3D.PLUS_K).
                     setRotation(0.0);
@@ -258,9 +258,9 @@ public class JBox2dRevoluteJointLoader implements DemoLoader {
             ColorSupport.newInstance(disk).setColor(Color.BLUE);
             TransformSupport.newInstance(disk).
                     setTranslation(new Vector3D(
-                                    (((double) i / (double) NUM_BALLS) * (scene.getBoundary().getX() - 1.0)) - ((scene.getBoundary().getX() - 1.0) / 2.0),
-                                    (0.9 * scene.getBoundary().getY()) - (scene.getBoundary().getY() / 2.0),
-                                    z)).
+                            (((double) i / (double) NUM_BALLS) * (scene.getBoundary().getX() - 1.0)) - ((scene.getBoundary().getX() - 1.0) / 2.0),
+                            (0.9 * scene.getBoundary().getY()) - (scene.getBoundary().getY() / 2.0),
+                            z)).
                     setScale(new Vector3D(0.5, 0.5, 1.0)).
                     setRotationAxis(Vector3D.PLUS_K).
                     setRotation(0.0);

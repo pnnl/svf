@@ -1,12 +1,12 @@
 package gov.pnnl.svf.text;
 
+import com.jogamp.opengl.GL2;
 import gov.pnnl.svf.core.geometry.Alignment;
 import gov.pnnl.svf.geometry.Shape;
 import gov.pnnl.svf.geometry.Text;
 import gov.pnnl.svf.scene.Disposable;
 import gov.pnnl.svf.scene.Initializable;
 import java.awt.Font;
-import com.jogamp.opengl.GL2;
 
 /**
  * Interface for drawing text in a scene using either orthographic or 3D

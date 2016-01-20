@@ -3,6 +3,11 @@ package gov.pnnl.svf.newt;
 import com.jogamp.newt.event.WindowAdapter;
 import com.jogamp.newt.event.WindowEvent;
 import com.jogamp.newt.opengl.GLWindow;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.util.gl2.GLUT;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.core.color.Color;
@@ -22,11 +27,6 @@ import gov.pnnl.svf.util.ConfigUtil;
 import java.beans.PropertyChangeSupport;
 import java.util.Collection;
 import java.util.Set;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.GLAutoDrawable;
-import com.jogamp.opengl.GLProfile;
-import com.jogamp.opengl.glu.GLU;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**

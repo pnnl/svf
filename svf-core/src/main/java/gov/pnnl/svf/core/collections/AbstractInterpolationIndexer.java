@@ -63,8 +63,8 @@ public abstract class AbstractInterpolationIndexer {
                 high++;
                 index = high;
             }
-        } else {
-            // attempt to go low
+        } else // attempt to go low
+        {
             if (low == 0) {
                 // can't go low so go high
                 if (high == size - 1) {

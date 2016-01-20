@@ -1,5 +1,10 @@
 package gov.pnnl.svf.util;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
+import com.jogamp.opengl.glu.GLUnurbs;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.core.geometry.Border;
 import gov.pnnl.svf.core.util.BezierCurveEvaluator;
 import gov.pnnl.svf.geometry.Cuboid3D;
@@ -12,11 +17,6 @@ import gov.pnnl.svf.geometry.Volume3D;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
-import com.jogamp.opengl.glu.GLUnurbs;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**

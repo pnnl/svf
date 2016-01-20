@@ -1,5 +1,11 @@
 package gov.pnnl.svf.awt;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.awt.GLCanvas;
+import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.util.gl2.GLUT;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.awt.scene.AwtScene;
@@ -20,12 +26,6 @@ import java.awt.BorderLayout;
 import java.beans.PropertyChangeSupport;
 import java.util.Collection;
 import java.util.Set;
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.GLAutoDrawable;
-import com.jogamp.opengl.GLProfile;
-import com.jogamp.opengl.awt.GLCanvas;
-import com.jogamp.opengl.glu.GLU;
 import javax.swing.JFrame;
 import org.apache.commons.math.geometry.Vector3D;
 

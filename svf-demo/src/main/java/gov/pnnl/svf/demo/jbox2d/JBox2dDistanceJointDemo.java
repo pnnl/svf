@@ -1,5 +1,6 @@
 package gov.pnnl.svf.demo.jbox2d;
 
+import com.jogamp.opengl.awt.GLCanvas;
 import gov.pnnl.svf.awt.scene.AwtScene;
 import gov.pnnl.svf.demo.Demo;
 import gov.pnnl.svf.demo.JBox2dDistanceJointLoader;
@@ -7,7 +8,6 @@ import gov.pnnl.svf.demo.awt.AbstractAwtDemo;
 import gov.pnnl.svf.scene.AbstractScene;
 import gov.pnnl.svf.scene.SceneBuilder;
 import java.lang.reflect.Constructor;
-import com.jogamp.opengl.awt.GLCanvas;
 import javax.swing.JFrame;
 
 /**

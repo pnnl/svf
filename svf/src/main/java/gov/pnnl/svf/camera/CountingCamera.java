@@ -1,5 +1,7 @@
 package gov.pnnl.svf.camera;
 
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.core.util.Transformer;
 import gov.pnnl.svf.geometry.Frustum;
@@ -9,8 +11,6 @@ import gov.pnnl.svf.scene.Scene;
 import java.beans.PropertyChangeSupport;
 import java.util.Collection;
 import java.util.Set;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**

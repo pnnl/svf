@@ -1,9 +1,9 @@
 package gov.pnnl.svf.geometry;
 
+import com.jogamp.opengl.GL2;
 import gov.pnnl.svf.core.geometry.Border;
 import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.util.Shape2DUtil;
-import com.jogamp.opengl.GL2;
 
 /**
  * Shape renderer implementation.
