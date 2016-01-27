@@ -1,6 +1,8 @@
 package gov.pnnl.svf.awt.scene;
 
 import com.jogamp.opengl.awt.GLCanvas;
+import gov.pnnl.svf.awt.geometry.AwtRectangle;
+import gov.pnnl.svf.geometry.Rectangle;
 import static gov.pnnl.svf.scene.AbstractScene.DEFAULT_TYPE;
 import gov.pnnl.svf.scene.SceneBuilder;
 import java.awt.Window;
@@ -140,6 +142,11 @@ public class AwtScene extends AbstractAwtScene<GLCanvas> {
                                }
                            });
         super.dispose();
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return new AwtRectangle(getComponent().getBounds());
     }
 
     private void initialize() {

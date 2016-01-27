@@ -1,6 +1,7 @@
 package gov.pnnl.svf.scene;
 
 import com.jogamp.opengl.GL2;
+import gov.pnnl.svf.geometry.Rectangle;
 
 /**
  * Dummy implementation of a scene. This object is mainly used for testing.
@@ -40,5 +41,10 @@ public class ProxyScene extends AbstractScene<ProxyGLCanvas> {
     @Override
     public void initialize(final GL2 gl) {
         // no operation
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return getViewport();
     }
 }

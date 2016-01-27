@@ -193,6 +193,11 @@ public class OffscreenTestScene implements SceneExt {
     }
 
     @Override
+    public Rectangle getBounds() {
+        return scene.getViewport();
+    }
+
+    @Override
     public Color getSceneBackground() {
         return scene.getSceneBackground();
     }

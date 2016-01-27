@@ -2,6 +2,7 @@ package gov.pnnl.svf.newt.scene;
 
 import com.jogamp.newt.opengl.GLWindow;
 import com.jogamp.opengl.GL2;
+import gov.pnnl.svf.newt.geometry.NewtRectangle;
 import gov.pnnl.svf.scene.AbstractScene;
 import gov.pnnl.svf.scene.SceneBuilder;
 
@@ -114,5 +115,10 @@ public class NewtScene extends AbstractScene<GLWindow> {
     @Override
     public void initialize(final GL2 gl) {
         // no operation
+    }
+
+    @Override
+    public gov.pnnl.svf.geometry.Rectangle getBounds() {
+        return new NewtRectangle(getComponent().getBounds());
     }
 }

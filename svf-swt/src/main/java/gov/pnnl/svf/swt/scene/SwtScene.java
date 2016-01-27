@@ -4,6 +4,7 @@ import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.swt.GLCanvas;
 import gov.pnnl.svf.scene.AbstractScene;
 import gov.pnnl.svf.scene.SceneBuilder;
+import gov.pnnl.svf.swt.geometry.SwtRectangle;
 import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -148,6 +149,11 @@ public class SwtScene extends AbstractScene<GLCanvas> {
                                }
                            });
         super.dispose();
+    }
+
+    @Override
+    public gov.pnnl.svf.geometry.Rectangle getBounds() {
+        return new SwtRectangle(getComponent().getBounds());
     }
 
     /**

@@ -1,6 +1,8 @@
 package gov.pnnl.svf.awt.scene;
 
 import com.jogamp.opengl.awt.GLJPanel;
+import gov.pnnl.svf.awt.geometry.AwtRectangle;
+import gov.pnnl.svf.geometry.Rectangle;
 import gov.pnnl.svf.scene.SceneBuilder;
 
 /**
@@ -107,6 +109,11 @@ public class AwtPanelScene extends AbstractAwtScene<GLJPanel> {
         final AwtPanelScene scene = new AwtPanelScene(component, builder, type, id);
         scene.start();
         return scene;
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return new AwtRectangle(getComponent().getBounds());
     }
 
     private static SceneBuilder configure(final SceneBuilder builder) {

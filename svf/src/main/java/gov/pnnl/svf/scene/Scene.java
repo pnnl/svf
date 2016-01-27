@@ -105,11 +105,18 @@ public interface Scene extends SceneLookup, Disposable, Observable {
     int getMaxInitializations();
 
     /**
-     * The total scene viewport area.
+     * The total scene viewport area. This is the area of the drawing canvas.
      *
      * @return the viewport
      */
     Rectangle getViewport();
+
+    /**
+     * The view bounds area. This is the area of the enclosing view panel.
+     *
+     * @return the bounds
+     */
+    Rectangle getBounds();
 
     /**
      * @return the background color of the scene

@@ -77,4 +77,5 @@ public class ProxyColorPickingCamera extends AbstractColorPickingCamera {
     public void mouseWheelMoved(final ProxyMouseEvent event) {
         listener.mouseWheelMoved(event);
     }
+
 }

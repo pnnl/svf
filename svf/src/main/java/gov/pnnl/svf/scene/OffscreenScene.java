@@ -2,6 +2,7 @@ package gov.pnnl.svf.scene;
 
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLOffscreenAutoDrawable;
+import gov.pnnl.svf.geometry.Rectangle;
 
 /**
  * Offscreen implementation of a scene. Use the following to get an offscreen
@@ -46,4 +47,10 @@ public class OffscreenScene extends AbstractScene<GLOffscreenAutoDrawable> {
     public void initialize(final GL2 gl) {
         // no operation
     }
+
+    @Override
+    public Rectangle getBounds() {
+        return getViewport();
+    }
+
 }

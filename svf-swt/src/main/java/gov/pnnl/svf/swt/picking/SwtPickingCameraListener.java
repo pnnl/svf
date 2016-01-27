@@ -125,7 +125,8 @@ class SwtPickingCameraListener implements MouseListener, MouseMoveListener, Mous
         // down button
         final Rectangle viewport = camera.getViewport();
         final Rectangle sceneViewport = camera.getScene().getViewport();
-        if (!viewport.contains(x, sceneViewport.getHeight() - y)) {
+        final double multiplier = camera.getCanvasMultiplier();
+        if (!viewport.contains((int) (x * multiplier), sceneViewport.getHeight() - (int) (y * multiplier))) {
             return;
         }
         x = event.x;

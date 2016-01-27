@@ -19,6 +19,7 @@ import gov.pnnl.svf.scene.SceneFactory;
 import gov.pnnl.svf.scene.SceneMetrics;
 import gov.pnnl.svf.scene.Screenshot;
 import gov.pnnl.svf.scene.Tooltip;
+import gov.pnnl.svf.swt.geometry.SwtRectangle;
 import gov.pnnl.svf.swt.scene.SwtScene;
 import gov.pnnl.svf.update.TaskManager;
 import gov.pnnl.svf.util.ConfigUtil;
@@ -224,6 +225,11 @@ public class SwtTestScene implements SceneExt {
     @Override
     public Rectangle getViewport() {
         return scene.getViewport();
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return new SwtRectangle(frame.getBounds());
     }
 
     @Override
