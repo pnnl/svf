@@ -2,6 +2,12 @@ language: java
 jdk: oraclejdk7
 os: linux
 sudo: false
+branches:
+  only:
+    - master
+    - develop
+      # Build tags that match this regex in addition to building the master branch.
+    - /^sci-vis-framework-[0-9]+\.[0-9]+\.[0-9]+/
 #cache:
 #  directories:
 #    - $HOME/.m2
@@ -13,3 +19,5 @@ before_script:
 #  - glxinfo
   - echo 'MAVEN_OPTS="-Xms2G -Xmx2G -XX:MaxPermSize=256m"' > ~/.mavenrc
 script: xvfb-run -s "-screen 0 1024x768x24" mvn -f sci-vis-framework test -Dsvf.demo.skip.tests=true
+after_success:
+  - test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_TAG}" != "" && mvn deploy --settings travis/travis-settings.xml
