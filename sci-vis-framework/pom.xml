@@ -220,15 +220,16 @@
     </scm>
 
     <distributionManagement>
+    
         <repository>
-            <id>Artifactory @ Developer Central</id>
-            <name>Artifactory @ Developer Central-releases</name>
-            <url>https://maven.pnnl.gov/artifactory/mvn-pnnl-releases</url>
+            <id>bintray</id>
+            <name>bintray</name>
+            <url>https://api.bintray.com/maven/pnnl/maven/svf/;publish=1</url>
         </repository>
         <snapshotRepository>
-            <id>Artifactory @ Developer Central</id>
-            <name>Artifactory @ Developer Central-snapshots</name>
-            <url>https://maven.pnnl.gov/artifactory/mvn-pnnl-snapshots</url>
+            <id>bintray</id>
+            <name>bintray</name>
+            <url>https://api.bintray.com/maven/pnnl/maven/svf/;publish=1</url>
         </snapshotRepository>
     </distributionManagement>
 
