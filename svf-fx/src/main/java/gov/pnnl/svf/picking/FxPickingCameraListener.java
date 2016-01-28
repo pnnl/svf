@@ -90,8 +90,7 @@ class FxPickingCameraListener implements FxEventHandler<InputEvent> {
             // mouse pressed
             final Rectangle viewport = camera.getViewport();
             final Rectangle sceneViewport = camera.getScene().getViewport();
-            final double multiplier = camera.getCanvasMultiplier();
-            if (!viewport.contains((int) (x * multiplier), sceneViewport.getHeight() - (int) (y * multiplier))) {
+            if (!viewport.contains(x, sceneViewport.getHeight() - y)) {
                 return;
             }
             x = (int) ((MouseEvent) event).getX();
@@ -134,8 +133,7 @@ class FxPickingCameraListener implements FxEventHandler<InputEvent> {
             // down button
             final Rectangle viewport = camera.getViewport();
             final Rectangle sceneViewport = camera.getScene().getViewport();
-            final double multiplier = camera.getCanvasMultiplier();
-            if (!viewport.contains((int) (x * multiplier), sceneViewport.getHeight() - (int) (y * multiplier))) {
+            if (!viewport.contains(x, sceneViewport.getHeight() - y)) {
                 return;
             }
             x = (int) ((ScrollEvent) event).getX();
@@ -155,8 +153,7 @@ class FxPickingCameraListener implements FxEventHandler<InputEvent> {
             // only consider move events that occur inside the camera space
             final Rectangle viewport = camera.getViewport();
             final Rectangle sceneViewport = camera.getScene().getViewport();
-            final double multiplier = camera.getCanvasMultiplier();
-            if (!viewport.contains((int) (x * multiplier), sceneViewport.getHeight() - (int) (y * multiplier))) {
+            if (!viewport.contains(x, sceneViewport.getHeight() - y)) {
                 return;
             }
             // filter move events here to reduce garbage

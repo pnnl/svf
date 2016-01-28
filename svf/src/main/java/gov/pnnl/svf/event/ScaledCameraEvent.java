@@ -1,18 +1,26 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package gov.pnnl.svf.event;
 
 import gov.pnnl.svf.camera.Camera;
+import gov.pnnl.svf.geometry.Point2D;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Set;
 
 /**
- * Event pushed by a camera.
+ * Event pushed by a camera in a canvas that is not the same size as the view.
  *
  * @author Arthur
  */
-public class CameraEvent extends AbstractCameraEvent<Camera> {
+public class ScaledCameraEvent extends CameraEvent {
 
     private static final long serialVersionUID = 1L;
+
+    private final Point2D scale;
 
     /**
      * Constructor
@@ -22,9 +30,17 @@ public class CameraEvent extends AbstractCameraEvent<Camera> {
      * @param y      the y coord in screen space
      * @param clicks the amount which can represent button or wheel clicks
      * @param types  the types of events
+     * @param scale  the scale
      */
-    public CameraEvent(final Camera source, final int x, final int y, final int clicks, final Set<CameraEventType> types) {
+    public ScaledCameraEvent(final Camera source, final int x, final int y, final int clicks, final Set<CameraEventType> types, final Point2D scale) {
         super(source, x, y, clicks, types);
+        if (scale == null) {
+            throw new NullPointerException("scale");
+        }
+        if (scale.getWidth() <= 0.0 || scale.getHeight() <= 0.0) {
+            throw new IllegalArgumentException("scale");
+        }
+        this.scale = scale;
     }
 
     /**
@@ -37,11 +53,49 @@ public class CameraEvent extends AbstractCameraEvent<Camera> {
      * @param height the height in screen space
      * @param clicks the amount which can represent button or wheel clicks
      * @param types  the types of events
+     * @param scale  the scale
      *
      * @throws IllegalArgumentException if the width or height is less than 1
      */
-    public CameraEvent(final Camera source, final int x, final int y, final int width, final int height, final int clicks, final Set<CameraEventType> types) {
+    public ScaledCameraEvent(final Camera source, final int x, final int y, final int width, final int height, final int clicks, final Set<CameraEventType> types, final Point2D scale) {
         super(source, x, y, width, height, clicks, types);
+        if (scale == null) {
+            throw new NullPointerException("scale");
+        }
+        if (scale.getWidth() <= 0.0 || scale.getHeight() <= 0.0) {
+            throw new IllegalArgumentException("scale");
+        }
+        this.scale = scale;
+    }
+
+    /**
+     * Constructor
+     *
+     * @param copy  the event to copy
+     * @param scale the scale
+     */
+    public ScaledCameraEvent(final CameraEvent copy, final Point2D scale) {
+        this(copy.getSource(), copy.getX(), copy.getY(), copy.getWidth(), copy.getHeight(), copy.getClicks(), copy.getTypes(), scale);
+    }
+
+    @Override
+    public int getX() {
+        return (int) (super.getX() * scale.getX());
+    }
+
+    @Override
+    public int getY() {
+        return (int) (super.getY() * scale.getY());
+    }
+
+    @Override
+    public int getWidth() {
+        return (int) (super.getWidth() * scale.getWidth());
+    }
+
+    @Override
+    public int getHeight() {
+        return (int) (super.getHeight() * scale.getHeight());
     }
 
     public static class Builder {
@@ -53,6 +107,7 @@ public class CameraEvent extends AbstractCameraEvent<Camera> {
         private int width = 1;
         private int height = 1;
         private int clicks = 0;
+        private Point2D scale = new Point2D(1.0, 1.0);
 
         private Builder() {
         }
@@ -61,7 +116,7 @@ public class CameraEvent extends AbstractCameraEvent<Camera> {
             return new Builder();
         }
 
-        public CameraEvent.Builder types(final CameraEventType... types) {
+        public Builder types(final CameraEventType... types) {
             this.types = types != null ? EnumSet.copyOf(Arrays.asList(types)) : null;
             return this;
         }
@@ -101,8 +156,13 @@ public class CameraEvent extends AbstractCameraEvent<Camera> {
             return this;
         }
 
-        public CameraEvent build() {
-            return new CameraEvent(source, x, y, width, height, clicks, types);
+        public Builder scale(final Point2D scale) {
+            this.scale = scale;
+            return this;
+        }
+
+        public ScaledCameraEvent build() {
+            return new ScaledCameraEvent(source, x, y, width, height, clicks, types, scale);
         }
     }
 

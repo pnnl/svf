@@ -4,6 +4,9 @@ import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.event.CameraEvent;
 import gov.pnnl.svf.event.CameraEventType;
 import gov.pnnl.svf.event.PickingCameraEvent;
+import gov.pnnl.svf.event.ScaledCameraEvent;
+import gov.pnnl.svf.event.ScaledPickingCameraEvent;
+import gov.pnnl.svf.geometry.Point2D;
 import gov.pnnl.svf.picking.PickingCamera;
 import java.util.EnumSet;
 import java.util.Set;
@@ -154,8 +157,15 @@ public class FxCameraUtils {
         final Set<CameraEventType> types = EnumSet.noneOf(CameraEventType.class);
         FxCameraUtils.addButtonTypes(event, types);
         FxCameraUtils.addModifierTypes(event, types);
-        final PickingCameraEvent pickEvent = new PickingCameraEvent(camera, (int) event.getX(), (int) event.getY(), (int) Math.abs(event.getDeltaY()), types);
-        return pickEvent;
+        // determine if there is scale difference
+        final Point2D scale = CameraUtil.getCanvasScale(camera.getScene());
+        if (Point2D.ONE.equals(scale)) {
+            final PickingCameraEvent pickEvent = new PickingCameraEvent(camera, (int) event.getX(), (int) event.getY(), (int) Math.abs(event.getDeltaY()), types);
+            return pickEvent;
+        } else {
+            final ScaledPickingCameraEvent pickEvent = new ScaledPickingCameraEvent(camera, (int) event.getX(), (int) event.getY(), (int) Math.abs(event.getDeltaY()), types, scale);
+            return pickEvent;
+        }
     }
 
     /**
@@ -172,8 +182,15 @@ public class FxCameraUtils {
         final Set<CameraEventType> types = EnumSet.noneOf(CameraEventType.class);
         FxCameraUtils.addButtonTypes(event, types);
         FxCameraUtils.addModifierTypes(event, types);
-        final PickingCameraEvent pickEvent = new PickingCameraEvent(camera, (int) event.getX(), (int) event.getY(), event.getClickCount(), types);
-        return pickEvent;
+        // determine if there is scale difference
+        final Point2D scale = CameraUtil.getCanvasScale(camera.getScene());
+        if (Point2D.ONE.equals(scale)) {
+            final PickingCameraEvent pickEvent = new PickingCameraEvent(camera, (int) event.getX(), (int) event.getY(), event.getClickCount(), types);
+            return pickEvent;
+        } else {
+            final ScaledPickingCameraEvent pickEvent = new ScaledPickingCameraEvent(camera, (int) event.getX(), (int) event.getY(), event.getClickCount(), types, scale);
+            return pickEvent;
+        }
     }
 
     /**
@@ -190,8 +207,15 @@ public class FxCameraUtils {
         final Set<CameraEventType> types = EnumSet.noneOf(CameraEventType.class);
         FxCameraUtils.addButtonTypes(event, types);
         FxCameraUtils.addModifierTypes(event, types);
-        final CameraEvent pickEvent = new CameraEvent(camera, (int) event.getX(), (int) event.getY(), (int) Math.abs(event.getDeltaY()), types);
-        return pickEvent;
+        // determine if there is scale difference
+        final Point2D scale = CameraUtil.getCanvasScale(camera.getScene());
+        if (Point2D.ONE.equals(scale)) {
+            final CameraEvent pickEvent = new CameraEvent(camera, (int) event.getX(), (int) event.getY(), (int) Math.abs(event.getDeltaY()), types);
+            return pickEvent;
+        } else {
+            final ScaledCameraEvent pickEvent = new ScaledCameraEvent(camera, (int) event.getX(), (int) event.getY(), (int) Math.abs(event.getDeltaY()), types, scale);
+            return pickEvent;
+        }
     }
 
     /**
@@ -208,7 +232,14 @@ public class FxCameraUtils {
         final Set<CameraEventType> types = EnumSet.noneOf(CameraEventType.class);
         FxCameraUtils.addButtonTypes(event, types);
         FxCameraUtils.addModifierTypes(event, types);
-        final CameraEvent pickEvent = new CameraEvent(camera, (int) event.getX(), (int) event.getY(), event.getClickCount(), types);
-        return pickEvent;
+        // determine if there is scale difference
+        final Point2D scale = CameraUtil.getCanvasScale(camera.getScene());
+        if (Point2D.ONE.equals(scale)) {
+            final CameraEvent pickEvent = new CameraEvent(camera, (int) event.getX(), (int) event.getY(), event.getClickCount(), types);
+            return pickEvent;
+        } else {
+            final ScaledCameraEvent pickEvent = new ScaledCameraEvent(camera, (int) event.getX(), (int) event.getY(), event.getClickCount(), types, scale);
+            return pickEvent;
+        }
     }
 }

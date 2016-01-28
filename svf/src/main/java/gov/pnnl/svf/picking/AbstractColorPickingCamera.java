@@ -134,15 +134,13 @@ public abstract class AbstractColorPickingCamera extends AbstractPickingCamera i
     public void update(final long delta) {
         super.update(delta);
         final double margin = getSensitivity();
-        // determine event multiplier if canvas is a different size than the view
-        final double multiplier = getCanvasMultiplier();
         // check current object under mouse and fire events
         final Set<PickingCameraEvent> events = getEvents();
         for (final PickingCameraEvent event : events) {
             // check for move events that don't have an action
             if (!Collections.disjoint(event.getTypes(), CameraEventType.Collections.MOVEMENT_TYPES)
                 && Collections.disjoint(event.getTypes(), CameraEventType.Collections.ACTION_TYPES)) {//event.getTypes().contains(PickType.MOVE)) {
-                final KeyValuePair<ColorPickingSupport, Object> hit = checkPickingHit((int) (event.getX() * multiplier), (int) (event.getY() * multiplier));
+                final KeyValuePair<ColorPickingSupport, Object> hit = checkPickingHit(event.getX(), event.getY());
                 final boolean fireEvent;
                 final KeyValuePair<ColorPickingSupport, Object> current;
                 if (currentPick == null ? hit == null : currentPick.equals(hit)) {
@@ -172,10 +170,10 @@ public abstract class AbstractColorPickingCamera extends AbstractPickingCamera i
             } else {
                 // all other picking events
                 // adjust method parameters for margin
-                final Set<KeyValuePair<ColorPickingSupport, Object>> hits = checkPickingHit((int) (event.getX() * multiplier),
-                                                                                            (int) (event.getY() * multiplier),
-                                                                                            (int) ((event.getWidth() + (int) Math.floor(margin + margin)) * multiplier),
-                                                                                            (int) ((event.getHeight() + (int) Math.floor(margin + margin)) * multiplier));
+                final Set<KeyValuePair<ColorPickingSupport, Object>> hits = checkPickingHit(event.getX(),
+                                                                                            event.getY(),
+                                                                                            event.getWidth() + (int) Math.floor(margin + margin),
+                                                                                            event.getHeight() + (int) Math.floor(margin + margin));
                 start(event);
                 if (!hits.isEmpty()) {
                     if (!Collections.disjoint(event.getTypes(), CameraEventType.Collections.ACTION_TYPES)) {//event.getTypes().contains(PickType.DOWN) || event.getTypes().contains(PickType.SINGLE) || event.getTypes().contains(PickType.DOUBLE) || event.getTypes().contains(PickType.HOVER)) {

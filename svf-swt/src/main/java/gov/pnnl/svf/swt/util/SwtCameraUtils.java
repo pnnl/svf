@@ -4,7 +4,11 @@ import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.event.CameraEvent;
 import gov.pnnl.svf.event.CameraEventType;
 import gov.pnnl.svf.event.PickingCameraEvent;
+import gov.pnnl.svf.event.ScaledCameraEvent;
+import gov.pnnl.svf.event.ScaledPickingCameraEvent;
+import gov.pnnl.svf.geometry.Point2D;
 import gov.pnnl.svf.picking.PickingCamera;
+import gov.pnnl.svf.util.CameraUtil;
 import java.util.EnumSet;
 import java.util.Set;
 import org.eclipse.swt.SWT;
@@ -119,8 +123,15 @@ public class SwtCameraUtils {
         final Set<CameraEventType> types = EnumSet.noneOf(CameraEventType.class);
         SwtCameraUtils.addButtonTypes(event, types);
         SwtCameraUtils.addModifierTypes(event, types);
-        final CameraEvent pickEvent = new CameraEvent(camera, event.x, event.y, Math.abs(event.count), types);
-        return pickEvent;
+        // determine if there is scale difference
+        final Point2D scale = CameraUtil.getCanvasScale(camera.getScene());
+        if (Point2D.ONE.equals(scale)) {
+            final CameraEvent pickEvent = new CameraEvent(camera, event.x, event.y, Math.abs(event.count), types);
+            return pickEvent;
+        } else {
+            final ScaledCameraEvent pickEvent = new ScaledCameraEvent(camera, event.x, event.y, Math.abs(event.count), types, scale);
+            return pickEvent;
+        }
     }
 
     /**
@@ -137,7 +148,14 @@ public class SwtCameraUtils {
         final Set<CameraEventType> types = EnumSet.noneOf(CameraEventType.class);
         SwtCameraUtils.addButtonTypes(event, types);
         SwtCameraUtils.addModifierTypes(event, types);
-        final PickingCameraEvent pickEvent = new PickingCameraEvent(camera, event.x, event.y, Math.abs(event.count), types);
-        return pickEvent;
+        // determine if there is scale difference
+        final Point2D scale = CameraUtil.getCanvasScale(camera.getScene());
+        if (Point2D.ONE.equals(scale)) {
+            final PickingCameraEvent pickEvent = new PickingCameraEvent(camera, event.x, event.y, Math.abs(event.count), types);
+            return pickEvent;
+        } else {
+            final ScaledPickingCameraEvent pickEvent = new ScaledPickingCameraEvent(camera, event.x, event.y, Math.abs(event.count), types, scale);
+            return pickEvent;
+        }
     }
 }

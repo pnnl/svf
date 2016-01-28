@@ -438,25 +438,6 @@ public abstract class AbstractCamera extends AbstractActor implements CameraExt<
     }
 
     /**
-     * The canvas multiplier for determining the difference of size between the
-     * canvas and the view. A multiple of 2 would mean that the canvas is twice
-     * the size of the view. This is common for Mac Retina displays.
-     *
-     * @return the canvas multiple
-     */
-    public double getCanvasMultiplier() {
-        // find the difference between the canvas and the view
-        final Scene scene = getScene();
-        final Rectangle viewport = scene.getViewport();
-        final Rectangle bounds = scene.getBounds();
-        if (viewport.getWidth() > 0 && bounds.getWidth() > 0) {
-            return (double) viewport.getWidth() / (double) bounds.getWidth();
-        } else {
-            return 1.0;
-        }
-    }
-
-    /**
      * Calculate the aspect ratio of this camera.
      *
      * @param viewport the viewport

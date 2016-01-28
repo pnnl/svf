@@ -174,10 +174,10 @@ public abstract class AbstractCameraEvent<C extends Camera> {
         int hash = 7;
         hash = 67 * hash + (this.source != null ? this.source.hashCode() : 0);
         hash = 67 * hash + (this.types != null ? this.types.hashCode() : 0);
-        hash = 67 * hash + this.x;
-        hash = 67 * hash + this.y;
-        hash = 67 * hash + this.width;
-        hash = 67 * hash + this.height;
+        hash = 67 * hash + this.getX();
+        hash = 67 * hash + this.getY();
+        hash = 67 * hash + this.getWidth();
+        hash = 67 * hash + this.getHeight();
         return hash;
     }
 
@@ -186,7 +186,7 @@ public abstract class AbstractCameraEvent<C extends Camera> {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof AbstractCameraEvent)) {
             return false;
         }
         final AbstractCameraEvent<?> other = (AbstractCameraEvent<?>) obj;
@@ -196,16 +196,16 @@ public abstract class AbstractCameraEvent<C extends Camera> {
         if (this.types != other.types && (this.types == null || !this.types.equals(other.types))) {
             return false;
         }
-        if (this.x != other.x) {
+        if (this.getX() != other.getX()) {
             return false;
         }
-        if (this.y != other.y) {
+        if (this.getY() != other.getY()) {
             return false;
         }
-        if (this.width != other.width) {
+        if (this.getWidth() != other.getWidth()) {
             return false;
         }
-        if (this.height != other.height) {
+        if (this.getHeight() != other.getHeight()) {
             return false;
         }
         if (this.clicks != other.clicks) {
@@ -216,6 +216,6 @@ public abstract class AbstractCameraEvent<C extends Camera> {
 
     @Override
     public String toString() {
-        return "PickEvent{" + "source=" + source + ", types=" + types + ", x=" + x + ", y=" + y + ", width=" + width + ", height=" + height + ", clicks=" + clicks + '}';
+        return "PickEvent{" + "source=" + source + ", types=" + types + ", x=" + getX() + ", y=" + getY() + ", width=" + getWidth() + ", height=" + getHeight() + ", clicks=" + clicks + '}';
     }
 }

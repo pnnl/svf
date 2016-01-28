@@ -146,8 +146,7 @@ class NewtPickingCameraListener implements MouseListener {
         // down button
         final Rectangle viewport = camera.getViewport();
         final Rectangle sceneViewport = camera.getScene().getViewport();
-        final double multiplier = camera.getCanvasMultiplier();
-        if (!viewport.contains((int) (x * multiplier), sceneViewport.getHeight() - (int) (y * multiplier))) {
+        if (!viewport.contains(x, sceneViewport.getHeight() - y)) {
             return;
         }
         x = evt.getX();

@@ -14,6 +14,10 @@ public class Point2D extends Shape2D implements Serializable {
      * Constant zero-dimensioned point *
      */
     public final static Point2D ZERO = new Point2D();
+    /**
+     * Constant one-dimensioned point *
+     */
+    public final static Point2D ONE = new Point2D(1.0, 1.0);
 
     /**
      * Constructor

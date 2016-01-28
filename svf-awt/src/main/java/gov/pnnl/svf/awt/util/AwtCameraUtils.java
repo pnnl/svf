@@ -4,7 +4,11 @@ import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.event.CameraEvent;
 import gov.pnnl.svf.event.CameraEventType;
 import gov.pnnl.svf.event.PickingCameraEvent;
+import gov.pnnl.svf.event.ScaledCameraEvent;
+import gov.pnnl.svf.event.ScaledPickingCameraEvent;
+import gov.pnnl.svf.geometry.Point2D;
 import gov.pnnl.svf.picking.PickingCamera;
+import gov.pnnl.svf.util.CameraUtil;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.util.EnumSet;
@@ -120,13 +124,26 @@ public class AwtCameraUtils {
         final Set<CameraEventType> types = EnumSet.noneOf(CameraEventType.class);
         AwtCameraUtils.addButtonTypes(event, types);
         AwtCameraUtils.addModifierTypes(event, types);
-        final CameraEvent pickEvent = new CameraEvent(
-                camera,
-                event.getX(),
-                event.getY(),
-                Math.max(event.getClickCount(), event instanceof MouseWheelEvent ? Math.abs(((MouseWheelEvent) event).getWheelRotation()) : 0),
-                types);
-        return pickEvent;
+        // determine if there is scale difference
+        final Point2D scale = CameraUtil.getCanvasScale(camera.getScene());
+        if (Point2D.ONE.equals(scale)) {
+            final CameraEvent pickEvent = new CameraEvent(
+                    camera,
+                    event.getX(),
+                    event.getY(),
+                    Math.max(event.getClickCount(), event instanceof MouseWheelEvent ? Math.abs(((MouseWheelEvent) event).getWheelRotation()) : 0),
+                    types);
+            return pickEvent;
+        } else {
+            final ScaledCameraEvent pickEvent = new ScaledCameraEvent(
+                    camera,
+                    event.getX(),
+                    event.getY(),
+                    Math.max(event.getClickCount(), event instanceof MouseWheelEvent ? Math.abs(((MouseWheelEvent) event).getWheelRotation()) : 0),
+                    types,
+                    scale);
+            return pickEvent;
+        }
     }
 
     /**
@@ -143,12 +160,25 @@ public class AwtCameraUtils {
         final Set<CameraEventType> types = EnumSet.noneOf(CameraEventType.class);
         AwtCameraUtils.addButtonTypes(event, types);
         AwtCameraUtils.addModifierTypes(event, types);
-        final PickingCameraEvent pickEvent = new PickingCameraEvent(
-                camera,
-                event.getX(),
-                event.getY(),
-                Math.max(event.getClickCount(), event instanceof MouseWheelEvent ? Math.abs(((MouseWheelEvent) event).getWheelRotation()) : 0),
-                types);
-        return pickEvent;
+        // determine if there is scale difference
+        final Point2D scale = CameraUtil.getCanvasScale(camera.getScene());
+        if (Point2D.ONE.equals(scale)) {
+            final PickingCameraEvent pickEvent = new PickingCameraEvent(
+                    camera,
+                    event.getX(),
+                    event.getY(),
+                    Math.max(event.getClickCount(), event instanceof MouseWheelEvent ? Math.abs(((MouseWheelEvent) event).getWheelRotation()) : 0),
+                    types);
+            return pickEvent;
+        } else {
+            final ScaledPickingCameraEvent pickEvent = new ScaledPickingCameraEvent(
+                    camera,
+                    event.getX(),
+                    event.getY(),
+                    Math.max(event.getClickCount(), event instanceof MouseWheelEvent ? Math.abs(((MouseWheelEvent) event).getWheelRotation()) : 0),
+                    types,
+                    scale);
+            return pickEvent;
+        }
     }
 }

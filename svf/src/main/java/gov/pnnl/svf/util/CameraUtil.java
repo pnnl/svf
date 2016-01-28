@@ -2,10 +2,12 @@ package gov.pnnl.svf.util;
 
 import gov.pnnl.svf.animation.LocationAnimationSupport;
 import gov.pnnl.svf.camera.DraggingCamera;
+import gov.pnnl.svf.geometry.Point2D;
 import gov.pnnl.svf.geometry.Rectangle;
 import gov.pnnl.svf.geometry.Shape;
 import gov.pnnl.svf.geometry.Shape2D;
 import gov.pnnl.svf.geometry.Shape3D;
+import gov.pnnl.svf.scene.Scene;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**
@@ -20,6 +22,36 @@ public class CameraUtil {
      */
     private CameraUtil() {
         super();
+    }
+
+    /**
+     * The canvas scale multiplier for determining the difference of size
+     * between the canvas and the view. A multiple of 2 would mean that the
+     * canvas is twice the size of the view. This is common for Mac Retina
+     * displays.
+     *
+     * @param scene reference to the scene
+     *
+     * @return the canvas scale
+     */
+    public static Point2D getCanvasScale(final Scene scene) {
+        if (scene == null) {
+            throw new NullPointerException("scene");
+        }
+        // find the difference between the canvas and the view
+        final Rectangle viewport = scene.getViewport();
+        final Rectangle bounds = scene.getBounds();
+        // start with no scale values
+        final Point2D.Builder scale = Point2D.Builder.construct()
+                .x(1.0)
+                .y(1.0);
+        if (viewport.getWidth() > 0 && bounds.getWidth() > 0) {
+            scale.x((double) viewport.getWidth() / (double) bounds.getWidth());
+        }
+        if (viewport.getHeight() > 0 && bounds.getHeight() > 0) {
+            scale.y((double) viewport.getHeight() / (double) bounds.getHeight());
+        }
+        return scale.build();
     }
 
     /**

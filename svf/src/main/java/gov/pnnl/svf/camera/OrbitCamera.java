@@ -151,8 +151,7 @@ public class OrbitCamera extends SimpleCamera {
         if (!isIgnoreViewport()) {
             final Rectangle viewport = getViewport();
             final Rectangle sceneViewport = getScene().getViewport();
-            final double multiplier = getCanvasMultiplier();
-            if (!viewport.contains((int) (x * multiplier), sceneViewport.getHeight() - (int) (y * multiplier))) {
+            if (!viewport.contains(x, sceneViewport.getHeight() - y)) {
                 return;
             }
         }
@@ -197,8 +196,7 @@ public class OrbitCamera extends SimpleCamera {
         if (!isIgnoreViewport()) {
             final Rectangle viewport = getViewport();
             final Rectangle sceneViewport = getScene().getViewport();
-            final double multiplier = getCanvasMultiplier();
-            if (!viewport.contains((int) (x * multiplier), sceneViewport.getHeight() - (int) (y * multiplier))) {
+            if (!viewport.contains(x, sceneViewport.getHeight() - y)) {
                 return;
             }
         }
@@ -215,8 +213,7 @@ public class OrbitCamera extends SimpleCamera {
     protected void moved(final int x, final int y) {
         final Rectangle viewport = getViewport();
         final Rectangle sceneViewport = getScene().getViewport();
-        final double multiplier = getCanvasMultiplier();
-        if (!isIgnoreViewport() && !viewport.contains((int) (x * multiplier), sceneViewport.getHeight() - (int) (y * multiplier))) {
+        if (!isIgnoreViewport() && !viewport.contains(x, sceneViewport.getHeight() - y)) {
             return;
         }
         // fill fields if they are null
@@ -253,8 +250,7 @@ public class OrbitCamera extends SimpleCamera {
     protected void scrolled(final int x, final int y, final int amount) {
         final Rectangle viewport = getViewport();
         final Rectangle sceneViewport = getScene().getViewport();
-        final double multiplier = getCanvasMultiplier();
-        if (!isIgnoreViewport() && !viewport.contains((int) (x * multiplier), sceneViewport.getHeight() - (int) (y * multiplier))) {
+        if (!isIgnoreViewport() && !viewport.contains(x, sceneViewport.getHeight() - y)) {
             return;
         }
         zoomInOut(amount * getZoomMultiplier());

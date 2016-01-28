@@ -367,8 +367,7 @@ public class DraggingCamera extends SimpleCamera {
         if (!isIgnoreViewport()) {
             final Rectangle viewport = getViewport();
             final Rectangle sceneViewport = getScene().getViewport();
-            final double multiplier = getCanvasMultiplier();
-            if (!viewport.contains((int) (x * multiplier), sceneViewport.getHeight() - (int) (y * multiplier))) {
+            if (!viewport.contains(x, sceneViewport.getHeight() - y)) {
                 return;
             }
         }
@@ -416,8 +415,7 @@ public class DraggingCamera extends SimpleCamera {
         if (!isIgnoreViewport()) {
             final Rectangle viewport = getViewport();
             final Rectangle sceneViewport = getScene().getViewport();
-            final double multiplier = getCanvasMultiplier();
-            if (!viewport.contains((int) (x * multiplier), sceneViewport.getHeight() - (int) (y * multiplier))) {
+            if (!viewport.contains(x, sceneViewport.getHeight() - y)) {
                 return;
             }
         }
@@ -439,8 +437,7 @@ public class DraggingCamera extends SimpleCamera {
     protected void moved(final int x, final int y) {
         final Rectangle viewport = getViewport();
         final Rectangle sceneViewport = getScene().getViewport();
-        final double multiplier = getCanvasMultiplier();
-        if (!isIgnoreViewport() && !viewport.contains((int) (x * multiplier), sceneViewport.getHeight() - (int) (y * multiplier))) {
+        if (!isIgnoreViewport() && !viewport.contains(x, sceneViewport.getHeight() - y)) {
             return;
         }
         // fill fields if they are null
@@ -453,11 +450,11 @@ public class DraggingCamera extends SimpleCamera {
         final int previousY = currentMouseY;
         currentMouseX = x;
         currentMouseY = y;
-        final float dragMultiplier;
+        final float multiplier;
         if (viewport.getHeight() > 0) {
-            dragMultiplier = getDragMultiplier() * ((float) sceneViewport.getHeight() / (float) viewport.getHeight());
+            multiplier = getDragMultiplier() * ((float) sceneViewport.getHeight() / (float) viewport.getHeight());
         } else {
-            dragMultiplier = getDragMultiplier();
+            multiplier = getDragMultiplier();
         }
         if (isDragging() && !isZooming()) {
             // get the current location
@@ -469,7 +466,7 @@ public class DraggingCamera extends SimpleCamera {
             final double zoomScale = location.getZ() / getZoomMax();
             // apply the new translation
             setLocation(location.add(
-                    new Vector3D((currentMouseX - previousX) * -dragMultiplier * zoomScale, (currentMouseY - previousY) * dragMultiplier * zoomScale, 0.0)));
+                    new Vector3D((currentMouseX - previousX) * -multiplier * zoomScale, (currentMouseY - previousY) * multiplier * zoomScale, 0.0)));
         }
         // need to check mouse button here or an initial zoom from scroll can cause problems
         if (pressedMouseButton == CameraEventType.RIGHT && isZooming() && !isDragging()) {
@@ -479,7 +476,7 @@ public class DraggingCamera extends SimpleCamera {
             // use the pressed point as the zoom to location
             final int mouseX = pressedMouseLocationX;
             final int mouseY = sceneViewport.getHeight() - pressedMouseLocationY;
-            final double zoom = location.getZ() + getZoomMultiplier() * (currentMouseY - previousY) * dragMultiplier;
+            final double zoom = location.getZ() + getZoomMultiplier() * (currentMouseY - previousY) * multiplier;
             zoomToPoint(location, mouseX, mouseY, zoom);
         }
     }
@@ -494,8 +491,7 @@ public class DraggingCamera extends SimpleCamera {
     protected void scrolled(final int x, final int y, final int amount) {
         final Rectangle viewport = getViewport();
         final Rectangle sceneViewport = getScene().getViewport();
-        final double multiplier = getCanvasMultiplier();
-        if (!isIgnoreViewport() && !viewport.contains((int) (x * multiplier), sceneViewport.getHeight() - (int) (y * multiplier))) {
+        if (!isIgnoreViewport() && !viewport.contains(x, sceneViewport.getHeight() - y)) {
             return;
         }
         setZooming(true);
