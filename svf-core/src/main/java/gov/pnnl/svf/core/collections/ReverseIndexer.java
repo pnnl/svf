@@ -15,6 +15,8 @@ public class ReverseIndexer implements Indexer {
 
     private final int size; // the size of the collection
     private int index; // the current index
+    private int prev; // the previous index
+    private int count; // the current count
 
     /**
      * Constructor
@@ -34,7 +36,7 @@ public class ReverseIndexer implements Indexer {
 
     @Override
     public int peek() {
-        return index;
+        return prev;
     }
 
     @Override
@@ -42,12 +44,14 @@ public class ReverseIndexer implements Indexer {
         if (index == -1) {
             return index;
         }
+        count++;
+        prev = index;
         return index--;
     }
 
     @Override
     public int count() {
-        return index == -1 ? size : size - index - 1;
+        return count;
     }
 
     @Override

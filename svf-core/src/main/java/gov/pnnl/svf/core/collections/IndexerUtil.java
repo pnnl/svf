@@ -90,4 +90,38 @@ public class IndexerUtil {
     public static Indexer create(final long min, final long max, final long value, final int size) {
         return new LongInterpolationIndexer(min, max, value, size);
     }
+
+    /**
+     * This indexer will iterate through indices in a linear fashion.
+     *
+     * @param size the size of the collection (number of values to iterate
+     *             through)
+     *
+     * @return the new indexer instance
+     *
+     * @throws IllegalArgumentException if size is less than zero
+     */
+    public static Indexer create(final int size) {
+        return new LinearIndexer(size);
+    }
+
+    /**
+     * This indexer will iterate through indices in a linear fashion in reverse
+     * order.
+     *
+     * @param size    the size of the collection (number of values to iterate
+     *                through)
+     * @param reverse true to return an indexer that will operate in reverse
+     *
+     * @return the new indexer instance
+     *
+     * @throws IllegalArgumentException if size is less than zero
+     */
+    public static Indexer create(final int size, final boolean reverse) {
+        if (reverse) {
+            return new ReverseIndexer(size);
+        } else {
+            return new LinearIndexer(size);
+        }
+    }
 }

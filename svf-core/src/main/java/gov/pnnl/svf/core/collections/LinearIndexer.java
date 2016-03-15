@@ -14,6 +14,8 @@ public class LinearIndexer implements Indexer {
 
     private final int size; // the size of the collection
     private int index; // the current index
+    private int prev; // the previous index
+    private int count; // the current count
 
     /**
      * Constructor
@@ -32,7 +34,7 @@ public class LinearIndexer implements Indexer {
 
     @Override
     public int peek() {
-        return index;
+        return prev;
     }
 
     @Override
@@ -40,17 +42,19 @@ public class LinearIndexer implements Indexer {
         if (index == -1) {
             return index;
         }
-        if (index >= size - 1) {
+        if (index >= size) {
             index = -1;
             return index;
         } else {
+            count++;
+            prev = index;
             return index++;
         }
     }
 
     @Override
     public int count() {
-        return index == -1 ? size : index + 1;
+        return count;
     }
 
     @Override
