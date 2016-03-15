@@ -7,7 +7,7 @@ branches:
     - master
     - develop
       # Build tags that match this regex in addition to building the master branch.
-    - /^sci-vis-framework-[0-9]+\.[0-9]+\.[0-9]+/
+    - /^[0-9]+\.[0-9]+\.[0-9]+$/
 #cache:
 #  directories:
 #    - $HOME/.m2
