@@ -1,7 +1,7 @@
 package gov.pnnl.svf.swt.input;
 
 import gov.pnnl.svf.input.KeyState;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.widgets.Button;

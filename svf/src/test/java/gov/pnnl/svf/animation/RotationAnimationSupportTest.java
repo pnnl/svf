@@ -10,7 +10,7 @@ import gov.pnnl.svf.support.TransformSupport;
 import gov.pnnl.svf.test.AbstractObjectTestBase;
 import gov.pnnl.svf.util.ConfigUtil;
 import java.util.Random;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class RotationAnimationSupportTest extends AbstractObjectTestBase<RotationAnimationSupport> {

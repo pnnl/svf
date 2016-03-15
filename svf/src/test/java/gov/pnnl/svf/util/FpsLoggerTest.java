@@ -3,7 +3,7 @@ package gov.pnnl.svf.util;
 import gov.pnnl.svf.scene.ProxyGLCanvas;
 import gov.pnnl.svf.scene.ProxyScene;
 import gov.pnnl.svf.scene.Scene;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**

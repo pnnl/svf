@@ -1,6 +1,6 @@
 package gov.pnnl.svf.core.util;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**

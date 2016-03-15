@@ -2,7 +2,7 @@ package gov.pnnl.svf.core.collections;
 
 import gov.pnnl.svf.test.AbstractObjectTestBase;
 import java.util.Random;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**

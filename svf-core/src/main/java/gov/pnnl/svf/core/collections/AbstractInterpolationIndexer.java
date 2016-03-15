@@ -9,10 +9,11 @@ package gov.pnnl.svf.core.collections;
  *
  * @author Arthur Bleeker
  */
-public abstract class AbstractInterpolationIndexer {
+public abstract class AbstractInterpolationIndexer implements Indexer {
 
     protected final int size; // the size of the collection
     protected int index; // the current index
+    protected int count; // the current count of returned indices
     protected int low; // the lowest index used
     protected int high; // the highest index used
     protected boolean dir; // the current direction
@@ -32,17 +33,27 @@ public abstract class AbstractInterpolationIndexer {
         this.size = size;
     }
 
-    /**
-     * @return the current index
-     */
+    @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
+    public int count() {
+        return count;
+    }
+
+    @Override
     public int peek() {
         return index;
     }
 
-    /**
-     * @return the next index or -1 if there is no next index
-     */
+    @Override
     public int next() {
+        if (index == -1) {
+            return index;
+        }
+        count++;
         if (low == -1 || high == -1) {
             // starting point
             low = index;

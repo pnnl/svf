@@ -10,7 +10,7 @@ import java.io.RandomAccessFile;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
