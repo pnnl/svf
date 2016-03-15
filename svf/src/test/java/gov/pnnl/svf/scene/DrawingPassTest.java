@@ -1,6 +1,6 @@
 package gov.pnnl.svf.scene;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**

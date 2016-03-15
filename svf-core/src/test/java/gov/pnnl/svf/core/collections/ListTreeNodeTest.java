@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**

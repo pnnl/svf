@@ -5,8 +5,8 @@ import java.awt.Font;
 import java.util.Collections;
 import java.util.Random;
 import java.util.UUID;
-import junit.framework.Assert;
 import org.apache.commons.collections.primitives.RandomAccessDoubleList;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -24,8 +24,8 @@ public class Text3DTest extends AbstractObjectTestBase<Text3D> {
     @Test
     public void testEmptyBounds() {
         final Text3D a = new Text3D("");
-        Assert.assertEquals(0.0, a.getWidth());
-        Assert.assertEquals(0.0, a.getHeight());
+        Assert.assertEquals(0.0, a.getWidth(), 0.0);
+        Assert.assertEquals(0.0, a.getHeight(), 0.0);
     }
 
     @Test

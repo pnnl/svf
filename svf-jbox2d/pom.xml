@@ -4,7 +4,7 @@
     <parent>
         <groupId>gov.pnnl.svf</groupId>
         <artifactId>sci-vis-framework</artifactId>
-        <version>1.7.5</version>
+        <version>1.7.6</version>
         <relativePath>../sci-vis-framework/pom.xml</relativePath>
     </parent>
 

@@ -1,7 +1,14 @@
 language: java
 jdk: oraclejdk7
 os: linux
-sudo: false
+sudo: required
+dist: trusty
+branches:
+  only:
+    - master
+    - develop
+      # Build tags that match this regex in addition to building the master branch.
+    - /^[0-9]+\.[0-9]+\.[0-9]+$/
 #cache:
 #  directories:
 #    - $HOME/.m2
@@ -12,4 +19,6 @@ before_script:
 #  - sleep 3 # give xvfb some time to start
 #  - glxinfo
   - echo 'MAVEN_OPTS="-Xms2G -Xmx2G -XX:MaxPermSize=256m"' > ~/.mavenrc
-script: xvfb-run -s "-screen 0 1024x768x24" mvn -f sci-vis-framework test -Dsvf.demo.skip.tests=true
+script: xvfb-run -s "-screen 0 1024x768x24" mvn -f sci-vis-framework test -Dsurefire.excludesFile=$TRAVIS_BUILD_DIR/.travis/travis-test-excludes
+after_success:
+  - test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_TAG}" != "" && mvn -f sci-vis-framework deploy -DskipTests=true --settings .travis/travis-settings.xml

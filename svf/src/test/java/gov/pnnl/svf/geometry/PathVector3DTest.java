@@ -4,7 +4,7 @@ import gov.pnnl.svf.test.AbstractObjectTestBase;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.apache.commons.math.geometry.Vector3D;
 import org.junit.Test;
 

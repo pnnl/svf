@@ -2,7 +2,7 @@ package gov.pnnl.svf.core.geometry;
 
 import java.awt.Point;
 import java.awt.Rectangle;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**

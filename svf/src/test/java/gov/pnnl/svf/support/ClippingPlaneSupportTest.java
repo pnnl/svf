@@ -6,7 +6,7 @@ import gov.pnnl.svf.scene.ProxyScene;
 import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.util.ConfigUtil;
 import java.util.Arrays;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.apache.commons.math.geometry.Vector3D;
 import org.junit.Test;
 

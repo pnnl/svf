@@ -9,7 +9,7 @@ import gov.pnnl.svf.scene.ProxyScene;
 import gov.pnnl.svf.scene.SceneExt;
 import gov.pnnl.svf.util.ConfigUtil;
 import java.util.Set;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

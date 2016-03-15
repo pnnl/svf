@@ -90,14 +90,7 @@ public class TextRendererImpl extends AbstractText {
         super.dispose();
         getScene().remove(actor);
         actor.dispose();
-        final BufferedImage image = this.image;
-        final Graphics2D graphics = this.graphics;
-        if (image != null) {
-            image.flush();
-        }
-        if (graphics != null) {
-            graphics.dispose();
-        }
+        createGraphics(null);
     }
 
     @Override
@@ -256,6 +249,7 @@ public class TextRendererImpl extends AbstractText {
         if (item == null) {
             // character wasn't found
             // test to see if it will fit in the current regions
+            final Graphics2D graphics = getGraphics();
             final FontMetrics metrics = graphics.getFontMetrics();
             final int width = (int) Math.ceil(metrics.getStringBounds(String.valueOf(c), graphics).getWidth());
             final int height = metrics.getHeight();
@@ -299,14 +293,8 @@ public class TextRendererImpl extends AbstractText {
         }
         cached = new HashMap<>();
         packer = new SimpleRectanglePacker(size, size);
-        if (image != null) {
-            image.flush();
-        }
-        if (graphics != null) {
-            graphics.dispose();
-        }
-        image = new BufferedImage(size, size, BufferedImage.TYPE_BYTE_GRAY);
-        graphics = image.createGraphics();
+        final BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_BYTE_GRAY);
+        final Graphics2D graphics = createGraphics(image);
         graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, isAntiAliased()
                                                                         ? RenderingHints.VALUE_TEXT_ANTIALIAS_ON
@@ -351,6 +339,28 @@ public class TextRendererImpl extends AbstractText {
         final Texture2dSupport texture = Texture2dSupport.newInstance(actor, data);
         texture.initialize(gl, null);
         textures.add(index, texture);
+    }
+
+    private Graphics2D createGraphics(final BufferedImage image) {
+        synchronized (this) {
+            if (this.graphics != null) {
+                this.graphics.dispose();
+            }
+            if (this.image != null) {
+                this.image.flush();
+            }
+            this.image = image;
+            if (this.image != null) {
+                this.graphics = this.image.createGraphics();
+            }
+            return this.graphics;
+        }
+    }
+
+    public Graphics2D getGraphics() {
+        synchronized (this) {
+            return graphics;
+        }
     }
 
 }

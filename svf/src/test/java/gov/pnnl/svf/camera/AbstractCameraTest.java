@@ -9,7 +9,7 @@ import gov.pnnl.svf.util.ConfigUtil;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.concurrent.atomic.AtomicBoolean;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.apache.commons.math.geometry.Vector3D;
 import org.junit.Test;
 

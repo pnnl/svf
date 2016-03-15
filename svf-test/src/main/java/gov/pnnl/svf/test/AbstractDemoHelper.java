@@ -1,7 +1,6 @@
 package gov.pnnl.svf.test;
 
-import junit.framework.Assert;
-import junit.framework.AssertionFailedError;
+import org.junit.Assert;
 import org.junit.Before;
 
 /**
@@ -116,7 +115,7 @@ public abstract class AbstractDemoHelper<D, W, B, S> {
                 Assert.assertTrue("builder is not garbage collectable", tracker.isGarbageCollectable("builder"));
                 Assert.assertTrue("scene is not garbage collectable", tracker.isGarbageCollectable("scene"));
                 return;
-            } catch (final AssertionFailedError ex) {
+            } catch (final AssertionError ex) {
                 if (count++ < NUM_RETRIES) {
                     System.out.println(count + " - Waiting for the scene to dispose...");
                     continue;

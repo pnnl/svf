@@ -5,7 +5,7 @@ import gov.pnnl.svf.core.geometry.Chart;
 import gov.pnnl.svf.test.AbstractObjectTestBase;
 import java.util.Collections;
 import java.util.Random;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
