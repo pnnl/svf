@@ -1,7 +1,8 @@
 language: java
 jdk: oraclejdk7
 os: linux
-sudo: false
+sudo: required
+dist: trusty
 branches:
   only:
     - master
