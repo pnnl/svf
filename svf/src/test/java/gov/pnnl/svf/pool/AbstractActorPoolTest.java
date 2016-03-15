@@ -8,7 +8,7 @@ import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.support.ColorSupport;
 import gov.pnnl.svf.support.TransformSupport;
 import gov.pnnl.svf.util.ConfigUtil;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**

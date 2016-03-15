@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.util.Collections;
 import java.util.Random;
 import java.util.UUID;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.apache.commons.collections.primitives.RandomAccessDoubleList;
 import org.junit.Test;
 

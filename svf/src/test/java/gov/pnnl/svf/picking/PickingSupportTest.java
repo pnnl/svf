@@ -12,7 +12,7 @@ import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.util.ConfigUtil;
 import java.util.EnumSet;
 import java.util.concurrent.atomic.AtomicBoolean;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**

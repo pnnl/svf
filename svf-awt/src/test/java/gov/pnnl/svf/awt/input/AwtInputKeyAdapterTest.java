@@ -3,7 +3,7 @@ package gov.pnnl.svf.awt.input;
 import gov.pnnl.svf.input.KeyState;
 import java.awt.Label;
 import java.awt.event.KeyEvent;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**

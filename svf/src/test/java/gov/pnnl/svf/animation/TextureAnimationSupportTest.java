@@ -13,7 +13,7 @@ import gov.pnnl.svf.util.ConfigUtil;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class TextureAnimationSupportTest extends AbstractObjectTestBase<TextureAnimationSupport> {

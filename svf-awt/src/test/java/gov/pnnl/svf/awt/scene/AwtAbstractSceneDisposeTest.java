@@ -10,7 +10,7 @@ import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.support.ChildSupport;
 import gov.pnnl.svf.support.ColorSupport;
 import gov.pnnl.svf.support.TransformSupport;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
