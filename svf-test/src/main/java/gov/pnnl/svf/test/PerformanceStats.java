@@ -5,6 +5,7 @@
  */
 package gov.pnnl.svf.test;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -35,9 +36,10 @@ public class PerformanceStats {
     public static synchronized void write(final String function, final int iterations, final long milliseconds) {
         final Properties properties = new Properties();
         // load existing
+        final File file = new File(FILE_NAME);
         FileInputStream input = null;
         try {
-            input = new FileInputStream(FILE_NAME);
+            input = new FileInputStream(file);
             properties.load(input);
         } catch (final IOException ex) {
             logger.log(Level.WARNING, "Unable to read performance statistics from file.", ex);
@@ -54,25 +56,32 @@ public class PerformanceStats {
         final String r = ".*\\(([\\d.]+), ([\\d.]+)\\).*";
         final Pattern p = Pattern.compile(r);
         Matcher m = null;
-        try {
-            m = p.matcher(properties.getProperty(function, ""));
-            m.matches();
-        } catch (final IllegalStateException ex) {
-            logger.log(Level.WARNING, "Unable to retrieve the previous time.", ex);
+        boolean extract = false;
+        if (file.exists()) {
+            try {
+                m = p.matcher(properties.getProperty(function, ""));
+                extract = m.matches();
+            } catch (final IllegalStateException ex) {
+                logger.log(Level.WARNING, "Unable to retrieve the previous time.", ex);
+            }
         }
         final double time = milliseconds / 1000.0;
         Double pMin = time;
-        try {
-            pMin = Double.valueOf(m.group(1));
-        } catch (final NullPointerException | IllegalStateException | NumberFormatException ex) {
-            logger.log(Level.WARNING, "Unable to parse the previous minimum time.", ex);
+        if (file.exists() && extract) {
+            try {
+                pMin = Double.valueOf(m.group(1));
+            } catch (final NullPointerException | IllegalStateException | NumberFormatException ex) {
+                logger.log(Level.WARNING, "Unable to parse the previous minimum time.", ex);
+            }
         }
         final double min = Math.min(time, pMin);
         Double pMax = time;
-        try {
-            pMax = Double.valueOf(m.group(2));
-        } catch (final NullPointerException | IllegalStateException | NumberFormatException ex) {
-            logger.log(Level.WARNING, "Unable to parse the previous maximum time.", ex);
+        if (file.exists() && extract) {
+            try {
+                pMax = Double.valueOf(m.group(2));
+            } catch (final NullPointerException | IllegalStateException | NumberFormatException ex) {
+                logger.log(Level.WARNING, "Unable to parse the previous maximum time.", ex);
+            }
         }
         final double max = Math.max(time, pMax);
         // build message
