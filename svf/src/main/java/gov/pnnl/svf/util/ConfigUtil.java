@@ -298,7 +298,7 @@ public class ConfigUtil {
                                 gl.glGetIntegerv(GL.GL_BLUE_BITS, colorBits, 2);
                                 final boolean colorBitsSupported = !((colorBits[0] < 8) || (colorBits[1] < 8) || (colorBits[2] < 8));
                                 // check if FBO is supported
-                                final boolean textureBufferSupported = gl.hasFullFBOSupport();
+                                final boolean frameBufferSupported = gl.hasFullFBOSupport();
                                 // auxilliary buffer utilized for color picking
                                 final int[] auxBuffer = new int[]{0};
                                 if (builder.isAuxiliaryBuffers()) {
@@ -310,16 +310,27 @@ public class ConfigUtil {
                                 gl.glGetBooleanv(GL2.GL_DOUBLEBUFFER, doubleBuffer, 0);
                                 final boolean doubleBufferSupported = doubleBuffer[0] == 1;
                                 // check if color picking can be utilized
+                                final boolean colorPickingSupported;
                                 if (colorBitsSupported
+                                    && frameBufferSupported
                                     && (builder.isDebugColorPicking()
-                                        || textureBufferSupported
                                         || auxBufferSupported
                                         || doubleBufferSupported)) {
                                     builder.addHint(PickingHint.COLOR_PICKING);
-                                    break;
+                                    colorPickingSupported = true;
+                                } else {
+                                    colorPickingSupported = false;
                                 }
+                                logger.log(Level.FINE, "Color picking {0}: color bits {1}, frame buffer {2}, auxiliary buffers {3}, double buffer {4}",
+                                           new Object[]{supportedMessage(colorPickingSupported),
+                                                        supportedMessage(colorBitsSupported),
+                                                        supportedMessage(frameBufferSupported),
+                                                        supportedMessage(auxBufferSupported),
+                                                        supportedMessage(doubleBufferSupported)});
+                            } else {
+                                builder.removeHint(PickingHint.COLOR_PICKING);
+                                logger.log(Level.FINE, "Color picking is disabled when running over remote desktop session.");
                             }
-                            builder.removeHint(PickingHint.COLOR_PICKING);
                             break;
                         case ITEM_PICKING:
                             builder.addHint(PickingHint.ITEM_PICKING);
@@ -755,6 +766,17 @@ public class ConfigUtil {
         final Properties properties = new Properties();
         properties.putAll(LOGGING_CONFIG_DEFAULTS);
         return properties;
+    }
+
+    /**
+     * Returns either "is supported" or "not supported".
+     *
+     * @param supported whether it is supported or not
+     *
+     * @return the message
+     */
+    protected static String supportedMessage(final boolean supported) {
+        return supported ? "is supported" : "not supported";
     }
 
     /**
