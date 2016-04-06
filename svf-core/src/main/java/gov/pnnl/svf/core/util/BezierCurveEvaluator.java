@@ -18,7 +18,7 @@ public class BezierCurveEvaluator {
      * Constructor
      *
      * @param degree the degree of the component used in the function {x: 0.0
-     *               &le x &lt &#8734}
+     *               &le; x &lt; &#8734;}
      */
     public BezierCurveEvaluator(final int degree) {
         if (degree <= 0) {
@@ -37,7 +37,7 @@ public class BezierCurveEvaluator {
      * checked to keep the function performant.
      *
      * @param points a 2d array of start, control, control, and end
-     * @param step   the step to evaluate where {0.0 &le step &le 1.0}
+     * @param step   the step to evaluate where {0.0 &le; step &le; 1.0}
      *
      * @return the evaluated point
      */
@@ -53,7 +53,7 @@ public class BezierCurveEvaluator {
      *
      * @param points a 1d array of start (a,b,c), control (a,b,c), control
      *               (a,b,c), and end (a,b,c)
-     * @param step   the step to evaluate where {0.0 &le step &le 1.0}
+     * @param step   the step to evaluate where {0.0 &le; step &le; 1.0}
      *
      * @return out the evaluated point
      */
@@ -68,7 +68,7 @@ public class BezierCurveEvaluator {
      * checked to keep the function performant.
      *
      * @param points a 2d array of start, control, control, and end
-     * @param step   the step to evaluate where {0.0 &le step &le 1.0}
+     * @param step   the step to evaluate where {0.0 &le; step &le; 1.0}
      * @param out    the evaluated point
      */
     public void evaluate(final double[][] points, final double step, final double[] out) {
@@ -99,7 +99,7 @@ public class BezierCurveEvaluator {
      *
      * @param points a 1d array of start (a,b,c), control (a,b,c), control
      *               (a,b,c), and end (a,b,c)
-     * @param step   the step to evaluate where {0.0 &le step &le 1.0}
+     * @param step   the step to evaluate where {0.0 &le; step &le; 1.0}
      * @param out    the evaluated point
      */
     public void evaluate(final double[] points, final double step, final double[] out) {

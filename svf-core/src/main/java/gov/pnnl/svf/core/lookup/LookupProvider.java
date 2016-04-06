@@ -25,7 +25,7 @@ public interface LookupProvider {
      * @param object The object to add to this lookup provider.
      *
      * @throws NullPointerException     if the lookup parameter is null
-     * @throws IllegalArgumentException if a Class<?> type is passed as the
+     * @throws IllegalArgumentException if a {@code Class<?>} type is passed as the
      *                                  object argument
      */
     <T> void add(T object);
@@ -54,7 +54,7 @@ public interface LookupProvider {
      * @return true if the object instance was found and removed
      *
      * @throws NullPointerException     if the object parameter is null
-     * @throws IllegalArgumentException if a Class<?> type is passed as the
+     * @throws IllegalArgumentException if a {@code Class<?>} type is passed as the
      *                                  object argument
      */
     <T> boolean remove(T object);

@@ -58,7 +58,7 @@ public class FpsLogger extends AbstractLogger {
 
     /**
      * The text uses MessageFormat and will insert the following metrics:
-     * <p/>
+     * <p>
      * Average Frames Per Second: {0}
      *
      * @param text The text to show in the logging message.

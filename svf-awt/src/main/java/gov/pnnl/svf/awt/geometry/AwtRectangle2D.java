@@ -19,7 +19,7 @@ public class AwtRectangle2D extends Rectangle2D implements Serializable {
 
     /**
      * Convenience Constructor
-     * <p/>
+     * <p>
      * This constructor will create a rectangle with the origin moved from the
      * top left to the center.
      *
@@ -34,7 +34,7 @@ public class AwtRectangle2D extends Rectangle2D implements Serializable {
 
     /**
      * Convenience Constructor
-     * <p/>
+     * <p>
      * This constructor will create a rectangle with the origin moved from the
      * top left to the center.
      *

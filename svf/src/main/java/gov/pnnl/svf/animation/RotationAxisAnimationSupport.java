@@ -22,10 +22,10 @@ public class RotationAxisAnimationSupport extends AbstractAnimationSupport {
      * object construction.
      *
      * @param actor        The actor to animate.
-     * @param duration     The duration in milliseconds to animate. {x: 0.0 &le
-     *                     x &lt &#8734}
+     * @param duration     The duration in milliseconds to animate. {x: 0.0 &le;
+     *                     x &lt; &#8734;}
      * @param pause        The time in milliseconds to wait before the animation
-     *                     starts. {x: 0.0 &le x &lt &#8734}
+     *                     starts. {x: 0.0 &le; x &lt; &#8734;}
      * @param repeat       Set to true to repeat this animation. Remove this
      *                     object from lookup to stop animation.
      * @param rotationAxis The target rotation axis.
@@ -45,10 +45,10 @@ public class RotationAxisAnimationSupport extends AbstractAnimationSupport {
      * Animation support for changing the rotation axis over a period of time.
      *
      * @param actor        The actor to animate.
-     * @param duration     The duration in milliseconds to animate. {x: 0.0 &le
-     *                     x &lt &#8734}
+     * @param duration     The duration in milliseconds to animate. {x: 0.0 &le;
+     *                     x &lt; &#8734;}
      * @param pause        The time in milliseconds to wait before the animation
-     *                     starts. {x: 0.0 &le x &lt &#8734}
+     *                     starts. {x: 0.0 &le; x &lt; &#8734;}
      * @param repeat       Set to true to repeat this animation. Remove this
      *                     object from lookup to stop animation.
      * @param rotationAxis The target rotation axis.

@@ -118,11 +118,11 @@ public abstract class AbstractDynamicActor extends AbstractActor implements VboD
 
     /**
      * Return the set of fields that should cause this actor to reinitialize.
-     * <p/>
+     * <p>
      * <code>
-     * final Set&lt;String&gt; fields = super.getInitializeFields();<br/>
-     * fields.add(FIELD);<br/>
-     * return fields;<br/>
+     * final Set&lt;String&gt; fields = super.getInitializeFields();<br>
+     * fields.add(FIELD);<br>
+     * return fields;<br>
      * </code>
      *
      * @return a set of fields

@@ -19,9 +19,9 @@ public abstract class AbstractAnimationSupport extends AbstractSupport<Animation
      *
      * @param actor    The actor that is being animated.
      * @param duration Amount of time in milliseconds for the animation. {x: 0
-     *                 &le x &lt &#8734}
+     *                 &le; x &lt; &#8734;}
      * @param pause    The time in milliseconds to wait before the animation {x:
-     *                 0.0 &le x &lt &#8734} starts.
+     *                 0.0 &le; x &lt; &#8734;} starts.
      * @param repeat   Set to true to repeat this animation. Remove this object
      *                 from lookup to stop animation.
      */

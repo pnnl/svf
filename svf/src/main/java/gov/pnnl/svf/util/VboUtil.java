@@ -393,7 +393,7 @@ public class VboUtil extends AbstractGLUtil implements DimensionConst {
 
     /**
      * Add an arc with an inner and outer radius.
-     * <p/>
+     * <p>
      * TODO implement texture coords method
      *
      * @param output      the list to add to
@@ -437,7 +437,7 @@ public class VboUtil extends AbstractGLUtil implements DimensionConst {
 
     /**
      * Add an arc with an inner and outer radius.
-     * <p/>
+     * <p>
      * TODO implement texture coords method
      *
      * @param output      the list to add to

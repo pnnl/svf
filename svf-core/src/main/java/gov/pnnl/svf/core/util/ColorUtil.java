@@ -53,7 +53,7 @@ public class ColorUtil {
      *                     ignored.
      * @param srcColor     The source or overlay color, the transparency value
      *                     will be used as the alpha value.
-     * @param transparency The transparency for the overlay. {x: 0.0 &le x &le
+     * @param transparency The transparency for the overlay. {x: 0.0 &le; x &le;
      *                     1.0}
      *
      * @return the newly created color
@@ -61,7 +61,7 @@ public class ColorUtil {
      * @throws NullPointerException     if the dstColor or srcColor argument is
      *                                  null
      * @throws IllegalArgumentException if the transparency is not in the set {x
-     *                                  : 0.0 &le x &le 1.0}
+     *                                  : 0.0 &le; x &le; 1.0}
      */
     public static Color createBlendedColor(final Color dstColor, final Color srcColor, final float transparency) {
         if (dstColor == null) {
@@ -90,7 +90,7 @@ public class ColorUtil {
      *
      * @param gradient The gradient to use for the texture
      * @param type     The type of texture data to create
-     * @param length   The length of the lookup texture {x: 1 &le x &le 1024}
+     * @param length   The length of the lookup texture {x: 1 &le; x &le; 1024}
      *
      * @return the newly created lookup texture
      */
@@ -151,8 +151,8 @@ public class ColorUtil {
     /**
      * Creates a random color that is clamped between the min and max values.
      *
-     * @param min minimum value for the color {x: 0.0 &le x &le 1.0}
-     * @param max maximum value for the color {x: 0.0 &le x &le 1.0}
+     * @param min minimum value for the color {x: 0.0 &le; x &le; 1.0}
+     * @param max maximum value for the color {x: 0.0 &le; x &le; 1.0}
      *
      * @return a new random color
      */
@@ -173,12 +173,12 @@ public class ColorUtil {
     /**
      * Creates a random color that is clamped between the min and max values.
      *
-     * @param hMin minimum hue value for the color {x: 0.0 &le x &le 1.0}
-     * @param hMax maximum hue value for the color {x: 0.0 &le x &le 1.0}
-     * @param sMin minimum saturation value for the color {x: 0.0 &le x &le 1.0}
-     * @param sMax maximum saturation value for the color {x: 0.0 &le x &le 1.0}
-     * @param lMin minimum lightness value for the color {x: 0.0 &le x &le 1.0}
-     * @param lMax maximum lightness value for the color {x: 0.0 &le x &le 1.0}
+     * @param hMin minimum hue value for the color {x: 0.0 &le; x &le; 1.0}
+     * @param hMax maximum hue value for the color {x: 0.0 &le; x &le; 1.0}
+     * @param sMin minimum saturation value for the color {x: 0.0 &le; x &le; 1.0}
+     * @param sMax maximum saturation value for the color {x: 0.0 &le; x &le; 1.0}
+     * @param lMin minimum lightness value for the color {x: 0.0 &le; x &le; 1.0}
+     * @param lMax maximum lightness value for the color {x: 0.0 &le; x &le; 1.0}
      *
      * @return a new random color
      */
@@ -295,8 +295,8 @@ public class ColorUtil {
      * Creates a color palette with varying hues.
      *
      * @param size       the number of unique colors
-     * @param saturation the saturation {x: 0.0 &le x &le 1.0}
-     * @param lightness  the lightness {x: 0.0 &le x &le 1.0}
+     * @param saturation the saturation {x: 0.0 &le; x &le; 1.0}
+     * @param lightness  the lightness {x: 0.0 &le; x &le; 1.0}
      *
      * @return the new palette
      *

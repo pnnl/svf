@@ -22,9 +22,9 @@ public class ScaleAnimationSupport extends AbstractAnimationSupport {
      * @param actor    The owning actor.
      * @param duration Duration of the animation in milliseconds. Set to a
      *                 negative number to create a pause before animating. {x:
-     *                 0.0 &le x &lt &#8734}
+     *                 0.0 &le; x &lt; &#8734;}
      * @param pause    The time in milliseconds to wait before the animation
-     *                 starts. {x: 0.0 &le x &lt &#8734}
+     *                 starts. {x: 0.0 &le; x &lt; &#8734;}
      * @param repeat   Set to true to repeat this animation. Remove this object
      *                 from lookup to stop animation.
      * @param scale    The scale to animate to.
@@ -46,9 +46,9 @@ public class ScaleAnimationSupport extends AbstractAnimationSupport {
      * @param actor    The owning actor.
      * @param duration Duration of the animation in milliseconds. Set to a
      *                 negative number to create a pause before animating. {x:
-     *                 0.0 &le x &lt &#8734}
+     *                 0.0 &le; x &lt; &#8734;}
      * @param pause    The time in milliseconds to wait before the animation
-     *                 starts. {x: 0.0 &le x &lt &#8734}
+     *                 starts. {x: 0.0 &le; x &lt; &#8734;}
      * @param repeat   Set to true to repeat this animation. Remove this object
      *                 from lookup to stop animation.
      * @param scale    The scale to animate to.

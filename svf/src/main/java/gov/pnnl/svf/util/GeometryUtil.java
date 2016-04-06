@@ -411,7 +411,7 @@ public class GeometryUtil extends AbstractGLUtil {
 
     /**
      * Draw an arc with an inner and outer radius.
-     * <p/>
+     * <p>
      * TODO implement texture coords
      *
      * @param gl          reference to current GL
@@ -455,7 +455,7 @@ public class GeometryUtil extends AbstractGLUtil {
 
     /**
      * Draw an arc with an inner and outer radius.
-     * <p/>
+     * <p>
      * TODO implement texture coords
      *
      * @param gl          reference to current GL

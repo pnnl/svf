@@ -596,15 +596,15 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
     /**
      * Perform all initial scene loading logic here. This function will get
      * called once after the initial GL initialization.
-     * <br/>
+     * <br>
      * <h3>e.g.:</h3>
      * <p>
      * <code>
-     * final SimpleCamera camera = new SimpleCamera(this);<br/>
-     * add(camera);<br/>
-     * <br/>
-     * final ColoredPlaneActor plane = new ColoredPlaneActor(this);<br/>
-     * add(plane);<br/>
+     * final SimpleCamera camera = new SimpleCamera(this);<br>
+     * add(camera);<br>
+     * <br>
+     * final ColoredPlaneActor plane = new ColoredPlaneActor(this);<br>
+     * add(plane);<br>
      * </code> </p>
      */
     @SuppressWarnings("unchecked")

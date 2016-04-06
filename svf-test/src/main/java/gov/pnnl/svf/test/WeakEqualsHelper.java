@@ -20,9 +20,9 @@ import java.util.logging.Logger;
 /**
  * Class that help to test equals for two object. For test use
  * {@code weakEquals()} method.
- * <p/>
+ * <p>
  * date: 27.05.2008
- * <p/>
+ * <p>
  *
  * @author : Pokidov.Dmitry
  */

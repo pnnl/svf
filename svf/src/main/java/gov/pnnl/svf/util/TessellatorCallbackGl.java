@@ -77,13 +77,13 @@ public class TessellatorCallbackGl extends GLUtessellatorCallbackAdapter {
      * coordinate location is trivial to calculate, but weight[4] may be used to
      * average color, normal, or texture coordinate data. In this program, color
      * is weighted.
-     * <br/>
+     * <br>
      * double[3] coords
-     * <br/>
+     * <br>
      * Object[4] data
-     * <br/>
+     * <br>
      * float[4] weight
-     * <br/>
+     * <br>
      * Object[1] outData
      *
      * @param coords  Specifics the location of the new vertex.

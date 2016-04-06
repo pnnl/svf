@@ -19,7 +19,7 @@ public class SwtRectangle extends Rectangle implements Serializable {
 
     /**
      * Convenience Constructor
-     * <p/>
+     * <p>
      * This constructor will create a rectangle with the origin moved from the
      * top left to the bottom left.
      *

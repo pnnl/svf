@@ -20,7 +20,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * Support object used to cull root actors in a scene according to the current
  * visible camera. This object uses location and radius to create a bounding
  * area. Set scale to zero to use a single point for a bounding area.
- * <p/>
+ * <p>
  * If a TransformSupport object exists then this object finds the location by
  * adding the offset to the translation. It determines the final radius by
  * multiplying the largest scale value with the supplied scale value. If no
