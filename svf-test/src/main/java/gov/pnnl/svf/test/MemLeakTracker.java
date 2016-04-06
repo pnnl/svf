@@ -80,7 +80,7 @@ public class MemLeakTracker {
     }
 
     @SuppressWarnings("unused")
-    private void allocateMemory(final int memAmount) {
+    private byte[] allocateMemory(final int memAmount) {
         final byte[] big = new byte[memAmount];
         // Fight against clever compilers/JVMs that may not allocate
         // unless we actually use the elements of the array
@@ -93,5 +93,6 @@ public class MemLeakTracker {
                 total -= big[i];
             }
         }
+        return big;
     }
 }

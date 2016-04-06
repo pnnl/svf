@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -436,10 +437,10 @@ public abstract class AbstractSceneBuilder<T extends AbstractSceneBuilder> imple
         final boolean otherDebugColorPicking = other.isDebugColorPicking();
         final boolean otherLighting = other.isLighting();
         final boolean otherBlending = other.isBlending();
-        if (this.drawableTypes != otherDrawableTypes && (this.drawableTypes == null || !this.drawableTypes.equals(otherDrawableTypes))) {
+        if (!Objects.equals(this.drawableTypes, otherDrawableTypes)) {
             return false;
         }
-        if (this.hints != otherHints && (this.hints == null || !this.hints.equals(otherHints))) {
+        if (!Objects.equals(this.hints, otherHints)) {
             return false;
         }
         if (this.glCapabilities != otherGLCapabilities && (this.glCapabilities == null || !this.glCapabilities.equals(otherGLCapabilities))) {
