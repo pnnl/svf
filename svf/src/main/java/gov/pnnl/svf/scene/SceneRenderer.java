@@ -109,6 +109,14 @@ public class SceneRenderer implements Disposable {
      */
     private static final byte AUX_BUFFER_MASK = StateUtil.getMasks()[3];
     /**
+     * State mask for boolean field in this actor.
+     */
+    private static final byte ATTRIB_STACK_MASK = StateUtil.getMasks()[4];
+    /**
+     * State mask for boolean field in this actor.
+     */
+    private static final byte MATRIX_STACK_MASK = StateUtil.getMasks()[5];
+    /**
      * State used by flags in this actor to save memory space. Up to 8 states
      * can be used and should go in the following order: 0x01, 0x02, 0x04, 0x08,
      * 0x10, 0x20, 0x40, and (byte) 0x80. Set the initial state in the
@@ -284,10 +292,14 @@ public class SceneRenderer implements Disposable {
             final boolean stereo;
             final boolean doubleBuffer;
             final boolean auxBuffer;
+            final boolean attribStack;
+            final boolean matrixStack;
             synchronized (this) {
                 stereo = StateUtil.isValue(state, STEREO_MASK);
                 doubleBuffer = StateUtil.isValue(state, DOUBLE_BUFFER_MASK);
                 auxBuffer = StateUtil.isValue(state, AUX_BUFFER_MASK);
+                attribStack = StateUtil.isValue(state, ATTRIB_STACK_MASK);
+                matrixStack = StateUtil.isValue(state, MATRIX_STACK_MASK);
             }
             DrawingPass repaint = timers.getAndSetRepaint(DrawingPass.NONE);
             if (scene.getSceneBuilder().isVerbose()) {
@@ -321,13 +333,19 @@ public class SceneRenderer implements Disposable {
             }
             // monitor the stack depths
             final int[] attribStackDepths = new int[AttribStackDepths.values().length];
-            gl.glGetIntegerv(GL2.GL_ATTRIB_STACK_DEPTH, attribStackDepths, AttribStackDepths.START.ordinal());
+            if (attribStack) {
+                gl.glGetIntegerv(GL2.GL_ATTRIB_STACK_DEPTH, attribStackDepths, AttribStackDepths.START.ordinal());
+            }
             // un-initialization
             performUninitialize(gl, glu);
-            gl.glGetIntegerv(GL2.GL_ATTRIB_STACK_DEPTH, attribStackDepths, AttribStackDepths.UNINITIALIZE.ordinal());
+            if (attribStack) {
+                gl.glGetIntegerv(GL2.GL_ATTRIB_STACK_DEPTH, attribStackDepths, AttribStackDepths.UNINITIALIZE.ordinal());
+            }
             // initialization
             performInitialize(gl, glu);
-            gl.glGetIntegerv(GL2.GL_ATTRIB_STACK_DEPTH, attribStackDepths, AttribStackDepths.INITIALIZE.ordinal());
+            if (attribStack) {
+                gl.glGetIntegerv(GL2.GL_ATTRIB_STACK_DEPTH, attribStackDepths, AttribStackDepths.INITIALIZE.ordinal());
+            }
             // populate collections required for rendering
             if (repaint != DrawingPass.NONE) {
                 // get the visible actor list
@@ -409,7 +427,9 @@ public class SceneRenderer implements Disposable {
                 clearScreen(gl, null, null, 0, backBuffers);
                 gl.glReadBuffer(backBuffers[0]);
             }
-            gl.glGetIntegerv(GL2.GL_ATTRIB_STACK_DEPTH, attribStackDepths, AttribStackDepths.COLOR_RENDER.ordinal());
+            if (attribStack) {
+                gl.glGetIntegerv(GL2.GL_ATTRIB_STACK_DEPTH, attribStackDepths, AttribStackDepths.COLOR_RENDER.ordinal());
+            }
             // clear the scene if the main layer requires redrawing
             if (repaint.isScene() || repaint.isInterface() || repaint.isOverlay()) {
                 // clear for main rendering
@@ -443,7 +463,9 @@ public class SceneRenderer implements Disposable {
                 verticesRendered += camera.getExtended().getVerticesCounter();
                 camera.getExtended().resetVerticesCounter();
             }
-            gl.glGetIntegerv(GL2.GL_ATTRIB_STACK_DEPTH, attribStackDepths, AttribStackDepths.PICKING_RENDER.ordinal());
+            if (attribStack) {
+                gl.glGetIntegerv(GL2.GL_ATTRIB_STACK_DEPTH, attribStackDepths, AttribStackDepths.PICKING_RENDER.ordinal());
+            }
             // paint the scene if necessary
             if (repaint.isScene()) {
                 // render from cameras
@@ -464,11 +486,11 @@ public class SceneRenderer implements Disposable {
                     // draw rendering area
                     if (stereo) {
                         gl.glDrawBuffer(doubleBuffer ? GL2.GL_BACK_LEFT : GL2.GL_FRONT_LEFT);
-                        performSceneRender(gl, glu, camera.getExtended(), collections.getActors());
+                        performSceneRender(gl, glu, camera.getExtended(), collections.getActors(), attribStack);
                         gl.glDrawBuffer(doubleBuffer ? GL2.GL_BACK_RIGHT : GL2.GL_FRONT_RIGHT);
-                        performSceneRender(gl, glu, camera.getExtended(), collections.getActors());
+                        performSceneRender(gl, glu, camera.getExtended(), collections.getActors(), attribStack);
                     } else {
-                        performSceneRender(gl, glu, camera.getExtended(), collections.getActors());
+                        performSceneRender(gl, glu, camera.getExtended(), collections.getActors(), attribStack);
                     }
                     // increment rendering performance stat
                     verticesRendered += camera.getExtended().getVerticesCounter();
@@ -493,11 +515,11 @@ public class SceneRenderer implements Disposable {
                     // draw rendering area
                     if (stereo) {
                         gl.glDrawBuffer(doubleBuffer ? GL2.GL_BACK_LEFT : GL2.GL_FRONT_LEFT);
-                        performInterfaceRender(gl, glu, camera.getExtended(), collections.getActors());
+                        performInterfaceRender(gl, glu, camera.getExtended(), collections.getActors(), attribStack);
                         gl.glDrawBuffer(doubleBuffer ? GL2.GL_BACK_RIGHT : GL2.GL_FRONT_RIGHT);
-                        performInterfaceRender(gl, glu, camera.getExtended(), collections.getActors());
+                        performInterfaceRender(gl, glu, camera.getExtended(), collections.getActors(), attribStack);
                     } else {
-                        performInterfaceRender(gl, glu, camera.getExtended(), collections.getActors());
+                        performInterfaceRender(gl, glu, camera.getExtended(), collections.getActors(), attribStack);
                     }
                     // increment rendering performance stat
                     verticesRendered += camera.getExtended().getVerticesCounter();
@@ -513,11 +535,11 @@ public class SceneRenderer implements Disposable {
                 }
                 if (stereo) {
                     gl.glDrawBuffer(doubleBuffer ? GL2.GL_BACK_LEFT : GL2.GL_FRONT_LEFT);
-                    performOverlayRender(gl, glu, overlay.getExtended(), collections.getActors());
+                    performOverlayRender(gl, glu, overlay.getExtended(), collections.getActors(), attribStack);
                     gl.glDrawBuffer(doubleBuffer ? GL2.GL_BACK_RIGHT : GL2.GL_FRONT_RIGHT);
-                    performOverlayRender(gl, glu, overlay.getExtended(), collections.getActors());
+                    performOverlayRender(gl, glu, overlay.getExtended(), collections.getActors(), attribStack);
                 } else {
-                    performOverlayRender(gl, glu, overlay.getExtended(), collections.getActors());
+                    performOverlayRender(gl, glu, overlay.getExtended(), collections.getActors(), attribStack);
                 }
                 // increment rendering performance stat
                 verticesRendered += overlay.getExtended().getVerticesCounter();
@@ -547,7 +569,9 @@ public class SceneRenderer implements Disposable {
                     collections.getServices().get(i).endDraw(gl, glu, null);
                 }
             }
-            gl.glGetIntegerv(GL2.GL_ATTRIB_STACK_DEPTH, attribStackDepths, AttribStackDepths.SCENE_RENDER.ordinal());
+            if (attribStack) {
+                gl.glGetIntegerv(GL2.GL_ATTRIB_STACK_DEPTH, attribStackDepths, AttribStackDepths.SCENE_RENDER.ordinal());
+            }
             // check attrib stack depths
             int lastAttribStackDepth = 0;
             for (int i = 0; i < attribStackDepths.length; i++) {
@@ -565,23 +589,25 @@ public class SceneRenderer implements Disposable {
             }
             // check the matrix stack depths
             final int[] matrixStackDepths = new int[MatrixStackDepths.values().length];
-            for (int i = 0; i < matrixStackDepths.length; i++) {
-                final MatrixStackDepths matrix = MatrixStackDepths.values()[i];
-                switch (matrix) {
-                    case MODELVIEW:
-                        gl.glGetIntegerv(GL2.GL_MODELVIEW_STACK_DEPTH, matrixStackDepths, i);
-                        break;
-                    case PROJECTION:
-                        gl.glGetIntegerv(GL2.GL_PROJECTION_STACK_DEPTH, matrixStackDepths, i);
-                        break;
-                    case TEXTURE:
-                        gl.glGetIntegerv(GL2.GL_TEXTURE_STACK_DEPTH, matrixStackDepths, i);
-                        break;
-                    default:
-                        throw new IllegalArgumentException("Unhandled enumeration type passed to control statement: " + matrix);
-                }
-                if (matrixStackDepths[i] > 1 && scene.getSceneBuilder().isVerbose()) {
-                    logger.log(Level.WARNING, "{0}: Matrix stack for {1} was not zero or one: {2}", new Object[]{scene, matrix.toString(), matrixStackDepths[i]});
+            if (matrixStack) {
+                for (int i = 0; i < matrixStackDepths.length; i++) {
+                    final MatrixStackDepths matrix = MatrixStackDepths.values()[i];
+                    switch (matrix) {
+                        case MODELVIEW:
+                            gl.glGetIntegerv(GL2.GL_MODELVIEW_STACK_DEPTH, matrixStackDepths, i);
+                            break;
+                        case PROJECTION:
+                            gl.glGetIntegerv(GL2.GL_PROJECTION_STACK_DEPTH, matrixStackDepths, i);
+                            break;
+                        case TEXTURE:
+                            gl.glGetIntegerv(GL2.GL_TEXTURE_STACK_DEPTH, matrixStackDepths, i);
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Unhandled enumeration type passed to control statement: " + matrix);
+                    }
+                    if (matrixStackDepths[i] > 1 && scene.getSceneBuilder().isVerbose()) {
+                        logger.log(Level.WARNING, "{0}: Matrix stack for {1} was not zero or one: {2}", new Object[]{scene, matrix.toString(), matrixStackDepths[i]});
+                    }
                 }
             }
             // check for gl errors
@@ -676,7 +702,7 @@ public class SceneRenderer implements Disposable {
         }
     }
 
-    private void performOverlayRender(final GL2 gl, final GLUgl2 glu, final CameraExt<?> camera, final Collection<Actor> actors) {
+    private void performOverlayRender(final GL2 gl, final GLUgl2 glu, final CameraExt<?> camera, final Collection<Actor> actors, final boolean attribStack) {
         camera.setDirty(false);
         // check camera pass
         if (!camera.getDrawingPass().containsDrawingPass(DrawingPass.OVERLAY)) {
@@ -689,13 +715,13 @@ public class SceneRenderer implements Disposable {
         camera.makeOrtho2D(gl, glu);
         // draw the user interface components
         for (final Actor actor : actors) {
-            drawActor(gl, glu, camera, actor, DrawingPass.OVERLAY, 0);
+            drawActor(gl, glu, camera, actor, DrawingPass.OVERLAY, 0, attribStack);
         }
         camera.endOrtho2D(gl, glu);
         timers.setCurrentDrawingPass(null);
     }
 
-    private void performSceneRender(final GL2 gl, final GLUgl2 glu, final CameraExt<?> camera, final Collection<Actor> actors) {
+    private void performSceneRender(final GL2 gl, final GLUgl2 glu, final CameraExt<?> camera, final Collection<Actor> actors, final boolean attribStack) {
         camera.setDirty(false);
         // check camera pass
         if (!camera.getDrawingPass().containsDrawingPass(DrawingPass.SCENE)) {
@@ -728,12 +754,12 @@ public class SceneRenderer implements Disposable {
                 final CullingSupport culling = actor.lookup(CullingSupport.class);
                 if (culling != null) {
                     if (frustum.contains(culling.getLocation(), culling.getRadius())) {
-                        drawActor(gl, glu, camera, actor, DrawingPass.SCENE, i);
+                        drawActor(gl, glu, camera, actor, DrawingPass.SCENE, i, attribStack);
                     } else if (actor.getPassNumber() == i) {
                         culledActors++;
                     }
                 } else {
-                    drawActor(gl, glu, camera, actor, DrawingPass.SCENE, i);
+                    drawActor(gl, glu, camera, actor, DrawingPass.SCENE, i, attribStack);
                 }
             }
             camera.endPerspective(gl, glu);
@@ -751,7 +777,7 @@ public class SceneRenderer implements Disposable {
         timers.setCurrentDrawingPass(null);
     }
 
-    private void performInterfaceRender(final GL2 gl, final GLUgl2 glu, final CameraExt<?> camera, final Collection<Actor> actors) {
+    private void performInterfaceRender(final GL2 gl, final GLUgl2 glu, final CameraExt<?> camera, final Collection<Actor> actors, final boolean attribStack) {
         camera.setDirty(false);
         // check camera pass
         if (!camera.getDrawingPass().containsDrawingPass(DrawingPass.INTERFACE)) {
@@ -777,7 +803,7 @@ public class SceneRenderer implements Disposable {
             camera.makeOrtho2D(gl, glu);
             // draw the user interface components
             for (final Actor actor : actors) {
-                drawActor(gl, glu, camera, actor, DrawingPass.INTERFACE, i);
+                drawActor(gl, glu, camera, actor, DrawingPass.INTERFACE, i, attribStack);
             }
             camera.endOrtho2D(gl, glu);
         }
@@ -902,7 +928,7 @@ public class SceneRenderer implements Disposable {
         }
     }
 
-    private void drawActor(final GL2 gl, final GLUgl2 glu, final Camera camera, final Actor actor, final DrawingPass drawingPass, final int passNumber) {
+    private void drawActor(final GL2 gl, final GLUgl2 glu, final Camera camera, final Actor actor, final DrawingPass drawingPass, final int passNumber, final boolean attribStack) {
         // only draw visible actors
         if (!actor.isVisible()) {
             return;
@@ -916,7 +942,9 @@ public class SceneRenderer implements Disposable {
         final ChildSupport childSupport = actor.lookup(ChildSupport.class);
         if (passNumber == actor.getPassNumber() || childSupport != null) {
             final int[] attribStackDepths = new int[2];
-            gl.glGetIntegerv(GL2.GL_ATTRIB_STACK_DEPTH, attribStackDepths, 0);
+            if (attribStack) {
+                gl.glGetIntegerv(GL2.GL_ATTRIB_STACK_DEPTH, attribStackDepths, 0);
+            }
             // check for transformable support
             final TransformSupport transformable = actor.lookup(TransformSupport.class);
             if (transformable != null) {
@@ -962,7 +990,7 @@ public class SceneRenderer implements Disposable {
             if (childSupport != null && childSupport.isInherit()) {
                 final Collection<Actor> children = childSupport.getChildren();
                 for (final Actor child : children) {
-                    drawActor(gl, glu, camera, child, drawingPass, passNumber);
+                    drawActor(gl, glu, camera, child, drawingPass, passNumber, attribStack);
                 }
             }
             if (draw) {
@@ -981,10 +1009,12 @@ public class SceneRenderer implements Disposable {
             if (childSupport != null && !childSupport.isInherit()) {
                 final Collection<Actor> children = childSupport.getChildren();
                 for (final Actor child : children) {
-                    drawActor(gl, glu, camera, child, drawingPass, passNumber);
+                    drawActor(gl, glu, camera, child, drawingPass, passNumber, attribStack);
                 }
             }
-            gl.glGetIntegerv(GL2.GL_ATTRIB_STACK_DEPTH, attribStackDepths, 1);
+            if (attribStack) {
+                gl.glGetIntegerv(GL2.GL_ATTRIB_STACK_DEPTH, attribStackDepths, 1);
+            }
             if (attribStackDepths[0] != attribStackDepths[1] && scene.getSceneBuilder().isVerbose()) {
                 logger.log(Level.WARNING, "{0}: The actor {1} or a child of actor is leaking {2} attrib stacks.", new Object[]{scene, actor.toString(),
                                                                                                                                attribStackDepths[1] - attribStackDepths[0]});
@@ -1188,32 +1218,74 @@ public class SceneRenderer implements Disposable {
             gl.glDepthFunc(GL.GL_LEQUAL);
             gl.glDisable(GL.GL_CULL_FACE);
             // setup material
-            gl.glShadeModel(GL2.GL_SMOOTH);
-            gl.glMaterialfv(GL.GL_FRONT, GL2.GL_EMISSION, new float[]{1.0f, 1.0f, 1.0f, 1.0f}, 0);
-            gl.glMaterialfv(GL.GL_FRONT, GL2.GL_SPECULAR, new float[]{1.0f, 1.0f, 1.0f, 1.0f}, 0);
-            gl.glMaterialf(GL.GL_FRONT, GL2.GL_SHININESS, 50.0f);
+            if (gl.isFunctionAvailable("glShadeModel")
+                && gl.isFunctionAvailable("glMaterialfv")
+                && gl.isFunctionAvailable("glMaterialf")
+                && gl.isExtensionAvailable("GL_SMOOTH")
+                && gl.isExtensionAvailable("GL_EMISSION")
+                && gl.isExtensionAvailable("GL_SPECULAR")
+                && gl.isExtensionAvailable("GL_SHININESS")) {
+                gl.glShadeModel(GL2.GL_SMOOTH);
+                gl.glMaterialfv(GL.GL_FRONT, GL2.GL_EMISSION, new float[]{1.0f, 1.0f, 1.0f, 1.0f}, 0);
+                gl.glMaterialfv(GL.GL_FRONT, GL2.GL_SPECULAR, new float[]{1.0f, 1.0f, 1.0f, 1.0f}, 0);
+                gl.glMaterialf(GL.GL_FRONT, GL2.GL_SHININESS, 50.0f);
+            } else {
+                if (sb != null) {
+                    sb.append("\nShaders and materials are not available.");
+                }
+            }
             // set up textures
             gl.glPixelStorei(GL.GL_UNPACK_ALIGNMENT, 1);
-            gl.glTexEnvf(GL2.GL_TEXTURE_ENV, GL2.GL_TEXTURE_ENV_MODE, GL2.GL_MODULATE);
-            gl.glHint(GL2.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
-            // setup lighting
-            if (builder.isLighting()) {
-                if (sb != null) {
-                    sb.append("\nEnabling lighting...");
-                }
-                gl.glEnable(GL2.GL_LIGHTING);
-                gl.glEnable(GL2.GL_COLOR_MATERIAL);
-                gl.glEnable(GL2.GL_RESCALE_NORMAL);
-                gl.glLightModelf(GL2.GL_LIGHT_MODEL_COLOR_CONTROL, GL2.GL_SEPARATE_SPECULAR_COLOR);
-                gl.glLightModelfv(GL2.GL_LIGHT_MODEL_AMBIENT, new float[]{0.1f, 0.1f, 0.1f, 1.0f}, 0);
+            if (gl.isFunctionAvailable("glTexEnvf")
+                && gl.isExtensionAvailable("GL_TEXTURE_ENV")
+                && gl.isExtensionAvailable("GL_TEXTURE_ENV_MODE")
+                && gl.isExtensionAvailable("GL_MODULATE")
+                && gl.isExtensionAvailable("GL_PERSPECTIVE_CORRECTION_HINT")) {
+                gl.glTexEnvf(GL2.GL_TEXTURE_ENV, GL2.GL_TEXTURE_ENV_MODE, GL2.GL_MODULATE);
+                gl.glHint(GL2.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
             } else {
-                gl.glDisable(GL2.GL_LIGHTING);
-                gl.glDisable(GL2.GL_COLOR_MATERIAL);
-                gl.glDisable(GL2.GL_RESCALE_NORMAL);
+                if (sb != null) {
+                    sb.append("\nTexture environment is not available.");
+                }
             }
-            gl.glDisable(GL2.GL_AUTO_NORMAL);
-            // setup evaluator
-            gl.glEnable(GL2.GL_MAP1_VERTEX_3);
+            // setup lighting
+            if (gl.isFunctionAvailable("glLightModelf")
+                && gl.isFunctionAvailable("glLightModelfv")
+                || gl.isExtensionAvailable("GL_LIGHTING")
+                || gl.isExtensionAvailable("GL_COLOR_MATERIAL")
+                || gl.isExtensionAvailable("GL_RESCALE_NORMAL")
+                || gl.isExtensionAvailable("GL_LIGHT_MODEL_COLOR_CONTROL")
+                || gl.isExtensionAvailable("GL_SEPARATE_SPECULAR_COLOR")
+                || gl.isExtensionAvailable("GL_LIGHT_MODEL_AMBIENT")
+                || gl.isExtensionAvailable("GL_AUTO_NORMAL")) {
+                if (builder.isLighting()) {
+                    if (sb != null) {
+                        sb.append("\nEnabling lighting...");
+                    }
+                    gl.glEnable(GL2.GL_LIGHTING);
+                    gl.glEnable(GL2.GL_COLOR_MATERIAL);
+                    gl.glEnable(GL2.GL_RESCALE_NORMAL);
+                    gl.glLightModelf(GL2.GL_LIGHT_MODEL_COLOR_CONTROL, GL2.GL_SEPARATE_SPECULAR_COLOR);
+                    gl.glLightModelfv(GL2.GL_LIGHT_MODEL_AMBIENT, new float[]{0.1f, 0.1f, 0.1f, 1.0f}, 0);
+                } else {
+                    gl.glDisable(GL2.GL_LIGHTING);
+                    gl.glDisable(GL2.GL_COLOR_MATERIAL);
+                    gl.glDisable(GL2.GL_RESCALE_NORMAL);
+                }
+                gl.glDisable(GL2.GL_AUTO_NORMAL);
+            } else {
+                if (sb != null) {
+                    sb.append("\nLighting is not available.");
+                }
+            }
+            // setup NURBS evaluator
+            if (gl.isExtensionAvailable("GL_MAP1_VERTEX_3")) {
+                gl.glEnable(GL2.GL_MAP1_VERTEX_3);
+            } else {
+                if (sb != null) {
+                    sb.append("\nNURBS is not available.");
+                }
+            }
             // setup blending
             if (builder.isBlending()) {
                 if (sb != null) {
@@ -1248,22 +1320,34 @@ public class SceneRenderer implements Disposable {
                     sb.append(MessageFormat.format("\nEnabling multi-sampling with {0} buffer and {1} samples; Using full screen antialiasing.", buffers[0], samples[0]));
                 }
                 // disable individual anti aliasing
-                gl.glDisable(GL2.GL_POINT_SMOOTH);
                 gl.glDisable(GL.GL_LINE_SMOOTH);
-                gl.glDisable(GL2.GL_POLYGON_SMOOTH);
+                if (gl.isExtensionAvailable("GL_POINT_SMOOTH")
+                    && gl.isExtensionAvailable("GL_POLYGON_SMOOTH")) {
+                    gl.glDisable(GL2.GL_POINT_SMOOTH);
+                    gl.glDisable(GL2.GL_POLYGON_SMOOTH);
+                }
             } else {
                 // fall back to point and line antialiasing
                 if (sb != null) {
                     sb.append(MessageFormat.format("\nUnable to enable multi-sampling with {0} buffers and {1} samples; Reverting to point and line smoothing.", buffers[0], samples[0]));
                 }
                 // setup anti aliasing
-                gl.glEnable(GL2.GL_POINT_SMOOTH);
-                gl.glHint(GL2.GL_POINT_SMOOTH_HINT, GL.GL_NICEST);
                 gl.glEnable(GL.GL_LINE_SMOOTH);
                 gl.glHint(GL.GL_LINE_SMOOTH_HINT, GL.GL_NICEST);
-                // polygon antialiasing is problematic so disable it
-                gl.glDisable(GL2.GL_POLYGON_SMOOTH);
-                gl.glHint(GL2.GL_POLYGON_SMOOTH_HINT, GL.GL_NICEST);
+                if (gl.isExtensionAvailable("GL_POINT_SMOOTH")
+                    && gl.isExtensionAvailable("GL_POLYGON_SMOOTH")
+                    && gl.isExtensionAvailable("GL_POINT_SMOOTH_HINT")
+                    && gl.isExtensionAvailable("GL_POLYGON_SMOOTH_HINT")) {
+                    gl.glEnable(GL2.GL_POINT_SMOOTH);
+                    gl.glHint(GL2.GL_POINT_SMOOTH_HINT, GL.GL_NICEST);
+                    // polygon antialiasing is problematic so disable it
+                    gl.glDisable(GL2.GL_POLYGON_SMOOTH);
+                    gl.glHint(GL2.GL_POLYGON_SMOOTH_HINT, GL.GL_NICEST);
+                } else {
+                    if (sb != null) {
+                        sb.append("\nPoint smoothing is not available.");
+                    }
+                }
             }
             // check if color picking will work
             if (builder.isDebugColorPicking()) {
@@ -1288,7 +1372,13 @@ public class SceneRenderer implements Disposable {
             }
             // determine if stereo has been enabled
             final byte[] stereo = new byte[]{0};
-            gl.glGetBooleanv(GL2.GL_STEREO, stereo, 0);
+            if (gl.isExtensionAvailable("GL_STEREO")) {
+                gl.glGetBooleanv(GL2.GL_STEREO, stereo, 0);
+            } else {
+                if (sb != null) {
+                    sb.append("\nStereo is not available.");
+                }
+            }
             synchronized (this) {
                 state = StateUtil.setValue(state, STEREO_MASK, stereo[0] == 1);
             }
@@ -1298,7 +1388,13 @@ public class SceneRenderer implements Disposable {
             // assert (stereo == caps.getStereo());
             // determine if double buffering has been enabled
             final byte[] doubleBuffer = new byte[]{0};
-            gl.glGetBooleanv(GL2.GL_DOUBLEBUFFER, doubleBuffer, 0);
+            if (gl.isExtensionAvailable("GL_DOUBLEBUFFER")) {
+                gl.glGetBooleanv(GL2.GL_DOUBLEBUFFER, doubleBuffer, 0);
+            } else {
+                if (sb != null) {
+                    sb.append("\nDouble buffer is not available.");
+                }
+            }
             synchronized (this) {
                 state = StateUtil.setValue(state, DOUBLE_BUFFER_MASK, doubleBuffer[0] == 1);
             }
@@ -1307,8 +1403,14 @@ public class SceneRenderer implements Disposable {
             }
             // get number of auxiliary buffers
             final int[] auxBuffer = new int[]{0};
-            if (builder.isAuxiliaryBuffers()) {
-                gl.glGetIntegerv(GL2.GL_AUX_BUFFERS, auxBuffer, 0);
+            if (gl.isExtensionAvailable("GL_AUX_BUFFERS")) {
+                if (builder.isAuxiliaryBuffers()) {
+                    gl.glGetIntegerv(GL2.GL_AUX_BUFFERS, auxBuffer, 0);
+                }
+            } else {
+                if (sb != null) {
+                    sb.append("\nAuxilliary buffers are not available.");
+                }
             }
             synchronized (this) {
                 state = StateUtil.setValue(state, AUX_BUFFER_MASK, auxBuffer[0] >= 4);
@@ -1340,10 +1442,37 @@ public class SceneRenderer implements Disposable {
                 sb.append(MessageFormat.format("\nColor picking rendering occuring on {0} buffer", buffer));
             }
             // check stack sizes
-            final int[] attrib = new int[1];
-            gl.glGetIntegerv(GL2.GL_MAX_ATTRIB_STACK_DEPTH, attrib, 0);
-            if (sb != null) {
-                sb.append(MessageFormat.format("\nPush attrib stack size: {0}", attrib[0]));
+            if (gl.isExtensionAvailable("GL_MAX_ATTRIB_STACK_DEPTH")
+                && gl.isExtensionAvailable("GL_ATTRIB_STACK_DEPTH")) {
+                synchronized (this) {
+                    state = StateUtil.setValue(state, ATTRIB_STACK_MASK, true);
+                }
+                final int[] attrib = new int[1];
+                gl.glGetIntegerv(GL2.GL_MAX_ATTRIB_STACK_DEPTH, attrib, 0);
+                if (sb != null) {
+                    sb.append(MessageFormat.format("\nPush attrib stack size: {0}", attrib[0]));
+                }
+            } else {
+                synchronized (this) {
+                    state = StateUtil.setValue(state, ATTRIB_STACK_MASK, false);
+                }
+                if (sb != null) {
+                    sb.append("\nAttrib stack depth not available.");
+                }
+            }
+            if (gl.isExtensionAvailable("GL_MODELVIEW_STACK_DEPTH")
+                && gl.isExtensionAvailable("GL_PROJECTION_STACK_DEPTH")
+                && gl.isExtensionAvailable("GL_TEXTURE_STACK_DEPTH")) {
+                synchronized (this) {
+                    state = StateUtil.setValue(state, MATRIX_STACK_MASK, true);
+                }
+            } else {
+                synchronized (this) {
+                    state = StateUtil.setValue(state, MATRIX_STACK_MASK, false);
+                }
+                if (sb != null) {
+                    sb.append("\nMatrix stack depth not available.");
+                }
             }
             // log
             if (sb != null) {
