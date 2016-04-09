@@ -24,7 +24,7 @@ public class BundlingUtil {
      * Create a list of hierarchical edge bundled points.
      *
      * @param points           the series of points to bundle
-     * @param bundlingStrength the strength of the bundling {x:0.0 &lte x &gte
+     * @param bundlingStrength the strength of the bundling {x:0.0 &le; x &ge;
      *                         1.0}
      * @param bundleOnLca      true to bundle, include, the least common
      *                         ancestor
@@ -67,7 +67,7 @@ public class BundlingUtil {
      * Create a list of hierarchical edge bundled points.
      *
      * @param points           the series of points to bundle
-     * @param bundlingStrength the strength of the bundling {x:0.0 &lte x &gte
+     * @param bundlingStrength the strength of the bundling {x:0.0 &le; x &ge;
      *                         1.0}
      * @param bundleOnLca      true to bundle, include, the least common
      *                         ancestor
@@ -111,7 +111,7 @@ public class BundlingUtil {
      * Create a list of hierarchical edge bundled points.
      *
      * @param points           the series of points to bundle
-     * @param bundlingStrength the strength of the bundling {x:0.0 &lte x &gte
+     * @param bundlingStrength the strength of the bundling {x:0.0 &le; x &ge;
      *                         1.0}
      * @param bundleOnLca      true to bundle, include, the least common
      *                         ancestor

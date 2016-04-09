@@ -1,0 +1,41 @@
+<FindBugsFilter xmlns="http://findbugs.sourceforge.net/filter/3.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://findbugs.sourceforge.net/filter/3.0.0 https://raw.githubusercontent.com/findbugsproject/findbugs/master/findbugs/etc/findbugsfilter.xsd">
+    <Match>
+        <Class name="gov.pnnl.svf.vbo.VertexBufferObject$Builder" />
+        <Or>
+            <Field name="colors" />
+            <Field name="normals" />
+            <Field name="texCoords" />
+            <Field name="vertices" />
+        </Or>
+        <Bug code="EI2" />
+    </Match>
+    <Match>
+        <Class name="gov.pnnl.svf.vbo.VertexBufferObjectImpl" />
+        <Or>
+            <Field name="colors" />
+            <Field name="normals" />
+            <Field name="texCoords" />
+            <Field name="vertices" />
+        </Or>
+        <Bug code="EI" />
+    </Match>
+    <Match>
+        <Class name="gov.pnnl.svf.vbo.VertexBufferObjectImpl" />
+        <Or>
+            <Field name="colors" />
+            <Field name="normals" />
+            <Field name="texCoords" />
+            <Field name="vertices" />
+        </Or>
+        <Bug code="EI2" />
+    </Match>
+    <Match>
+        <Class name="gov.pnnl.svf.vbo.ArrayDrawableSupport" />
+        <Or>
+            <Method name="drawVbo" />
+        </Or>
+        <Bug code="SF" />
+    </Match>
+</FindBugsFilter>

@@ -2,6 +2,7 @@ package gov.pnnl.svf.awt.camera;
 
 import gov.pnnl.svf.awt.util.AwtCameraUtils;
 import gov.pnnl.svf.camera.DrivingCamera;
+import gov.pnnl.svf.camera.SimpleCamera;
 import gov.pnnl.svf.scene.Scene;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

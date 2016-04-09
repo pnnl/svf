@@ -102,11 +102,11 @@ public abstract class AbstractCallListActor extends AbstractActor implements Ini
 
     /**
      * Return the set of fields that should cause this actor to reinitialize.
-     * <p/>
+     * <p>
      * <code>
-     * final Set&lt;String&gt; fields = super.getInitializeFields();<br/>
-     * fields.add(FIELD);<br/>
-     * return fields;<br/>
+     * final Set&lt;String&gt; fields = super.getInitializeFields();<br>
+     * fields.add(FIELD);<br>
+     * return fields;<br>
      * </code>
      *
      * @return a set of fields
@@ -121,13 +121,13 @@ public abstract class AbstractCallListActor extends AbstractActor implements Ini
     /**
      * Override this method to initialize the lists for the actor. An example of
      * how to use this to create a single call list:
-     * <p/>
+     * <p>
      * <code>
-     * count = 1;<br/>
-     * list = gl.glGenLists(count);<br/>
-     * gl.glNewList(list, GL2.GL_COMPILE);<br/>
-     * // perform rendering steps here...<br/>
-     * gl.glEndList();<br/>
+     * count = 1;<br>
+     * list = gl.glGenLists(count);<br>
+     * gl.glNewList(list, GL2.GL_COMPILE);<br>
+     * // perform rendering steps here...<br>
+     * gl.glEndList();<br>
      * </code>
      *
      * @param gl  reference to the gl

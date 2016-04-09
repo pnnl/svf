@@ -8,7 +8,7 @@ package gov.pnnl.svf.hint;
 public enum GLProfileHint {
 
     /**
-     * The desktop OpenGL compatibility profile 4.x, with x >= 0, ie GL2 plus
+     * The desktop OpenGL compatibility profile 4.x, with x &ge; 0, ie GL2 plus
      * GL4.<br>
      * <code>bc</code> stands for backward compatibility.
      */
@@ -19,7 +19,7 @@ public enum GLProfileHint {
     //     */
     //    GL4,
     /**
-     * The desktop OpenGL compatibility profile 3.x, with x >= 1, ie GL2 plus
+     * The desktop OpenGL compatibility profile 3.x, with x &ge; 1, ie GL2 plus
      * GL3.<br>
      * <code>bc</code> stands for backward compatibility.
      */
@@ -34,11 +34,11 @@ public enum GLProfileHint {
      */
     GL2,
     /**
-     * The embedded OpenGL profile ES 1.x, with x >= 0
+     * The embedded OpenGL profile ES 1.x, with x &ge; 0
      */
     GLES1,
     /**
-     * The embedded OpenGL profile ES 2.x, with x >= 0
+     * The embedded OpenGL profile ES 2.x, with x &ge; 0
      */
     GLES2,
     // not supported by SVF

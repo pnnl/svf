@@ -71,7 +71,7 @@ public interface VboShapeFactory {
 
     /**
      * Create a VBO for the shape using simple geometry for the specified items.
-     * <p/>
+     * <p>
      * Override <code>useColorPicking</code> and return true to utilize this
      * method.
      *
@@ -87,7 +87,7 @@ public interface VboShapeFactory {
 
     /**
      * Create a VBO for the shape using simple geometry for the specified items.
-     * <p/>
+     * <p>
      * Override <code>useColorPicking</code> and return true to utilize this
      * method.
      *

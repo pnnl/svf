@@ -57,7 +57,7 @@ public class TextRendererImpl extends AbstractText {
     private static final double[] NORMAL = new double[]{0.0, 0.0, 1.0};
     //    private static final double[][] TEX_COORDS = new double[][]{{0.0, 1.0}, {0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}};
     private final Actor actor;
-    private final Map<Integer, Tuple2<Integer, Rectangle>> map = new HashMap<>();
+    private final Map<Character, Tuple2<Integer, Rectangle>> map = new HashMap<>();
     private final List<TextureRegionMapSupport> regions = Collections.synchronizedList(new ArrayList<TextureRegionMapSupport>());
     private final List<Texture2dSupport> textures = Collections.synchronizedList(new ArrayList<Texture2dSupport>());
     private Map<Integer, Rectangle> cached;
@@ -129,7 +129,7 @@ public class TextRendererImpl extends AbstractText {
             initialize(gl);
         }
         for (int i = 0; i < text.length(); i++) {
-            findCharacter(gl, Integer.valueOf(text.charAt(i)), true);
+            findCharacter(gl, text.charAt(i), true);
         }
         createRegion();
         createTexture(gl);
@@ -203,7 +203,7 @@ public class TextRendererImpl extends AbstractText {
         //        TextureRegionMapSupport region;
         Texture2dSupport texture = null;
         for (int i = 0; i < str.length(); i++) {
-            final Integer c = (int) str.charAt(i);
+            final char c = str.charAt(i);
             final Tuple2<Integer, Rectangle> item = findCharacter(gl, c, false);
             //                region = regions.get(item.getFirst());
             final Texture2dSupport temp = textures.get(item.getFirst());
@@ -243,7 +243,7 @@ public class TextRendererImpl extends AbstractText {
         gl.glPopAttrib();
     }
 
-    private Tuple2<Integer, Rectangle> findCharacter(final GL2 gl, final Integer c, final boolean defer) {
+    private Tuple2<Integer, Rectangle> findCharacter(final GL2 gl, final char c, final boolean defer) {
         // look for the character
         Tuple2<Integer, Rectangle> item = map.get(c);
         if (item == null) {
@@ -268,8 +268,8 @@ public class TextRendererImpl extends AbstractText {
                 point = packer.pack(width + widthPadding, height + heightPadding);
             }
             final Rectangle rec = new Rectangle((int) point.getX() + widthPadding / 2, (int) point.getY() + heightPadding / 2, width, height);
-            graphics.drawString(new String(new char[]{(char) c.intValue()}), rec.getX(), rec.getY() + (int) (rec.getHeight() * 0.8));
-            cached.put(c, rec);
+            graphics.drawString(new String(new char[]{c}), rec.getX(), rec.getY() + (int) (rec.getHeight() * 0.8));
+            cached.put((int) c, rec);
             if (!defer) {
                 createRegion();
             }
@@ -313,7 +313,7 @@ public class TextRendererImpl extends AbstractText {
     private void initialize(final GL2 gl) {
         final Set<Character> set = new HashSet<>(TextUtil.DEFAULT_CHARACTERS);
         for (final Character c : set) {
-            findCharacter(gl, Integer.valueOf(c), true);
+            findCharacter(gl, c, true);
         }
         createRegion();
         createTexture(gl);

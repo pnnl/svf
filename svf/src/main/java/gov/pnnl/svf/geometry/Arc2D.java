@@ -40,7 +40,7 @@ public class Arc2D extends Shape2D implements Serializable {
 
     /**
      * Parameterized Constructor
-     * <p/>
+     * <p>
      * The radius and angle will be normalized.
      *
      * @param angle     the middle angle of the arc in degrees
@@ -56,7 +56,7 @@ public class Arc2D extends Shape2D implements Serializable {
 
     /**
      * Parameterized Constructor
-     * <p/>
+     * <p>
      * The radius and angle will be normalized.
      *
      * @param x         the x offset of the arc

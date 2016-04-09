@@ -22,7 +22,7 @@ abstract class AbstractGLUtil implements NurbsConst, CartesianConst {
 
     /**
      * Represents a general direction.
-     * <p/>
+     * <p>
      * directions {back, front, right, left, top, bottom}
      */
     protected enum Direction {

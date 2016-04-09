@@ -23,9 +23,9 @@ public class AwtColor extends Color implements Serializable {
     /**
      * Constructor
      *
-     * @param r red component {x: 0 &le x &le 255}
-     * @param g green component {x: 0 &le x &le 255}
-     * @param b blue component {x: 0 &le x &le 255}
+     * @param r red component {x: 0 &le; x &le; 255}
+     * @param g green component {x: 0 &le; x &le; 255}
+     * @param b blue component {x: 0 &le; x &le; 255}
      *
      * @throws IllegalArgumentException if r, g, b, or a is not in the range 0
      *                                  to 255 inclusive
@@ -37,10 +37,10 @@ public class AwtColor extends Color implements Serializable {
     /**
      * Constructor
      *
-     * @param r red component {x: 0 &le x &le 255}
-     * @param g green component {x: 0 &le x &le 255}
-     * @param b blue component {x: 0 &le x &le 255}
-     * @param a alpha component {x: 0 &le x &le 255}
+     * @param r red component {x: 0 &le; x &le; 255}
+     * @param g green component {x: 0 &le; x &le; 255}
+     * @param b blue component {x: 0 &le; x &le; 255}
+     * @param a alpha component {x: 0 &le; x &le; 255}
      *
      * @throws IllegalArgumentException if r, g, b, or a is not in the range 0
      *                                  to 255 inclusive
@@ -52,9 +52,9 @@ public class AwtColor extends Color implements Serializable {
     /**
      * Constructor
      *
-     * @param r red component {x: 0.0 &le x &le 1.0}
-     * @param g green component {x: 0.0 &le x &le 1.0}
-     * @param b blue component {x: 0.0 &le x &le 1.0}
+     * @param r red component {x: 0.0 &le; x &le; 1.0}
+     * @param g green component {x: 0.0 &le; x &le; 1.0}
+     * @param b blue component {x: 0.0 &le; x &le; 1.0}
      *
      * @throws IllegalArgumentException if r, g, b, or a is not in the range 0.0
      *                                  to 1.0 inclusive
@@ -66,10 +66,10 @@ public class AwtColor extends Color implements Serializable {
     /**
      * Constructor
      *
-     * @param r red component {x: 0.0 &le x &le 1.0}
-     * @param g green component {x: 0.0 &le x &le 1.0}
-     * @param b blue component {x: 0.0 &le x &le 1.0}
-     * @param a alpha component {x: 0.0 &le x &le 1.0}
+     * @param r red component {x: 0.0 &le; x &le; 1.0}
+     * @param g green component {x: 0.0 &le; x &le; 1.0}
+     * @param b blue component {x: 0.0 &le; x &le; 1.0}
+     * @param a alpha component {x: 0.0 &le; x &le; 1.0}
      *
      * @throws IllegalArgumentException if r, g, b, or a is not in the range 0.0
      *                                  to 1.0 inclusive
@@ -125,9 +125,9 @@ public class AwtColor extends Color implements Serializable {
     /**
      * Constructor
      *
-     * @param r red component {x: 0 &le x &le 255}
-     * @param g green component {x: 0 &le x &le 255}
-     * @param b blue component {x: 0 &le x &le 255}
+     * @param r red component {x: 0 &le; x &le; 255}
+     * @param g green component {x: 0 &le; x &le; 255}
+     * @param b blue component {x: 0 &le; x &le; 255}
      *
      * @throws IllegalArgumentException if r, g, b, or a is not in the range 0
      *                                  to 255 inclusive
@@ -139,10 +139,10 @@ public class AwtColor extends Color implements Serializable {
     /**
      * Constructor
      *
-     * @param r red component {x: 0 &le x &le 255}
-     * @param g green component {x: 0 &le x &le 255}
-     * @param b blue component {x: 0 &le x &le 255}
-     * @param a alpha component {x: 0 &le x &le 255}
+     * @param r red component {x: 0 &le; x &le; 255}
+     * @param g green component {x: 0 &le; x &le; 255}
+     * @param b blue component {x: 0 &le; x &le; 255}
+     * @param a alpha component {x: 0 &le; x &le; 255}
      *
      * @throws IllegalArgumentException if r, g, b, or a is not in the range 0
      *                                  to 255 inclusive

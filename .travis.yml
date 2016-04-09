@@ -12,13 +12,13 @@ branches:
 #cache:
 #  directories:
 #    - $HOME/.m2
-install: mvn -f sci-vis-framework install -DskipTests=true
+install: mvn -P travis -f sci-vis-framework install -DskipTests=true
 before_script:
 #  - "export DISPLAY=:99.0"
 #  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 800x600x24 +extension RANDR"
 #  - sleep 3 # give xvfb some time to start
 #  - glxinfo
   - echo 'MAVEN_OPTS="-Xms2G -Xmx2G -XX:MaxPermSize=256m"' > ~/.mavenrc
-script: xvfb-run -s "-screen 0 1024x768x24" mvn -f sci-vis-framework test -Dsurefire.excludesFile=$TRAVIS_BUILD_DIR/.travis/travis-test-excludes
+script: xvfb-run -s "-screen 0 1024x768x24" mvn -P travis -f sci-vis-framework test -Dsurefire.excludesFile=$TRAVIS_BUILD_DIR/.travis/travis-test-excludes
 after_success:
-  - test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_TAG}" != "" && mvn -f sci-vis-framework deploy -DskipTests=true --settings .travis/travis-settings.xml
+  - test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_TAG}" != "" && mvn -P travis -f sci-vis-framework deploy -DskipTests=true --settings .travis/travis-settings.xml

@@ -37,7 +37,7 @@ public class Sphere3D extends Shape3D implements Serializable {
 
     /**
      * Parameterized Constructor
-     * <p/>
+     * <p>
      * The radius will be normalized.
      *
      * @param radius the radius
@@ -48,7 +48,7 @@ public class Sphere3D extends Shape3D implements Serializable {
 
     /**
      * Parameterized Constructor
-     * <p/>
+     * <p>
      * The radius will be normalized.
      *
      * @param x      the x offset of the sphere

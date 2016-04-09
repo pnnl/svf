@@ -19,10 +19,10 @@ public class TextureAnimationSupport extends AbstractAnimationSupport {
      * construction
      *
      * @param actor    actor that has textures to animate
-     * @param duration duration in milliseconds of animation {x: 0.0 &le x &lt
-     *                 &#8734}
-     * @param pause    delay before beginning the animation {x: 0.0 &le x &lt
-     *                 &#8734}
+     * @param duration duration in milliseconds of animation {x: 0.0 &le; x &lt;
+     *                 &#8734;}
+     * @param pause    delay before beginning the animation {x: 0.0 &le; x &lt;
+     *                 &#8734;}
      * @param repeat   set to true to repeat the animation
      */
     protected TextureAnimationSupport(final Actor actor, final long duration, final long pause, final boolean repeat) {
@@ -34,10 +34,10 @@ public class TextureAnimationSupport extends AbstractAnimationSupport {
      *
      * @param actor    actor to apply the animation to, the animation instance
      *                 created in this function will be added to the actor.
-     * @param duration duration in milliseconds of animation {x: 0.0 &le x &lt
-     *                 &#8734}
-     * @param pause    delay before beginning the animation {x: 0.0 &le x &lt
-     *                 &#8734}
+     * @param duration duration in milliseconds of animation {x: 0.0 &le; x &lt;
+     *                 &#8734;}
+     * @param pause    delay before beginning the animation {x: 0.0 &le; x &lt;
+     *                 &#8734;}
      * @param repeat   set to true to repeat the animation
      *
      * @return new instance of a texture animation added to the given actor

@@ -4,6 +4,7 @@ import com.jogamp.newt.event.KeyEvent;
 import com.jogamp.newt.event.KeyListener;
 import com.jogamp.newt.event.MouseEvent;
 import gov.pnnl.svf.camera.DrivingCamera;
+import gov.pnnl.svf.camera.SimpleCamera;
 import gov.pnnl.svf.newt.util.NewtCameraUtils;
 import gov.pnnl.svf.scene.Scene;
 

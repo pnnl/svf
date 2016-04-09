@@ -36,7 +36,7 @@ public class Circle2D extends Shape2D implements Serializable {
 
     /**
      * Parameterized Constructor
-     * <p/>
+     * <p>
      * The radius will be normalized.
      *
      * @param radius the radius of the circle
@@ -47,7 +47,7 @@ public class Circle2D extends Shape2D implements Serializable {
 
     /**
      * Parameterized Constructor
-     * <p/>
+     * <p>
      * The radius will be normalized.
      *
      * @param x      the x offset of the circle

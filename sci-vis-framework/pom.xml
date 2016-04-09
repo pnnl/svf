@@ -1,9 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>gov.pnnl.svf</groupId>
     <artifactId>sci-vis-framework</artifactId>
-    <version>1.7.8</version>
+    <version>1.7.9</version>
     <packaging>pom</packaging>
     <name>sci-vis-framework</name>
     <description>Sci-Vis Framework (SVF) is a full featured OpenGL 3d framework that allows for rapid creation of complex visualizations. The framework handles much of the lifecycle and complex tasks required for a 3d visualization. Unlike a game framework, SVF was designed to use fewer resources, work well in a windowed environment, and only render when necessary. The scene also takes advantage of multiple threads to free up the UI thread as much as possible. Shapes (actors) in the scene are created by adding or removing functionality (through support objects) during runtime. This allows a highly flexible and dynamic means of creating highly complex actors without the code complexity (it also helps overcome the lack of multiple inheritance in Java.) All classes are highly customizable and there are abstract classes which are intended to be subclassed to allow a developer to create more complex and highly performant actors. There are multiple demos included in the framework to help the developer get started and shows off nearly all of the functionality. Some simple shapes (actors) are already created for you such as text, bordered text, radial text, text area, complex paths, NURBS paths, cube, disk, grid, plane, geometric shapes, and volumetric area. It also comes with various camera types for viewing that can be dragged, zoomed, and rotated. Picking or selecting items in the scene can be accomplished in various ways depending on your needs (raycasting or color picking.) The framework currently has functionality for tooltips, animation, actor pools, color gradients, 2d physics, text, 1d/2d/3d textures, children, blending, clipping planes, view frustum culling, custom shaders, and custom actor states. </description>
@@ -48,6 +49,36 @@
                         <configuration>
                             <skip>true</skip>
                         </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>travis</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>findbugs-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>findbugs-check</id>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
@@ -116,29 +147,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <source>${targetJdk}</source>
-                    <target>${targetJdk}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-            <!--            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.2</version>
-            </plugin>-->
-            <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <version>3.0.1</version>
@@ -150,31 +158,69 @@
                 </configuration>
             </plugin>
             <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
                 <configuration>
-                    <systemPropertyVariables>
-                        <java.util.logging.config.file>src/test/resources/logging.properties</java.util.logging.config.file>
-                    </systemPropertyVariables>
+                    <quiet>true</quiet>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.5.1</version>
+                    <configuration>
+                        <source>${targetJdk}</source>
+                        <target>${targetJdk}</target>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.7</version>
+                    <configuration>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.19.1</version>
+                    <configuration>
+                        <systemPropertyVariables>
+                            <java.util.logging.config.file>src/test/resources/logging.properties</java.util.logging.config.file>
+                        </systemPropertyVariables>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>findbugs-maven-plugin</artifactId>
+                    <version>3.0.3</version>
+                    <configuration>
+                        <effort>Max</effort>
+                        <failOnError>false</failOnError>
+                        <xmlOutput>true</xmlOutput>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <reporting>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.3</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.0</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changelog-plugin</artifactId>
                 <version>2.3</version>
                 <configuration>
@@ -182,7 +228,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
                 <version>2.5</version>
             </plugin>
@@ -191,6 +236,7 @@
                 <artifactId>findbugs-maven-plugin</artifactId>
                 <version>3.0.3</version>
                 <configuration>
+                    <effort>Max</effort>
                     <failOnError>false</failOnError>
                     <xmlOutput>true</xmlOutput>
                 </configuration>
@@ -233,7 +279,7 @@
         <module>../svf</module>
         <module>../svf-jbox2d</module>
         <module>../svf-awt</module>
-        <!--<module>../svf-fx</module>-->
+        <!--<module>../svf-fx</module> -->
         <module>../svf-newt</module>
         <module>../svf-swt</module>
         <module>../svf-demo</module>

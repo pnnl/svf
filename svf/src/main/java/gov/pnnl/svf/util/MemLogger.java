@@ -135,11 +135,11 @@ public class MemLogger extends AbstractLogger implements DrawableItem {
 
     /**
      * The text uses MessageFormat and will insert the following metrics:
-     * <p/>
+     * <p>
      * Total Available GPU Memory: {0}
-     * <p/>
+     * <p>
      * Current Available GPU Memory: {1}
-     * <p/>
+     * <p>
      * Vendor name: {2}
      *
      * @param text The text to show in the logging message.

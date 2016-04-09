@@ -91,25 +91,25 @@ public class PerfLogger extends AbstractLogger implements DrawableItem {
 
     /**
      * The text uses MessageFormat and will insert the following metrics:
-     * <p/>
+     * <p>
      * Average Vertices Per Second: {0}
-     * <p/>
+     * <p>
      * Max Vertices Per Frame: {1}
-     * <p/>
+     * <p>
      * Max Draw Length: {2}
-     * <p/>
+     * <p>
      * Max Update Length: {3}
-     * <p/>
+     * <p>
      * Max Actors Culled Per Frame: {4}
-     * <p/>
+     * <p>
      * Max Uncleared Attribs Per Frame: {5}
-     * <p/>
+     * <p>
      * Max Uncleared Modelview Matrices Per Frame: {6}
-     * <p/>
+     * <p>
      * Max Uncleared Projection Matrices Per Frame: {7}
-     * <p/>
+     * <p>
      * Max Uncleared Texture Matrices Per Frame: {8}
-     * <p/>
+     * <p>
      * Max Errors Reported Per Frame: {9}
      *
      * @param text The text to show in the logging message.

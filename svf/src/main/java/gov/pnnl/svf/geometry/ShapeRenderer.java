@@ -84,7 +84,7 @@ public interface ShapeRenderer {
     /**
      * Draw the shape using simple geometry for the specified items. This method
      * gets called during the color picking draw method.
-     * <p/>
+     * <p>
      * Override <code>useColorPicking</code> and return true to utilize this
      * method.
      *
@@ -102,7 +102,7 @@ public interface ShapeRenderer {
     /**
      * Draw the shape using simple geometry for the specified items. This method
      * gets called during the color picking draw method.
-     * <p/>
+     * <p>
      * Override <code>useColorPicking</code> and return true to utilize this
      * method.
      *

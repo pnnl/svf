@@ -144,6 +144,10 @@ public class ClassUtil {
         if (directory.isDirectory()) {
             // directory
             final File[] files = directory.listFiles();
+            if(files == null) {
+            	logger.log(Level.INFO, "Unable to read dir {0}", directory);
+            	return classes;
+            }
             for (final File file : files) {
                 final String fileName = file.getName();
                 if (file.isDirectory()) {

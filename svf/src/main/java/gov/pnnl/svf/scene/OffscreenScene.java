@@ -7,7 +7,7 @@ import com.jogamp.opengl.GLOffscreenAutoDrawable;
  * Offscreen implementation of a scene. Use the following to get an offscreen
  * auto drawable component for the scene. This scene type utilizes a proxy scene
  * factory but can accommodate any drawing or picking camera types.
- * <p/>
+ * <p>
  * <code>GLDrawableFactory.getDesktopFactory().createOffscreenAutoDrawable(null, builder.getGLCapabilities(), null, width, height);</code>
  *
  * @author Arthur Bleeker
