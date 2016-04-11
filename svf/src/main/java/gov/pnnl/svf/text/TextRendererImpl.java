@@ -53,7 +53,7 @@ import org.apache.commons.collections.primitives.DoubleList;
 public class TextRendererImpl extends AbstractText {
 
     private static final Integer UNINITIALIZED = -1;
-    private static final float RELATIVE_PADDING = 1.0f;
+    private static final double RELATIVE_PADDING = 0.2;
     private static final double[] NORMAL = new double[]{0.0, 0.0, 1.0};
     //    private static final double[][] TEX_COORDS = new double[][]{{0.0, 1.0}, {0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}};
     private final Actor actor;
@@ -249,9 +249,10 @@ public class TextRendererImpl extends AbstractText {
         if (item == null) {
             // character wasn't found
             // test to see if it will fit in the current regions
-            final Graphics2D graphics = getGraphics();
+            Graphics2D graphics = getGraphics();
+            final String s = String.valueOf(c);
             final FontMetrics metrics = graphics.getFontMetrics();
-            final int width = (int) Math.ceil(metrics.getStringBounds(String.valueOf(c), graphics).getWidth());
+            final int width = Math.max(metrics.charWidth(c), (int) metrics.getMaxCharBounds(graphics).getWidth());
             final int height = metrics.getHeight();
             final int widthPadding = (int) (width * RELATIVE_PADDING);
             final int heightPadding = (int) (height * RELATIVE_PADDING);
@@ -266,9 +267,10 @@ public class TextRendererImpl extends AbstractText {
                 // didn't fit so make a new image
                 newTextImage(gl);
                 point = packer.pack(width + widthPadding, height + heightPadding);
+                graphics = getGraphics();
             }
             final Rectangle rec = new Rectangle((int) point.getX() + widthPadding / 2, (int) point.getY() + heightPadding / 2, width, height);
-            graphics.drawString(new String(new char[]{c}), rec.getX(), rec.getY() + (int) (rec.getHeight() * 0.8));
+            graphics.drawString(s, rec.getX(), rec.getY() + (int) (rec.getHeight() * 0.8));
             cached.put((int) c, rec);
             if (!defer) {
                 createRegion();

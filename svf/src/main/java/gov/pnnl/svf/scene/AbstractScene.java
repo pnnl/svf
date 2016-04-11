@@ -21,6 +21,7 @@ import gov.pnnl.svf.geometry.Rectangle;
 import gov.pnnl.svf.geometry.ShapeServiceImpl;
 import gov.pnnl.svf.hint.CameraHint;
 import gov.pnnl.svf.hint.PickingHint;
+import gov.pnnl.svf.hint.TextHint;
 import gov.pnnl.svf.picking.ColorPickingUtils;
 import gov.pnnl.svf.picking.PickingCamera;
 import gov.pnnl.svf.text.TextServiceImpl;
@@ -176,10 +177,6 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
         sceneRenderer = new SceneRenderer(this, builder);
         sceneRenderer.setBackground(builder.getBackground());
         sceneRenderer.setMaxInitializations(builder.getMaxInitializations());
-        // create the text service
-        TextServiceImpl.newInstance(this);
-        ShapeServiceImpl.newInstance(this);
-        VboShapeServiceImpl.newInstance(this);
         // start the busy service
         busyService = factory.createService(this, BusyService.class);
         add(busyService);
@@ -300,15 +297,15 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
         }
         // remove the GL event listener
         factory.runOnUiThread(this, new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    component.removeGLEventListener(listener);
-                } catch (final RuntimeException ex) {
-                    logger.log(Level.WARNING, MessageFormat.format("{0}: Exception while removing GLEventListener.", this), ex);
-                }
-            }
-        });
+                          @Override
+                          public void run() {
+                              try {
+                                  component.removeGLEventListener(listener);
+                              } catch (final RuntimeException ex) {
+                                  logger.log(Level.WARNING, MessageFormat.format("{0}: Exception while removing GLEventListener.", this), ex);
+                              }
+                          }
+                      });
         // clear the lookup
         clear();
         // remove the scene reference from the global lookup
@@ -318,21 +315,21 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
     @Override
     public void addListeners(final Object object) {
         factory.runOnUiThread(this, new Runnable() {
-            @Override
-            public void run() {
-                sceneListenerUtils.addListener(object);
-            }
-        });
+                          @Override
+                          public void run() {
+                              sceneListenerUtils.addListener(object);
+                          }
+                      });
     }
 
     @Override
     public void removeListeners(final Object object) {
         factory.runOnUiThread(this, new Runnable() {
-            @Override
-            public void run() {
-                sceneListenerUtils.removeListener(object);
-            }
-        });
+                          @Override
+                          public void run() {
+                              sceneListenerUtils.removeListener(object);
+                          }
+                      });
     }
 
     @Override
@@ -688,6 +685,13 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
                 logger.log(Level.INFO, "Configuring the specified hints: {0}", builder.getHints());
                 // configure the hints prior to loading the scene
                 ConfigUtil.configureHints(builder, gl);
+                // create the text service
+                final Set<TextHint> textHints = builder.copyHints(TextHint.class);
+                if (textHints.isEmpty() || textHints.contains(TextHint.DEFAULT)) {
+                    TextServiceImpl.newInstance(scene);
+                }
+                ShapeServiceImpl.newInstance(scene);
+                VboShapeServiceImpl.newInstance(scene);
                 // load the scene
                 logger.log(Level.INFO, "Loading the scene using hints: {0}", builder.getHints());
                 scene.load();
