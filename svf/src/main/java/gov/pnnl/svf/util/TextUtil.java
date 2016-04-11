@@ -55,21 +55,22 @@ public class TextUtil {
     static {
         final Set<Character> characters = new HashSet<>();
         findCharacters(Character.UnicodeBlock.BASIC_LATIN, characters);
-        findCharacters(Character.UnicodeBlock.LATIN_1_SUPPLEMENT, characters);
-        findCharacters(Character.UnicodeBlock.LATIN_EXTENDED_A, characters);
-        findCharacters(Character.UnicodeBlock.LATIN_EXTENDED_B, characters);
-        //        TextureUtil.findCharacters(Character.UnicodeBlock.IPA_EXTENSIONS, characters);
-        //        TextureUtil.findCharacters(Character.UnicodeBlock.SPACING_MODIFIER_LETTERS, characters);
-        findCharacters(Character.UnicodeBlock.GENERAL_PUNCTUATION, characters);
-        //        TextureUtil.findCharacters(Character.UnicodeBlock.SUPERSCRIPTS_AND_SUBSCRIPTS, characters);
-        findCharacters(Character.UnicodeBlock.CURRENCY_SYMBOLS, characters);
-        //        TextureUtil.findCharacters(Character.UnicodeBlock.COMBINING_MARKS_FOR_SYMBOLS, characters);
-        //        TextureUtil.findCharacters(Character.UnicodeBlock.LETTERLIKE_SYMBOLS, characters);
-        findCharacters(Character.UnicodeBlock.NUMBER_FORMS, characters);
-        findCharacters(Character.UnicodeBlock.ARROWS, characters);
-        findCharacters(Character.UnicodeBlock.MATHEMATICAL_OPERATORS, characters);
-        //        TextureUtil.findCharacters(Character.UnicodeBlock.MISCELLANEOUS_TECHNICAL, characters);
-        //        TextureUtil.findCharacters(Character.UnicodeBlock.MISCELLANEOUS_SYMBOLS, characters);
+        // additional characters take up too much room and are rarely necessary
+//        findCharacters(Character.UnicodeBlock.LATIN_1_SUPPLEMENT, characters);
+//        findCharacters(Character.UnicodeBlock.LATIN_EXTENDED_A, characters);
+//        findCharacters(Character.UnicodeBlock.LATIN_EXTENDED_B, characters);
+//        findCharacters(Character.UnicodeBlock.IPA_EXTENSIONS, characters);
+//        findCharacters(Character.UnicodeBlock.SPACING_MODIFIER_LETTERS, characters);
+//        findCharacters(Character.UnicodeBlock.GENERAL_PUNCTUATION, characters);
+//        findCharacters(Character.UnicodeBlock.SUPERSCRIPTS_AND_SUBSCRIPTS, characters);
+//        findCharacters(Character.UnicodeBlock.CURRENCY_SYMBOLS, characters);
+//        findCharacters(Character.UnicodeBlock.COMBINING_MARKS_FOR_SYMBOLS, characters);
+//        findCharacters(Character.UnicodeBlock.LETTERLIKE_SYMBOLS, characters);
+//        findCharacters(Character.UnicodeBlock.NUMBER_FORMS, characters);
+//        findCharacters(Character.UnicodeBlock.ARROWS, characters);
+//        findCharacters(Character.UnicodeBlock.MATHEMATICAL_OPERATORS, characters);
+//        findCharacters(Character.UnicodeBlock.MISCELLANEOUS_TECHNICAL, characters);
+//        findCharacters(Character.UnicodeBlock.MISCELLANEOUS_SYMBOLS, characters);
         DEFAULT_CHARACTERS = Collections.unmodifiableSet(new HashSet<>(characters));
     }
 

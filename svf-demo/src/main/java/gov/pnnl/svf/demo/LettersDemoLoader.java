@@ -44,7 +44,10 @@ public class LettersDemoLoader implements DemoLoader {
         final Set<String> duplicate = new HashSet<>();
         final List<Font> fonts = new ArrayList<>();
         for (final String name : GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames(Locale.US)) {
-            if (name.split(" ").length > 1 ? !duplicate.add(name.split(" ")[0]) : !duplicate.add(name)) {
+            if (fonts.size() >= MAX_FONT_FAMILIES) {
+                break;
+            }
+            if (!duplicate.add(name.split(" ")[0])) {
                 fonts.add(new Font(name, Font.PLAIN, 10));
                 fonts.add(new Font(name, Font.BOLD, 48));
                 fonts.add(new Font(name, Font.ITALIC, 14));
