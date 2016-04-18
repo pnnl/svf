@@ -28,7 +28,7 @@ public abstract class AbstractJBox2dDemo extends AbstractDemo<JFrame, GLCanvas> 
 
             @Override
             public void windowClosed(final WindowEvent we) {
-                scene.dispose();
+                // do nothing
             }
 
             @Override

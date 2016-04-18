@@ -35,7 +35,7 @@ public abstract class AbstractAwtDemo extends AbstractDemo<JFrame, GLCanvas> {
 
             @Override
             public void windowClosed(final WindowEvent we) {
-                scene.dispose();
+                // do nothing
             }
 
             @Override
