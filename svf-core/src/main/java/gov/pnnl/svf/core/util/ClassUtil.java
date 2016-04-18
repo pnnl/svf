@@ -78,7 +78,7 @@ public class ClassUtil {
                     final File file = new File(filePath);
                     dirs.add(file);
                 } catch (final RuntimeException ex) {
-                    logger.log(Level.WARNING, "Unable to search for resources in {0}", resource.getPath());
+                    logger.log(Level.FINE, "Unable to search for resources in {0}", resource.getPath());
                 }
                 // necessary for finding jars
                 int index = resource.toExternalForm().lastIndexOf(resourceName(packageName));
@@ -90,7 +90,7 @@ public class ClassUtil {
                     final File file = new File(filePath);
                     dirs.add(file);
                 } catch (final RuntimeException ex) {
-                    logger.log(Level.WARNING, "Unable to search for resources in {0}", resource.getPath());
+                    logger.log(Level.FINE, "Unable to search for resources in {0}", resource.getPath());
                 }
             }
             // build the list of classes
@@ -144,9 +144,9 @@ public class ClassUtil {
         if (directory.isDirectory()) {
             // directory
             final File[] files = directory.listFiles();
-            if(files == null) {
-            	logger.log(Level.INFO, "Unable to read dir {0}", directory);
-            	return classes;
+            if (files == null) {
+                logger.log(Level.FINE, "Unable to read dir {0}", directory);
+                return classes;
             }
             for (final File file : files) {
                 final String fileName = file.getName();
