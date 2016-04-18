@@ -69,14 +69,18 @@ public class SwtTestScene implements SceneExt {
         frame.open();
         scene.start();
         final Display display = frame.getDisplay();
-        while (!frame.isDisposed()) {
-            if (!display.readAndDispatch()) {
-                display.sleep();
+        try {
+            while (!frame.isDisposed()) {
+                if (!display.readAndDispatch()) {
+                    display.sleep();
+                }
+            }
+            scene.dispose();
+        } finally {
+            if (!frame.isDisposed()) {
+                frame.dispose();
             }
         }
-        display.dispose();
-        frame.dispose();
-        scene.dispose();
     }
 
     /**

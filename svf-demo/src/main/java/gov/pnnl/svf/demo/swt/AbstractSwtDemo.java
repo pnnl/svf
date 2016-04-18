@@ -25,14 +25,19 @@ public abstract class AbstractSwtDemo extends AbstractDemo<Shell, GLCanvas> {
         window.open();
         scene.start();
         final Display display = window.getDisplay();
-        while (!window.isDisposed()) {
-            if (!display.readAndDispatch()) {
-                display.sleep();
+        try {
+            while (!window.isDisposed()) {
+                if (!display.readAndDispatch()) {
+                    display.sleep();
+                }
             }
+            scene.dispose();
+        } finally {
+            if (!window.isDisposed()) {
+                window.dispose();
+            }
+            System.exit(0);
         }
-        scene.dispose();
-        display.dispose();
-        window.dispose();
     }
 
     @Override
@@ -54,7 +59,7 @@ public abstract class AbstractSwtDemo extends AbstractDemo<Shell, GLCanvas> {
 
     @Override
     public Shell createWindow(final SceneBuilder builder) {
-        final Display display = Display.getDefault();
+        final Display display = new Display();
         final Shell shell = new Shell(display);
         shell.setSize(WINDOW_SIZE_WIDTH, WINDOW_SIZE_HEIGHT);
         return shell;

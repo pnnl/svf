@@ -238,13 +238,19 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
             return;
         }
         logger.log(Level.FINE, "{0}: Stopping the AbstractScene.", this);
-        try {
-            animator.stop();
-        } catch (final RuntimeException ex) {
-            // ignore, animator can have problems here in the
-            // underlying implementation
-            logger.log(Level.WARNING, MessageFormat.format("{0}: Error occurred when attempting to stop animator.", this), ex);
-        }
+        factory.runOnUiThread(this, new Runnable() {
+                          @Override
+                          public void run() {
+                              // stop the animator
+                              try {
+                                  animator.stop();
+                              } catch (final RuntimeException ex) {
+                                  // ignore, animator can have problems here in the
+                                  // underlying implementation
+                                  logger.log(Level.WARNING, MessageFormat.format("{0}: Error occurred when attempting to stop animator.", this), ex);
+                              }
+                          }
+                      });
     }
 
     @Override
@@ -276,6 +282,7 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
         // wait for items to be disposed
         final long start = System.currentTimeMillis();
         while (animator.isStarted() && !isShutdown(lookupAll(Disposable.class)) && System.currentTimeMillis() < start + DISPOSE_TIMEOUT) {
+            draw();
             try {
                 Thread.sleep(100L);
             } catch (final InterruptedException ex) {
@@ -287,29 +294,29 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
         sceneUtil.dispose();
         sceneRenderer.dispose();
         tooltip.dispose();
-        // stop the animator
-        try {
-            animator.stop();
-        } catch (final RuntimeException ex) {
-            // ignore, animator can have problems here in the
-            // underlying implementation
-            logger.log(Level.WARNING, MessageFormat.format("{0}: Error occurred when attempting to stop animator.", this), ex);
-        }
-        // remove the GL event listener
-        factory.runOnUiThread(this, new Runnable() {
-                          @Override
-                          public void run() {
-                              try {
-                                  component.removeGLEventListener(listener);
-                              } catch (final RuntimeException ex) {
-                                  logger.log(Level.WARNING, MessageFormat.format("{0}: Exception while removing GLEventListener.", this), ex);
-                              }
-                          }
-                      });
         // clear the lookup
         clear();
         // remove the scene reference from the global lookup
         Lookup.getLookup().remove(this);
+        // remove the GL event listener
+        factory.runOnUiThread(this, new Runnable() {
+                          @Override
+                          public void run() {
+                              // stop the animator
+                              try {
+                                  animator.stop();
+                              } catch (final RuntimeException ex) {
+                                  // ignore, animator can have problems here in the
+                                  // underlying implementation
+                                  logger.log(Level.WARNING, MessageFormat.format("{0}: Error occurred when attempting to stop animator.", this), ex);
+                              }
+                              try {
+                                  component.removeGLEventListener(listener);
+                              } catch (final RuntimeException ex) {
+                                  logger.log(Level.FINE, MessageFormat.format("{0}: Exception while removing GLEventListener.", this), ex);
+                              }
+                          }
+                      });
     }
 
     @Override

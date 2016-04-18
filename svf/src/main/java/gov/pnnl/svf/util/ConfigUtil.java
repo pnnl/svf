@@ -136,6 +136,7 @@ public class ConfigUtil {
             }
         }
         HINTS_STRING = sb.toString();
+        logger.log(Level.INFO, "Available hints: {0}", HINTS_STRING);
     }
 
     /**
@@ -200,7 +201,6 @@ public class ConfigUtil {
      * @return the new configuration
      */
     public static SceneBuilder configure(final Properties svf, final Properties opengl, final Properties logging) {
-        logger.log(Level.INFO, "Available hints: {0}", HINTS_STRING);
         // locate configuration hints in svf properties
         SceneBuilder sceneBuilder = newSceneBuilder(svf);
         final Set<AutoConfigHint> autoConfigHints = sceneBuilder.copyHints(AutoConfigHint.class);

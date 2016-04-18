@@ -35,7 +35,7 @@ public abstract class AbstractAwtPanelDemo extends AbstractDemo<JFrame, GLJPanel
 
             @Override
             public void windowClosed(final WindowEvent we) {
-                scene.dispose();
+                // do nothing
             }
 
             @Override
