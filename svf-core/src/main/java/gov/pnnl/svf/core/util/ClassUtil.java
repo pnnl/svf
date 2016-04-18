@@ -7,6 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;
@@ -137,11 +138,18 @@ public class ClassUtil {
      * @return The classes
      */
     public static List<Class<?>> getClasses(final ClassLoader classLoader, final File directory, final String packageName) {
+        if (!directory.exists()) {
+            return Collections.emptyList();
+        }
+        return getClasses(classLoader, directory, packageName, directory.isDirectory());
+    }
+
+    private static List<Class<?>> getClasses(final ClassLoader classLoader, final File directory, final String packageName, final boolean isDirectory) {
         final List<Class<?>> classes = new ArrayList<>();
         if (!directory.exists()) {
             return classes;
         }
-        if (directory.isDirectory()) {
+        if (isDirectory) {
             // directory
             final File[] files = directory.listFiles();
             if (files == null) {
@@ -151,7 +159,7 @@ public class ClassUtil {
             for (final File file : files) {
                 final String fileName = file.getName();
                 if (file.isDirectory()) {
-                    classes.addAll(getClasses(classLoader, file, packageName));
+                    classes.addAll(getClasses(classLoader, file, packageName, true));
                 } else if (fileName.endsWith(".class")) {
                     final String className = packageName + '.' + fileName.substring(0, fileName.length() - 6);
                     try {
