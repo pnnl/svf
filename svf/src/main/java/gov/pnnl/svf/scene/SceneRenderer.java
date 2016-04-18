@@ -2,6 +2,7 @@ package gov.pnnl.svf.scene;
 
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLException;
 import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.actor.Actor;
 import gov.pnnl.svf.actor.FpsActor;
@@ -1217,47 +1218,36 @@ public class SceneRenderer implements Disposable {
             gl.glEnable(GL.GL_DEPTH_TEST);
             gl.glDepthFunc(GL.GL_LEQUAL);
             gl.glDisable(GL.GL_CULL_FACE);
-            // setup material
-            if (gl.isFunctionAvailable("glShadeModel")
-                && gl.isFunctionAvailable("glMaterialfv")
-                && gl.isFunctionAvailable("glMaterialf")
-                && gl.isExtensionAvailable("GL_SMOOTH")
-                && gl.isExtensionAvailable("GL_EMISSION")
-                && gl.isExtensionAvailable("GL_SPECULAR")
-                && gl.isExtensionAvailable("GL_SHININESS")) {
+            // setup shade model
+            try {
                 gl.glShadeModel(GL2.GL_SMOOTH);
+            } catch (final GLException ex) {
+                if (sb != null) {
+                    sb.append("\nShade model is not available.");
+                }
+            }
+            // setup material
+            try {
                 gl.glMaterialfv(GL.GL_FRONT, GL2.GL_EMISSION, new float[]{1.0f, 1.0f, 1.0f, 1.0f}, 0);
                 gl.glMaterialfv(GL.GL_FRONT, GL2.GL_SPECULAR, new float[]{1.0f, 1.0f, 1.0f, 1.0f}, 0);
                 gl.glMaterialf(GL.GL_FRONT, GL2.GL_SHININESS, 50.0f);
-            } else {
+            } catch (final GLException ex) {
                 if (sb != null) {
-                    sb.append("\nShaders and materials are not available.");
+                    sb.append("\nMaterial is not available.");
                 }
             }
             // set up textures
             gl.glPixelStorei(GL.GL_UNPACK_ALIGNMENT, 1);
-            if (gl.isFunctionAvailable("glTexEnvf")
-                && gl.isExtensionAvailable("GL_TEXTURE_ENV")
-                && gl.isExtensionAvailable("GL_TEXTURE_ENV_MODE")
-                && gl.isExtensionAvailable("GL_MODULATE")
-                && gl.isExtensionAvailable("GL_PERSPECTIVE_CORRECTION_HINT")) {
+            try {
                 gl.glTexEnvf(GL2.GL_TEXTURE_ENV, GL2.GL_TEXTURE_ENV_MODE, GL2.GL_MODULATE);
                 gl.glHint(GL2.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
-            } else {
+            } catch (final GLException ex) {
                 if (sb != null) {
                     sb.append("\nTexture environment is not available.");
                 }
             }
             // setup lighting
-            if (gl.isFunctionAvailable("glLightModelf")
-                && gl.isFunctionAvailable("glLightModelfv")
-                || gl.isExtensionAvailable("GL_LIGHTING")
-                || gl.isExtensionAvailable("GL_COLOR_MATERIAL")
-                || gl.isExtensionAvailable("GL_RESCALE_NORMAL")
-                || gl.isExtensionAvailable("GL_LIGHT_MODEL_COLOR_CONTROL")
-                || gl.isExtensionAvailable("GL_SEPARATE_SPECULAR_COLOR")
-                || gl.isExtensionAvailable("GL_LIGHT_MODEL_AMBIENT")
-                || gl.isExtensionAvailable("GL_AUTO_NORMAL")) {
+            try {
                 if (builder.isLighting()) {
                     if (sb != null) {
                         sb.append("\nEnabling lighting...");
@@ -1273,15 +1263,15 @@ public class SceneRenderer implements Disposable {
                     gl.glDisable(GL2.GL_RESCALE_NORMAL);
                 }
                 gl.glDisable(GL2.GL_AUTO_NORMAL);
-            } else {
+            } catch (final GLException ex) {
                 if (sb != null) {
                     sb.append("\nLighting is not available.");
                 }
             }
             // setup NURBS evaluator
-            if (gl.isExtensionAvailable("GL_MAP1_VERTEX_3")) {
+            try {
                 gl.glEnable(GL2.GL_MAP1_VERTEX_3);
-            } else {
+            } catch (final GLException ex) {
                 if (sb != null) {
                     sb.append("\nNURBS is not available.");
                 }
@@ -1306,8 +1296,10 @@ public class SceneRenderer implements Disposable {
                     sb.append("\nAttempting to enable multi-sampling...");
                 }
                 gl.glEnable(GL.GL_MULTISAMPLE);
-                if (gl.isExtensionAvailable("GL_MULTISAMPLE_FILTER_HINT_NV")) {
+                try {
                     gl.glHint(GL2.GL_MULTISAMPLE_FILTER_HINT_NV, GL.GL_NICEST);
+                } catch (final GLException ex) {
+                    // ignore
                 }
                 // check
                 final int[] enabled = new int[1];
@@ -1321,10 +1313,11 @@ public class SceneRenderer implements Disposable {
                 }
                 // disable individual anti aliasing
                 gl.glDisable(GL.GL_LINE_SMOOTH);
-                if (gl.isExtensionAvailable("GL_POINT_SMOOTH")
-                    && gl.isExtensionAvailable("GL_POLYGON_SMOOTH")) {
+                try {
                     gl.glDisable(GL2.GL_POINT_SMOOTH);
                     gl.glDisable(GL2.GL_POLYGON_SMOOTH);
+                } catch (final GLException ex) {
+                    // ignore
                 }
             } else {
                 // fall back to point and line antialiasing
@@ -1334,16 +1327,13 @@ public class SceneRenderer implements Disposable {
                 // setup anti aliasing
                 gl.glEnable(GL.GL_LINE_SMOOTH);
                 gl.glHint(GL.GL_LINE_SMOOTH_HINT, GL.GL_NICEST);
-                if (gl.isExtensionAvailable("GL_POINT_SMOOTH")
-                    && gl.isExtensionAvailable("GL_POLYGON_SMOOTH")
-                    && gl.isExtensionAvailable("GL_POINT_SMOOTH_HINT")
-                    && gl.isExtensionAvailable("GL_POLYGON_SMOOTH_HINT")) {
+                try {
                     gl.glEnable(GL2.GL_POINT_SMOOTH);
                     gl.glHint(GL2.GL_POINT_SMOOTH_HINT, GL.GL_NICEST);
                     // polygon antialiasing is problematic so disable it
                     gl.glDisable(GL2.GL_POLYGON_SMOOTH);
                     gl.glHint(GL2.GL_POLYGON_SMOOTH_HINT, GL.GL_NICEST);
-                } else {
+                } catch (final GLException ex) {
                     if (sb != null) {
                         sb.append("\nPoint smoothing is not available.");
                     }
@@ -1372,9 +1362,9 @@ public class SceneRenderer implements Disposable {
             }
             // determine if stereo has been enabled
             final byte[] stereo = new byte[]{0};
-            if (gl.isExtensionAvailable("GL_STEREO")) {
+            try {
                 gl.glGetBooleanv(GL2.GL_STEREO, stereo, 0);
-            } else {
+            } catch (final GLException ex) {
                 if (sb != null) {
                     sb.append("\nStereo is not available.");
                 }
@@ -1388,9 +1378,9 @@ public class SceneRenderer implements Disposable {
             // assert (stereo == caps.getStereo());
             // determine if double buffering has been enabled
             final byte[] doubleBuffer = new byte[]{0};
-            if (gl.isExtensionAvailable("GL_DOUBLEBUFFER")) {
+            try {
                 gl.glGetBooleanv(GL2.GL_DOUBLEBUFFER, doubleBuffer, 0);
-            } else {
+            } catch (final GLException ex) {
                 if (sb != null) {
                     sb.append("\nDouble buffer is not available.");
                 }
@@ -1403,11 +1393,11 @@ public class SceneRenderer implements Disposable {
             }
             // get number of auxiliary buffers
             final int[] auxBuffer = new int[]{0};
-            if (gl.isExtensionAvailable("GL_AUX_BUFFERS")) {
+            try {
                 if (builder.isAuxiliaryBuffers()) {
                     gl.glGetIntegerv(GL2.GL_AUX_BUFFERS, auxBuffer, 0);
                 }
-            } else {
+            } catch (final GLException ex) {
                 if (sb != null) {
                     sb.append("\nAuxilliary buffers are not available.");
                 }
@@ -1442,8 +1432,7 @@ public class SceneRenderer implements Disposable {
                 sb.append(MessageFormat.format("\nColor picking rendering occuring on {0} buffer", buffer));
             }
             // check stack sizes
-            if (gl.isExtensionAvailable("GL_MAX_ATTRIB_STACK_DEPTH")
-                && gl.isExtensionAvailable("GL_ATTRIB_STACK_DEPTH")) {
+            try {
                 synchronized (this) {
                     state = StateUtil.setValue(state, ATTRIB_STACK_MASK, true);
                 }
@@ -1452,7 +1441,7 @@ public class SceneRenderer implements Disposable {
                 if (sb != null) {
                     sb.append(MessageFormat.format("\nPush attrib stack size: {0}", attrib[0]));
                 }
-            } else {
+            } catch (final GLException ex) {
                 synchronized (this) {
                     state = StateUtil.setValue(state, ATTRIB_STACK_MASK, false);
                 }
@@ -1460,13 +1449,11 @@ public class SceneRenderer implements Disposable {
                     sb.append("\nAttrib stack depth not available.");
                 }
             }
-            if (gl.isExtensionAvailable("GL_MODELVIEW_STACK_DEPTH")
-                && gl.isExtensionAvailable("GL_PROJECTION_STACK_DEPTH")
-                && gl.isExtensionAvailable("GL_TEXTURE_STACK_DEPTH")) {
+            try {
                 synchronized (this) {
                     state = StateUtil.setValue(state, MATRIX_STACK_MASK, true);
                 }
-            } else {
+            } catch (final GLException ex) {
                 synchronized (this) {
                     state = StateUtil.setValue(state, MATRIX_STACK_MASK, false);
                 }
