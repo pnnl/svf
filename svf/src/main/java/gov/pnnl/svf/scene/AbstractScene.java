@@ -9,6 +9,7 @@ import com.jogamp.opengl.GLException;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.glu.gl2.GLUgl2;
+import com.jogamp.opengl.util.Animator;
 import com.jogamp.opengl.util.FPSAnimator;
 import com.jogamp.opengl.util.gl2.GLUT;
 import gov.pnnl.svf.actor.Actor;
@@ -191,7 +192,11 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
         this.component.addGLEventListener(listener);
         // animator
         final int targetFps = sceneUtil.getSceneBuilder().getTargetFps();
-        this.animator = new FPSAnimator(component, targetFps, true);
+        if (targetFps > 0) {
+            this.animator = new FPSAnimator(component, targetFps, true);
+        } else {
+            this.animator = new Animator(component);
+        }
         logger.log(Level.FINE, "{0}: Creating a new AbstractScene.", this);
     }
 

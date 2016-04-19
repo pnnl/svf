@@ -20,7 +20,10 @@ import java.util.logging.Logger;
  * Utilities for working with java classes, interfaces, etc.
  *
  * @author Arthur Bleeker
+ *
+ * @deprecated please use Google Guava ClassPath instead
  */
+@Deprecated
 public class ClassUtil {
 
     private static final Logger logger = Logger.getLogger(ClassUtil.class.getName());

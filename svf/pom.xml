@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>gov.pnnl.svf</groupId>
         <artifactId>sci-vis-framework</artifactId>
-        <version>1.7.14</version>
+        <version>1.7.15</version>
         <relativePath>../sci-vis-framework/pom.xml</relativePath>
     </parent>
 
