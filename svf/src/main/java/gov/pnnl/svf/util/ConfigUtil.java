@@ -635,7 +635,12 @@ public class ConfigUtil {
      * @return a new GLCapabilities
      */
     protected static GLCapabilities newGLCapabilities(final String version) {
-        final GLProfile profile = GLProfile.get(version);
+        final GLProfile profile;
+        if (version == null) {
+            profile = GLProfile.getMaximum(true);
+        } else {
+            profile = GLProfile.get(version);
+        }
         final GLCapabilities capabilities = new GLCapabilities(profile);
 //        capabilities.setHardwareAccelerated(true);
 //        capabilities.setRedBits(8);
