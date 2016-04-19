@@ -11,13 +11,13 @@ import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
-import gov.pnnl.svf.core.util.ClassUtil;
 import gov.pnnl.svf.hint.AutoConfigHint;
 import gov.pnnl.svf.hint.CameraHint;
 import gov.pnnl.svf.hint.FileConfigHint;
 import gov.pnnl.svf.hint.GLProfileHint;
 import gov.pnnl.svf.hint.OpenGLHint;
 import gov.pnnl.svf.hint.PickingHint;
+import gov.pnnl.svf.hint.TextHint;
 import gov.pnnl.svf.scene.AbstractSceneBuilder;
 import gov.pnnl.svf.scene.SceneBuilder;
 import java.io.BufferedInputStream;
@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.SequenceInputStream;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -119,7 +120,13 @@ public class ConfigUtil {
         }
         // build hints string
         final StringBuilder sb = new StringBuilder();
-        final List<Class<?>> classes = ClassUtil.getClasses("gov.pnnl.svf.hint");
+        final List<Class<? extends Enum<? extends Enum<?>>>> classes = Arrays.asList(AutoConfigHint.class,
+                                                                                     CameraHint.class,
+                                                                                     FileConfigHint.class,
+                                                                                     GLProfileHint.class,
+                                                                                     OpenGLHint.class,
+                                                                                     PickingHint.class,
+                                                                                     TextHint.class);
         for (final Class<?> cls : classes) {
             if (cls.isEnum()) {
                 sb.append("\n");
