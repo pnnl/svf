@@ -7,6 +7,7 @@ import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
 import com.jogamp.opengl.glu.gl2.GLUgl2;
 import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.scene.SceneExt;
+import java.awt.Point;
 import java.nio.FloatBuffer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -123,6 +124,80 @@ public class SceneCoordsHelper {
                     logger.log(Level.WARNING, "Unable to unproject the scene pick.");
                 }
                 return Vector3D.ZERO;
+            }
+        }
+    }
+
+    /**
+     * Get the location of the pick in screen coordinates. The depth buffer must
+     * be utilized for this function to work. The GL context must be current.
+     *
+     * @param gl  reference to gl
+     * @param glu reference to glu
+     * @param x   the x scene location
+     * @param y   the y scene location
+     * @param z   the z scene location
+     *
+     * @return the projected screen coordinate or zero if failed
+     */
+    public Point project(final GL2 gl, final GLUgl2 glu, final int x, final int y, final int z) {
+        gl.glGetDoublev(GLMatrixFunc.GL_MODELVIEW_MATRIX, modelview, 0);
+        gl.glGetDoublev(GLMatrixFunc.GL_PROJECTION_MATRIX, projection, 0);
+        gl.glGetIntegerv(GL.GL_VIEWPORT, viewport, 0);
+        position[0] = x;
+        position[1] = y;
+        position[2] = z;
+        return project(position[0], position[1], position[2], modelview, projection, viewport);
+    }
+
+    /**
+     * Project the scene coordinates to screen coordinates without the GL
+     * context being current.
+     *
+     * @param x          the x location in the scene
+     * @param y          the y location in the scene
+     * @param z          the z location in the scene
+     * @param modelview  the modelview matrix
+     * @param projection the projection matrix
+     * @param viewport   the viewport (x, y, width, height)
+     *
+     * @return the projected screen coordinate or zero if failed
+     */
+    public Point project(final double x, final double y, final double z, final double[] modelview, final double[] projection, final int[] viewport) {
+        synchronized (this) {
+            if (scene.getGLU().gluProject(x, y, z, modelview, 0, projection, 0, viewport, 0, window, 0)) {
+                return new Point((int) window[0], (int) (viewport[3] - window[1]));
+            } else {
+                if (scene.getSceneBuilder().isVerbose()) {
+                    logger.log(Level.WARNING, "Unable to project the scene pick.");
+                }
+                return new Point(0, 0);
+            }
+        }
+    }
+
+    /**
+     * Un-project the screen coordinates to scene coordinates without the GL
+     * context being current.
+     *
+     * @param x          the x location in the scene
+     * @param y          the y location in the scene
+     * @param z          the z location in the scene
+     * @param modelview  the modelview matrix
+     * @param projection the projection matrix
+     * @param viewport   the viewport (x, y, width, height)
+     *
+     * @return the projected screen coordinate or zero if failed
+     */
+    public Point project(final float x, final float y, final float z, final double[] modelview, final double[] projection, final int[] viewport) {
+        synchronized (this) {
+            if (scene.getGLU().gluProject(x, y, z, modelview, 0, projection, 0, viewport, 0, window, 0)) {
+                return new Point((int) window[0], (int) (viewport[3] - window[1]));
+            } else {
+                if (scene.getSceneBuilder().isVerbose()) {
+                    logger.log(Level.WARNING, "Unable to project the scene pick.");
+                }
+                return new Point(0, 0);
             }
         }
     }
