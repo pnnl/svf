@@ -193,9 +193,12 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
         // animator
         final int targetFps = sceneUtil.getSceneBuilder().getTargetFps();
         if (targetFps > 0) {
-            this.animator = new FPSAnimator(component, targetFps, true);
+            final FPSAnimator animator = new FPSAnimator(component, targetFps, true);
+            this.animator = animator;
         } else {
-            this.animator = new Animator(component);
+            final Animator animator = new Animator(component);
+            animator.setRunAsFastAsPossible(true);
+            this.animator = animator;
         }
         logger.log(Level.FINE, "{0}: Creating a new AbstractScene.", this);
     }
