@@ -10,13 +10,22 @@ import gov.pnnl.svf.camera.OrbitCamera;
 import gov.pnnl.svf.camera.SimpleCamera;
 import gov.pnnl.svf.core.service.AbstractBusyService;
 import gov.pnnl.svf.core.service.BusyService;
+import gov.pnnl.svf.core.util.NamedThreadFactory;
 import gov.pnnl.svf.picking.ColorPickingCamera;
 import gov.pnnl.svf.picking.FxColorPickingCamera;
 import gov.pnnl.svf.picking.FxItemPickingCamera;
 import gov.pnnl.svf.picking.FxPickingCamera;
 import gov.pnnl.svf.picking.ItemPickingCamera;
 import gov.pnnl.svf.picking.PickingCamera;
+import java.text.MessageFormat;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 
 /**
@@ -26,6 +35,9 @@ import javafx.application.Platform;
  */
 public class FxSceneFactory implements SceneFactory {
 
+    private static final Logger logger = Logger.getLogger(FxSceneFactory.class.getName());
+
+    private final ExecutorService executor = Executors.newCachedThreadPool(new NamedThreadFactory(FxSceneFactory.class, "Worker"));
     private final AtomicLong counter = new AtomicLong();
 
     /**
@@ -115,6 +127,36 @@ public class FxSceneFactory implements SceneFactory {
             }
         } else {
             Platform.runLater(runnable);
+            return false;
+        }
+    }
+
+    @Override
+    public void runOffUiThread(final Scene scene, final Runnable runnable) {
+        if (Platform.isFxApplicationThread()) {
+            executor.submit(runnable);
+        } else {
+            runnable.run();
+        }
+    }
+
+    @Override
+    public boolean runOffUiThread(final Scene scene, final Runnable runnable, final boolean synchronous) {
+        if (synchronous) {
+            if (Platform.isFxApplicationThread()) {
+                try {
+                    executor.submit(runnable).get(10, TimeUnit.MINUTES);
+                } catch (final InterruptedException | TimeoutException ex) {
+                    logger.log(Level.WARNING, MessageFormat.format("{0}: Unable to run off Fx UI thread.", scene), ex);
+                } catch (final ExecutionException ex) {
+                    throw (RuntimeException) ex.getCause();
+                }
+            } else {
+                runnable.run();
+            }
+            return true;
+        } else {
+            executor.submit(runnable);
             return false;
         }
     }

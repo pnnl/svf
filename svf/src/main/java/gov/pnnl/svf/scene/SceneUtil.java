@@ -202,7 +202,7 @@ public class SceneUtil implements Disposable {
          */
         private byte state = StateUtil.NONE;
         private final SceneLookupImpl lookup;
-        private final List<Camera> cameras = new ArrayList<>();
+        private final List<Camera> cameras = new ArrayList<Camera>();
 
         protected ViewportListener(final SceneUtil utils) {
             lookup = utils.getSceneLookup();
@@ -223,15 +223,19 @@ public class SceneUtil implements Disposable {
                 }
                 state = StateUtil.setValue(state, DISPOSED_MASK);
             }
-            cameras.clear();
+            synchronized (cameras) {
+                cameras.clear();
+            }
         }
 
         @Override
         public void propertyChange(final PropertyChangeEvent event) {
             final Rectangle viewport = (Rectangle) event.getNewValue();
-            lookup.lookupAll(Camera.class, cameras);
-            for (final Camera camera : cameras) {
-                camera.setViewport(viewport);
+            synchronized (cameras) {
+                lookup.lookupAll(Camera.class, cameras);
+                for (final Camera camera : cameras) {
+                    camera.setViewport(viewport);
+                }
             }
         }
     }

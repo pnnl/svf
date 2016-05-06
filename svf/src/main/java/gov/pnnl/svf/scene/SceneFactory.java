@@ -91,4 +91,26 @@ public interface SceneFactory {
      * @return true if run synchronously
      */
     boolean runOnUiThread(Scene scene, Runnable runnable, boolean synchronous);
+
+    /**
+     * Run this off of the UI thread. If this is called off the UI thread then
+     * it will be run immediately. Otherwise it is run asynchronously.
+     *
+     * @param scene    reference to the scene
+     * @param runnable the runnable
+     */
+    void runOffUiThread(Scene scene, Runnable runnable);
+
+    /**
+     * Run this off of the UI thread. If synchronous this call should not return
+     * until run. Otherwise this task may, or may not, run immediately if called
+     * off of the UI thread.
+     *
+     * @param scene       reference to the scene
+     * @param runnable    the runnable
+     * @param synchronous true for synchronous execution
+     *
+     * @return true if run synchronously
+     */
+    boolean runOffUiThread(Scene scene, Runnable runnable, boolean synchronous);
 }
