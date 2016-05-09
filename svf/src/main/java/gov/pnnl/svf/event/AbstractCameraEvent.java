@@ -19,37 +19,39 @@ public abstract class AbstractCameraEvent<C extends Camera> {
     private final int y;
     private final int width;
     private final int height;
-    private final int clicks;
+    private final int context;
     private Vector3D location;
 
     /**
      * Constructor
      *
-     * @param source the source camera of the event
-     * @param x      the x coord in screen space
-     * @param y      the y coord in screen space
-     * @param clicks the amount which can represent button or wheel clicks
-     * @param types  the types of events
+     * @param source  the source camera of the event
+     * @param x       the x coord in screen space
+     * @param y       the y coord in screen space
+     * @param context the amount which can represent button or wheel clicks or a
+     *                specific key
+     * @param types   the types of events
      */
-    protected AbstractCameraEvent(final C source, final int x, final int y, final int clicks, final Set<CameraEventType> types) {
-        this(source, x, y, 1, 1, clicks, types);
+    protected AbstractCameraEvent(final C source, final int x, final int y, final int context, final Set<CameraEventType> types) {
+        this(source, x, y, 1, 1, context, types);
     }
 
     /**
      * Constructor
      *
-     * @param source the source camera of the event
-     * @param x      the x coord center in screen space
-     * @param y      the y coord center in screen space
-     * @param width  the width in screen space
-     * @param height the height in screen space
-     * @param clicks the amount which can represent button or wheel clicks
-     * @param types  the types of events
+     * @param source  the source camera of the event
+     * @param x       the x coord center in screen space
+     * @param y       the y coord center in screen space
+     * @param width   the width in screen space
+     * @param height  the height in screen space
+     * @param context the amount which can represent button or wheel clicks or a
+     *                specific key
+     * @param types   the types of events
      *
      * @throws IllegalArgumentException if the width or height is less than 1,
      *                                  or clicks is less than 0
      */
-    protected AbstractCameraEvent(final C source, final int x, final int y, final int width, final int height, final int clicks, final Set<CameraEventType> types) {
+    protected AbstractCameraEvent(final C source, final int x, final int y, final int width, final int height, final int context, final Set<CameraEventType> types) {
         if (source == null) {
             throw new NullPointerException("source");
         }
@@ -59,8 +61,8 @@ public abstract class AbstractCameraEvent<C extends Camera> {
         if (height < 1) {
             throw new IllegalArgumentException("height");
         }
-        if (clicks < 0) {
-            throw new IllegalArgumentException("clicks");
+        if (context < 0) {
+            throw new IllegalArgumentException("context");
         }
         if (types == null) {
             throw new NullPointerException("types");
@@ -70,7 +72,7 @@ public abstract class AbstractCameraEvent<C extends Camera> {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.clicks = clicks;
+        this.context = context;
         this.types = types;
     }
 
@@ -132,13 +134,13 @@ public abstract class AbstractCameraEvent<C extends Camera> {
     }
 
     /**
-     * Represents the number of button or wheel clicks. This value will always
-     * be positive.
+     * Represents the number of button or wheel clicks or a specific key. This
+     * value will always be positive.
      *
-     * @return the button or wheel clicks
+     * @return the button or wheel clicks or key
      */
-    public int getClicks() {
-        return clicks;
+    public int getContext() {
+        return context;
     }
 
     /**
@@ -178,6 +180,7 @@ public abstract class AbstractCameraEvent<C extends Camera> {
         hash = 67 * hash + this.y;
         hash = 67 * hash + this.width;
         hash = 67 * hash + this.height;
+        hash = 67 * hash + this.context;
         return hash;
     }
 
@@ -208,7 +211,7 @@ public abstract class AbstractCameraEvent<C extends Camera> {
         if (this.height != other.height) {
             return false;
         }
-        if (this.clicks != other.clicks) {
+        if (this.context != other.context) {
             return false;
         }
         return true;
@@ -216,6 +219,6 @@ public abstract class AbstractCameraEvent<C extends Camera> {
 
     @Override
     public String toString() {
-        return "PickEvent{" + "source=" + source + ", types=" + types + ", x=" + x + ", y=" + y + ", width=" + width + ", height=" + height + ", clicks=" + clicks + '}';
+        return "PickEvent{" + "source=" + source + ", types=" + types + ", x=" + x + ", y=" + y + ", width=" + width + ", height=" + height + ", context=" + context + '}';
     }
 }

@@ -3,6 +3,8 @@ package gov.pnnl.svf.awt.picking;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.picking.AbstractItemPickingCamera;
 import gov.pnnl.svf.scene.Scene;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -17,7 +19,7 @@ import java.awt.event.MouseWheelListener;
  *
  * @author Arthur Bleeker
  */
-public class AwtItemPickingCamera extends AbstractItemPickingCamera implements MouseListener, MouseMotionListener, MouseWheelListener {
+public class AwtItemPickingCamera extends AbstractItemPickingCamera implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
 
     private final AwtPickingCameraListener listener = new AwtPickingCameraListener(this);
 
@@ -52,6 +54,21 @@ public class AwtItemPickingCamera extends AbstractItemPickingCamera implements M
      */
     public AwtItemPickingCamera(final Scene scene, final String type, final String id, final Camera camera) {
         super(scene, type, id, camera);
+    }
+
+    @Override
+    public void keyPressed(final KeyEvent event) {
+        listener.keyPressed(event);
+    }
+
+    @Override
+    public void keyReleased(final KeyEvent event) {
+        listener.keyReleased(event);
+    }
+
+    @Override
+    public void keyTyped(final KeyEvent event) {
+        listener.keyTyped(event);
     }
 
     @Override

@@ -74,12 +74,24 @@ public class PickingDemoLoader implements DemoLoader {
         // create a picking camera
         final PickingCamera picking = scene.getFactory().createPickingCamera(scene, camera, PickingCamera.class);
         scene.add(picking);
+        // add key event type
+        final Set<CameraEventType> pickingTypes = EnumSet.copyOf(picking.getPickTypes());
+        pickingTypes.add(CameraEventType.KEY);
+        picking.setPickTypes(pickingTypes);
         // create an item picking camera
         final ItemPickingCamera itemPicking = scene.getFactory().createPickingCamera(scene, camera, ItemPickingCamera.class);
         scene.add(itemPicking);
+        // add key event type
+        final Set<CameraEventType> itemPickingTypes = EnumSet.copyOf(itemPicking.getPickTypes());
+        itemPickingTypes.add(CameraEventType.KEY);
+        itemPicking.setPickTypes(itemPickingTypes);
         // create a color picking camera
         final ColorPickingCamera colorPicking = scene.getFactory().createPickingCamera(scene, camera, ColorPickingCamera.class);
         scene.add(colorPicking);
+        // add key event type
+        final Set<CameraEventType> colorPickingTypes = EnumSet.copyOf(colorPicking.getPickTypes());
+        colorPickingTypes.add(CameraEventType.KEY);
+        colorPicking.setPickTypes(colorPickingTypes);
         // log the fps and vps
         if (!scene.getExtended().getSceneBuilder().isDebug()) {
             FpsLogger.newInstance(scene, 1000 * 10);

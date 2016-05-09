@@ -28,7 +28,8 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class ProxySceneFactory implements SceneFactory {
 
-    private final ExecutorService executor = Executors.newSingleThreadExecutor(new NamedThreadFactory(ProxyScene.class, "UI"));
+    private final ExecutorService executorUI = Executors.newSingleThreadExecutor(new NamedThreadFactory(ProxyScene.class, "UI"));
+    private final ExecutorService executorWorker = Executors.newCachedThreadPool(new NamedThreadFactory(ProxyScene.class, "Worker"));
     private final AtomicLong counter = new AtomicLong();
 
     /**
@@ -97,7 +98,22 @@ public class ProxySceneFactory implements SceneFactory {
         if (synchronous) {
             runnable.run();
         } else {
-            executor.execute(runnable);
+            executorUI.execute(runnable);
+        }
+        return synchronous;
+    }
+
+    @Override
+    public void runOffUiThread(final Scene scene, final Runnable runnable) {
+        runnable.run();
+    }
+
+    @Override
+    public boolean runOffUiThread(final Scene scene, final Runnable runnable, final boolean synchronous) {
+        if (synchronous) {
+            runnable.run();
+        } else {
+            executorWorker.execute(runnable);
         }
         return synchronous;
     }

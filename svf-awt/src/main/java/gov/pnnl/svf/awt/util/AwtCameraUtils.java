@@ -5,6 +5,9 @@ import gov.pnnl.svf.event.CameraEvent;
 import gov.pnnl.svf.event.CameraEventType;
 import gov.pnnl.svf.event.PickingCameraEvent;
 import gov.pnnl.svf.picking.PickingCamera;
+import java.awt.Point;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.util.EnumSet;
@@ -25,53 +28,28 @@ public class AwtCameraUtils {
     }
 
     /**
-     * Add the correct event button types to the set according to the mouse
+     * Add the correct event button types to the set according to the input
      * event.
      *
-     * @param event the mouse event
+     * @param event the input event
      * @param types the set of types
      *
      * @throws NullPointerException if event or types is null
      */
-    public static void addButtonTypes(final MouseEvent event, final Set<CameraEventType> types) {
-        if (event instanceof MouseWheelEvent) {
-            // button type
-            if (((MouseWheelEvent) event).getWheelRotation() < 0) {
-                types.add(CameraEventType.WHEEL_UP);
-            } else if (((MouseWheelEvent) event).getWheelRotation() > 0) {
-                types.add(CameraEventType.WHEEL_DOWN);
-            } else {
-                types.add(CameraEventType.NONE);
-            }
-        } else {
-            // process the button number
-            switch (event.getButton()) {
-                case MouseEvent.BUTTON1:
-                    types.add(CameraEventType.LEFT);
-                    break;
-                case MouseEvent.BUTTON2:
-                    types.add(CameraEventType.MIDDLE);
-                    break;
-                case MouseEvent.BUTTON3:
-                    types.add(CameraEventType.RIGHT);
-                    break;
-                default:
-                    types.add(CameraEventType.NONE);
-                    break;
-            }
-        }
+    public static void addButtonTypes(final InputEvent event, final Set<CameraEventType> types) {
+        types.add(getButton(event));
     }
 
     /**
-     * Add the correct event modifier types to the set according to the mouse
+     * Add the correct event modifier types to the set according to the input
      * event.
      *
-     * @param event the mouse event
+     * @param event the input event
      * @param types the set of types
      *
      * @throws NullPointerException if event or types is null
      */
-    public static void addModifierTypes(final MouseEvent event, final Set<CameraEventType> types) {
+    public static void addModifierTypes(final InputEvent event, final Set<CameraEventType> types) {
         // process modifier keys
         if (event.isAltDown()) {
             types.add(CameraEventType.ALT);
@@ -87,23 +65,65 @@ public class AwtCameraUtils {
     /**
      * Get the button for the supplied event.
      *
-     * @param event the mouse event
+     * @param event the input event
      *
-     * @return the button
+     * @return the button event type
      *
      * @throws NullPointerException if event is null
      */
-    public static CameraEventType getButton(final MouseEvent event) {
-        switch (event.getButton()) {
-            case MouseEvent.BUTTON1:
-                return CameraEventType.LEFT;
-            case MouseEvent.BUTTON2:
-                return CameraEventType.MIDDLE;
-            case MouseEvent.BUTTON3:
-                return CameraEventType.RIGHT;
-            default:
+    public static CameraEventType getButton(final InputEvent event) {
+        if (event instanceof MouseWheelEvent) {
+            // wheel event type
+            if (((MouseWheelEvent) event).getWheelRotation() < 0) {
+                return CameraEventType.WHEEL_UP;
+            } else if (((MouseWheelEvent) event).getWheelRotation() > 0) {
+                return CameraEventType.WHEEL_DOWN;
+            } else {
                 return CameraEventType.NONE;
+            }
+        } else if (event instanceof MouseEvent) {
+            // mouse button event type
+            switch (((MouseEvent) event).getButton()) {
+                case MouseEvent.BUTTON1:
+                    return CameraEventType.LEFT;
+                case MouseEvent.BUTTON2:
+                    return CameraEventType.MIDDLE;
+                case MouseEvent.BUTTON3:
+                    return CameraEventType.RIGHT;
+                default:
+                    return CameraEventType.NONE;
+            }
+        } else if (event instanceof KeyEvent) {
+            // key event type
+            return CameraEventType.KEY;
+        } else {
+            // unknown
+            return CameraEventType.NONE;
         }
+    }
+
+    /**
+     * Create a new camera event.
+     *
+     * @param camera   camera that generated the event
+     * @param event    the key event
+     * @param location the event location
+     *
+     * @return the new camera event
+     *
+     * @throws NullPointerException if event is null
+     */
+    public static CameraEvent newCameraEvent(final Camera camera, final KeyEvent event, final Point location) {
+        final Set<CameraEventType> types = EnumSet.noneOf(CameraEventType.class);
+        AwtCameraUtils.addButtonTypes(event, types);
+        AwtCameraUtils.addModifierTypes(event, types);
+        final CameraEvent pickEvent = new CameraEvent(
+                camera,
+                (int) location.getX(),
+                (int) location.getY(),
+                event.getKeyChar(),
+                types);
+        return pickEvent;
     }
 
     /**

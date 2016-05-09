@@ -3,8 +3,11 @@ package gov.pnnl.svf.swt.picking;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.picking.AbstractPickingCamera;
 import gov.pnnl.svf.scene.Scene;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.events.MouseTrackListener;
 import org.eclipse.swt.events.MouseWheelListener;
 
@@ -16,7 +19,7 @@ import org.eclipse.swt.events.MouseWheelListener;
  *
  * @author Arthur Bleeker
  */
-public class SwtPickingCamera extends AbstractPickingCamera implements MouseListener, MouseTrackListener, MouseWheelListener {
+public class SwtPickingCamera extends AbstractPickingCamera implements MouseListener, MouseMoveListener, MouseTrackListener, MouseWheelListener, KeyListener {
 
     private final SwtPickingCameraListener listener = new SwtPickingCameraListener(this);
 
@@ -54,6 +57,16 @@ public class SwtPickingCamera extends AbstractPickingCamera implements MouseList
     }
 
     @Override
+    public void keyPressed(final KeyEvent evt) {
+        listener.keyPressed(evt);
+    }
+
+    @Override
+    public void keyReleased(final KeyEvent evt) {
+        listener.keyReleased(evt);
+    }
+
+    @Override
     public void mouseDoubleClick(final MouseEvent evt) {
         listener.mouseDoubleClick(evt);
     }
@@ -76,6 +89,11 @@ public class SwtPickingCamera extends AbstractPickingCamera implements MouseList
     @Override
     public void mouseHover(final MouseEvent evt) {
         listener.mouseHover(evt);
+    }
+
+    @Override
+    public void mouseMove(final MouseEvent evt) {
+        listener.mouseMove(evt);
     }
 
     @Override

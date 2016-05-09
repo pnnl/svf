@@ -3,6 +3,8 @@ package gov.pnnl.svf.swt.picking;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.picking.AbstractColorPickingCamera;
 import gov.pnnl.svf.scene.Scene;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
@@ -17,7 +19,7 @@ import org.eclipse.swt.events.MouseWheelListener;
  *
  * @author Arthur Bleeker
  */
-public class SwtColorPickingCamera extends AbstractColorPickingCamera implements MouseListener, MouseMoveListener, MouseTrackListener, MouseWheelListener {
+public class SwtColorPickingCamera extends AbstractColorPickingCamera implements MouseListener, MouseMoveListener, MouseTrackListener, MouseWheelListener, KeyListener {
 
     private final SwtPickingCameraListener listener = new SwtPickingCameraListener(this);
 
@@ -52,6 +54,16 @@ public class SwtColorPickingCamera extends AbstractColorPickingCamera implements
      */
     public SwtColorPickingCamera(final Scene scene, final String type, final String id, final Camera camera) {
         super(scene, type, id, camera);
+    }
+
+    @Override
+    public void keyPressed(final KeyEvent evt) {
+        listener.keyPressed(evt);
+    }
+
+    @Override
+    public void keyReleased(final KeyEvent evt) {
+        listener.keyReleased(evt);
     }
 
     @Override
