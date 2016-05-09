@@ -15,31 +15,33 @@ public class PickingCameraEvent extends AbstractCameraEvent<PickingCamera> {
     /**
      * Constructor
      *
-     * @param source the source camera of the event
-     * @param x      the x coord in screen space
-     * @param y      the y coord in screen space
-     * @param clicks the amount which can represent button or wheel clicks
-     * @param types  the types of events
+     * @param source  the source camera of the event
+     * @param x       the x coord in screen space
+     * @param y       the y coord in screen space
+     * @param context the amount which can represent button or wheel clicks or
+     *                specific key
+     * @param types   the types of events
      */
-    public PickingCameraEvent(final PickingCamera source, final int x, final int y, final int clicks, final Set<CameraEventType> types) {
-        super(source, x, y, clicks, types);
+    public PickingCameraEvent(final PickingCamera source, final int x, final int y, final int context, final Set<CameraEventType> types) {
+        super(source, x, y, context, types);
     }
 
     /**
      * Constructor
      *
-     * @param source the source camera of the event
-     * @param x      the x coord center in screen space
-     * @param y      the y coord center in screen space
-     * @param width  the width in screen space
-     * @param height the height in screen space
-     * @param clicks the amount which can represent button or wheel clicks
-     * @param types  the types of events
+     * @param source  the source camera of the event
+     * @param x       the x coord center in screen space
+     * @param y       the y coord center in screen space
+     * @param width   the width in screen space
+     * @param height  the height in screen space
+     * @param context the amount which can represent button or wheel clicks or
+     *                specific key
+     * @param types   the types of events
      *
      * @throws IllegalArgumentException if the width or height is less than 1
      */
-    public PickingCameraEvent(final PickingCamera source, final int x, final int y, final int width, final int height, final int clicks, final Set<CameraEventType> types) {
-        super(source, x, y, width, height, clicks, types);
+    public PickingCameraEvent(final PickingCamera source, final int x, final int y, final int width, final int height, final int context, final Set<CameraEventType> types) {
+        super(source, x, y, width, height, context, types);
     }
 
     public static class Builder {
@@ -50,7 +52,7 @@ public class PickingCameraEvent extends AbstractCameraEvent<PickingCamera> {
         private int y = 0;
         private int width = 1;
         private int height = 1;
-        private int clicks = 0;
+        private int context = 0;
 
         private Builder() {
         }
@@ -94,13 +96,13 @@ public class PickingCameraEvent extends AbstractCameraEvent<PickingCamera> {
             return this;
         }
 
-        public Builder clicks(final int clicks) {
-            this.clicks = clicks;
+        public Builder context(final int context) {
+            this.context = context;
             return this;
         }
 
         public PickingCameraEvent build() {
-            return new PickingCameraEvent(source, x, y, width, height, clicks, types);
+            return new PickingCameraEvent(source, x, y, width, height, context, types);
         }
     }
 }

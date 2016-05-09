@@ -40,6 +40,10 @@ public enum CameraEventType {
      */
     WHEEL_DOWN,
     /**
+     * Mouse event type for a specific key event.
+     */
+    KEY,
+    /**
      * Mouse event type that represents the left button.
      */
     LEFT,
@@ -97,13 +101,14 @@ public enum CameraEventType {
          * DOWN, SINGLE, DOUBLE, HOVER, AREA
          */
         public static final Set<CameraEventType> ACTION_TYPES = java.util.Collections.unmodifiableSet(EnumSet.of(CameraEventType.NONE, CameraEventType.DOWN,
-                                                                                                                 CameraEventType.SINGLE, CameraEventType.DOUBLE, CameraEventType.HOVER, CameraEventType.AREA));
+                                                                                                                 CameraEventType.SINGLE, CameraEventType.DOUBLE,
+                                                                                                                 CameraEventType.HOVER, CameraEventType.AREA));
         /**
          * Set containing all of the event types that represent a button: LEFT,
          * MIDDLE, RIGHT, WHEEL_DOWN, WHEEL_UP
          */
-        public static final Set<CameraEventType> BUTTON_TYPES = java.util.Collections.unmodifiableSet(EnumSet.of(CameraEventType.LEFT, CameraEventType.MIDDLE,
-                                                                                                                 CameraEventType.RIGHT, CameraEventType.WHEEL_DOWN, CameraEventType.WHEEL_UP));
+        public static final Set<CameraEventType> BUTTON_TYPES = java.util.Collections.unmodifiableSet(EnumSet.of(CameraEventType.LEFT, CameraEventType.MIDDLE, CameraEventType.RIGHT,
+                                                                                                                 CameraEventType.WHEEL_DOWN, CameraEventType.WHEEL_UP, CameraEventType.KEY));
         /**
          * Set containing all of the event types that represent a modifier key:
          * SHIFT, ALT, CTRL

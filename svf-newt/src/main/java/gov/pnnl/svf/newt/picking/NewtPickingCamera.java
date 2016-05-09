@@ -1,5 +1,7 @@
 package gov.pnnl.svf.newt.picking;
 
+import com.jogamp.newt.event.KeyEvent;
+import com.jogamp.newt.event.KeyListener;
 import com.jogamp.newt.event.MouseEvent;
 import com.jogamp.newt.event.MouseListener;
 import gov.pnnl.svf.camera.Camera;
@@ -14,7 +16,7 @@ import gov.pnnl.svf.scene.Scene;
  *
  * @author Arthur Bleeker
  */
-public class NewtPickingCamera extends AbstractPickingCamera implements MouseListener {
+public class NewtPickingCamera extends AbstractPickingCamera implements MouseListener, KeyListener {
 
     private final NewtPickingCameraListener listener = new NewtPickingCameraListener(this);
 
@@ -49,6 +51,16 @@ public class NewtPickingCamera extends AbstractPickingCamera implements MouseLis
      */
     public NewtPickingCamera(final Scene scene, final String type, final String id, final Camera camera) {
         super(scene, type, id, camera);
+    }
+
+    @Override
+    public void keyPressed(final KeyEvent evt) {
+        listener.keyPressed(evt);
+    }
+
+    @Override
+    public void keyReleased(final KeyEvent evt) {
+        listener.keyReleased(evt);
     }
 
     @Override

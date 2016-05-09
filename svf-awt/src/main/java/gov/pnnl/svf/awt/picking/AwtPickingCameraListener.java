@@ -5,8 +5,12 @@ import gov.pnnl.svf.event.CameraEventType;
 import gov.pnnl.svf.event.PickingCameraEvent;
 import gov.pnnl.svf.geometry.Rectangle;
 import gov.pnnl.svf.picking.AbstractPickingCamera;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -22,7 +26,7 @@ import javax.swing.Timer;
  *
  * @author Arthur Bleeker
  */
-class AwtPickingCameraListener implements MouseListener, MouseMotionListener, MouseWheelListener {
+class AwtPickingCameraListener implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
 
     private static final int AREA_SIZE = 4;
     private static final Set<CameraEventType> MOVE = Collections.unmodifiableSet(EnumSet.of(CameraEventType.MOVE));
@@ -70,6 +74,45 @@ class AwtPickingCameraListener implements MouseListener, MouseMotionListener, Mo
     }
 
     @Override
+    public void keyPressed(final KeyEvent event) {
+        final Point location = MouseInfo.getPointerInfo().getLocation();
+        final Rectangle viewport = camera.getViewport();
+        final Rectangle sceneViewport = camera.getScene().getViewport();
+        if (!viewport.contains((int) location.getX(), sceneViewport.getHeight() - (int) location.getY())) {
+            return;
+        }
+        // key down event
+        final Set<CameraEventType> types = EnumSet.of(CameraEventType.DOWN);
+        AwtCameraUtils.addButtonTypes(event, types);
+        AwtCameraUtils.addModifierTypes(event, types);
+        // process the pick
+        camera.addEvent(new PickingCameraEvent(camera, (int) location.getX(), (int) location.getY(), event.getKeyChar(), types));
+    }
+
+    @Override
+    public void keyReleased(final KeyEvent event) {
+        final Point location = MouseInfo.getPointerInfo().getLocation();
+        final Set<CameraEventType> types = EnumSet.noneOf(CameraEventType.class);
+        AwtCameraUtils.addButtonTypes(event, types);
+        AwtCameraUtils.addModifierTypes(event, types);
+        // process the area pick
+        final int w = Math.abs(x - (int) location.getX()) + 1;
+        final int h = Math.abs(y - (int) location.getY()) + 1;
+        if (w > AREA_SIZE || h > AREA_SIZE) {
+            final Set<CameraEventType> areaTypes = EnumSet.copyOf(types);
+            areaTypes.add(CameraEventType.AREA);
+            camera.addEvent(new PickingCameraEvent(camera, Math.min(x, (int) location.getX()) + w / 2, Math.min(y, (int) location.getY()) + h / 2, w, h, event.getKeyChar(), areaTypes));
+        }
+        // process the pick
+        camera.addEvent(new PickingCameraEvent(camera, (int) location.getX(), (int) location.getY(), event.getKeyChar(), types));
+    }
+
+    @Override
+    public void keyTyped(final KeyEvent event) {
+        // no operation
+    }
+
+    @Override
     public void mouseClicked(final MouseEvent event) {
         // no operation
     }
@@ -90,7 +133,7 @@ class AwtPickingCameraListener implements MouseListener, MouseMotionListener, Mo
     public void mousePressed(final MouseEvent event) {
         final Rectangle viewport = camera.getViewport();
         final Rectangle sceneViewport = camera.getScene().getViewport();
-        if (!viewport.contains(x, sceneViewport.getHeight() - y)) {
+        if (!viewport.contains(event.getX(), sceneViewport.getHeight() - event.getY())) {
             return;
         }
         x = event.getX();
@@ -139,7 +182,7 @@ class AwtPickingCameraListener implements MouseListener, MouseMotionListener, Mo
         // only consider move events that occur inside the camera space
         final Rectangle viewport = camera.getViewport();
         final Rectangle sceneViewport = camera.getScene().getViewport();
-        if (!viewport.contains(x, sceneViewport.getHeight() - y)) {
+        if (!viewport.contains(event.getX(), sceneViewport.getHeight() - event.getY())) {
             return;
         }
         // filter move events here to reduce garbage
@@ -157,7 +200,7 @@ class AwtPickingCameraListener implements MouseListener, MouseMotionListener, Mo
         // down button
         final Rectangle viewport = camera.getViewport();
         final Rectangle sceneViewport = camera.getScene().getViewport();
-        if (!viewport.contains(x, sceneViewport.getHeight() - y)) {
+        if (!viewport.contains(event.getX(), sceneViewport.getHeight() - event.getY())) {
             return;
         }
         x = event.getX();

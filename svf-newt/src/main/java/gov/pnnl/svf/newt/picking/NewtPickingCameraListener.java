@@ -1,5 +1,8 @@
 package gov.pnnl.svf.newt.picking;
 
+import com.jogamp.nativewindow.util.Point;
+import com.jogamp.newt.event.KeyEvent;
+import com.jogamp.newt.event.KeyListener;
 import com.jogamp.newt.event.MouseEvent;
 import com.jogamp.newt.event.MouseListener;
 import gov.pnnl.svf.event.CameraEventType;
@@ -22,7 +25,7 @@ import javax.swing.Timer;
  * @author Arthur Bleeker
  *
  */
-class NewtPickingCameraListener implements MouseListener {
+class NewtPickingCameraListener implements MouseListener, KeyListener {
 
     private static final int AREA_SIZE = 4;
     private static final Set<CameraEventType> MOVE = Collections.unmodifiableSet(EnumSet.of(CameraEventType.MOVE));
@@ -66,6 +69,40 @@ class NewtPickingCameraListener implements MouseListener {
      */
     public int getInitialDelay() {
         return timer.getInitialDelay();
+    }
+
+    @Override
+    public void keyPressed(final KeyEvent event) {
+        final Point location = (Point) event.getSource();
+        final Rectangle viewport = camera.getViewport();
+        final Rectangle sceneViewport = camera.getScene().getViewport();
+        if (!viewport.contains((int) location.getX(), sceneViewport.getHeight() - (int) location.getY())) {
+            return;
+        }
+        // key down event
+        final Set<CameraEventType> types = EnumSet.of(CameraEventType.DOWN);
+        NewtCameraUtils.addButtonTypes(event, types);
+        NewtCameraUtils.addModifierTypes(event, types);
+        // process the pick
+        camera.addEvent(new PickingCameraEvent(camera, (int) location.getX(), (int) location.getY(), event.getKeyChar(), types));
+    }
+
+    @Override
+    public void keyReleased(final KeyEvent event) {
+        final Point location = (Point) event.getSource();
+        final Set<CameraEventType> types = EnumSet.noneOf(CameraEventType.class);
+        NewtCameraUtils.addButtonTypes(event, types);
+        NewtCameraUtils.addModifierTypes(event, types);
+        // process the area pick
+        final int w = Math.abs(x - (int) location.getX()) + 1;
+        final int h = Math.abs(y - (int) location.getY()) + 1;
+        if (w > AREA_SIZE || h > AREA_SIZE) {
+            final Set<CameraEventType> areaTypes = EnumSet.copyOf(types);
+            areaTypes.add(CameraEventType.AREA);
+            camera.addEvent(new PickingCameraEvent(camera, Math.min(x, (int) location.getX()) + w / 2, Math.min(y, (int) location.getY()) + h / 2, w, h, event.getKeyChar(), areaTypes));
+        }
+        // process the pick
+        camera.addEvent(new PickingCameraEvent(camera, (int) location.getX(), (int) location.getY(), event.getKeyChar(), types));
     }
 
     @Override
@@ -146,7 +183,7 @@ class NewtPickingCameraListener implements MouseListener {
         // down button
         final Rectangle viewport = camera.getViewport();
         final Rectangle sceneViewport = camera.getScene().getViewport();
-        if (!viewport.contains(x, sceneViewport.getHeight() - y)) {
+        if (!viewport.contains(evt.getX(), sceneViewport.getHeight() - evt.getY())) {
             return;
         }
         x = evt.getX();

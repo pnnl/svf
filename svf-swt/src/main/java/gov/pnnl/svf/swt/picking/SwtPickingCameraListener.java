@@ -8,11 +8,14 @@ import gov.pnnl.svf.swt.util.SwtCameraUtils;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.events.MouseTrackListener;
 import org.eclipse.swt.events.MouseWheelListener;
+import org.eclipse.swt.graphics.Point;
 
 /**
  * This camera builds a picking view for a scene. Actor's that have picking
@@ -22,7 +25,7 @@ import org.eclipse.swt.events.MouseWheelListener;
  * @author Arthur Bleeker
  *
  */
-class SwtPickingCameraListener implements MouseListener, MouseMoveListener, MouseTrackListener, MouseWheelListener {
+class SwtPickingCameraListener implements MouseListener, MouseMoveListener, MouseTrackListener, MouseWheelListener, KeyListener {
 
     private static final int AREA_SIZE = 4;
     private static final Set<CameraEventType> MOVE = Collections.unmodifiableSet(EnumSet.of(CameraEventType.MOVE));
@@ -39,6 +42,40 @@ class SwtPickingCameraListener implements MouseListener, MouseMoveListener, Mous
     SwtPickingCameraListener(final AbstractPickingCamera camera) {
         super();
         this.camera = camera;
+    }
+
+    @Override
+    public void keyPressed(final KeyEvent evt) {
+        final Point location = (Point) evt.getSource();
+        final Rectangle viewport = camera.getViewport();
+        final Rectangle sceneViewport = camera.getScene().getViewport();
+        if (!viewport.contains(location.x, sceneViewport.getHeight() - location.y)) {
+            return;
+        }
+        // key down event
+        final Set<CameraEventType> types = EnumSet.of(CameraEventType.DOWN);
+        SwtCameraUtils.addButtonTypes(evt, types);
+        SwtCameraUtils.addModifierTypes(evt, types);
+        // process the pick
+        camera.addEvent(new PickingCameraEvent(camera, location.x, location.y, evt.character, types));
+    }
+
+    @Override
+    public void keyReleased(final KeyEvent evt) {
+        final Point location = (Point) evt.getSource();
+        final Set<CameraEventType> types = EnumSet.noneOf(CameraEventType.class);
+        SwtCameraUtils.addButtonTypes(evt, types);
+        SwtCameraUtils.addModifierTypes(evt, types);
+        // process the area pick
+        final int w = Math.abs(x - location.x) + 1;
+        final int h = Math.abs(y - location.y) + 1;
+        if (w > AREA_SIZE || h > AREA_SIZE) {
+            final Set<CameraEventType> areaTypes = EnumSet.copyOf(types);
+            areaTypes.add(CameraEventType.AREA);
+            camera.addEvent(new PickingCameraEvent(camera, Math.min(x, location.x) + w / 2, Math.min(y, location.y) + h / 2, w, h, evt.character, areaTypes));
+        }
+        // process the pick
+        camera.addEvent(new PickingCameraEvent(camera, location.x, location.y, evt.character, types));
     }
 
     @Override
@@ -121,21 +158,21 @@ class SwtPickingCameraListener implements MouseListener, MouseMoveListener, Mous
     }
 
     @Override
-    public void mouseScrolled(final MouseEvent event) {
+    public void mouseScrolled(final MouseEvent evt) {
         // down button
         final Rectangle viewport = camera.getViewport();
         final Rectangle sceneViewport = camera.getScene().getViewport();
-        if (!viewport.contains(x, sceneViewport.getHeight() - y)) {
+        if (!viewport.contains(evt.x, sceneViewport.getHeight() - evt.y)) {
             return;
         }
-        x = event.x;
-        y = event.y;
+        x = evt.x;
+        y = evt.y;
         // up button
         final Set<CameraEventType> types = EnumSet.noneOf(CameraEventType.class);
-        SwtCameraUtils.addButtonTypes(event, types);
-        SwtCameraUtils.addModifierTypes(event, types);
+        SwtCameraUtils.addButtonTypes(evt, types);
+        SwtCameraUtils.addModifierTypes(evt, types);
         // process the pick
-        camera.addEvent(new PickingCameraEvent(camera, event.x, event.y, Math.abs(event.count), types));
+        camera.addEvent(new PickingCameraEvent(camera, evt.x, evt.y, Math.abs(evt.count), types));
         dragging = false;
     }
 }

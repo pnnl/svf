@@ -1,11 +1,14 @@
 package gov.pnnl.svf.newt.util;
 
+import com.jogamp.newt.event.InputEvent;
+import com.jogamp.newt.event.KeyEvent;
 import com.jogamp.newt.event.MouseEvent;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.event.CameraEvent;
 import gov.pnnl.svf.event.CameraEventType;
 import gov.pnnl.svf.event.PickingCameraEvent;
 import gov.pnnl.svf.picking.PickingCamera;
+import java.awt.Point;
 import java.util.EnumSet;
 import java.util.Set;
 
@@ -32,28 +35,8 @@ public class NewtCameraUtils {
      *
      * @throws NullPointerException if event or types is null
      */
-    public static void addButtonTypes(final MouseEvent evt, final Set<CameraEventType> types) {
-        // button type
-        if (evt.getRotation()[1] > 0) {
-            types.add(CameraEventType.WHEEL_UP);
-        } else if (evt.getRotation()[1] < 0) {
-            types.add(CameraEventType.WHEEL_DOWN);
-        } else {
-            switch (evt.getButton()) {
-                case MouseEvent.BUTTON1:
-                    types.add(CameraEventType.LEFT);
-                    break;
-                case MouseEvent.BUTTON2:
-                    types.add(CameraEventType.MIDDLE);
-                    break;
-                case MouseEvent.BUTTON3:
-                    types.add(CameraEventType.RIGHT);
-                    break;
-                default:
-                    types.add(CameraEventType.NONE);
-                    break;
-            }
-        }
+    public static void addButtonTypes(final InputEvent evt, final Set<CameraEventType> types) {
+        types.add(getButton(evt));
     }
 
     /**
@@ -65,7 +48,7 @@ public class NewtCameraUtils {
      *
      * @throws NullPointerException if event or types is null
      */
-    public static void addModifierTypes(final MouseEvent evt, final Set<CameraEventType> types) {
+    public static void addModifierTypes(final InputEvent evt, final Set<CameraEventType> types) {
         if (evt.isAltDown()) {
             types.add(CameraEventType.ALT);
         }
@@ -86,17 +69,56 @@ public class NewtCameraUtils {
      *
      * @throws NullPointerException if event is null
      */
-    public static CameraEventType getButton(final MouseEvent event) {
-        switch (event.getButton()) {
-            case MouseEvent.BUTTON1:
-                return CameraEventType.LEFT;
-            case MouseEvent.BUTTON2:
-                return CameraEventType.MIDDLE;
-            case MouseEvent.BUTTON3:
-                return CameraEventType.RIGHT;
-            default:
-                return CameraEventType.NONE;
+    public static CameraEventType getButton(final InputEvent event) {
+        if (event instanceof MouseEvent) {
+            // wheel event type
+            if (((MouseEvent) event).getRotation()[1] > 0) {
+                return CameraEventType.WHEEL_UP;
+            } else if (((MouseEvent) event).getRotation()[1] < 0) {
+                return CameraEventType.WHEEL_DOWN;
+            } else {
+                // mouse button event type
+                switch (((MouseEvent) event).getButton()) {
+                    case MouseEvent.BUTTON1:
+                        return CameraEventType.LEFT;
+                    case MouseEvent.BUTTON2:
+                        return CameraEventType.MIDDLE;
+                    case MouseEvent.BUTTON3:
+                        return CameraEventType.RIGHT;
+                    default:
+                        return CameraEventType.NONE;
+                }
+            }
+        } else if (event instanceof KeyEvent) {
+            // key event type
+            return CameraEventType.KEY;
+        } else {
+            // unknown
+            return CameraEventType.NONE;
         }
+    }
+
+    /**
+     * Create a new camera event.
+     *
+     * @param camera the camera that created the event
+     * @param event  the mouse event
+     *
+     * @return the new camera event
+     *
+     * @throws NullPointerException if event is null
+     */
+    public static CameraEvent newCameraEvent(final Camera camera, final KeyEvent event, final Point location) {
+        final Set<CameraEventType> types = EnumSet.noneOf(CameraEventType.class);
+        NewtCameraUtils.addButtonTypes(event, types);
+        NewtCameraUtils.addModifierTypes(event, types);
+        final CameraEvent pickEvent = new CameraEvent(
+                camera,
+                (int) location.getX(),
+                (int) location.getY(),
+                event.getKeyChar(),
+                types);
+        return pickEvent;
     }
 
     /**
