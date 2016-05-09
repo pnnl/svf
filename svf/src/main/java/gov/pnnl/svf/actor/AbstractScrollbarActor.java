@@ -563,9 +563,9 @@ public abstract class AbstractScrollbarActor extends AbstractActor implements Sc
         }
         // area has been scrolled
         if (event.getTypes().contains(CameraEventType.WHEEL_UP)) {
-            scrolled(-event.getClicks());
+            scrolled(-event.getContext());
         } else if (event.getTypes().contains(CameraEventType.WHEEL_DOWN)) {
-            scrolled(event.getClicks());
+            scrolled(event.getContext());
         }
     }
 

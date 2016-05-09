@@ -15,14 +15,21 @@ import gov.pnnl.svf.camera.OrbitCamera;
 import gov.pnnl.svf.camera.SimpleCamera;
 import gov.pnnl.svf.core.service.BusyService;
 import gov.pnnl.svf.core.service.CursorService;
+import gov.pnnl.svf.core.util.NamedThreadFactory;
 import gov.pnnl.svf.picking.ColorPickingCamera;
 import gov.pnnl.svf.picking.ItemPickingCamera;
 import gov.pnnl.svf.picking.PickingCamera;
+import gov.pnnl.svf.scene.ProxyScene;
 import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.scene.SceneFactory;
 import gov.pnnl.svf.scene.TooltipActor;
 import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +43,8 @@ import javax.swing.SwingUtilities;
 public class AwtSceneFactory implements SceneFactory {
 
     private static final Logger logger = Logger.getLogger(AwtSceneFactory.class.getName());
+
+    private final ExecutorService executor = Executors.newCachedThreadPool(new NamedThreadFactory(ProxyScene.class, "Worker"));
     private final AtomicLong counter = new AtomicLong();
 
     /**
@@ -134,6 +143,36 @@ public class AwtSceneFactory implements SceneFactory {
             return true;
         } else {
             SwingUtilities.invokeLater(runnable);
+            return false;
+        }
+    }
+
+    @Override
+    public void runOffUiThread(final Scene scene, final Runnable runnable) {
+        if (SwingUtilities.isEventDispatchThread()) {
+            executor.submit(runnable);
+        } else {
+            runnable.run();
+        }
+    }
+
+    @Override
+    public boolean runOffUiThread(final Scene scene, final Runnable runnable, final boolean synchronous) {
+        if (synchronous) {
+            if (SwingUtilities.isEventDispatchThread()) {
+                try {
+                    executor.submit(runnable).get(10, TimeUnit.MINUTES);
+                } catch (final InterruptedException | TimeoutException ex) {
+                    logger.log(Level.WARNING, MessageFormat.format("{0}: Unable to run off AWT UI thread.", scene), ex);
+                } catch (final ExecutionException ex) {
+                    throw (RuntimeException) ex.getCause();
+                }
+            } else {
+                runnable.run();
+            }
+            return true;
+        } else {
+            executor.submit(runnable);
             return false;
         }
     }

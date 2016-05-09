@@ -193,9 +193,12 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
         // animator
         final int targetFps = sceneUtil.getSceneBuilder().getTargetFps();
         if (targetFps > 0) {
-            this.animator = new FPSAnimator(component, targetFps, true);
+            final FPSAnimator animator = new FPSAnimator(component, targetFps, true);
+            this.animator = animator;
         } else {
-            this.animator = new Animator(component);
+            final Animator animator = new Animator(component);
+            animator.setRunAsFastAsPossible(true);
+            this.animator = animator;
         }
         logger.log(Level.FINE, "{0}: Creating a new AbstractScene.", this);
     }
@@ -243,19 +246,19 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
             return;
         }
         logger.log(Level.FINE, "{0}: Stopping the AbstractScene.", this);
-        factory.runOnUiThread(this, new Runnable() {
-                          @Override
-                          public void run() {
-                              // stop the animator
-                              try {
-                                  animator.stop();
-                              } catch (final RuntimeException ex) {
-                                  // ignore, animator can have problems here in the
-                                  // underlying implementation
-                                  logger.log(Level.WARNING, MessageFormat.format("{0}: Error occurred when attempting to stop animator.", this), ex);
-                              }
-                          }
-                      });
+        factory.runOffUiThread(this, new Runnable() {
+                           @Override
+                           public void run() {
+                               // stop the animator
+                               try {
+                                   animator.stop();
+                               } catch (final RuntimeException ex) {
+                                   // ignore, animator can have problems here in the
+                                   // underlying implementation
+                                   logger.log(Level.WARNING, MessageFormat.format("{0}: Error occurred when attempting to stop animator.", this), ex);
+                               }
+                           }
+                       });
     }
 
     @Override

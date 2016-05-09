@@ -36,7 +36,7 @@ public class PickingCameraEventTest extends AbstractObjectTestBase<PickingCamera
                 .x(object.getX())
                 .width(object.getWidth())
                 .height(object.getHeight())
-                .clicks(object.getClicks())
+                .context(object.getContext())
                 .types(object.getTypes())
                 .build();
     }

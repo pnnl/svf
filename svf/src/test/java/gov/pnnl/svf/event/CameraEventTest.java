@@ -36,7 +36,7 @@ public class CameraEventTest extends AbstractObjectTestBase<CameraEvent> {
                 .y(object.getY())
                 .width(object.getWidth())
                 .height(object.getHeight())
-                .clicks(object.getClicks())
+                .context(object.getContext())
                 .types(object.getTypes())
                 .build();
     }
