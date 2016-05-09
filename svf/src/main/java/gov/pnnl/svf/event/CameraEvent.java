@@ -47,7 +47,7 @@ public class CameraEvent extends AbstractCameraEvent<Camera> {
         private int y = 0;
         private int width = 1;
         private int height = 1;
-        private int clicks = 0;
+        private int context = 0;
 
         private Builder() {
         }
@@ -91,13 +91,13 @@ public class CameraEvent extends AbstractCameraEvent<Camera> {
             return this;
         }
 
-        public Builder clicks(final int clicks) {
-            this.clicks = clicks;
+        public Builder context(final int context) {
+            this.context = context;
             return this;
         }
 
         public CameraEvent build() {
-            return new CameraEvent(source, x, y, width, height, clicks, types);
+            return new CameraEvent(source, x, y, width, height, context, types);
         }
     }
 

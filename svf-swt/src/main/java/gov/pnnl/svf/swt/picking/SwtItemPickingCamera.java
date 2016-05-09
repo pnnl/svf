@@ -7,6 +7,7 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.events.MouseTrackListener;
 import org.eclipse.swt.events.MouseWheelListener;
 
@@ -18,7 +19,7 @@ import org.eclipse.swt.events.MouseWheelListener;
  *
  * @author Arthur Bleeker
  */
-public class SwtItemPickingCamera extends AbstractItemPickingCamera implements MouseListener, MouseTrackListener, MouseWheelListener, KeyListener {
+public class SwtItemPickingCamera extends AbstractItemPickingCamera implements MouseListener, MouseMoveListener, MouseTrackListener, MouseWheelListener, KeyListener {
 
     private final SwtPickingCameraListener listener = new SwtPickingCameraListener(this);
 
@@ -88,6 +89,11 @@ public class SwtItemPickingCamera extends AbstractItemPickingCamera implements M
     @Override
     public void mouseHover(final MouseEvent evt) {
         listener.mouseHover(evt);
+    }
+
+    @Override
+    public void mouseMove(final MouseEvent evt) {
+        listener.mouseMove(evt);
     }
 
     @Override
