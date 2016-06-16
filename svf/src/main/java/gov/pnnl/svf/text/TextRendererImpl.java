@@ -70,15 +70,15 @@ public class TextRendererImpl extends AbstractText {
     /**
      * Constructor
      *
-     * @param scene       reference to the scene
-     * @param font        the font for the text renderer
+     * @param scene reference to the scene
+     * @param font the font for the text renderer
      * @param antiAliased true for antialiased text
-     * @param mipMaps     true for mip maps
-     * @param fractional  true for fractional metrics
-     * @param smoothing   true for smoothing
+     * @param mipMaps true for mip maps
+     * @param fractional true for fractional metrics
+     * @param smoothing true for smoothing
      */
     public TextRendererImpl(final Scene scene, final Font font, final boolean antiAliased, final boolean mipMaps, final boolean fractional,
-                            final boolean smoothing) {
+            final boolean smoothing) {
         super(scene, font, antiAliased, mipMaps, fractional, smoothing);
         actor = new InvisibleActor(scene);
         actor.setDrawingPass(DrawingPass.SCENE_INTERFACE_OVERLAY);
@@ -173,7 +173,7 @@ public class TextRendererImpl extends AbstractText {
     }
 
     private void draw(final GL2 gl, final String str, final double x, final double y, final double z, final double w, final double h, final DoubleList offsets,
-                      final double scale) {
+            final double scale) {
         // ensure it's initialized
         if (index.equals(UNINITIALIZED)) {
             newTextImage(gl);
@@ -299,11 +299,11 @@ public class TextRendererImpl extends AbstractText {
         final Graphics2D graphics = createGraphics(image);
         graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, isAntiAliased()
-                                                                        ? RenderingHints.VALUE_TEXT_ANTIALIAS_ON
-                                                                        : RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+                ? RenderingHints.VALUE_TEXT_ANTIALIAS_ON
+                : RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
         graphics.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, isFractional()
-                                                                        ? RenderingHints.VALUE_FRACTIONALMETRICS_ON
-                                                                        : RenderingHints.VALUE_FRACTIONALMETRICS_OFF);
+                ? RenderingHints.VALUE_FRACTIONALMETRICS_ON
+                : RenderingHints.VALUE_FRACTIONALMETRICS_OFF);
         graphics.setComposite(AlphaComposite.Clear);
         graphics.fillRect(0, 0, size, size);
         graphics.setComposite(AlphaComposite.Src);
@@ -337,6 +337,10 @@ public class TextRendererImpl extends AbstractText {
             dispose.dispose();
         }
         final boolean mipmaps = isMipMaps();
+        final BufferedImage image;
+        synchronized (this) {
+            image = this.image;
+        }
         final TextureData data = new AWTTextureData(gl == null ? GLProfile.getDefault() : gl.getGLProfile(), GL2.GL_INTENSITY, 0, mipmaps, image);
         final Texture2dSupport texture = Texture2dSupport.newInstance(actor, data);
         texture.initialize(gl, null);
