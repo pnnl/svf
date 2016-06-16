@@ -37,7 +37,7 @@ public class SingleUpdateTaskManager implements TaskManager {
      * Constructor
      *
      * @param scene reference to the parent scene
-     * @param size  the size of the thread pool for asynchronous tasks
+     * @param size the size of the thread pool for asynchronous tasks
      */
     public SingleUpdateTaskManager(final Scene scene, final int size) {
         if (scene == null) {
@@ -82,13 +82,14 @@ public class SingleUpdateTaskManager implements TaskManager {
 
     @Override
     public Task schedule(final UpdateTaskRunnable runnable, final long delay, final boolean showBusy) {
+        final Task task = UpdateTask.schedule(scene, runnable, delay, showBusy);
         synchronized (this) {
-            if (task != null) {
-                task.cancel();
+            if (this.task != null) {
+                this.task.cancel();
             }
-            task = UpdateTask.schedule(scene, runnable, delay, showBusy);
-            return task;
+            this.task = task;
         }
+        return task;
     }
 
     @Override
@@ -103,13 +104,14 @@ public class SingleUpdateTaskManager implements TaskManager {
 
     @Override
     public WorkerTask schedule(final WorkerUpdateTaskRunnable runnable, final long delay, final boolean showBusy) {
+        final WorkerTask task = WorkerUpdateTask.schedule(scene, runnable, delay, showBusy, executor);
         synchronized (this) {
-            if (task != null) {
-                task.cancel();
+            if (this.task != null) {
+                this.task.cancel();
             }
-            task = WorkerUpdateTask.schedule(scene, runnable, delay, showBusy, executor);
-            return (WorkerTask) task;
+            this.task = task;
         }
+        return task;
     }
 
     @Override
@@ -124,12 +126,13 @@ public class SingleUpdateTaskManager implements TaskManager {
 
     @Override
     public BatchWorkerTask schedule(final Collection<WorkerUpdateTaskRunnable> runnables, final long delay, final boolean showBusy) {
+        final BatchWorkerTask task = BatchWorkerUpdateTask.schedule(scene, runnables, delay, showBusy, executor);
         synchronized (this) {
-            if (task != null) {
-                task.cancel();
+            if (this.task != null) {
+                this.task.cancel();
             }
-            task = BatchWorkerUpdateTask.schedule(scene, runnables, delay, showBusy, executor);
-            return (BatchWorkerTask) task;
+            this.task = task;
         }
+        return task;
     }
 }

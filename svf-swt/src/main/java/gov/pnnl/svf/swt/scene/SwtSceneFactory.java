@@ -171,7 +171,7 @@ public class SwtSceneFactory implements SceneFactory {
     @Override
     public void runOffUiThread(final Scene scene, final Runnable runnable) {
         if (Display.getCurrent() != null) {
-            executor.submit(runnable);
+            executor.execute(runnable);
         } else {
             runnable.run();
         }
@@ -193,7 +193,7 @@ public class SwtSceneFactory implements SceneFactory {
             }
             return true;
         } else {
-            executor.submit(runnable);
+            executor.execute(runnable);
             return false;
         }
     }

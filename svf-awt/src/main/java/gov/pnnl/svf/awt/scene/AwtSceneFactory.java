@@ -150,7 +150,7 @@ public class AwtSceneFactory implements SceneFactory {
     @Override
     public void runOffUiThread(final Scene scene, final Runnable runnable) {
         if (SwingUtilities.isEventDispatchThread()) {
-            executor.submit(runnable);
+            executor.execute(runnable);
         } else {
             runnable.run();
         }
@@ -172,7 +172,7 @@ public class AwtSceneFactory implements SceneFactory {
             }
             return true;
         } else {
-            executor.submit(runnable);
+            executor.execute(runnable);
             return false;
         }
     }
