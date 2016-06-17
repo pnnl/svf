@@ -11,6 +11,8 @@ import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.ControlListener;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.events.PaintEvent;
+import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.events.ShellAdapter;
 import org.eclipse.swt.events.ShellEvent;
 import org.eclipse.swt.graphics.Rectangle;
@@ -139,6 +141,7 @@ public class SwtScene extends AbstractScene<GLCanvas> {
                                    try {
                                        getComponent().removeControlListener(swtListener);
                                        getComponent().removeDisposeListener(swtListener);
+                                       getComponent().removePaintListener(swtListener);
                                        getComponent().getShell().removeShellListener(swtListener);
                                    } catch (final RuntimeException ex) {
                                        if (getSceneBuilder().isVerbose()) {
@@ -169,13 +172,14 @@ public class SwtScene extends AbstractScene<GLCanvas> {
         // add the resize and other swt behavior
         getComponent().addControlListener(swtListener);
         getComponent().addDisposeListener(swtListener);
+        getComponent().addPaintListener(swtListener);
         getComponent().getShell().addShellListener(swtListener);
     }
 
     /**
      * SWT listeners
      */
-    protected static class SwtListener extends ShellAdapter implements ControlListener, DisposeListener {
+    protected static class SwtListener extends ShellAdapter implements ControlListener, DisposeListener, PaintListener {
 
         protected final SwtScene scene;
 
@@ -204,15 +208,13 @@ public class SwtScene extends AbstractScene<GLCanvas> {
         }
 
         @Override
-        public void widgetDisposed(final DisposeEvent e) {
-            final Thread thread = new Thread(new Runnable() {
+        public void widgetDisposed(final DisposeEvent de) {
+            // do nothing
+        }
 
-                @Override
-                public void run() {
-                    scene.dispose();
-                }
-            }, "SwtScene_dispose");
-            thread.start();
+        @Override
+        public void paintControl(final PaintEvent pe) {
+            scene.draw();
         }
     }
 }

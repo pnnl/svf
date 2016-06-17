@@ -83,7 +83,7 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
      * State mask for boolean field in this actor.
      */
     protected static final byte DISPOSED_MASK = StateUtil.getMasks()[1];
-    private static final long DISPOSE_TIMEOUT = 30L * 1000L;
+    private static final long DISPOSE_TIMEOUT = 1000L;
     /**
      * State used by flags in this actor to save memory space. Up to 8 states
      * can be used and should go in the following order: 0x01, 0x02, 0x04, 0x08,
@@ -310,19 +310,24 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
         factory.runOnUiThread(this, new Runnable() {
                           @Override
                           public void run() {
-                              // stop the animator
-                              try {
-                                  animator.stop();
-                              } catch (final RuntimeException ex) {
-                                  // ignore, animator can have problems here in the
-                                  // underlying implementation
-                                  logger.log(Level.WARNING, MessageFormat.format("{0}: Error occurred when attempting to stop animator.", this), ex);
-                              }
                               try {
                                   component.removeGLEventListener(listener);
                               } catch (final RuntimeException ex) {
                                   logger.log(Level.FINE, MessageFormat.format("{0}: Exception while removing GLEventListener.", this), ex);
                               }
+                              // stop the animator
+                              factory.runOffUiThread(AbstractScene.this, new Runnable() {
+                                                 @Override
+                                                 public void run() {
+                                                     try {
+                                                         animator.stop();
+                                                     } catch (final RuntimeException ex) {
+                                                         // ignore, animator can have problems here in the
+                                                         // underlying implementation
+                                                         logger.log(Level.WARNING, MessageFormat.format("{0}: Error occurred when attempting to stop animator.", this), ex);
+                                                     }
+                                                 }
+                                             });
                           }
                       });
     }
@@ -673,6 +678,9 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
 
         @Override
         public void init(final GLAutoDrawable drawable) {
+            if (scene.isDisposed()) {
+                return;
+            }
             logger.log(Level.FINE, "{0}: Initializing the scene.", this);
             // set up the gl fields
             final GL2 gl;
@@ -749,6 +757,9 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
 
         @Override
         public void display(final GLAutoDrawable drawable) {
+            if (scene.isDisposed()) {
+                return;
+            }
             final Rectangle viewport = scene.sceneUtil.getViewport();
             if (viewport.getWidth() > 0 && viewport.getHeight() > 0) {
                 // set up the gl fields
