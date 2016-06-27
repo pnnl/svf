@@ -49,11 +49,11 @@ public class LongArrayUtilTest {
             }
             Collections.sort(cc, new Comparator<Long>() {
 
-                         @Override
-                         public int compare(Long o1, Long o2) {
-                             return o1.compareTo(o2);
-                         }
-                     });
+                @Override
+                public int compare(Long o1, Long o2) {
+                    return o1.compareTo(o2);
+                }
+            });
             for (int i = 0; i < cc.size(); i++) {
                 c[i] = cc.get(i);
             }
@@ -65,17 +65,24 @@ public class LongArrayUtilTest {
             start = System.currentTimeMillis();
             LongArrayUtil.sort(d, new LongArrayUtil.LongComparator() {
 
-                           @Override
-                           public int compare(long o1, long o2) {
-                               return Long.compare(o1, o2);
-                           }
-                       });
+                @Override
+                public int compare(long o1, long o2) {
+                    return Long.compare(o1, o2);
+                }
+            });
             stop = System.currentTimeMillis();
             System.out.println("LongArrayUtil.sort() took " + (stop - start) + " ms to sort " + SIZE + " entries.");
             total += stop - start;
 //        System.out.println(Arrays.toString(d));
+            // Arrays.parallelSort()
+            final long[] e = Arrays.copyOf(a, a.length);
+            start = System.currentTimeMillis();
+            Arrays.parallelSort(e);
+            stop = System.currentTimeMillis();
+            System.out.println("Arrays.parallelSort() took " + (stop - start) + " ms to sort " + SIZE + " entries.");
+//        System.out.println(Arrays.toString(e));
             // ensure they are all the same
-            Assert.assertArrayEquals("Failed on iteration " + j, b, c);
+            Assert.assertArrayEquals("Failed on iteration " + j, e, c);
             Assert.assertArrayEquals("Failed on iteration " + j, c, d);
         }
         PerformanceStats.write("LongArrayUtil.sort(long[" + SIZE + "])", 1, total / ITERATIONS);

@@ -49,11 +49,11 @@ public class DoubleArrayUtilTest {
             }
             Collections.sort(cc, new Comparator<Double>() {
 
-                         @Override
-                         public int compare(Double o1, Double o2) {
-                             return o1.compareTo(o2);
-                         }
-                     });
+                @Override
+                public int compare(Double o1, Double o2) {
+                    return o1.compareTo(o2);
+                }
+            });
             for (int i = 0; i < cc.size(); i++) {
                 c[i] = cc.get(i);
             }
@@ -65,15 +65,22 @@ public class DoubleArrayUtilTest {
             start = System.currentTimeMillis();
             DoubleArrayUtil.sort(d, new DoubleArrayUtil.DoubleComparator() {
 
-                             @Override
-                             public int compare(double o1, double o2) {
-                                 return Double.compare(o1, o2);
-                             }
-                         });
+                @Override
+                public int compare(double o1, double o2) {
+                    return Double.compare(o1, o2);
+                }
+            });
             stop = System.currentTimeMillis();
             System.out.println("DoubleArrayUtil.sort() took " + (stop - start) + " ms to sort " + SIZE + " entries.");
             total += stop - start;
 //        System.out.println(Arrays.toString(d));
+            // Arrays.parallelSort()
+            final double[] e = Arrays.copyOf(a, a.length);
+            start = System.currentTimeMillis();
+            Arrays.parallelSort(e);
+            stop = System.currentTimeMillis();
+            System.out.println("Arrays.parallelSort() took " + (stop - start) + " ms to sort " + SIZE + " entries.");
+//        System.out.println(Arrays.toString(e));
             // ensure they are all the same
             Assert.assertArrayEquals("Failed on iteration " + j, b, c, 0.0);
             Assert.assertArrayEquals("Failed on iteration " + j, c, d, 0.0);

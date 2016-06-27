@@ -49,11 +49,11 @@ public class ShortArrayUtilTest {
             }
             Collections.sort(cc, new Comparator<Short>() {
 
-                         @Override
-                         public int compare(Short o1, Short o2) {
-                             return o1.compareTo(o2);
-                         }
-                     });
+                @Override
+                public int compare(Short o1, Short o2) {
+                    return o1.compareTo(o2);
+                }
+            });
             for (int i = 0; i < cc.size(); i++) {
                 c[i] = cc.get(i);
             }
@@ -65,15 +65,22 @@ public class ShortArrayUtilTest {
             start = System.currentTimeMillis();
             ShortArrayUtil.sort(d, new ShortArrayUtil.ShortComparator() {
 
-                            @Override
-                            public int compare(short o1, short o2) {
-                                return Short.compare(o1, o2);
-                            }
-                        });
+                @Override
+                public int compare(short o1, short o2) {
+                    return Short.compare(o1, o2);
+                }
+            });
             stop = System.currentTimeMillis();
             System.out.println("ShortArrayUtil.sort() took " + (stop - start) + " ms to sort " + SIZE + " entries.");
             total += stop - start;
 //        System.out.println(Arrays.toString(d));
+            // Arrays.parallelSort()
+            final short[] e = Arrays.copyOf(a, a.length);
+            start = System.currentTimeMillis();
+            Arrays.parallelSort(e);
+            stop = System.currentTimeMillis();
+            System.out.println("Arrays.parallelSort() took " + (stop - start) + " ms to sort " + SIZE + " entries.");
+//        System.out.println(Arrays.toString(e));
             // ensure they are all the same
             Assert.assertArrayEquals("Failed on iteration " + j, b, c);
             Assert.assertArrayEquals("Failed on iteration " + j, c, d);
