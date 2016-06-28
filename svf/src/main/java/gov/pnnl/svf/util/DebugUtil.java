@@ -175,11 +175,11 @@ public class DebugUtil {
                 return "GL_INVALID_VALUE";
             case GL.GL_INVALID_OPERATION:
                 return "GL_INVALID_OPERATION";
+            case GL2.GL_INVALID_FRAMEBUFFER_OPERATION:
+                return "GL_INVALID_FRAMEBUFFER_OPERATION";
             case com.jogamp.opengl.GL2ES1.GL_STACK_OVERFLOW:
-                //            case com.jogamp.opengl.GL2ES2.GL_STACK_OVERFLOW:
                 return "GL_STACK_OVERFLOW";
             case com.jogamp.opengl.GL2ES1.GL_STACK_UNDERFLOW:
-                //            case com.jogamp.opengl.GL2ES2.GL_STACK_UNDERFLOW:
                 return "GL_STACK_UNDERFLOW";
             case GL.GL_OUT_OF_MEMORY:
                 return "GL_OUT_OF_MEMORY";

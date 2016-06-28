@@ -6,7 +6,8 @@ import gov.pnnl.svf.geometry.Shape;
 import gov.pnnl.svf.geometry.Text3D;
 import gov.pnnl.svf.picking.ColorPickingSupport;
 import gov.pnnl.svf.scene.Scene;
-import gov.pnnl.svf.util.Vbo3DUtil;
+import gov.pnnl.svf.util.VboBorder3DUtil;
+import gov.pnnl.svf.util.VboShape3DUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -35,7 +36,7 @@ public class Text3DVboFactory extends AbstractVboShapeFactory {
     @Override
     public List<VertexBufferObject> createBackgroundVbos(final Shape shape, final Color color) {
         if (shape instanceof Text3D) {
-            return Collections.singletonList(Vbo3DUtil.createShape((Text3D) shape, color, false));
+            return Collections.singletonList(VboShape3DUtil.createShape((Text3D) shape, color, false));
         }
         return Collections.emptyList();
     }
@@ -43,7 +44,7 @@ public class Text3DVboFactory extends AbstractVboShapeFactory {
     @Override
     public List<VertexBufferObject> createBorderVbos(final Shape shape, final Border border, final double thickness, final Color color) {
         if (shape instanceof Text3D) {
-            return Vbo3DUtil.createBorder((Text3D) shape, border, thickness, color);
+            return VboBorder3DUtil.createBorder((Text3D) shape, border, thickness, color);
         }
         return Collections.emptyList();
     }
@@ -51,7 +52,7 @@ public class Text3DVboFactory extends AbstractVboShapeFactory {
     @Override
     public List<VertexBufferObject> createPickingVbos(final Shape shape) {
         if (shape instanceof Text3D) {
-            return Collections.singletonList(Vbo3DUtil.createShape((Text3D) shape, null, false));
+            return Collections.singletonList(VboShape3DUtil.createShape((Text3D) shape, null, false));
         }
         return Collections.emptyList();
     }
@@ -70,7 +71,7 @@ public class Text3DVboFactory extends AbstractVboShapeFactory {
         final Color color = support.getMapping(support.getActor());
         if (color != null) {
             final List<VertexBufferObject> vbos = new ArrayList<>();
-            vbos.add(Vbo3DUtil.createShape((Text3D) shape, color, false));
+            vbos.add(VboShape3DUtil.createShape((Text3D) shape, color, false));
             vbos.addAll(createBorderVbos(shape, border, thickness, color));
             return vbos;
         }

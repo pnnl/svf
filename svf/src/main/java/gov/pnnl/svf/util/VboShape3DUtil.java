@@ -2,15 +2,12 @@ package gov.pnnl.svf.util;
 
 import com.jogamp.opengl.GL;
 import gov.pnnl.svf.core.color.Color;
-import gov.pnnl.svf.core.geometry.Border;
 import gov.pnnl.svf.core.util.BezierCurveEvaluator;
 import gov.pnnl.svf.geometry.Path3D;
 import gov.pnnl.svf.geometry.PathVector3D;
 import gov.pnnl.svf.geometry.Point3D;
 import gov.pnnl.svf.geometry.Text3D;
 import gov.pnnl.svf.vbo.VertexBufferObject;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 import org.apache.commons.collections.primitives.ArrayDoubleList;
@@ -18,18 +15,18 @@ import org.apache.commons.collections.primitives.DoubleList;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**
- * Utility class containing all of the 3D shape methods.
+ * Utility class containing all of the 3D VBO shape methods.
  *
  * @author Arthur Bleeker
  */
-public class Vbo3DUtil extends VboUtil {
+public class VboShape3DUtil extends VboUtil {
 
-    private static final Logger logger = Logger.getLogger(Vbo3DUtil.class.getName());
+    private static final Logger logger = Logger.getLogger(VboShape3DUtil.class.getName());
 
     /**
      * Constructor kept private for static utility class
      */
-    protected Vbo3DUtil() {
+    protected VboShape3DUtil() {
     }
 
     /**
@@ -213,40 +210,6 @@ public class Vbo3DUtil extends VboUtil {
         } else {
             return buildVbo(vbo, NORMAL, null, color);
         }
-    }
-
-    /**
-     * Creates a border around text.
-     *
-     * @param text      the text to draw
-     * @param border    the border
-     * @param thickness the thickness of the border
-     * @param color     the optional color
-     *
-     * @return the vertex buffer objects
-     *
-     * @throws NullPointerException     if shape or border are null
-     * @throws IllegalArgumentException if thickness is less than zero
-     */
-    public static List<VertexBufferObject> createBorder(final Text3D text, final Border border, final double thickness, final Color color) {
-        if (thickness < 0.0) {
-            throw new IllegalArgumentException("thickness");
-        }
-        if (thickness == 0.0 || border == Border.NONE) {
-            return Collections.emptyList();
-        }
-        final List<VertexBufferObject> vbos = new ArrayList<>();
-        final List<DoubleList> vertices = new ArrayList<>();
-        final int[] modes = addRectangleBorder(vertices, text.getX(), text.getY(), text.getZ(), text.getWidth(), text.getHeight(), border, thickness);
-        for (int i = 0; i < vertices.size(); i++) {
-            final VertexBufferObject.Builder vbo = VertexBufferObject.Builder.construct()
-                    .vertexDimension(THREE_D)
-                    .mode(modes[i])
-                    .vertices(vertices.get(i).toArray())
-                    .texCoordDimension(TWO_D);
-            vbos.add(buildVbo(vbo, NORMAL, null, color));
-        }
-        return vbos;
     }
 
 }

@@ -143,7 +143,7 @@ public class SceneRenderer implements Disposable {
     /**
      * Constructor
      *
-     * @param scene   reference to the parent scene
+     * @param scene reference to the parent scene
      * @param builder reference to the builder
      */
     public SceneRenderer(final SceneExt scene, final SceneBuilder builder) {
@@ -270,7 +270,7 @@ public class SceneRenderer implements Disposable {
     /**
      * Main method and entry point for drawing the scene.
      *
-     * @param gl  reference to GL
+     * @param gl reference to GL
      * @param glu reference to GLU
      *
      * @return true if the scene was rendered
@@ -325,12 +325,12 @@ public class SceneRenderer implements Disposable {
             final int[] backBuffers;
             if (stereo) {
                 backBuffers = doubleBuffer
-                              ? new int[]{GL2.GL_BACK_LEFT, GL2.GL_BACK_RIGHT}
-                              : new int[]{GL2.GL_FRONT_LEFT, GL2.GL_FRONT_RIGHT};
+                        ? new int[]{GL2.GL_BACK_LEFT, GL2.GL_BACK_RIGHT}
+                        : new int[]{GL2.GL_FRONT_LEFT, GL2.GL_FRONT_RIGHT};
             } else {
                 backBuffers = doubleBuffer
-                              ? new int[]{GL.GL_BACK}
-                              : new int[]{GL.GL_FRONT};
+                        ? new int[]{GL.GL_BACK}
+                        : new int[]{GL.GL_FRONT};
             }
             // monitor the stack depths
             final int[] attribStackDepths = new int[AttribStackDepths.values().length];
@@ -424,9 +424,6 @@ public class SceneRenderer implements Disposable {
                     gl.glFinish();
                     colorPickingUtils.end(gl);
                 }
-                // set the read and draw buffers
-                clearScreen(gl, null, null, 0, backBuffers);
-                gl.glReadBuffer(backBuffers[0]);
             }
             if (attribStack) {
                 gl.glGetIntegerv(GL2.GL_ATTRIB_STACK_DEPTH, attribStackDepths, AttribStackDepths.COLOR_RENDER.ordinal());
@@ -579,7 +576,7 @@ public class SceneRenderer implements Disposable {
                 if (attribStackDepths[i] != lastAttribStackDepth) {
                     if (scene.getSceneBuilder().isVerbose()) {
                         logger.log(Level.WARNING, "{0}: Attrib stack depth after {1} was not zero: {2}", new Object[]{scene, AttribStackDepths.values()[i],
-                                                                                                                      attribStackDepths[i] - lastAttribStackDepth});
+                            attribStackDepths[i] - lastAttribStackDepth});
                     }
                     lastAttribStackDepth = attribStackDepths[i];
                 }
@@ -630,7 +627,7 @@ public class SceneRenderer implements Disposable {
             timers.setCollectionsInfo(collections.toString());
             if (scene.getSceneBuilder().isVerbose() && isSlow()) {
                 logger.log(Level.INFO, "{0}: Scene took too long to render: draw time {1} ms, update time {2} ms", new Object[]{scene, timers.getLastDrawLength(),
-                                                                                                                                timers.getLastUpdateLength()});
+                    timers.getLastUpdateLength()});
             }
             return repaint.isScene() || repaint.isInterface() || repaint.isOverlay() || builder.isDebugColorPicking();
         } catch (final RuntimeException ex) {
@@ -834,7 +831,7 @@ public class SceneRenderer implements Disposable {
                     // only pick if this actor is viewable in the camera
                     // ray casting picking only works for scene objects
                     if (actor.getDrawingPass().containsDrawingPass(DrawingPass.SCENE)
-                        && (actor.getCamera() == null || actor.getCamera() == camera.getCamera())) {
+                            && (actor.getCamera() == null || actor.getCamera() == camera.getCamera())) {
                         timers.setCurrentDrawingPass(DrawingPass.SCENE);
                         // start with a fresh transformation matrix
                         gl.glLoadIdentity();
@@ -868,7 +865,7 @@ public class SceneRenderer implements Disposable {
                     // only pick if this actor is viewable in the camera
                     // ray casting picking only works for scene objects
                     if (actor.getDrawingPass().containsDrawingPass(DrawingPass.INTERFACE)
-                        && (actor.getCamera() == null || actor.getCamera() == camera.getCamera())) {
+                            && (actor.getCamera() == null || actor.getCamera() == camera.getCamera())) {
                         timers.setCurrentDrawingPass(DrawingPass.INTERFACE);
                         // start with a fresh transformation matrix
                         gl.glLoadIdentity();
@@ -974,7 +971,7 @@ public class SceneRenderer implements Disposable {
             // if a camera has been set then only draw when that camera is
             // visible and during that camera's actual draw cycle
             final boolean draw = (actor.getPassNumber() == passNumber)
-                                 && (actor.getCamera() == null || actor.getCamera() == camera);
+                    && (actor.getCamera() == null || actor.getCamera() == camera);
             if (draw) {
                 // set up some base fields
                 gl.glLineWidth(actor.getThickness());
@@ -1018,13 +1015,13 @@ public class SceneRenderer implements Disposable {
             }
             if (attribStackDepths[0] != attribStackDepths[1] && scene.getSceneBuilder().isVerbose()) {
                 logger.log(Level.WARNING, "{0}: The actor {1} or a child of actor is leaking {2} attrib stacks.", new Object[]{scene, actor.toString(),
-                                                                                                                               attribStackDepths[1] - attribStackDepths[0]});
+                    attribStackDepths[1] - attribStackDepths[0]});
             }
         }
     }
 
     private void colorPickingDrawActor(final GL2 gl, final GLUgl2 glu, final ColorPickingCamera camera, final Actor actor, final DrawingPass drawingPass,
-                                       final int passNumber) {
+            final int passNumber) {
         // only draw visible actors
         if (!actor.isVisible()) {
             return;
@@ -1052,8 +1049,8 @@ public class SceneRenderer implements Disposable {
             // if a camera has been set then only draw when that camera is
             // visible and during that camera's actual draw cycle
             final boolean draw = actor.getDrawingPass().containsDrawingPass(drawingPass.addDrawingPass(DrawingPass.PICKING))
-                                 && (actor.getPassNumber() == passNumber)
-                                 && (actor.getCamera() == null || actor.getCamera() == camera.getReferenceCamera());
+                    && (actor.getPassNumber() == passNumber)
+                    && (actor.getCamera() == null || actor.getCamera() == camera.getReferenceCamera());
             if (draw) {
                 // set up some base fields
                 gl.glLineWidth(actor.getThickness());
@@ -1187,7 +1184,7 @@ public class SceneRenderer implements Disposable {
     /**
      * Initialize OpenGL using the provided builder settings.
      *
-     * @param gl  reference to current GL
+     * @param gl reference to current GL
      * @param glu reference to GLU
      */
     void initialize(final GL2 gl, final GLUgl2 glu) {
@@ -1348,15 +1345,15 @@ public class SceneRenderer implements Disposable {
                 if (sb != null) {
                     if (colorBits[0] < 8) {
                         sb.append(MessageFormat.format("\nColor picking will not work correctly using a display with less than 8 red color bits; "
-                                                       + "\nOpenGL is currently using only {0} bits.", colorBits[0]));
+                                + "\nOpenGL is currently using only {0} bits.", colorBits[0]));
                     }
                     if (colorBits[1] < 8) {
                         sb.append(MessageFormat.format("\nColor picking will not work correctly using a display with less than 8 green color bits; "
-                                                       + "\nOpenGL is currently using only {0} bits.", colorBits[1]));
+                                + "\nOpenGL is currently using only {0} bits.", colorBits[1]));
                     }
                     if (colorBits[2] < 8) {
                         sb.append(MessageFormat.format("\nColor picking will not work correctly using a display with less than 8 blue color bits; "
-                                                       + "\nOpenGL is currently using only {0} bits.", colorBits[2]));
+                                + "\nOpenGL is currently using only {0} bits.", colorBits[2]));
                     }
                 }
             }

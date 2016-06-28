@@ -8,7 +8,8 @@ import gov.pnnl.svf.geometry.Rectangle2D;
 import gov.pnnl.svf.geometry.Shape;
 import gov.pnnl.svf.picking.ColorPickingSupport;
 import gov.pnnl.svf.scene.Scene;
-import gov.pnnl.svf.util.Vbo2DUtil;
+import gov.pnnl.svf.util.VboBorder2DUtil;
+import gov.pnnl.svf.util.VboShape2DUtil;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class Chart2DVboFactory extends AbstractVboShapeFactory {
     @Override
     public List<VertexBufferObject> createShapeVbos(final Shape shape, final Color color, final boolean texCoords) {
         if (shape instanceof Chart2D) {
-            return Vbo2DUtil.createShape((Chart2D) shape, color);
+            return VboShape2DUtil.createShape((Chart2D) shape, color);
         }
         return Collections.emptyList();
     }
@@ -39,7 +40,7 @@ public class Chart2DVboFactory extends AbstractVboShapeFactory {
     @Override
     public List<VertexBufferObject> createBorderVbos(final Shape shape, final Border border, final double thickness, final Color color) {
         if (shape instanceof Chart2D) {
-            return Vbo2DUtil.createBorder((Chart2D) shape, border, thickness, color);
+            return VboBorder2DUtil.createBorder((Chart2D) shape, border, thickness, color);
         }
         return Collections.emptyList();
     }
@@ -55,7 +56,7 @@ public class Chart2DVboFactory extends AbstractVboShapeFactory {
                 case LINE:
                 case AREA:
                 case BAR:
-                    return Collections.singletonList(Vbo2DUtil.createShape(new Rectangle2D(chart.getX(), chart.getY(), chart.getWidth(), chart.getHeight()), color, false));
+                    return Collections.singletonList(VboShape2DUtil.createShape(new Rectangle2D(chart.getX(), chart.getY(), chart.getWidth(), chart.getHeight()), color, false));
                 // circular charts
                 case PIE:
                     return Collections.emptyList();
@@ -77,10 +78,10 @@ public class Chart2DVboFactory extends AbstractVboShapeFactory {
                 case LINE:
                 case AREA:
                 case BAR:
-                    return Collections.singletonList(Vbo2DUtil.createShape(new Rectangle2D(chart.getX(), chart.getY(), chart.getWidth(), chart.getHeight()), null, false));
+                    return Collections.singletonList(VboShape2DUtil.createShape(new Rectangle2D(chart.getX(), chart.getY(), chart.getWidth(), chart.getHeight()), null, false));
                 // circular charts
                 case PIE:
-                    return Collections.singletonList(Vbo2DUtil.createShape(new Circle2D(chart.getX(), chart.getY(), Math.max(chart.getWidth(), chart.getHeight()) / 2.0), null, false));
+                    return Collections.singletonList(VboShape2DUtil.createShape(new Circle2D(chart.getX(), chart.getY(), Math.max(chart.getWidth(), chart.getHeight()) / 2.0), null, false));
                 default:
                     return Collections.emptyList();
             }
@@ -101,10 +102,10 @@ public class Chart2DVboFactory extends AbstractVboShapeFactory {
                     case LINE:
                     case AREA:
                     case BAR:
-                        return Collections.singletonList(Vbo2DUtil.createShape(new Rectangle2D(chart.getX(), chart.getY(), chart.getWidth(), chart.getHeight()), color, false));
+                        return Collections.singletonList(VboShape2DUtil.createShape(new Rectangle2D(chart.getX(), chart.getY(), chart.getWidth(), chart.getHeight()), color, false));
                     // circular charts
                     case PIE:
-                        return Collections.singletonList(Vbo2DUtil.createShape(new Circle2D(chart.getX(), chart.getY(), Math.max(chart.getWidth(), chart.getHeight()) / 2.0), color, false));
+                        return Collections.singletonList(VboShape2DUtil.createShape(new Circle2D(chart.getX(), chart.getY(), Math.max(chart.getWidth(), chart.getHeight()) / 2.0), color, false));
                     default:
                         return Collections.emptyList();
                 }
