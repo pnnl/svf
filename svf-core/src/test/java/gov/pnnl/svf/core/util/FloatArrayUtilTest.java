@@ -49,11 +49,11 @@ public class FloatArrayUtilTest {
             }
             Collections.sort(cc, new Comparator<Float>() {
 
-                @Override
-                public int compare(Float o1, Float o2) {
-                    return o1.compareTo(o2);
-                }
-            });
+                         @Override
+                         public int compare(Float o1, Float o2) {
+                             return o1.compareTo(o2);
+                         }
+                     });
             for (int i = 0; i < cc.size(); i++) {
                 c[i] = cc.get(i);
             }
@@ -65,21 +65,22 @@ public class FloatArrayUtilTest {
             start = System.currentTimeMillis();
             FloatArrayUtil.sort(d, new FloatArrayUtil.FloatComparator() {
 
-                @Override
-                public int compare(float o1, float o2) {
-                    return Float.compare(o1, o2);
-                }
-            });
+                            @Override
+                            public int compare(float o1, float o2) {
+                                return Float.compare(o1, o2);
+                            }
+                        });
             stop = System.currentTimeMillis();
             System.out.println("FloatArrayUtil.sort() took " + (stop - start) + " ms to sort " + SIZE + " entries.");
             total += stop - start;
 //        System.out.println(Arrays.toString(d));
             // Arrays.parallelSort()
-            final float[] e = Arrays.copyOf(a, a.length);
-            start = System.currentTimeMillis();
-            Arrays.parallelSort(e);
-            stop = System.currentTimeMillis();
-            System.out.println("Arrays.parallelSort() took " + (stop - start) + " ms to sort " + SIZE + " entries.");
+            // uncomment to build and test when using JDK_1.8
+//            final float[] e = Arrays.copyOf(a, a.length);
+//            start = System.currentTimeMillis();
+//            Arrays.parallelSort(e);
+//            stop = System.currentTimeMillis();
+//            System.out.println("Arrays.parallelSort() took " + (stop - start) + " ms to sort " + SIZE + " entries.");
 //        System.out.println(Arrays.toString(e));
             // ensure they are all the same
             Assert.assertArrayEquals("Failed on iteration " + j, b, c, 0.0F);
