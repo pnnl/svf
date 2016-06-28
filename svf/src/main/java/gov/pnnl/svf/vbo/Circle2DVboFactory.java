@@ -5,7 +5,8 @@ import gov.pnnl.svf.core.geometry.Border;
 import gov.pnnl.svf.geometry.Circle2D;
 import gov.pnnl.svf.geometry.Shape;
 import gov.pnnl.svf.scene.Scene;
-import gov.pnnl.svf.util.Vbo2DUtil;
+import gov.pnnl.svf.util.VboBorder2DUtil;
+import gov.pnnl.svf.util.VboShape2DUtil;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class Circle2DVboFactory extends AbstractVboShapeFactory {
     @Override
     public List<VertexBufferObject> createShapeVbos(final Shape shape, final Color color, final boolean texCoords) {
         if (shape instanceof Circle2D) {
-            return Collections.singletonList(Vbo2DUtil.createShape((Circle2D) shape, color, texCoords));
+            return Collections.singletonList(VboShape2DUtil.createShape((Circle2D) shape, color, texCoords));
         }
         return Collections.emptyList();
     }
@@ -36,7 +37,7 @@ public class Circle2DVboFactory extends AbstractVboShapeFactory {
     @Override
     public List<VertexBufferObject> createBorderVbos(final Shape shape, final Border border, final double thickness, final Color color) {
         if (shape instanceof Circle2D) {
-            return Collections.singletonList(Vbo2DUtil.createBorder((Circle2D) shape, border, thickness, color));
+            return Collections.singletonList(VboBorder2DUtil.createBorder((Circle2D) shape, border, thickness, color));
         }
         return Collections.emptyList();
     }

@@ -5,6 +5,7 @@ import gov.pnnl.svf.core.geometry.Border;
 import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.text.TextRenderer;
 import gov.pnnl.svf.text.TextService;
+import gov.pnnl.svf.util.Border2DUtil;
 import gov.pnnl.svf.util.Shape2DUtil;
 
 /**
@@ -56,7 +57,7 @@ public class Text2DRenderer extends AbstractShapeRenderer {
     @Override
     public int drawBorder(final GL2 gl, final Shape shape, final Border border, final double thickness) {
         if (shape instanceof Text2D) {
-            return Shape2DUtil.drawBorder(gl, (Text2D) shape, border, thickness);
+            return Border2DUtil.drawBorder(gl, (Text2D) shape, border, thickness);
         }
         return 0;
     }

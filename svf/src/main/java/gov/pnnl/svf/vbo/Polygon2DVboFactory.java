@@ -5,7 +5,7 @@ import gov.pnnl.svf.core.geometry.Border;
 import gov.pnnl.svf.geometry.Polygon2D;
 import gov.pnnl.svf.geometry.Shape;
 import gov.pnnl.svf.scene.Scene;
-import gov.pnnl.svf.util.Vbo2DUtil;
+import gov.pnnl.svf.util.VboShape2DUtil;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class Polygon2DVboFactory extends AbstractVboShapeFactory {
     @Override
     public List<VertexBufferObject> createShapeVbos(final Shape shape, final Color color, final boolean texCoords) {
         if (shape instanceof Polygon2D) {
-            return Vbo2DUtil.createShape((Polygon2D) shape, color);
+            return VboShape2DUtil.createShape((Polygon2D) shape, color);
         }
         return Collections.emptyList();
     }

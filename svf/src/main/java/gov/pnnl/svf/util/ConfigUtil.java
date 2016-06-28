@@ -28,7 +28,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.SequenceInputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -535,7 +538,19 @@ public class ConfigUtil {
             sis = new SequenceInputStream(ina, inb);
             bin = new BufferedInputStream(sis);
             // read the configuration
-            LogManager.getLogManager().readConfiguration(bin);
+            final LogManager logManager = LogManager.getLogManager();
+            logManager.readConfiguration(bin);
+            // refresh per-logger handlers
+            try {
+                final Method loadLoggerHandlers = LogManager.class.getDeclaredMethod("loadLoggerHandlers", Logger.class, String.class, String.class);
+                loadLoggerHandlers.setAccessible(true);
+                for (final Enumeration<String> iterator = logManager.getLoggerNames(); iterator.hasMoreElements();) {
+                    final String loggerName = iterator.nextElement();
+                    loadLoggerHandlers.invoke(logManager, logManager.getLogger(loggerName), loggerName, loggerName + ".handlers");
+                }
+            } catch (final NoSuchMethodException | IllegalAccessException | InvocationTargetException ex) {
+                logger.log(Level.INFO, "Unable to refresh a logger handler.");
+            }
         } catch (final IOException | SecurityException ex) {
             logger.log(Level.WARNING, "Unable to read the default configuration for logging.", ex);
         } finally {
