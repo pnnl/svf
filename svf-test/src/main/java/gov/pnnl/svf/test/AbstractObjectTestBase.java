@@ -75,10 +75,32 @@ public abstract class AbstractObjectTestBase<T extends Object> {
      */
     protected int eventTimeout = DEFAULT_EVENT_TIMEOUT;
     /**
+     * true to enforce override of the toString method
+     */
+    protected boolean overrideToString = true;
+    /**
+     * true to check for memory leaks
+     */
+    protected boolean memoryLeakCheck = true;
+    /**
+     * true to enforce override of the equals method for objects that can be
+     * copied.
+     */
+    protected boolean overrideEquals = true;
+    /**
+     * true to enforce override of the hashcode method for objects that can be
+     * copied.
+     */
+    protected boolean overrideHashCode = true;
+    /**
      * map of class to field name to ignore when comparing fields during
      * serialization test
      */
     protected final Map<String, List<String>> ignore = new HashMap<>();
+
+    private static final long END_WAIT_TIME = 500L;
+    private static final int NUM_RETRIES = 10;
+    private Method dispose = null;
 
     @Rule
     public TestRule watcher = new TestWatcher() {
@@ -94,6 +116,48 @@ public abstract class AbstractObjectTestBase<T extends Object> {
     };
 
     /**
+     * test for memory leak
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testMemoryLeak() throws Exception {
+        // check if test should run
+        Assume.assumeTrue(memoryLeakCheck);
+        // check for memory leak
+        final MemLeakTracker tracker = new MemLeakTracker();
+        T a = this.newValueObject();
+        tracker.register(a, "a");
+        Assert.assertFalse("Object is collectable with a stack reference.", tracker.isGarbageCollectable("a"));
+        dispose(a);
+        a = null;
+        int count = 0;
+        while (true) {
+            // verify
+            try {
+                Assert.assertTrue("Object is not collectable with no stack reference.", tracker.isGarbageCollectable("a"));
+                return;
+            } catch (final AssertionError ex) {
+                if (count++ < NUM_RETRIES) {
+                    System.out.println(count + " - Waiting for the object to dispose...");
+                    try {
+                        // let it finish disposing
+                        Thread.sleep(END_WAIT_TIME);
+                    } catch (final InterruptedException exi) {
+                        // ignore
+                    }
+                    continue;
+                }
+                System.out.println("All currently active threads:");
+                for (final Thread thread : MemLeakTracker.getActiveThreads()) {
+                    System.out.println(thread.getName());
+                }
+                throw ex;
+            }
+        }
+    }
+
+    /**
      * test marshalling if serializable
      *
      * @throws Exception
@@ -103,7 +167,7 @@ public abstract class AbstractObjectTestBase<T extends Object> {
     public void testSerializable() throws Exception {
         // check for serializable interface
         // check serializable
-        final T a = this.newValueObject();
+        final T a = newValueObject();
         Assume.assumeTrue(a instanceof Serializable);
         final T copy;
         ObjectOutputStream oos = null;
@@ -134,6 +198,9 @@ public abstract class AbstractObjectTestBase<T extends Object> {
         // test equality
         final boolean result = WeakEqualsHelper.weakEquals(a, copy, ignore);
         Assert.assertTrue(WeakEqualsHelper.getErrors().toString(), result);
+        // cleanup
+        dispose(a);
+        dispose(copy);
     }
 
     /**
@@ -155,6 +222,10 @@ public abstract class AbstractObjectTestBase<T extends Object> {
         Assert.assertFalse(
                 "equals method failed to compare a different class object.",
                 this.newValueObject().equals(new Object()));
+        // cleanup
+        dispose(a);
+        dispose(b);
+        dispose(c);
     }
 
     /**
@@ -167,6 +238,10 @@ public abstract class AbstractObjectTestBase<T extends Object> {
         final T b = this.newValueObject();
         final T c = this.newValueObject();
         checkNotEqualsImpl(a, b, c);
+        // cleanup
+        dispose(a);
+        dispose(b);
+        dispose(c);
     }
 
     /**
@@ -181,6 +256,10 @@ public abstract class AbstractObjectTestBase<T extends Object> {
         final T b = this.copyValueObject(a);
         final T c = this.copyValueObject(a);
         checkEqualsImpl(a, b, c);
+        // cleanup
+        dispose(a);
+        dispose(b);
+        dispose(c);
     }
 
     /**
@@ -205,6 +284,10 @@ public abstract class AbstractObjectTestBase<T extends Object> {
         Assert.assertEquals(
                 "Failed hash code comparison test.",
                 a.hashCode(), b.hashCode());
+        // cleanup
+        dispose(a);
+        dispose(b);
+        dispose(muppet);
     }
 
     /**
@@ -226,7 +309,85 @@ public abstract class AbstractObjectTestBase<T extends Object> {
     }
 
     /**
-     * This method should return a copy of the value object.
+     * tests the tostring method for exceptions
+     */
+    @Test
+    public void testToString() {
+        // set up three objects with all null fields
+        final T a = this.newValueObject();
+        // set all of the fields to null
+        this.setFieldsToNull(a);
+        // call tostring
+        Assert.assertNotNull("The toString() method must return a String value.", a.toString());
+        Assert.assertFalse("The toString() method must provide a representation of the object.", a.toString().isEmpty());
+        if (overrideToString) {
+            final String temp = "@" + a.hashCode();
+            final String toString = a.toString();
+            Assert.assertNotEquals("The toString() method should be overridden and provide a representation of the object.", temp, toString);
+        }
+        // cleanup
+        dispose(a);
+    }
+
+    /**
+     * tests the tostring method for exceptions
+     */
+    @Test
+    public void testToStringNullFields() {
+        // set up three objects with all null fields
+        final T a = this.newValueObject();
+        // set all of the fields to null
+        this.setFieldsToNull(a);
+        // call tostring
+        Assert.assertNotNull("The toString() method must return a String value.", a.toString());
+        Assert.assertFalse("The toString() method must provide a representation of the object.", a.toString().isEmpty());
+        if (overrideToString) {
+            final String temp = "@" + a.hashCode();
+            final String toString = a.toString();
+            Assert.assertNotEquals("The toString() method should be overridden and provide a representation of the object.", temp, toString);
+        }
+        // cleanup
+        dispose(a);
+    }
+
+    /**
+     * Tests whether hashcode method has been implemented.
+     */
+    @Test
+    public void testHashCodeImplemented() throws Exception {
+        if (overrideHashCode) {
+            // determine if this test should run
+            final T a = this.newValueObject();
+            final T b = this.copyValueObject(a);
+            Assume.assumeTrue(a != b);
+            Assume.assumeTrue(a.getClass() != Object.class);
+            Assume.assumeTrue(!(a instanceof Enum));
+            // determine if the hash code method has been implemented
+            Assert.assertFalse(a.getClass().getMethod("hashCode").getDeclaringClass().equals(Object.class));
+        }
+    }
+
+    /**
+     * Tests whether equals method has been implemented.
+     */
+    @Test
+    public void testEqualsImplemented() throws Exception {
+        if (overrideEquals) {
+            // determine if this test should run
+            final T a = this.newValueObject();
+            final T b = this.copyValueObject(a);
+            Assume.assumeTrue(a != b);
+            Assume.assumeTrue(a.getClass() != Object.class);
+            Assume.assumeTrue(!(a instanceof Enum));
+            // determine if the hash code method has been implemented
+            Assert.assertFalse(a.getClass().getMethod("equals", Object.class).getDeclaringClass().equals(Object.class));
+        }
+    }
+
+    /**
+     * This method should return a copy of the value object. Objects that return
+     * a copy should override the equals and hashcode method; which will be
+     * tested.
      *
      * @param object that should be copied
      *
@@ -248,6 +409,31 @@ public abstract class AbstractObjectTestBase<T extends Object> {
      * @param object to set the fields to null
      */
     protected abstract void setFieldsToNull(T object);
+
+    /**
+     * This method should dispose the object and may be necessary for the memory
+     * leak test.
+     *
+     * @param object the object to dispose
+     */
+    protected void dispose(T object) {
+        // override this method to dispose of the object
+        if (this.dispose == null) {
+            try {
+                this.dispose = object.getClass().getMethod("dispose");
+            } catch (final Exception ex) {
+                // ignore
+            }
+        }
+        // call dispose if available
+        if (this.dispose != null) {
+            try {
+                this.dispose.invoke(object);
+            } catch (final Exception ex) {
+                // ignore
+            }
+        }
+    }
 
     /**
      * Test a bound field by registering a listener and then verifying that the
@@ -442,7 +628,7 @@ public abstract class AbstractObjectTestBase<T extends Object> {
             while (latch.getCount() > 0 && (start + eventTimeout) > System.currentTimeMillis()) {
                 try {
                     if (latch.await(10, TimeUnit.MILLISECONDS)) {
-                        // timed  out 
+                        // timed  out
                     }
                 } catch (final InterruptedException ex) {
                     // ignore thread inturuption

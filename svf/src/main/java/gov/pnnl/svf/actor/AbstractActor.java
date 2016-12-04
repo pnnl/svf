@@ -168,6 +168,7 @@ public abstract class AbstractActor implements ActorExt {
             }
             actorState.setDisposed();
         }
+        propertyChangeSupport.removePropertyChangeListener(listener);
         // remove the property change listeners
         final PropertyChangeListener[] listeners = propertyChangeSupport.getPropertyChangeListeners();
         for (final PropertyChangeListener listener : listeners) {

@@ -148,13 +148,16 @@ public class ByteStateUtil {
      */
     public static String toString(final byte state) {
         String binary = Integer.toBinaryString(state);
-        binary = binary.substring(binary.lastIndexOf('1'), binary.length());
+        final int index = binary.lastIndexOf('1');
+        if (index >= 0 && index < binary.length()) {
+            binary = binary.substring(index, binary.length());
+        }
         binary = ByteStateUtil.leftPad(binary);
         return binary;
     }
 
     private static String leftPad(final String binary) {
-        final StringBuilder sb = new StringBuilder(binary);
+        final StringBuilder sb = new StringBuilder(binary.isEmpty() ? "0" : binary);
         while (sb.length() < 8) {
             sb.insert(0, '0');
         }

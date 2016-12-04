@@ -103,12 +103,6 @@ public abstract class AbstractDemoHelper<D, W, B, S> {
         window = null;
         int count = 0;
         while (true) {
-            try {
-                // let it finish disposing
-                Thread.sleep(END_WAIT_TIME);
-            } catch (final InterruptedException ex) {
-                // ignore
-            }
             // verify
             try {
                 Assert.assertTrue("new Object() is not garbage collectable", tracker.isGarbageCollectable("obj"));
@@ -118,6 +112,12 @@ public abstract class AbstractDemoHelper<D, W, B, S> {
             } catch (final AssertionError ex) {
                 if (count++ < NUM_RETRIES) {
                     System.out.println(count + " - Waiting for the scene to dispose...");
+                    try {
+                        // let it finish disposing
+                        Thread.sleep(END_WAIT_TIME);
+                    } catch (final InterruptedException exi) {
+                        // ignore
+                    }
                     continue;
                 }
                 System.out.println("All currently active threads:");

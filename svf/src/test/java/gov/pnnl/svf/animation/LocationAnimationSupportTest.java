@@ -9,8 +9,8 @@ import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.test.AbstractObjectTestBase;
 import gov.pnnl.svf.util.ConfigUtil;
 import java.util.Random;
-import org.junit.Assert;
 import org.apache.commons.math.geometry.Vector3D;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class LocationAnimationSupportTest extends AbstractObjectTestBase<LocationAnimationSupport> {

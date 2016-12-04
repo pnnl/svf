@@ -10,8 +10,8 @@ import gov.pnnl.svf.support.TransformSupport;
 import gov.pnnl.svf.test.AbstractObjectTestBase;
 import gov.pnnl.svf.util.ConfigUtil;
 import java.util.Random;
-import org.junit.Assert;
 import org.apache.commons.math.geometry.Vector3D;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class RotationAxisAnimationSupportTest extends AbstractObjectTestBase<RotationAxisAnimationSupport> {

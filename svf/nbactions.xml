@@ -13,14 +13,14 @@
         </properties>
     </action>
     <action>
-            <actionName>CUSTOM-Install</actionName>
-            <displayName>Install</displayName>
-            <goals>
-                <goal>clean</goal>
-                <goal>compile</goal>
-                <goal>javadoc:jar</goal>
-                <goal>source:jar</goal>
-                <goal>install</goal>
-            </goals>
-        </action>
+        <actionName>CUSTOM-Install</actionName>
+        <displayName>Install</displayName>
+        <goals>
+            <goal>clean</goal>
+            <goal>compile</goal>
+            <goal>javadoc:jar</goal>
+            <goal>source:jar</goal>
+            <goal>install</goal>
+        </goals>
+    </action>
 </actions>

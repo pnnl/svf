@@ -37,7 +37,7 @@ public class SingleUpdateTaskManager implements TaskManager {
      * Constructor
      *
      * @param scene reference to the parent scene
-     * @param size the size of the thread pool for asynchronous tasks
+     * @param size  the size of the thread pool for asynchronous tasks
      */
     public SingleUpdateTaskManager(final Scene scene, final int size) {
         if (scene == null) {

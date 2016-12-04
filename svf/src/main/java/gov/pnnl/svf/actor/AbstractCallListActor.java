@@ -81,8 +81,9 @@ public abstract class AbstractCallListActor extends AbstractActor implements Ini
 
     @Override
     public void dispose() {
-        super.dispose();
         listener.propertyChange(new PropertyChangeEvent(this, DISPOSE, null, this));
+        getPropertyChangeSupport().removePropertyChangeListener(listener);
+        super.dispose();
     }
 
     @Override
