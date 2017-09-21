@@ -23,8 +23,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.build.target.jdk>1.7</project.build.target.jdk>
-        <targetJdk>1.7</targetJdk>
+        <project.build.target.jdk>1.8</project.build.target.jdk>
+        <targetJdk>1.8</targetJdk>
         <jogl.version>2.3.2</jogl.version>
     </properties>
 

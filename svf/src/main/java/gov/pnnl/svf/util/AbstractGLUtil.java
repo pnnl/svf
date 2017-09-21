@@ -1,5 +1,6 @@
 package gov.pnnl.svf.util;
 
+import gov.pnnl.svf.core.geometry.Direction;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.fixedfunc.GLLightingFunc;
@@ -20,20 +21,6 @@ import org.apache.commons.math.geometry.Vector3D;
  */
 abstract class AbstractGLUtil implements NurbsConst, CartesianConst {
 
-    /**
-     * Represents a general direction.
-     * <p>
-     * directions {back, front, right, left, top, bottom}
-     */
-    protected enum Direction {
-
-        BACK,
-        FRONT,
-        RIGHT,
-        LEFT,
-        TOP,
-        BOTTOM
-    }
     protected static final int BEZIER_EVALUATORS = 10;
     protected static final double BEZIER_SMOOTHNESS = 0.2;
     protected static final double[][] TEX_COORDS = new double[][]{{0.0, 1.0}, {0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}};

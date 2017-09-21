@@ -1,5 +1,6 @@
 package gov.pnnl.svf.util;
 
+import gov.pnnl.svf.core.geometry.Direction;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
@@ -403,6 +404,17 @@ public class Shape3DUtil extends ShapeUtil {
         GLUT.glutSolidSphere(sphere.getRadius(), slices, slices);
         gl.glPopMatrix();
         return slices * slices + 2;
+    }
+
+    /**
+     * Find the general direction using the specified look vector.
+     *
+     * @param look the look vector
+     *
+     * @return a general direction
+     */
+    public static Direction findDirection(final Vector3D look) {
+        return findCameraDirection(look);
     }
 
 }
