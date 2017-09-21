@@ -140,13 +140,15 @@ public class NodeActor extends AbstractActor {
             } else {
                 actor = new NodeActor(scene);
             }
-            actor.setCamera(camera)
-                    .setDirty(dirty)
+            actor.setDirty(dirty)
                     .setDrawingPass(drawingPass)
                     .setPassNumber(passNumber)
                     .setThickness(thickness)
                     .setVisible(visible)
                     .setWire(wire);
+            if (camera != null) {
+                actor.addCamera(camera);
+            }
             if (type != null) {
                 actor.setType(type);
             }

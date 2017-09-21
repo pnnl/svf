@@ -27,7 +27,6 @@ public class InvisibleActorTest extends AbstractObjectTestBase<InvisibleActor> {
     @Override
     protected InvisibleActor copyValueObject(final InvisibleActor object) {
         final InvisibleActor copy = new InvisibleActor(object.getScene(), object.getType(), object.getId());
-        copy.setCamera(object.getCamera());
         copy.setDirty(object.isDirty());
         copy.setDrawingPass(object.getDrawingPass());
         copy.setPassNumber(object.getPassNumber());
@@ -57,21 +56,21 @@ public class InvisibleActorTest extends AbstractObjectTestBase<InvisibleActor> {
 
     @Override
     protected void setFieldsToNull(final InvisibleActor object) {
-        object.setCamera(null);
+        // no fields to set
     }
 
     /**
      * Tests whether the actor is set as dirty when the a property is changed
      */
     @Test
-    public void setCameraTest() {
+    public void addCameraTest() {
         final Camera a = new SimpleCamera(scene);
         final Camera b = new SimpleCamera(scene);
         final InvisibleActor actor = newValueObject();
-        actor.setCamera(a);
+        actor.addCamera(a);
         actor.setDirty(false);
         Assert.assertFalse(actor.isDirty());
-        testBoundField(actor, Actor.CAMERA, b, Camera.class);
+        actor.addCamera(b);
         Assert.assertFalse(actor.isDirty());
     }
 

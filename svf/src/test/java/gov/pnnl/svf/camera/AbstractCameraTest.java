@@ -9,8 +9,8 @@ import gov.pnnl.svf.util.ConfigUtil;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.concurrent.atomic.AtomicBoolean;
-import org.junit.Assert;
 import org.apache.commons.math.geometry.Vector3D;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -166,7 +166,6 @@ public class AbstractCameraTest extends AbstractObjectTestBase<AbstractCamera> {
     @Override
     protected AbstractCamera copyValueObject(final AbstractCamera object) {
         final AbstractCameraImpl copy = new AbstractCameraImpl(object.getScene(), object.getType(), object.getId());
-        copy.setCamera(object.getCamera());
         copy.setDirty(object.isDirty());
         copy.setDrawingPass(object.getDrawingPass());
         copy.setFarClip(object.getFarClip());

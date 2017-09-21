@@ -67,7 +67,6 @@ public class DraggingCameraTest extends AbstractObjectTestBase<DraggingCamera> {
     @Override
     protected DraggingCamera copyValueObject(final DraggingCamera object) {
         final DraggingCamera copy = new DraggingCamera(object.getScene(), object.getType(), object.getId());
-        copy.setCamera(object.getCamera());
         copy.setDirty(object.isDirty());
         copy.setDrawingPass(object.getDrawingPass());
         copy.setFarClip(object.getFarClip());

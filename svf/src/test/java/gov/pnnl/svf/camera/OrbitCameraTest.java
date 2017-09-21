@@ -22,7 +22,6 @@ public class OrbitCameraTest extends AbstractObjectTestBase<OrbitCamera> {
     @Override
     protected OrbitCamera copyValueObject(final OrbitCamera object) {
         final OrbitCamera copy = new OrbitCamera(object.getScene(), object.getType(), object.getId());
-        copy.setCamera(object.getCamera());
         copy.setDirty(object.isDirty());
         copy.setDrawingPass(object.getDrawingPass());
         copy.setFarClip(object.getFarClip());

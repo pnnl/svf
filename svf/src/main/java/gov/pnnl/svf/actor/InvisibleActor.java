@@ -149,13 +149,15 @@ public class InvisibleActor extends AbstractActor {
             } else {
                 actor = new InvisibleActor(scene);
             }
-            actor.setCamera(camera)
-                    .setDirty(dirty)
+            actor.setDirty(dirty)
                     .setDrawingPass(drawingPass)
                     .setPassNumber(passNumber)
                     .setThickness(thickness)
                     .setVisible(visible)
                     .setWire(wire);
+            if (camera != null) {
+                actor.addCamera(camera);
+            }
             if (type != null) {
                 actor.setType(type);
             }

@@ -22,7 +22,6 @@ public class SimpleCameraTest extends AbstractObjectTestBase<SimpleCamera> {
     @Override
     protected SimpleCamera copyValueObject(final SimpleCamera object) {
         final SimpleCamera copy = new SimpleCamera(object.getScene(), object.getType(), object.getId());
-        copy.setCamera(object.getCamera());
         copy.setDirty(object.isDirty());
         copy.setDrawingPass(object.getDrawingPass());
         copy.setFarClip(object.getFarClip());
@@ -50,7 +49,7 @@ public class SimpleCameraTest extends AbstractObjectTestBase<SimpleCamera> {
 
     @Override
     protected void setFieldsToNull(final SimpleCamera object) {
-        object.setCamera(null);
+        //no fields to set
     }
 
     /**

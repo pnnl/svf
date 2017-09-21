@@ -176,7 +176,7 @@ public abstract class AbstractPickingCamera extends AbstractActor implements Pic
     @Override
     public void checkPickingHit(final GL2 gl, final GLUgl2 glu, final PickingSupport support) {
         // only pick if this actor is viewable in the referenceCamera
-        if ((support.getActor().getCamera() == null) || (support.getActor().getCamera() == referenceCamera)) {
+        if (support.getActor().isCamera(referenceCamera)) {
             gl.glRenderMode(GL2.GL_SELECT);
             gl.glInitNames();
             gl.glPushName(0);
