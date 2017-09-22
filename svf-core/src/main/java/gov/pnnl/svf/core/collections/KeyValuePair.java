@@ -78,14 +78,22 @@ public class KeyValuePair<K, V> implements Serializable {
 
     public static class Builder<K, V> {
 
-        private K key;
-        private V value;
+        protected K key;
+        protected V value;
 
         private Builder() {
         }
 
         public static <K, V> Builder<K, V> construct() {
             return new Builder<>();
+        }
+
+        public K key() {
+            return this.key;
+        }
+
+        public V value() {
+            return this.value;
         }
 
         public Builder<K, V> key(final K key) {

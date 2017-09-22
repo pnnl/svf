@@ -6,6 +6,29 @@ package gov.pnnl.svf.core.geometry;
  * directions {back, front, right, left, top, bottom}
  */
 public enum Direction {
-    BACK, FRONT, RIGHT, LEFT, TOP, BOTTOM
+    /**
+     * Back (South)
+     */
+    BACK,
+    /**
+     * Front (North)
+     */
+    FRONT,
+    /**
+     * Right (East)
+     */
+    RIGHT,
+    /**
+     * Left (West)
+     */
+    LEFT,
+    /**
+     * Top (Up)
+     */
+    TOP,
+    /**
+     * Bottom (Down)
+     */
+    BOTTOM
 
 }

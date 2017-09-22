@@ -76,14 +76,14 @@ public abstract class AbstractTreeNode<T, C extends Collection<N>, N extends Abs
             throw new NullPointerException("children");
         }
         if (this.children != null) {
-            for (final N child : this.children) {
+            this.children.parallelStream().forEach((child) -> {
                 child.parent = null;
-            }
+            });
         }
         this.children = children;
-        for (final N child : children) {
+        this.children.parallelStream().forEach((child) -> {
             child.parent = (N) this;
-        }
+        });
     }
 
     /**

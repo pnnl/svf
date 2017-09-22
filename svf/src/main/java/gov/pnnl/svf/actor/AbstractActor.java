@@ -58,7 +58,7 @@ public abstract class AbstractActor implements ActorExt {
     private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupportWrapper(this);
     private final Collection<Disposable> disposables = Collections.synchronizedSet(new HashSet<>());
     private final LookupProvider lookup = LookupProviderFactory.newLookupProvider();
-    private Set<String> cameras = Collections.synchronizedSet(new HashSet<>());
+    private final Set<String> cameras = Collections.synchronizedSet(new HashSet<>());
     private DrawingPass drawingPass = DrawingPass.SCENE;
     private byte passNumber = 0;
     private float thickness = 1.0f;
@@ -179,9 +179,9 @@ public abstract class AbstractActor implements ActorExt {
         // dispose of the children
         final ChildSupport children = lookup.lookup(ChildSupport.class);
         if (children != null) {
-            for (final Actor child : children.getChildren()) {
+            children.getChildren().forEach((child) -> {
                 child.dispose();
-            }
+            });
             children.dispose();
         }
         // dispose of the disposable objects
@@ -189,9 +189,9 @@ public abstract class AbstractActor implements ActorExt {
         synchronized (disposables) {
             copy = new ArrayList<>(disposables);
         }
-        for (final Disposable disposable : copy) {
+        copy.forEach((disposable) -> {
             disposable.dispose();
-        }
+        });
         // clear out the lookup
         lookup.clear();
         // remove from the scene
@@ -367,13 +367,13 @@ public abstract class AbstractActor implements ActorExt {
 
     @Override
     public Actor clearCameras() {
-        for (final Camera camera : getScene().lookupAll(Camera.class)) {
+        getScene().lookupAll(Camera.class).forEach((camera) -> {
             if (cameras.remove(camera.getId())) {
                 propertyChangeSupport.firePropertyChange(CAMERA, camera, null);
             }
-            // clear out any remaining camera id's
-            cameras.clear();
-        }
+        });
+        // clear out any remaining camera id's
+        cameras.clear();
         return this;
     }
 

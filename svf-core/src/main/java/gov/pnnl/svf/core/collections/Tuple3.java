@@ -57,6 +57,18 @@ public class Tuple3<A, B, C> extends AbstractTuple {
             return new Builder<>();
         }
 
+        public A first() {
+            return this.first;
+        }
+
+        public B second() {
+            return this.second;
+        }
+
+        public C third() {
+            return this.third;
+        }
+
         public Builder<A, B, C> first(final A first) {
             this.first = first;
             return this;

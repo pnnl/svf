@@ -20,6 +20,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Abstract base class for actors that need to draw that require performance
@@ -34,7 +35,7 @@ public abstract class AbstractDynamicActor extends AbstractActor implements VboD
      */
     protected static final String DISPOSE = "dispose";
     protected final LoadListener loadListener;
-    private DrawableSupport drawableSupport;
+    private final AtomicReference<DrawableSupport> drawableSupport;
 
     /**
      * Constructor
@@ -48,6 +49,7 @@ public abstract class AbstractDynamicActor extends AbstractActor implements VboD
     protected AbstractDynamicActor(final Scene scene, final String type, final String id) {
         super(scene, type, id);
         this.loadListener = new LoadListener(this);
+        this.drawableSupport = new AtomicReference<>();
         scene.getPropertyChangeSupport().addPropertyChangeListener(Scene.LOADED, loadListener);
         getPropertyChangeSupport().addPropertyChangeListener(loadListener);
     }
@@ -61,10 +63,7 @@ public abstract class AbstractDynamicActor extends AbstractActor implements VboD
 
     @Override
     public void draw(final GL2 gl, final GLUgl2 glu, final Camera camera) {
-        final DrawableSupport drawableSupport;
-        synchronized (this) {
-            drawableSupport = this.drawableSupport;
-        }
+        final DrawableSupport drawableSupport = this.drawableSupport.get();
         if (drawableSupport != null) {
             drawableSupport.draw(gl, glu, camera);
         } else {
@@ -79,10 +78,7 @@ public abstract class AbstractDynamicActor extends AbstractActor implements VboD
 
     @Override
     public void pickingDraw(final GL2 gl, final GLUgl2 glu, final Camera camera, final PickingCameraEvent event) {
-        final DrawableSupport drawableSupport;
-        synchronized (this) {
-            drawableSupport = this.drawableSupport;
-        }
+        final DrawableSupport drawableSupport = this.drawableSupport.get();
         if (drawableSupport != null) {
             drawableSupport.pickingDraw(gl, glu, camera, event);
         } else {
@@ -92,10 +88,7 @@ public abstract class AbstractDynamicActor extends AbstractActor implements VboD
 
     @Override
     public void itemPickingDraw(final GL2 gl, final GLUgl2 glu, final Camera camera, final PickingCameraEvent event, final Object item) {
-        final DrawableSupport drawableSupport;
-        synchronized (this) {
-            drawableSupport = this.drawableSupport;
-        }
+        final DrawableSupport drawableSupport = this.drawableSupport.get();
         if (drawableSupport != null) {
             drawableSupport.itemPickingDraw(gl, glu, camera, event, item);
         } else {
@@ -105,10 +98,7 @@ public abstract class AbstractDynamicActor extends AbstractActor implements VboD
 
     @Override
     public void colorPickingDraw(final GL2 gl, final GLUgl2 glu, final Camera camera, final ColorPickingSupport support) {
-        final DrawableSupport drawableSupport;
-        synchronized (this) {
-            drawableSupport = this.drawableSupport;
-        }
+        final DrawableSupport drawableSupport = this.drawableSupport.get();
         if (drawableSupport != null) {
             drawableSupport.colorPickingDraw(gl, glu, camera, support);
         } else {
@@ -163,35 +153,31 @@ public abstract class AbstractDynamicActor extends AbstractActor implements VboD
         }
         openGLHint = overrideOpenGLHint(openGLHints, openGLHint);
         // locate new drawableSupport
-        DrawableSupport drawableSupport;
-        synchronized (this) {
-            drawableSupport = this.drawableSupport;
-            this.drawableSupport = null;
-        }
-        if (drawableSupport != null) {
-            if (drawableSupport instanceof Disposable) {
-                ((Disposable) drawableSupport).dispose();
+        synchronized (this.drawableSupport) {
+            DrawableSupport drawableSupport = this.drawableSupport.getAndSet(null);
+            if (drawableSupport != null) {
+                if (drawableSupport instanceof Disposable) {
+                    ((Disposable) drawableSupport).dispose();
+                }
+                remove(drawableSupport);
             }
-            remove(drawableSupport);
-        }
-        switch (openGLHint) {
-            case VBO_DRAW:
-                drawableSupport = VboDrawableSupport.newInstance(this, this, getInitializeFields());
-                break;
-            case ARRAY_DRAW:
-                drawableSupport = ArrayDrawableSupport.newInstance(this, this, getInitializeFields());
-                break;
-            case DISPLAY_LISTS:
-                drawableSupport = DisplayListDrawableSupport.newInstance(this, this, getInitializeFields());
-                break;
-            case IMMEDIATE_DRAW:
-                drawableSupport = ImmediateDrawableSupport.newInstance(this, this, getInitializeFields());
-                break;
-            default:
-                throw new IllegalArgumentException("Unhandled enumeration type passed to switch statement: " + openGLHint);
-        }
-        synchronized (this) {
-            this.drawableSupport = drawableSupport;
+            switch (openGLHint) {
+                case VBO_DRAW:
+                    drawableSupport = VboDrawableSupport.newInstance(this, this, getInitializeFields());
+                    break;
+                case ARRAY_DRAW:
+                    drawableSupport = ArrayDrawableSupport.newInstance(this, this, getInitializeFields());
+                    break;
+                case DISPLAY_LISTS:
+                    drawableSupport = DisplayListDrawableSupport.newInstance(this, this, getInitializeFields());
+                    break;
+                case IMMEDIATE_DRAW:
+                    drawableSupport = ImmediateDrawableSupport.newInstance(this, this, getInitializeFields());
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unhandled enumeration type passed to switch statement: " + openGLHint);
+            }
+            this.drawableSupport.set(drawableSupport);
         }
     }
 

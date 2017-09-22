@@ -321,15 +321,15 @@ public interface Actor extends LookupProvider, Drawable, Disposable, Observable 
             this.actorType = ActorType.NODE;
             return this;
         }
-        // volume actor
 
+        // volume actor
         public BuilderShape volume(final Volume3D shape) {
             this.actorType = ActorType.VOLUME;
             this.shape = shape;
             return this;
         }
-        // shape actor
 
+        // shape actor
         @Override
         public BuilderShape shape(final Shape shape) {
             if (shape instanceof Volume3D) {
@@ -356,8 +356,8 @@ public interface Actor extends LookupProvider, Drawable, Disposable, Observable 
             this.backgroundColor = backgroundColor;
             return this;
         }
-        // bordered shape actor
 
+        // bordered shape actor
         @Override
         public BuilderShape border(final Border border) {
             this.actorType = ActorType.BORDERED_SHAPE;

@@ -1,6 +1,7 @@
 package gov.pnnl.svf.core.lookup;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -20,7 +21,7 @@ import java.util.Set;
  */
 public class LookupProviderImpl implements LookupProvider {
 
-    private final Map<Class<?>, Object> map = new HashMap<>();
+    private final Map<Class<?>, Object> map = Collections.synchronizedMap(new HashMap<>());
 
     /**
      * Constructor
@@ -42,21 +43,21 @@ public class LookupProviderImpl implements LookupProvider {
             throw new NullPointerException("lookupProvider");
         }
         if (lookupProvider instanceof LookupProviderImpl) {
-            for (final Entry<Class<?>, Object> entry : ((LookupProviderImpl) lookupProvider).map.entrySet()) {
-                map.put(entry.getKey(), entry.getValue());
+            synchronized (((LookupProviderImpl) lookupProvider).map) {
+                ((LookupProviderImpl) lookupProvider).map.entrySet().forEach((entry) -> {
+                    map.put(entry.getKey(), entry.getValue());
+                });
             }
         } else {
-            for (final Object object : lookupProvider.lookupAll()) {
+            lookupProvider.lookupAll().forEach((object) -> {
                 addSuperclass(object.getClass(), object);
-            }
+            });
         }
     }
 
     @Override
     public void clear() {
-        synchronized (this) {
-            map.clear();
-        }
+        map.clear();
     }
 
     @Override
@@ -78,9 +79,7 @@ public class LookupProviderImpl implements LookupProvider {
         if (type == null) {
             throw new NullPointerException("type");
         }
-        synchronized (this) {
-            return (T) map.get(type);
-        }
+        return (T) map.get(type);
     }
 
     @Override
@@ -92,7 +91,7 @@ public class LookupProviderImpl implements LookupProvider {
             throw new IllegalArgumentException("object");
         }
         boolean removed = false;
-        synchronized (this) {
+        synchronized (map) {
             final Iterator<Entry<Class<?>, Object>> iterator = map.entrySet().iterator();
             while (iterator.hasNext()) {
                 if (iterator.next().getValue() == object) {
@@ -107,7 +106,7 @@ public class LookupProviderImpl implements LookupProvider {
     @Override
     public Set<Object> lookupAll() {
         final Set<Object> copy;
-        synchronized (this) {
+        synchronized (map) {
             copy = new HashSet<>(map.values());
         }
         return copy;
@@ -115,7 +114,7 @@ public class LookupProviderImpl implements LookupProvider {
 
     @Override
     public void lookupAll(final Collection<Object> out) {
-        synchronized (this) {
+        synchronized (map) {
             out.addAll(map.values());
         }
     }

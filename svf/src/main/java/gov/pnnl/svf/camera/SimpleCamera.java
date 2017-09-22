@@ -192,13 +192,6 @@ public class SimpleCamera extends AbstractCamera implements DrawingCamera {
         rotateLeftRight(amount);
     }
 
-    private void rotateLeftRight(final double amount) {
-        // use quaternion rotation to avoid gimbal lock and keep the rotation
-        // smooth
-        final Rotation rotation = new Rotation(getCameraUp(), amount);
-        setLook(rotation.applyTo(getLook()));
-    }
-
     /**
      * Rotate camera to the right.
      *
@@ -215,6 +208,13 @@ public class SimpleCamera extends AbstractCamera implements DrawingCamera {
      */
     public void rotateUp(final double amount) {
         rotateUpDown(-amount);
+    }
+
+    private void rotateLeftRight(final double amount) {
+        // use quaternion rotation to avoid gimbal lock and keep the rotation
+        // smooth
+        final Rotation rotation = new Rotation(getCameraUp(), amount);
+        setLook(rotation.applyTo(getLook()));
     }
 
     private void rotateUpDown(final double amount) {
