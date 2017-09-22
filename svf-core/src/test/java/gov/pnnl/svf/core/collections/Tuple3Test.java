@@ -18,7 +18,7 @@ public class Tuple3Test extends AbstractObjectTestBase<Tuple3<Integer, Integer, 
      */
     @Test
     public void testGet() {
-        final Tuple3<Integer, Integer, Integer> a = new Tuple3<>(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3));
+        final Tuple3<Integer, Integer, Integer> a = new Tuple3<>(1, 2, 3);
         Assert.assertEquals(1, a.get(0));
         Assert.assertEquals(2, a.get(1));
         Assert.assertEquals(3, a.get(2));
@@ -30,9 +30,9 @@ public class Tuple3Test extends AbstractObjectTestBase<Tuple3<Integer, Integer, 
     @Test
     public void testGetBuilder() {
         final Tuple3<Integer, Integer, Integer> a = Tuple3.Builder.<Integer, Integer, Integer>construct()
-                .first(Integer.valueOf(1))
-                .second(Integer.valueOf(2))
-                .third(Integer.valueOf(3))
+                .first(1)
+                .second(2)
+                .third(3)
                 .build();
         Assert.assertEquals(1, a.get(0));
         Assert.assertEquals(2, a.get(1));
@@ -44,7 +44,7 @@ public class Tuple3Test extends AbstractObjectTestBase<Tuple3<Integer, Integer, 
      */
     @Test
     public void testSize() {
-        final Tuple3<Integer, Integer, Integer> a = new Tuple3<>(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3));
+        final Tuple3<Integer, Integer, Integer> a = new Tuple3<>(1, 2, 3);
         Assert.assertEquals(3, a.size());
     }
 

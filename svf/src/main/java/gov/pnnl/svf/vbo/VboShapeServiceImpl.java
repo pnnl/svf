@@ -74,8 +74,8 @@ public class VboShapeServiceImpl implements VboShapeService {
         if (factory == null) {
             // find best case factory
             final Class<?>[] classes = type.getClasses();
-            for (int i = 0; i < classes.length; i++) {
-                factory = map.get(classes[i]);
+            for (Class<?> classe : classes) {
+                factory = map.get(classe);
                 if (factory != null) {
                     break;
                 }

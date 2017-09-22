@@ -41,25 +41,22 @@ public class CameraDemoLoader extends ShapeDemoLoader implements DemoLoader {
         ColorSupport.newInstance(third).setColor(new Color("#dddddd"));
         scene.add(third);
         // property change to update camera viewports
-        final PropertyChangeListener viewportListener = new PropertyChangeListener() {
-            @Override
-            public void propertyChange(final PropertyChangeEvent evt) {
-                final Rectangle viewport = (Rectangle) evt.getNewValue();
-                first.setViewport(Rectangle.Builder.construct()
-                        .x(viewport.getWidth() / 2)
-                        .width(viewport.getWidth() / 2)
-                        .height(viewport.getHeight())
-                        .build());
-                second.setViewport(Rectangle.Builder.construct()
-                        .y(viewport.getHeight() / 2)
-                        .width(viewport.getWidth() / 2)
-                        .height(viewport.getHeight() / 2)
-                        .build());
-                third.setViewport(Rectangle.Builder.construct()
-                        .width(viewport.getWidth() / 2)
-                        .height(viewport.getHeight() / 2)
-                        .build());
-            }
+        final PropertyChangeListener viewportListener = (final PropertyChangeEvent evt) -> {
+            final Rectangle viewport = (Rectangle) evt.getNewValue();
+            first.setViewport(Rectangle.Builder.construct()
+                    .x(viewport.getWidth() / 2)
+                    .width(viewport.getWidth() / 2)
+                    .height(viewport.getHeight())
+                    .build());
+            second.setViewport(Rectangle.Builder.construct()
+                    .y(viewport.getHeight() / 2)
+                    .width(viewport.getWidth() / 2)
+                    .height(viewport.getHeight() / 2)
+                    .build());
+            third.setViewport(Rectangle.Builder.construct()
+                    .width(viewport.getWidth() / 2)
+                    .height(viewport.getHeight() / 2)
+                    .build());
         };
         scene.getPropertyChangeSupport().addPropertyChangeListener(Scene.VIEWPORT, viewportListener);
         viewportListener.propertyChange(new PropertyChangeEvent(scene, Scene.VIEWPORT, null, scene.getViewport()));

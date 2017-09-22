@@ -33,7 +33,7 @@ public abstract class AbstractItemPickingCamera extends AbstractPickingCamera im
 
     private static final Logger logger = Logger.getLogger(AbstractItemPickingCamera.class.getName());
 
-    protected final List<ItemPickingCameraListener> listeners = Collections.synchronizedList(new ArrayList<ItemPickingCameraListener>());
+    protected final List<ItemPickingCameraListener> listeners = Collections.synchronizedList(new ArrayList<>());
     private final int maxNameStackDepth[] = {64};
     private IntBuffer nameStackBuffer;
     private boolean initialized = false;

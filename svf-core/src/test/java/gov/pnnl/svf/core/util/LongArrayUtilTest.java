@@ -47,13 +47,7 @@ public class LongArrayUtilTest {
             for (int i = 0; i < c.length; i++) {
                 cc.add(c[i]);
             }
-            Collections.sort(cc, new Comparator<Long>() {
-
-                         @Override
-                         public int compare(Long o1, Long o2) {
-                             return o1.compareTo(o2);
-                         }
-                     });
+            Collections.sort(cc, Long::compareTo);
             for (int i = 0; i < cc.size(); i++) {
                 c[i] = cc.get(i);
             }
@@ -63,13 +57,7 @@ public class LongArrayUtilTest {
             // LongArrayUtil.sort()
             final long[] d = Arrays.copyOf(a, a.length);
             start = System.currentTimeMillis();
-            LongArrayUtil.sort(d, new LongArrayUtil.LongComparator() {
-
-                           @Override
-                           public int compare(long o1, long o2) {
-                               return Long.compare(o1, o2);
-                           }
-                       });
+            LongArrayUtil.sort(d, Long::compare);
             stop = System.currentTimeMillis();
             System.out.println("LongArrayUtil.sort() took " + (stop - start) + " ms to sort " + SIZE + " entries.");
             total += stop - start;

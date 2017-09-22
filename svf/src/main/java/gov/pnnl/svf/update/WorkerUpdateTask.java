@@ -170,17 +170,14 @@ public class WorkerUpdateTask extends AbstractWorkerTask {
         if (Stage.SCHEDULE.equals(getStage())) {
             if (!executor.isShutdown()) {
                 setStage(Stage.RUN);
-                executor.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (isCanceled()) {
-                            return;
-                        }
-                        try {
-                            runnable.run(WorkerUpdateTask.this);
-                        } finally {
-                            setStage(Stage.POST_RUN);
-                        }
+                executor.execute(() -> {
+                    if (isCanceled()) {
+                        return;
+                    }
+                    try {
+                        runnable.run(WorkerUpdateTask.this);
+                    } finally {
+                        setStage(Stage.POST_RUN);
                     }
                 });
             } else {

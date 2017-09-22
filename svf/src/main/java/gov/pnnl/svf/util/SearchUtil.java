@@ -128,22 +128,10 @@ public class SearchUtil {
                 }
             }
         }
-        Collections.sort(list, new Comparator<T>() {
-
-                     @Override
-                     public int compare(final T o1, final T o2) {
-                         return scores.get(o2).compareTo(scores.get(o1));
-                     }
-                 });
+        Collections.sort(list, (final T o1, final T o2) -> scores.get(o2).compareTo(scores.get(o1)));
         logger.log(Level.INFO, "Map of scores for all objects for text \"{0}\": {1}", new Object[]{string, scores});
         logger.log(Level.INFO, "List of prioritized matching objects sorted by scores: {0}", list);
-        Collections.sort(list, new Comparator<T>() {
-
-                     @Override
-                     public int compare(final T o1, final T o2) {
-                         return distances.get(o1).compareTo(distances.get(o2));
-                     }
-                 });
+        Collections.sort(list, (final T o1, final T o2) -> distances.get(o1).compareTo(distances.get(o2)));
         logger.log(Level.INFO, "Map of distances for all objects for text \"{0}\": {1}", new Object[]{string, distances});
         logger.log(Level.INFO, "List of prioritized matching objects additionally sorted by distances: {0}", list);
         return list.isEmpty() ? null : list.get(0);

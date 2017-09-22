@@ -389,18 +389,15 @@ public abstract class AbstractObjectTestBase<T extends Object> {
             // event criteria is correct
             final AtomicBoolean passed = new AtomicBoolean(false);
             // event listener
-            final PropertyChangeListener listener = new PropertyChangeListener() {
-                @Override
-                public void propertyChange(final PropertyChangeEvent evt) {
-                    try {
-                        if (object == evt.getSource() && field.equals(evt.getPropertyName())
-                            && current == null ? evt.getOldValue() == null : current.equals(evt.getOldValue())
-                                                                             && value == null ? evt.getNewValue() == null : value.equals(evt.getNewValue())) {
-                            passed.set(true);
-                        }
-                    } finally {
-                        latch.countDown();
+            final PropertyChangeListener listener = (final PropertyChangeEvent evt) -> {
+                try {
+                    if (object == evt.getSource() && field.equals(evt.getPropertyName())
+                        && current == null ? evt.getOldValue() == null : current.equals(evt.getOldValue())
+                                                                         && value == null ? evt.getNewValue() == null : value.equals(evt.getNewValue())) {
+                        passed.set(true);
                     }
+                } finally {
+                    latch.countDown();
                 }
             };
             if (!passed.get()) {
@@ -442,7 +439,7 @@ public abstract class AbstractObjectTestBase<T extends Object> {
             while (latch.getCount() > 0 && (start + eventTimeout) > System.currentTimeMillis()) {
                 try {
                     if (latch.await(10, TimeUnit.MILLISECONDS)) {
-                        // timed  out 
+                        // timed  out
                     }
                 } catch (final InterruptedException ex) {
                     // ignore thread inturuption

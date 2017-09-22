@@ -110,14 +110,10 @@ public class AwtScrollbarDemo extends AbstractAwtDemo {
         final TransformSupport scrollbarTransform = TransformSupport.newInstance(scrollbar)
                 .setRotationAxis(Vector3D.MINUS_K)
                 .setRotation(180.0);
-        final PropertyChangeListener scrollbarListener = new PropertyChangeListener() {
-
-            @Override
-            public void propertyChange(final PropertyChangeEvent evt) {
-                final Rectangle viewport = scene.getViewport();
-                scrollbarTransform.setTranslation(new Vector3D(viewport.getWidth() - 10.0, (viewport.getHeight() * 0.5) + 10.0, 0.0));
-                scrollbar.setExtent(viewport.getHeight() - 20.0);
-            }
+        final PropertyChangeListener scrollbarListener = (final PropertyChangeEvent evt) -> {
+            final Rectangle viewport = scene.getViewport();
+            scrollbarTransform.setTranslation(new Vector3D(viewport.getWidth() - 10.0, (viewport.getHeight() * 0.5) + 10.0, 0.0));
+            scrollbar.setExtent(viewport.getHeight() - 20.0);
         };
         scene.getPropertyChangeSupport().addPropertyChangeListener(Scene.VIEWPORT, scrollbarListener);
         scrollbarListener.propertyChange(null);
@@ -137,14 +133,10 @@ public class AwtScrollbarDemo extends AbstractAwtDemo {
         final TransformSupport scrollbarTransform = TransformSupport.newInstance(scrollbar)
                 .setRotationAxis(Vector3D.PLUS_K)
                 .setRotation(90.0);
-        final PropertyChangeListener scrollbarListener = new PropertyChangeListener() {
-
-            @Override
-            public void propertyChange(final PropertyChangeEvent evt) {
-                final Rectangle viewport = scene.getViewport();
-                scrollbarTransform.setTranslation(new Vector3D((viewport.getWidth() * 0.5) - 10.0, 10.0, 0.0));
-                scrollbar.setExtent(viewport.getWidth() - 20.0);
-            }
+        final PropertyChangeListener scrollbarListener = (final PropertyChangeEvent evt) -> {
+            final Rectangle viewport = scene.getViewport();
+            scrollbarTransform.setTranslation(new Vector3D((viewport.getWidth() * 0.5) - 10.0, 10.0, 0.0));
+            scrollbar.setExtent(viewport.getWidth() - 20.0);
         };
         scene.getPropertyChangeSupport().addPropertyChangeListener(Scene.VIEWPORT, scrollbarListener);
         scrollbarListener.propertyChange(null);
@@ -164,14 +156,10 @@ public class AwtScrollbarDemo extends AbstractAwtDemo {
         final TransformSupport scrollbarTransform = TransformSupport.newInstance(scrollbar)
                 .setRotationAxis(Vector3D.PLUS_K)
                 .setRotation(0.0);
-        final PropertyChangeListener scrollbarListener = new PropertyChangeListener() {
-
-            @Override
-            public void propertyChange(final PropertyChangeEvent evt) {
-                final Rectangle viewport = scene.getViewport();
-                scrollbarTransform.setTranslation(new Vector3D(viewport.getWidth() * 0.5, viewport.getHeight() * 0.5, 0.0));
-                scrollbar.setExtent(Math.min(viewport.getWidth(), viewport.getHeight()));
-            }
+        final PropertyChangeListener scrollbarListener = (final PropertyChangeEvent evt) -> {
+            final Rectangle viewport = scene.getViewport();
+            scrollbarTransform.setTranslation(new Vector3D(viewport.getWidth() * 0.5, viewport.getHeight() * 0.5, 0.0));
+            scrollbar.setExtent(Math.min(viewport.getWidth(), viewport.getHeight()));
         };
         scene.getPropertyChangeSupport().addPropertyChangeListener(Scene.VIEWPORT, scrollbarListener);
         scrollbarListener.propertyChange(null);

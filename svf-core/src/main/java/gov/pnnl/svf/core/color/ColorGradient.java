@@ -162,8 +162,8 @@ public class ColorGradient extends Color implements Serializable {
             throw new NullPointerException("colors");
         }
         final SortedSet<ColorEntry> temp = new TreeSet<>(comparator);
-        for (int i = 0; i < colors.length; i++) {
-            temp.add(colors[i]);
+        for (ColorEntry color : colors) {
+            temp.add(color);
         }
         validate(temp);
         this.colors = Collections.unmodifiableSortedSet(temp);

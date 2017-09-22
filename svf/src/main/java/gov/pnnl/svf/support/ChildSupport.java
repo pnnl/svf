@@ -307,9 +307,9 @@ public class ChildSupport extends AbstractSupport<ChildSupportListener> {
 
     private static Collection<Actor> newCollection(final Collection<Actor> children, final boolean ordered) {
         if (ordered) {
-            return children != null ? new LinkedHashSet<>(children) : new LinkedHashSet<Actor>();
+            return children != null ? new LinkedHashSet<>(children) : new LinkedHashSet<>();
         } else {
-            return children != null ? new HashSet<>(children) : new HashSet<Actor>();
+            return children != null ? new HashSet<>(children) : new HashSet<>();
         }
     }
 }

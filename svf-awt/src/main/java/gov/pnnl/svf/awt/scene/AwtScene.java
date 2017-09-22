@@ -127,16 +127,13 @@ public class AwtScene extends AbstractAwtScene<GLCanvas> {
 
     @Override
     public void dispose() {
-        getFactory().runOnUiThread(this, new Runnable() {
-                               @Override
-                               public void run() {
-                                   // remove the resize behavior
-                                   try {
-                                       final Window window = (Window) SwingUtilities.getRoot(getComponent());
-                                       window.removeWindowStateListener(awtListener);
-                                   } catch (final RuntimeException ex) {
-                                       logger.log(Level.WARNING, MessageFormat.format("{0}: Exception while removing window listener.", AwtScene.this), ex);
-                                   }
+        getFactory().runOnUiThread(this, () -> {
+                               // remove the resize behavior
+                               try {
+                                   final Window window = (Window) SwingUtilities.getRoot(getComponent());
+                                   window.removeWindowStateListener(awtListener);
+                               } catch (final RuntimeException ex) {
+                                   logger.log(Level.WARNING, MessageFormat.format("{0}: Exception while removing window listener.", AwtScene.this), ex);
                                }
                            });
         super.dispose();

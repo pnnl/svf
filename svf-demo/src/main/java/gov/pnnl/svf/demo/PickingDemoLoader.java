@@ -195,21 +195,18 @@ public class PickingDemoLoader implements DemoLoader {
         planePicking.newMapping(Quadrant.TOP_RIGHT);
         planePicking.newMapping(Quadrant.BOTTOM_LEFT);
         planePicking.newMapping(Quadrant.BOTTOM_RIGHT);
-        planePicking.addListener(new ColorPickingSupportListener() {
-            @Override
-            public void itemsPicked(final Actor actor, final Set<Object> items, final PickingCameraEvent event) {
-                final StringBuilder sb = new StringBuilder();
-                for (final CameraEventType type : event.getTypes()) {
-                    sb.append(type.toString());
-                    sb.append(" | ");
-                }
-                for (final Object quadrant : items) {
-                    sb.append(quadrant.toString());
-                    sb.append(" | ");
-                }
-                sb.append("UI PLANE");
-                label.setShape(new Text2D(sb.toString()));
+        planePicking.addListener((ColorPickingSupportListener) (final Actor actor, final Set<Object> items, final PickingCameraEvent event) -> {
+            final StringBuilder sb = new StringBuilder();
+            for (final CameraEventType type : event.getTypes()) {
+                sb.append(type.toString());
+                sb.append(" | ");
             }
+            for (final Object quadrant : items) {
+                sb.append(quadrant.toString());
+                sb.append(" | ");
+            }
+            sb.append("UI PLANE");
+            label.setShape(new Text2D(sb.toString()));
         });
         scene.add(plane);
         // texture
@@ -228,21 +225,18 @@ public class PickingDemoLoader implements DemoLoader {
         texturePicking.newMapping(Quadrant.TOP_RIGHT);
         texturePicking.newMapping(Quadrant.BOTTOM_LEFT);
         texturePicking.newMapping(Quadrant.BOTTOM_RIGHT);
-        texturePicking.addListener(new ColorPickingSupportListener() {
-            @Override
-            public void itemsPicked(final Actor actor, final Set<Object> items, final PickingCameraEvent event) {
-                final StringBuilder sb = new StringBuilder();
-                for (final CameraEventType type : event.getTypes()) {
-                    sb.append(type.toString());
-                    sb.append(" | ");
-                }
-                for (final Object quadrant : items) {
-                    sb.append(quadrant.toString());
-                    sb.append(" | ");
-                }
-                sb.append("UI TEXTURE");
-                label.setShape(new Text2D(sb.toString()));
+        texturePicking.addListener((ColorPickingSupportListener) (final Actor actor, final Set<Object> items, final PickingCameraEvent event) -> {
+            final StringBuilder sb = new StringBuilder();
+            for (final CameraEventType type : event.getTypes()) {
+                sb.append(type.toString());
+                sb.append(" | ");
             }
+            for (final Object quadrant : items) {
+                sb.append(quadrant.toString());
+                sb.append(" | ");
+            }
+            sb.append("UI TEXTURE");
+            label.setShape(new Text2D(sb.toString()));
         });
         scene.add(texture);
         // return the label reference
@@ -266,28 +260,25 @@ public class PickingDemoLoader implements DemoLoader {
         plane.setPassNumber(1);
         ColorSupport.newInstance(plane).setColor(Color.GRAY);
         TransformSupport.newInstance(plane).setTranslation(new Vector3D(-2.0, 2.0, 0.0));
-        PickingSupport.newInstance(plane).addListener(new PickingSupportListener() {
-            @Override
-            public void picked(final Actor actor, final PickingCameraEvent event) {
-                final StringBuilder sb = new StringBuilder();
-                for (final CameraEventType type : event.getTypes()) {
-                    sb.append(type.toString());
-                    sb.append(" | ");
-                }
-                sb.append("PLANE");
-                label.setShape(new Text3D(sb.toString()));
-                // zoom to actor
-                if (event.getTypes().containsAll(EnumSet.<CameraEventType>of(CameraEventType.LEFT, CameraEventType.DOUBLE))) {
-                    final DraggingCamera camera = scene.lookup(DraggingCamera.class);
-                    if (camera != null) {
-                        final TransformSupport transform = actor.lookup(TransformSupport.class);
-                        if (transform != null) {
-                            final Rectangle2D bounds = new Rectangle2D(transform.getTranslation().getX(),
-                                                                       transform.getTranslation().getY(),
-                                                                       transform.getScale().getX(),
-                                                                       transform.getScale().getY());
-                            CameraUtil.fitInViewport(camera, bounds, true);
-                        }
+        PickingSupport.newInstance(plane).addListener((PickingSupportListener) (final Actor actor, final PickingCameraEvent event) -> {
+            final StringBuilder sb = new StringBuilder();
+            for (final CameraEventType type : event.getTypes()) {
+                sb.append(type.toString());
+                sb.append(" | ");
+            }
+            sb.append("PLANE");
+            label.setShape(new Text3D(sb.toString()));
+            // zoom to actor
+            if (event.getTypes().containsAll(EnumSet.<CameraEventType>of(CameraEventType.LEFT, CameraEventType.DOUBLE))) {
+                final DraggingCamera camera = scene.lookup(DraggingCamera.class);
+                if (camera != null) {
+                    final TransformSupport transform = actor.lookup(TransformSupport.class);
+                    if (transform != null) {
+                        final Rectangle2D bounds = new Rectangle2D(transform.getTranslation().getX(),
+                                                                   transform.getTranslation().getY(),
+                                                                   transform.getScale().getX(),
+                                                                   transform.getScale().getY());
+                        CameraUtil.fitInViewport(camera, bounds, true);
                     }
                 }
             }
@@ -304,28 +295,25 @@ public class PickingDemoLoader implements DemoLoader {
             logger.log(Level.WARNING, "Unable to load the texture for the demo texture plane.");
         }
         Texture2dSupport.newInstance(texture, url);
-        PickingSupport.newInstance(texture).addListener(new PickingSupportListener() {
-            @Override
-            public void picked(final Actor actor, final PickingCameraEvent event) {
-                final StringBuilder sb = new StringBuilder();
-                for (final CameraEventType type : event.getTypes()) {
-                    sb.append(type.toString());
-                    sb.append(" | ");
-                }
-                sb.append("TEXTURE");
-                label.setShape(new Text3D(sb.toString()));
-                // zoom to actor
-                if (event.getTypes().containsAll(EnumSet.<CameraEventType>of(CameraEventType.LEFT, CameraEventType.DOUBLE))) {
-                    final DraggingCamera camera = scene.lookup(DraggingCamera.class);
-                    if (camera != null) {
-                        final TransformSupport transform = actor.lookup(TransformSupport.class);
-                        if (transform != null) {
-                            final Rectangle2D bounds = new Rectangle2D(transform.getTranslation().getX(),
-                                                                       transform.getTranslation().getY(),
-                                                                       transform.getScale().getX(),
-                                                                       transform.getScale().getY());
-                            CameraUtil.fitInViewport(camera, bounds, true);
-                        }
+        PickingSupport.newInstance(texture).addListener((PickingSupportListener) (final Actor actor, final PickingCameraEvent event) -> {
+            final StringBuilder sb = new StringBuilder();
+            for (final CameraEventType type : event.getTypes()) {
+                sb.append(type.toString());
+                sb.append(" | ");
+            }
+            sb.append("TEXTURE");
+            label.setShape(new Text3D(sb.toString()));
+            // zoom to actor
+            if (event.getTypes().containsAll(EnumSet.<CameraEventType>of(CameraEventType.LEFT, CameraEventType.DOUBLE))) {
+                final DraggingCamera camera = scene.lookup(DraggingCamera.class);
+                if (camera != null) {
+                    final TransformSupport transform = actor.lookup(TransformSupport.class);
+                    if (transform != null) {
+                        final Rectangle2D bounds = new Rectangle2D(transform.getTranslation().getX(),
+                                                                   transform.getTranslation().getY(),
+                                                                   transform.getScale().getX(),
+                                                                   transform.getScale().getY());
+                        CameraUtil.fitInViewport(camera, bounds, true);
                     }
                 }
             }
@@ -356,21 +344,18 @@ public class PickingDemoLoader implements DemoLoader {
         planePicking.getItems().add(Quadrant.TOP_RIGHT);
         planePicking.getItems().add(Quadrant.BOTTOM_LEFT);
         planePicking.getItems().add(Quadrant.BOTTOM_RIGHT);
-        planePicking.addListener(new ItemPickingSupportListener() {
-            @Override
-            public void itemsPicked(final Actor actor, final Set<Object> items, final PickingCameraEvent event) {
-                final StringBuilder sb = new StringBuilder();
-                for (final CameraEventType type : event.getTypes()) {
-                    sb.append(type.toString());
-                    sb.append(" | ");
-                }
-                for (final Object quadrant : items) {
-                    sb.append(quadrant.toString());
-                    sb.append(" | ");
-                }
-                sb.append("PLANE");
-                label.setShape(new Text3D(sb.toString()));
+        planePicking.addListener((ItemPickingSupportListener) (final Actor actor, final Set<Object> items, final PickingCameraEvent event) -> {
+            final StringBuilder sb = new StringBuilder();
+            for (final CameraEventType type : event.getTypes()) {
+                sb.append(type.toString());
+                sb.append(" | ");
             }
+            for (final Object quadrant : items) {
+                sb.append(quadrant.toString());
+                sb.append(" | ");
+            }
+            sb.append("PLANE");
+            label.setShape(new Text3D(sb.toString()));
         });
         scene.add(plane);
         // texture
@@ -389,21 +374,18 @@ public class PickingDemoLoader implements DemoLoader {
         texturePicking.getItems().add(Quadrant.TOP_RIGHT);
         texturePicking.getItems().add(Quadrant.BOTTOM_LEFT);
         texturePicking.getItems().add(Quadrant.BOTTOM_RIGHT);
-        texturePicking.addListener(new ItemPickingSupportListener() {
-            @Override
-            public void itemsPicked(final Actor actor, final Set<Object> items, final PickingCameraEvent event) {
-                final StringBuilder sb = new StringBuilder();
-                for (final CameraEventType type : event.getTypes()) {
-                    sb.append(type.toString());
-                    sb.append(" | ");
-                }
-                for (final Object quadrant : items) {
-                    sb.append(quadrant.toString());
-                    sb.append(" | ");
-                }
-                sb.append("TEXTURE");
-                label.setShape(new Text3D(sb.toString()));
+        texturePicking.addListener((ItemPickingSupportListener) (final Actor actor, final Set<Object> items, final PickingCameraEvent event) -> {
+            final StringBuilder sb = new StringBuilder();
+            for (final CameraEventType type : event.getTypes()) {
+                sb.append(type.toString());
+                sb.append(" | ");
             }
+            for (final Object quadrant : items) {
+                sb.append(quadrant.toString());
+                sb.append(" | ");
+            }
+            sb.append("TEXTURE");
+            label.setShape(new Text3D(sb.toString()));
         });
         scene.add(texture);
         // return the label reference
@@ -431,21 +413,18 @@ public class PickingDemoLoader implements DemoLoader {
         planePicking.newMapping(Quadrant.TOP_RIGHT);
         planePicking.newMapping(Quadrant.BOTTOM_LEFT);
         planePicking.newMapping(Quadrant.BOTTOM_RIGHT);
-        planePicking.addListener(new ColorPickingSupportListener() {
-            @Override
-            public void itemsPicked(final Actor actor, final Set<Object> items, final PickingCameraEvent event) {
-                final StringBuilder sb = new StringBuilder();
-                for (final CameraEventType type : event.getTypes()) {
-                    sb.append(type.toString());
-                    sb.append(" | ");
-                }
-                for (final Object quadrant : items) {
-                    sb.append(quadrant.toString());
-                    sb.append(" | ");
-                }
-                sb.append("PLANE");
-                label.setShape(new Text3D(sb.toString()));
+        planePicking.addListener((ColorPickingSupportListener) (final Actor actor, final Set<Object> items, final PickingCameraEvent event) -> {
+            final StringBuilder sb = new StringBuilder();
+            for (final CameraEventType type : event.getTypes()) {
+                sb.append(type.toString());
+                sb.append(" | ");
             }
+            for (final Object quadrant : items) {
+                sb.append(quadrant.toString());
+                sb.append(" | ");
+            }
+            sb.append("PLANE");
+            label.setShape(new Text3D(sb.toString()));
         });
         scene.add(plane);
         // texture
@@ -464,21 +443,18 @@ public class PickingDemoLoader implements DemoLoader {
         texturePicking.newMapping(Quadrant.TOP_RIGHT);
         texturePicking.newMapping(Quadrant.BOTTOM_LEFT);
         texturePicking.newMapping(Quadrant.BOTTOM_RIGHT);
-        texturePicking.addListener(new ColorPickingSupportListener() {
-            @Override
-            public void itemsPicked(final Actor actor, final Set<Object> items, final PickingCameraEvent event) {
-                final StringBuilder sb = new StringBuilder();
-                for (final CameraEventType type : event.getTypes()) {
-                    sb.append(type.toString());
-                    sb.append(" | ");
-                }
-                for (final Object quadrant : items) {
-                    sb.append(quadrant.toString());
-                    sb.append(" | ");
-                }
-                sb.append("TEXTURE");
-                label.setShape(new Text3D(sb.toString()));
+        texturePicking.addListener((ColorPickingSupportListener) (final Actor actor, final Set<Object> items, final PickingCameraEvent event) -> {
+            final StringBuilder sb = new StringBuilder();
+            for (final CameraEventType type : event.getTypes()) {
+                sb.append(type.toString());
+                sb.append(" | ");
             }
+            for (final Object quadrant : items) {
+                sb.append(quadrant.toString());
+                sb.append(" | ");
+            }
+            sb.append("TEXTURE");
+            label.setShape(new Text3D(sb.toString()));
         });
         scene.add(texture);
         // return the label reference

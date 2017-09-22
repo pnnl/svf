@@ -47,13 +47,7 @@ public class IntArrayUtilTest {
             for (int i = 0; i < c.length; i++) {
                 cc.add(c[i]);
             }
-            Collections.sort(cc, new Comparator<Integer>() {
-
-                         @Override
-                         public int compare(Integer o1, Integer o2) {
-                             return o1.compareTo(o2);
-                         }
-                     });
+            Collections.sort(cc, Integer::compareTo);
             for (int i = 0; i < cc.size(); i++) {
                 c[i] = cc.get(i);
             }
@@ -63,13 +57,7 @@ public class IntArrayUtilTest {
             // IntArrayUtil.sort()
             final int[] d = Arrays.copyOf(a, a.length);
             start = System.currentTimeMillis();
-            IntArrayUtil.sort(d, new IntArrayUtil.IntComparator() {
-
-                          @Override
-                          public int compare(int o1, int o2) {
-                              return Integer.compare(o1, o2);
-                          }
-                      });
+            IntArrayUtil.sort(d, Integer::compare);
             stop = System.currentTimeMillis();
             System.out.println("IntArrayUtil.sort() took " + (stop - start) + " ms to sort " + SIZE + " entries.");
             total += stop - start;

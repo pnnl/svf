@@ -334,21 +334,15 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
 
     @Override
     public void addListeners(final Object object) {
-        factory.runOnUiThread(this, new Runnable() {
-                          @Override
-                          public void run() {
-                              sceneListenerUtils.addListener(object);
-                          }
+        factory.runOnUiThread(this, () -> {
+                          sceneListenerUtils.addListener(object);
                       });
     }
 
     @Override
     public void removeListeners(final Object object) {
-        factory.runOnUiThread(this, new Runnable() {
-                          @Override
-                          public void run() {
-                              sceneListenerUtils.removeListener(object);
-                          }
+        factory.runOnUiThread(this, () -> {
+                          sceneListenerUtils.removeListener(object);
                       });
     }
 
@@ -589,12 +583,8 @@ public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneEx
     @Override
     public boolean waitForLoad(final long timeout) {
         final CountDownLatch latch = new CountDownLatch(1);
-        final PropertyChangeListener listener = new PropertyChangeListener() {
-
-            @Override
-            public void propertyChange(final PropertyChangeEvent evt) {
-                latch.countDown();
-            }
+        final PropertyChangeListener listener = (final PropertyChangeEvent evt) -> {
+            latch.countDown();
         };
         getPropertyChangeSupport().addPropertyChangeListener(Scene.LOADED, listener);
         if (!isLoaded()) {

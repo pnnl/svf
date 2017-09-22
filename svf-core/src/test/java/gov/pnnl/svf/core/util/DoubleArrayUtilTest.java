@@ -47,13 +47,7 @@ public class DoubleArrayUtilTest {
             for (int i = 0; i < c.length; i++) {
                 cc.add(c[i]);
             }
-            Collections.sort(cc, new Comparator<Double>() {
-
-                         @Override
-                         public int compare(Double o1, Double o2) {
-                             return o1.compareTo(o2);
-                         }
-                     });
+            Collections.sort(cc, Double::compareTo);
             for (int i = 0; i < cc.size(); i++) {
                 c[i] = cc.get(i);
             }
@@ -63,13 +57,7 @@ public class DoubleArrayUtilTest {
             // DoubleArrayUtil.sort()
             final double[] d = Arrays.copyOf(a, a.length);
             start = System.currentTimeMillis();
-            DoubleArrayUtil.sort(d, new DoubleArrayUtil.DoubleComparator() {
-
-                             @Override
-                             public int compare(double o1, double o2) {
-                                 return Double.compare(o1, o2);
-                             }
-                         });
+            DoubleArrayUtil.sort(d, Double::compare);
             stop = System.currentTimeMillis();
             System.out.println("DoubleArrayUtil.sort() took " + (stop - start) + " ms to sort " + SIZE + " entries.");
             total += stop - start;

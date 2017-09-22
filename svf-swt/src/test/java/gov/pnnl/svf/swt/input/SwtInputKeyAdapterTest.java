@@ -46,11 +46,8 @@ public class SwtInputKeyAdapterTest {
         event.keyCode = 'a';
         event.character = 'a';
         final KeyEvent keyEvent = new KeyEvent(event);
-        shell.getDisplay().syncExec(new Runnable() {
-            @Override
-            public void run() {
-                instance.keyPressed(keyEvent);
-            }
+        shell.getDisplay().syncExec(() -> {
+            instance.keyPressed(keyEvent);
         });
 
         Assert.assertEquals(KeyState.DOWN, instance.getKeyState('a'));
@@ -73,12 +70,9 @@ public class SwtInputKeyAdapterTest {
         event.keyCode = 'a';
         event.character = 'a';
         final KeyEvent keyEvent = new KeyEvent(event);
-        shell.getDisplay().syncExec(new Runnable() {
-            @Override
-            public void run() {
-                instance.keyPressed(keyEvent);
-                instance.keyReleased(keyEvent);
-            }
+        shell.getDisplay().syncExec(() -> {
+            instance.keyPressed(keyEvent);
+            instance.keyReleased(keyEvent);
         });
 
         Assert.assertEquals(KeyState.UP, instance.getKeyState('a'));

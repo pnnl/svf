@@ -47,13 +47,7 @@ public class ByteArrayUtilTest {
             for (int i = 0; i < c.length; i++) {
                 cc.add(c[i]);
             }
-            Collections.sort(cc, new Comparator<Byte>() {
-
-                         @Override
-                         public int compare(Byte o1, Byte o2) {
-                             return o1.compareTo(o2);
-                         }
-                     });
+            Collections.sort(cc, Byte::compareTo);
             for (int i = 0; i < cc.size(); i++) {
                 c[i] = cc.get(i);
             }
@@ -63,13 +57,7 @@ public class ByteArrayUtilTest {
             // ByteArrayUtil.sort()
             final byte[] d = Arrays.copyOf(a, a.length);
             start = System.currentTimeMillis();
-            ByteArrayUtil.sort(d, new ByteArrayUtil.ByteComparator() {
-
-                           @Override
-                           public int compare(byte o1, byte o2) {
-                               return Byte.compare(o1, o2);
-                           }
-                       });
+            ByteArrayUtil.sort(d, Byte::compare);
             stop = System.currentTimeMillis();
             System.out.println("ByteArrayUtil.sort() took " + (stop - start) + " ms to sort " + SIZE + " entries.");
             total += stop - start;

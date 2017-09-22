@@ -31,15 +31,15 @@ public class CountingHashSetTest {
         // hash set
         final Set<Long> hashSet = new HashSet<>(PERFORMANCE_TEST_SIZE);
         final long hashSetStart = System.currentTimeMillis();
-        for (int i = 0; i < LIST.length; i++) {
-            hashSet.add(LIST[i]);
+        for (Long LIST1 : LIST) {
+            hashSet.add(LIST1);
         }
         final long hashSetEnd = System.currentTimeMillis();
         // counting hash set
         final CountingSet<Long> countingHashSet = new CountingHashSet<>(PERFORMANCE_TEST_SIZE);
         final long countingHashSetStart = System.currentTimeMillis();
-        for (int i = 0; i < LIST.length; i++) {
-            countingHashSet.add(LIST[i]);
+        for (Long LIST1 : LIST) {
+            countingHashSet.add(LIST1);
         }
         final long countingHashSetEnd = System.currentTimeMillis();
         PerformanceStats.write("HashSet.add(object)", PERFORMANCE_TEST_SIZE, hashSetEnd - hashSetStart);
@@ -51,15 +51,15 @@ public class CountingHashSetTest {
         // hash set
         final Set<Long> hashSet = new HashSet<>(Arrays.asList(LIST));
         final long hashSetStart = System.currentTimeMillis();
-        for (int i = 0; i < LIST.length; i++) {
-            hashSet.remove(LIST[i]);
+        for (Long LIST1 : LIST) {
+            hashSet.remove(LIST1);
         }
         final long hashSetEnd = System.currentTimeMillis();
         // counting hash set
         final CountingSet<Long> countingHashSet = new CountingHashSet<>(Arrays.asList(LIST));
         final long countingHashSetStart = System.currentTimeMillis();
-        for (int i = 0; i < LIST.length; i++) {
-            countingHashSet.remove(LIST[i]);
+        for (Long LIST1 : LIST) {
+            countingHashSet.remove(LIST1);
         }
         final long countingHashSetEnd = System.currentTimeMillis();
         PerformanceStats.write("HashSet.remove(object)", PERFORMANCE_TEST_SIZE, hashSetEnd - hashSetStart);
@@ -71,15 +71,15 @@ public class CountingHashSetTest {
         // hash set
         final Set<Long> hashSet = new HashSet<>(Arrays.asList(LIST));
         final long hashSetStart = System.currentTimeMillis();
-        for (int i = 0; i < LIST.length; i++) {
-            hashSet.contains(LIST[i]);
+        for (Long LIST1 : LIST) {
+            hashSet.contains(LIST1);
         }
         final long hashSetEnd = System.currentTimeMillis();
         // counting hash set
         final CountingSet<Long> countingHashSet = new CountingHashSet<>(Arrays.asList(LIST));
         final long countingHashSetStart = System.currentTimeMillis();
-        for (int i = 0; i < LIST.length; i++) {
-            countingHashSet.contains(LIST[i]);
+        for (Long LIST1 : LIST) {
+            countingHashSet.contains(LIST1);
         }
         final long countingHashSetEnd = System.currentTimeMillis();
         PerformanceStats.write("HashSet.contains(object)", PERFORMANCE_TEST_SIZE, hashSetEnd - hashSetStart);
@@ -91,8 +91,8 @@ public class CountingHashSetTest {
         // counting hash set
         final CountingSet<Long> countingHashSet = new CountingHashSet<>(Arrays.asList(LIST));
         final long countingHashSetStart = System.currentTimeMillis();
-        for (int i = 0; i < LIST.length; i++) {
-            countingHashSet.getCount(LIST[i]);
+        for (Long LIST1 : LIST) {
+            countingHashSet.getCount(LIST1);
         }
         final long countingHashSetEnd = System.currentTimeMillis();
         PerformanceStats.write("CountingHashSet.getCount(object)", PERFORMANCE_TEST_SIZE, countingHashSetEnd - countingHashSetStart);

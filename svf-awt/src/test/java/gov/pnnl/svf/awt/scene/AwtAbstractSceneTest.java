@@ -148,11 +148,8 @@ public class AwtAbstractSceneTest {
         };
         final MouseMotionListener listener2 = new MouseMotionAdapter() {
         };
-        final MouseWheelListener listener3 = new MouseWheelListener() {
-            @Override
-            public void mouseWheelMoved(final MouseWheelEvent event) {
-                // no operation
-            }
+        final MouseWheelListener listener3 = (final MouseWheelEvent event) -> {
+            // no operation
         };
         final ComponentListener listener4 = new ComponentAdapter() {
         };
@@ -161,17 +158,14 @@ public class AwtAbstractSceneTest {
         final FocusListener listener6 = new FocusAdapter() {
         };
         // add all the listeners on the event thread
-        SwingUtilities.invokeAndWait(new Runnable() {
-            @Override
-            public void run() {
-                scene.add(listener0);
-                scene.add(listener1);
-                scene.add(listener2);
-                scene.add(listener3);
-                scene.add(listener4);
-                scene.add(listener5);
-                scene.add(listener6);
-            }
+        SwingUtilities.invokeAndWait(() -> {
+            scene.add(listener0);
+            scene.add(listener1);
+            scene.add(listener2);
+            scene.add(listener3);
+            scene.add(listener4);
+            scene.add(listener5);
+            scene.add(listener6);
         });
         // ensure they are all added to the panel
         Assert.assertTrue(containsValue(panel.getKeyListeners(), listener0));
@@ -200,11 +194,8 @@ public class AwtAbstractSceneTest {
         };
         final MouseMotionListener listener2 = new MouseMotionAdapter() {
         };
-        final MouseWheelListener listener3 = new MouseWheelListener() {
-            @Override
-            public void mouseWheelMoved(final MouseWheelEvent event) {
-                // no operation
-            }
+        final MouseWheelListener listener3 = (final MouseWheelEvent event) -> {
+            // no operation
         };
         final ComponentListener listener4 = new ComponentAdapter() {
         };
@@ -213,17 +204,14 @@ public class AwtAbstractSceneTest {
         final FocusListener listener6 = new FocusAdapter() {
         };
         // add all the listeners on the event thread
-        SwingUtilities.invokeAndWait(new Runnable() {
-            @Override
-            public void run() {
-                scene.add(listener0);
-                scene.add(listener1);
-                scene.add(listener2);
-                scene.add(listener3);
-                scene.add(listener4);
-                scene.add(listener5);
-                scene.add(listener6);
-            }
+        SwingUtilities.invokeAndWait(() -> {
+            scene.add(listener0);
+            scene.add(listener1);
+            scene.add(listener2);
+            scene.add(listener3);
+            scene.add(listener4);
+            scene.add(listener5);
+            scene.add(listener6);
         });
         // ensure they are all added to the panel
         Assert.assertTrue(containsValue(panel.getKeyListeners(), listener0));
@@ -234,17 +222,14 @@ public class AwtAbstractSceneTest {
         //        Assert.assertTrue(containsValue(panel.getContainerListeners(), listener5));
         Assert.assertTrue(containsValue(panel.getFocusListeners(), listener6));
         // remove all the listeners on the event thread
-        SwingUtilities.invokeAndWait(new Runnable() {
-            @Override
-            public void run() {
-                scene.remove(listener0);
-                scene.remove(listener1);
-                scene.remove(listener2);
-                scene.remove(listener3);
-                scene.remove(listener4);
-                scene.remove(listener5);
-                scene.remove(listener6);
-            }
+        SwingUtilities.invokeAndWait(() -> {
+            scene.remove(listener0);
+            scene.remove(listener1);
+            scene.remove(listener2);
+            scene.remove(listener3);
+            scene.remove(listener4);
+            scene.remove(listener5);
+            scene.remove(listener6);
         });
         // ensure they are all removed from the panel
         Assert.assertFalse(containsValue(panel.getKeyListeners(), listener0));

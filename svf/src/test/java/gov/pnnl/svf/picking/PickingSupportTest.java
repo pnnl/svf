@@ -39,12 +39,9 @@ public class PickingSupportTest {
         actor.setShape(Rectangle2D.ONE);
         final PickingSupport support = PickingSupport.newInstance(actor);
         final AtomicBoolean passed = new AtomicBoolean(false);
-        support.addListener(new PickingSupportListener() {
-            @Override
-            public void picked(final Actor actor, final PickingCameraEvent event) {
-                if (event.getTypes().containsAll(EnumSet.of(CameraEventType.RIGHT, CameraEventType.SINGLE, CameraEventType.SHIFT))) {
-                    passed.set(true);
-                }
+        support.addListener((PickingSupportListener) (final Actor actor1, final PickingCameraEvent event) -> {
+            if (event.getTypes().containsAll(EnumSet.of(CameraEventType.RIGHT, CameraEventType.SINGLE, CameraEventType.SHIFT))) {
+                passed.set(true);
             }
         });
         support.notifyPicked(new PickingCameraEvent(picking, 0, 0, 1, EnumSet.of(CameraEventType.SINGLE, CameraEventType.RIGHT, CameraEventType.SHIFT)));

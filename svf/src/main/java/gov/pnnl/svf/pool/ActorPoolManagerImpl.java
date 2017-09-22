@@ -23,7 +23,7 @@ public class ActorPoolManagerImpl implements ActorPoolManager {
      * Constructor
      */
     public ActorPoolManagerImpl() {
-        pools = Collections.synchronizedMap(new HashMap<KeyValuePair<Class<?>, String>, ActorPool<?>>());
+        pools = Collections.synchronizedMap(new HashMap<>());
     }
 
     @Override
@@ -31,7 +31,7 @@ public class ActorPoolManagerImpl implements ActorPoolManager {
         if (pool == null) {
             throw new NullPointerException("pool");
         }
-        final KeyValuePair<Class<?>, String> key = new KeyValuePair<Class<?>, String>(pool.getPoolClass(), pool.getPoolType());
+        final KeyValuePair<Class<?>, String> key = new KeyValuePair<>(pool.getPoolClass(), pool.getPoolType());
         synchronized (pools) {
             final ActorPool<?> existing = pools.put(key, pool);
             if (existing != null) {
@@ -45,7 +45,7 @@ public class ActorPoolManagerImpl implements ActorPoolManager {
     @SuppressWarnings("unchecked")
     @Override
     public <T> Pool<T> getPool(final Class<T> clazz, final String type) {
-        final KeyValuePair<Class<?>, String> key = new KeyValuePair<Class<?>, String>(clazz, type);
+        final KeyValuePair<Class<?>, String> key = new KeyValuePair<>(clazz, type);
         return (Pool<T>) pools.get(key);
     }
 

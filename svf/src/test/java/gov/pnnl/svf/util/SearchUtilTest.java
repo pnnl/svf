@@ -163,8 +163,8 @@ public class SearchUtilTest {
             final Set<String> temp = new HashSet<>();
             temp.add(abbreviation);
             if (keywords != null && keywords.length > 0) {
-                for (int i = 0; i < keywords.length; i++) {
-                    temp.add(keywords[i]);
+                for (String keyword : keywords) {
+                    temp.add(keyword);
                 }
             }
             this.keywords = Collections.unmodifiableSet(temp);

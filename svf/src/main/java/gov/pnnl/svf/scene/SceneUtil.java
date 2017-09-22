@@ -202,7 +202,7 @@ public class SceneUtil implements Disposable {
          */
         private byte state = StateUtil.NONE;
         private final SceneLookupImpl lookup;
-        private final List<Camera> cameras = new ArrayList<Camera>();
+        private final List<Camera> cameras = new ArrayList<>();
 
         protected ViewportListener(final SceneUtil utils) {
             lookup = utils.getSceneLookup();

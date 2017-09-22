@@ -26,7 +26,7 @@ import java.util.Set;
  */
 public class ColorPickingSupport extends AbstractSupport<ColorPickingSupportListener> implements ColorPickable {
 
-    private final Map<Object, Color> mapping = Collections.synchronizedMap(new HashMap<Object, Color>());
+    private final Map<Object, Color> mapping = Collections.synchronizedMap(new HashMap<>());
     private final ColorPickingUtils colorUtils;
     private final ColorPickableActor drawable;
 
