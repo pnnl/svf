@@ -78,6 +78,22 @@ public class SceneCoordsHelper {
 
     /**
      * Un-project the screen coordinates to scene coordinates without the GL
+     * context being current. This will use the last filled or identity
+     * matrices.
+     *
+     * @param x        the x location on the screen
+     * @param y        the y location on the screen
+     * @param z        the z depth in the scene
+     * @param viewport the viewport (x, y, width, height)
+     *
+     * @return the unprojected scene coordinate or zero vector if failed
+     */
+    public Vector3D unProject(final double x, final double y, final double z, final int[] viewport) {
+        return unProject(x, y, z, modelview, projection, viewport);
+    }
+
+    /**
+     * Un-project the screen coordinates to scene coordinates without the GL
      * context being current.
      *
      * @param x          the x location on the screen
@@ -100,6 +116,22 @@ public class SceneCoordsHelper {
                 return Vector3D.ZERO;
             }
         }
+    }
+
+    /**
+     * Un-project the screen coordinates to scene coordinates without the GL
+     * context being current. This will use the last filled or identity
+     * matrices.
+     *
+     * @param x        the x location on the screen
+     * @param y        the y location on the screen
+     * @param z        the z depth in the scene
+     * @param viewport the viewport (x, y, width, height)
+     *
+     * @return the unprojected scene coordinate or zero vector if failed
+     */
+    public Vector3D unProject(final float x, final float y, final float z, final int[] viewport) {
+        return unProject(x, y, z, modelview, projection, viewport);
     }
 
     /**

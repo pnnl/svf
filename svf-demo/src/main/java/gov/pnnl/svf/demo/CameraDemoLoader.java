@@ -1,8 +1,6 @@
 package gov.pnnl.svf.demo;
 
-import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.camera.DraggingCamera;
-import gov.pnnl.svf.camera.DrivingCamera;
 import gov.pnnl.svf.camera.OrbitCamera;
 import gov.pnnl.svf.core.color.Color;
 import gov.pnnl.svf.geometry.Rectangle;
@@ -29,15 +27,21 @@ public class CameraDemoLoader extends ShapeDemoLoader implements DemoLoader {
     public void load(final Scene scene) {
         super.load(scene);
         // find the first camera that was previously created
-        final Camera first = scene.lookup(DraggingCamera.class);
+        final DraggingCamera first = scene.lookup(DraggingCamera.class);
+        first.setZoomMin(5.0f);
+        first.setZoomMax(20.0f);
         // create a second camera
-        final Camera second = scene.getFactory().createCamera(scene, OrbitCamera.class);
+        final OrbitCamera second = scene.getFactory().createCamera(scene, OrbitCamera.class);
         second.setLocation(new Vector3D(1.0, 0.0, 15.0));
         ColorSupport.newInstance(second).setColor(new Color("#ffffff"));
         scene.add(second);
         // create a third camera
-        final Camera third = scene.getFactory().createCamera(scene, DrivingCamera.class);
-        third.setLocation(new Vector3D(1.0, 0.0, 15.0));
+        final DraggingCamera third = scene.getFactory().createCamera(scene, DraggingCamera.class);
+//        third.setDragMultiplier(0.01f);
+        third.setNearClip(0.001);
+        third.setZoomMin(0.01f);
+        third.setZoomMax(5.0f);
+        third.setLocation(new Vector3D(1.0, 0.0, 1.0));
         ColorSupport.newInstance(third).setColor(new Color("#dddddd"));
         scene.add(third);
         // property change to update camera viewports
