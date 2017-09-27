@@ -2,6 +2,7 @@ package gov.pnnl.svf.camera;
 
 import gov.pnnl.svf.core.util.MathUtil;
 import gov.pnnl.svf.event.CameraEventType;
+import gov.pnnl.svf.geometry.Frustum;
 import gov.pnnl.svf.geometry.Rectangle;
 import gov.pnnl.svf.geometry.Rectangle2D;
 import gov.pnnl.svf.scene.Scene;
@@ -65,7 +66,7 @@ public class DraggingCamera extends SimpleCamera {
      */
     private boolean zooming = false;
     private boolean zoomToMouse = true;
-    private float dragMultiplier = 0.06f;
+    private float dragMultiplier = 1.0f;
     private float zoomMultiplier = 0.5f;
     private float zoomMin = 0.0f;
     private float zoomMax = 100.0f;
@@ -450,23 +451,24 @@ public class DraggingCamera extends SimpleCamera {
         final int previousY = currentMouseY;
         currentMouseX = x;
         currentMouseY = y;
-        final float multiplier;
-        if (viewport.getHeight() > 0) {
-            multiplier = getDragMultiplier() * ((float) sceneViewport.getHeight() / (float) viewport.getHeight());
-        } else {
-            multiplier = getDragMultiplier();
-        }
+        final float multiplier = getDragMultiplier();
         if (isDragging() && !isZooming()) {
             // get the current location
             final Vector3D location = getLocation();
             // move the camera around while it is being dragged
             // scale the drag sensitivity according to the current zoom
-            // we don't use linear interpolation because we want it to scale all the way to zero
-            // because of the perspective shift
-            final double zoomScale = location.getZ() / getZoomMax();
+            final Frustum frustum = getFrustum();
+            final double dirX = currentMouseX - previousX < 0.0 ? 1.0 : -1.0;
+            final double dirY = currentMouseY - previousY < 0.0 ? -1.0 : 1.0;
+            final double far = Math.min(frustum.getFarViewableArea().getWidth(), frustum.getFarViewableArea().getHeight());
+            final double near = Math.min(frustum.getNearViewableArea().getWidth(), frustum.getNearViewableArea().getHeight());
+            final double size = Math.min(viewport.getWidth(), viewport.getHeight());
+            final double dScale = MathUtil.scale(location.getZ(), getFarClip(), getNearClip(), far, near);
+            final double vScaleX = MathUtil.scale(Math.abs(currentMouseX - previousX), size, 0.0, dScale, 0.0);
+            final double vScaleY = MathUtil.scale(Math.abs(currentMouseY - previousY), size, 0.0, dScale, 0.0);
             // apply the new translation
             setLocation(location.add(
-                    new Vector3D((currentMouseX - previousX) * -multiplier * zoomScale, (currentMouseY - previousY) * multiplier * zoomScale, 0.0)));
+                    new Vector3D(vScaleX * multiplier * dirX, vScaleY * multiplier * dirY, 0.0)));
         }
         // need to check mouse button here or an initial zoom from scroll can cause problems
         if (pressedMouseButton == CameraEventType.RIGHT && isZooming() && !isDragging()) {
