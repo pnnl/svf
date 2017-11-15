@@ -34,7 +34,6 @@ public class BorderedShapeActorTest extends AbstractObjectTestBase<BorderedShape
     @Override
     protected BorderedShapeActor copyValueObject(final BorderedShapeActor object) {
         final BorderedShapeActor copy = new BorderedShapeActor(object.getScene(), object.getType(), object.getId());
-        copy.setCamera(object.getCamera());
         copy.setDirty(object.isDirty());
         copy.setDrawingPass(object.getDrawingPass());
         copy.setPassNumber(object.getPassNumber());
@@ -81,8 +80,7 @@ public class BorderedShapeActorTest extends AbstractObjectTestBase<BorderedShape
         object.setBorderColor(null)
                 .setBackgroundColor(null)
                 .setColor(null)
-                .setShape(null)
-                .setCamera(null);
+                .setShape(null);
     }
 
     /**
@@ -192,14 +190,14 @@ public class BorderedShapeActorTest extends AbstractObjectTestBase<BorderedShape
      * Tests whether the actor is set as dirty when the a property is changed
      */
     @Test
-    public void setCameraTest() {
+    public void addCameraTest() {
         final Camera a = new SimpleCamera(scene);
         final Camera b = new SimpleCamera(scene);
         final BorderedShapeActor actor = newValueObject();
-        actor.setCamera(a);
+        actor.addCamera(a);
         actor.setDirty(false);
         Assert.assertFalse(actor.isDirty());
-        testBoundField(actor, Actor.CAMERA, b, Camera.class);
+        actor.addCamera(b);
         Assert.assertTrue(actor.isDirty());
     }
 

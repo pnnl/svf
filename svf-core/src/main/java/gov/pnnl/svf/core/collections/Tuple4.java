@@ -76,6 +76,22 @@ public class Tuple4<A, B, C, D> extends AbstractTuple {
             return new Builder<>();
         }
 
+        public A first() {
+            return this.first;
+        }
+
+        public B second() {
+            return this.second;
+        }
+
+        public C third() {
+            return this.third;
+        }
+
+        public D fourth() {
+            return this.fourth;
+        }
+
         public Builder<A, B, C, D> first(final A first) {
             this.first = first;
             return this;

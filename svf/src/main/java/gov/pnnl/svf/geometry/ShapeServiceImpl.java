@@ -57,8 +57,8 @@ public class ShapeServiceImpl implements ShapeService {
         if (renderer == null) {
             // find best case renderer
             final Class<?>[] classes = type.getClasses();
-            for (int i = 0; i < classes.length; i++) {
-                renderer = map.get(classes[i]);
+            for (Class<?> classe : classes) {
+                renderer = map.get(classe);
                 if (renderer != null) {
                     break;
                 }

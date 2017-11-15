@@ -148,7 +148,7 @@ public class ColorPickingTest {
             final Set<KeyValuePair<ColorPickingSupport, Object>> picks = new HashSet<>();
             for (int x = 0; x < SELECT_SIZE; x++) {
                 for (int y = 0; y < SELECT_SIZE; y++) {
-                    picks.add(new KeyValuePair<ColorPickingSupport, Object>(cps, new Point(x * SPACING + SPACING / 2, y * SPACING + SPACING / 2)));
+                    picks.add(new KeyValuePair<>(cps, new Point(x * SPACING + SPACING / 2, y * SPACING + SPACING / 2)));
                 }
             }
             final Set<KeyValuePair<ColorPickingSupport, Object>> actual;

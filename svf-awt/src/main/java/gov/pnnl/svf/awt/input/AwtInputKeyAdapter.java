@@ -34,7 +34,7 @@ public class AwtInputKeyAdapter implements KeyListener, FocusListener {
      */
     public KeyState getKeyState(final int keyCode) {
         synchronized (keyStates) {
-            final KeyState state = keyStates.get(Integer.valueOf(keyCode));
+            final KeyState state = keyStates.get(keyCode);
             if (state == null) {
                 keyStates.put(keyCode, KeyState.UP);
                 return KeyState.UP;

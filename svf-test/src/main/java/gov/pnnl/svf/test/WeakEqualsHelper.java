@@ -308,8 +308,7 @@ public class WeakEqualsHelper {
         }
 
         final ArrayList<Integer> usedIndexes = new ArrayList<>();
-        for (int i = 0; i < array.length; i++) {
-            final Object currObject = array[i];
+        for (Object currObject : array) {
             boolean found = false;
             for (int k = 0; k < otherArray.length; k++) {
                 if (!usedIndexes.contains(k)) {

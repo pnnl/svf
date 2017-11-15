@@ -7,10 +7,9 @@ import gov.pnnl.svf.scene.Scene;
 import gov.pnnl.svf.test.AbstractObjectTestBase;
 import gov.pnnl.svf.util.ConfigUtil;
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.concurrent.atomic.AtomicBoolean;
-import org.junit.Assert;
 import org.apache.commons.math.geometry.Vector3D;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -34,12 +33,9 @@ public class AbstractCameraTest extends AbstractObjectTestBase<AbstractCamera> {
         final AbstractCamera actor = newValueObject();
         actor.setFarClip(0.345);
         actor.setDirty(false);
-        actor.getPropertyChangeSupport().addPropertyChangeListener(Camera.FAR_CLIP, new PropertyChangeListener() {
-                                                               @Override
-                                                               public void propertyChange(final PropertyChangeEvent evt) {
-                                                                   Assert.assertTrue(evt.getNewValue() instanceof Double);
-                                                                   passed.set(true);
-                                                               }
+        actor.getPropertyChangeSupport().addPropertyChangeListener(Camera.FAR_CLIP, (final PropertyChangeEvent evt) -> {
+                                                               Assert.assertTrue(evt.getNewValue() instanceof Double);
+                                                               passed.set(true);
                                                            });
         actor.setFarClip(0.9);
         Assert.assertTrue(passed.get());
@@ -55,12 +51,9 @@ public class AbstractCameraTest extends AbstractObjectTestBase<AbstractCamera> {
         final AbstractCamera actor = newValueObject();
         actor.setFieldOfView(0.345);
         actor.setDirty(false);
-        actor.getPropertyChangeSupport().addPropertyChangeListener(Camera.FIELD_OF_VIEW, new PropertyChangeListener() {
-                                                               @Override
-                                                               public void propertyChange(final PropertyChangeEvent evt) {
-                                                                   Assert.assertTrue(evt.getNewValue() instanceof Double);
-                                                                   passed.set(true);
-                                                               }
+        actor.getPropertyChangeSupport().addPropertyChangeListener(Camera.FIELD_OF_VIEW, (final PropertyChangeEvent evt) -> {
+                                                               Assert.assertTrue(evt.getNewValue() instanceof Double);
+                                                               passed.set(true);
                                                            });
         actor.setFieldOfView(0.9);
         Assert.assertTrue(passed.get());
@@ -76,12 +69,9 @@ public class AbstractCameraTest extends AbstractObjectTestBase<AbstractCamera> {
         final AbstractCamera actor = newValueObject();
         actor.setLook(new Vector3D(0.1, 0.2, 0.3));
         actor.setDirty(false);
-        actor.getPropertyChangeSupport().addPropertyChangeListener(Camera.LOOK, new PropertyChangeListener() {
-                                                               @Override
-                                                               public void propertyChange(final PropertyChangeEvent evt) {
-                                                                   Assert.assertTrue(evt.getNewValue() instanceof Vector3D);
-                                                                   passed.set(true);
-                                                               }
+        actor.getPropertyChangeSupport().addPropertyChangeListener(Camera.LOOK, (final PropertyChangeEvent evt) -> {
+                                                               Assert.assertTrue(evt.getNewValue() instanceof Vector3D);
+                                                               passed.set(true);
                                                            });
         actor.setLook(new Vector3D(0.4, 0.4, 0.4));
         Assert.assertTrue(passed.get());
@@ -97,12 +87,9 @@ public class AbstractCameraTest extends AbstractObjectTestBase<AbstractCamera> {
         final AbstractCamera actor = newValueObject();
         actor.setNearClip(0.345);
         actor.setDirty(false);
-        actor.getPropertyChangeSupport().addPropertyChangeListener(Camera.NEAR_CLIP, new PropertyChangeListener() {
-                                                               @Override
-                                                               public void propertyChange(final PropertyChangeEvent evt) {
-                                                                   Assert.assertTrue(evt.getNewValue() instanceof Double);
-                                                                   passed.set(true);
-                                                               }
+        actor.getPropertyChangeSupport().addPropertyChangeListener(Camera.NEAR_CLIP, (final PropertyChangeEvent evt) -> {
+                                                               Assert.assertTrue(evt.getNewValue() instanceof Double);
+                                                               passed.set(true);
                                                            });
         actor.setNearClip(0.9);
         Assert.assertTrue(passed.get());
@@ -118,12 +105,9 @@ public class AbstractCameraTest extends AbstractObjectTestBase<AbstractCamera> {
         final AbstractCamera actor = newValueObject();
         actor.setUp(new Vector3D(0.1, 0.2, 0.3));
         actor.setDirty(false);
-        actor.getPropertyChangeSupport().addPropertyChangeListener(Camera.UP, new PropertyChangeListener() {
-                                                               @Override
-                                                               public void propertyChange(final PropertyChangeEvent evt) {
-                                                                   Assert.assertTrue(evt.getNewValue() instanceof Vector3D);
-                                                                   passed.set(true);
-                                                               }
+        actor.getPropertyChangeSupport().addPropertyChangeListener(Camera.UP, (final PropertyChangeEvent evt) -> {
+                                                               Assert.assertTrue(evt.getNewValue() instanceof Vector3D);
+                                                               passed.set(true);
                                                            });
         actor.setUp(new Vector3D(0.4, 0.4, 0.4));
         Assert.assertTrue(passed.get());
@@ -139,12 +123,9 @@ public class AbstractCameraTest extends AbstractObjectTestBase<AbstractCamera> {
         final AbstractCamera actor = newValueObject();
         actor.setViewport(new Rectangle(0, 0, 150, 150));
         actor.setDirty(false);
-        actor.getPropertyChangeSupport().addPropertyChangeListener(Camera.VIEWPORT, new PropertyChangeListener() {
-                                                               @Override
-                                                               public void propertyChange(final PropertyChangeEvent evt) {
-                                                                   Assert.assertTrue(evt.getNewValue() instanceof Rectangle);
-                                                                   passed.set(true);
-                                                               }
+        actor.getPropertyChangeSupport().addPropertyChangeListener(Camera.VIEWPORT, (final PropertyChangeEvent evt) -> {
+                                                               Assert.assertTrue(evt.getNewValue() instanceof Rectangle);
+                                                               passed.set(true);
                                                            });
         actor.setViewport(new Rectangle(20, 20, 50, 50));
         Assert.assertTrue(passed.get());
@@ -166,7 +147,6 @@ public class AbstractCameraTest extends AbstractObjectTestBase<AbstractCamera> {
     @Override
     protected AbstractCamera copyValueObject(final AbstractCamera object) {
         final AbstractCameraImpl copy = new AbstractCameraImpl(object.getScene(), object.getType(), object.getId());
-        copy.setCamera(object.getCamera());
         copy.setDirty(object.isDirty());
         copy.setDrawingPass(object.getDrawingPass());
         copy.setFarClip(object.getFarClip());

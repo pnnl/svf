@@ -76,14 +76,6 @@ public interface Actor extends LookupProvider, Drawable, Disposable, Observable 
     void dispose();
 
     /**
-     * The camera that this actor is visible in. This is useful for GUI
-     * components. If left null then the actor will be visible in all cameras.
-     *
-     * @return the scene camera or null for all cameras
-     */
-    Camera getCamera();
-
-    /**
      * @return the id
      */
     String getId();
@@ -122,14 +114,40 @@ public interface Actor extends LookupProvider, Drawable, Disposable, Observable 
     boolean isWire();
 
     /**
-     * The camera that this actor is visible in. This is useful for GUI
-     * components. If left null then the actor will be visible in all cameras.
+     * Check whether this actor is visible to the specified camera.
      *
-     * @param camera the scene camera or null for all cameras
+     * @param camera the camera to check
+     *
+     * @return true if visible
+     */
+    boolean isCamera(final Camera camera);
+
+    /**
+     * A camera that this actor is visible in. This is useful for GUI
+     * components.
+     *
+     * @param camera a scene camera
      *
      * @return this instance
      */
-    Actor setCamera(final Camera camera);
+    Actor addCamera(final Camera camera);
+
+    /**
+     * A camera that this actor is not visible in. This is useful for GUI
+     * components.
+     *
+     * @param camera a scene camera
+     *
+     * @return this instance
+     */
+    Actor removeCamera(final Camera camera);
+
+    /**
+     * Make this actor visible to all cameras.
+     *
+     * @return this instance
+     */
+    Actor clearCameras();
 
     /**
      * @param dirty true if this actor needs to be redrawn
@@ -303,15 +321,15 @@ public interface Actor extends LookupProvider, Drawable, Disposable, Observable 
             this.actorType = ActorType.NODE;
             return this;
         }
-        // volume actor
 
+        // volume actor
         public BuilderShape volume(final Volume3D shape) {
             this.actorType = ActorType.VOLUME;
             this.shape = shape;
             return this;
         }
-        // shape actor
 
+        // shape actor
         @Override
         public BuilderShape shape(final Shape shape) {
             if (shape instanceof Volume3D) {
@@ -338,8 +356,8 @@ public interface Actor extends LookupProvider, Drawable, Disposable, Observable 
             this.backgroundColor = backgroundColor;
             return this;
         }
-        // bordered shape actor
 
+        // bordered shape actor
         @Override
         public BuilderShape border(final Border border) {
             this.actorType = ActorType.BORDERED_SHAPE;
@@ -439,13 +457,15 @@ public interface Actor extends LookupProvider, Drawable, Disposable, Observable 
                 default:
                     throw new IllegalArgumentException("Unknown actor type passed to control statement: " + actorType);
             }
-            actor.setCamera(camera)
-                    .setDirty(dirty)
+            actor.setDirty(dirty)
                     .setDrawingPass(drawingPass)
                     .setPassNumber(passNumber)
                     .setThickness(thickness)
                     .setVisible(visible)
                     .setWire(wire);
+            if (camera != null) {
+                actor.addCamera(camera);
+            }
             if (type != null) {
                 actor.setType(type);
             }

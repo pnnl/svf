@@ -67,7 +67,7 @@ public abstract class AbstractSupport<I> implements Disposable, Observable {
         final Set<Actor> temp;
         synchronized (this) {
             if (actors == null) {
-                actors = Collections.synchronizedSet(new HashSet<Actor>());
+                actors = Collections.synchronizedSet(new HashSet<>());
                 actors.add(this.actor);
             }
             temp = actors;
@@ -248,7 +248,7 @@ public abstract class AbstractSupport<I> implements Disposable, Observable {
     }
 
     private static <I> List<I> newCollection(final List<I> listeners) {
-        return listeners != null ? new ArrayList<>(listeners) : new ArrayList<I>();
+        return listeners != null ? new ArrayList<>(listeners) : new ArrayList<>();
     }
 
     /**

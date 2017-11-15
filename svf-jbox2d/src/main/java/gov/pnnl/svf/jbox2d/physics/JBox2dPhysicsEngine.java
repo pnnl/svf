@@ -97,7 +97,7 @@ public class JBox2dPhysicsEngine extends AbstractActor implements Updatable {
      * The actor name used to identify the right scene boundary.
      */
     public static final String SCENE_BOUNDARY_RIGHT = "scene-boundary-right";
-    protected final Set<JBox2dContactListener> contactListeners = Collections.synchronizedSet(new HashSet<JBox2dContactListener>());
+    protected final Set<JBox2dContactListener> contactListeners = Collections.synchronizedSet(new HashSet<>());
     protected final ExecutorService executor = Executors.newSingleThreadExecutor(new NamedThreadFactory(getClass(), "Update"));
     protected final AtomicBoolean updating = new AtomicBoolean(false);
     protected final AtomicLong modifiedDelta = new AtomicLong(0L);
@@ -742,25 +742,7 @@ public class JBox2dPhysicsEngine extends AbstractActor implements Updatable {
             modifiedDelta.addAndGet(delta);
             if (!updating.getAndSet(true)) {
                 getPropertyChangeSupport().firePropertyChange(UPDATING, false, true);
-                executor.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            modifiedDelta.addAndGet(updatePhysics(modifiedDelta.getAndSet(0L)));
-                        } catch (final RuntimeException ex) {
-                            logger.log(Level.WARNING, MessageFormat.format("{0}: Exception thrown while updating the physics engine.", scene), ex);
-                        } finally {
-                            updating.set(false);
-                            getPropertyChangeSupport().firePropertyChange(UPDATING, true, false);
-                        }
-                    }
-                });
-            }
-        } else if (update.getAndSet(false) && !updating.getAndSet(true)) {
-            getPropertyChangeSupport().firePropertyChange(UPDATING, false, true);
-            executor.execute(new Runnable() {
-                @Override
-                public void run() {
+                executor.execute(() -> {
                     try {
                         modifiedDelta.addAndGet(updatePhysics(modifiedDelta.getAndSet(0L)));
                     } catch (final RuntimeException ex) {
@@ -769,6 +751,18 @@ public class JBox2dPhysicsEngine extends AbstractActor implements Updatable {
                         updating.set(false);
                         getPropertyChangeSupport().firePropertyChange(UPDATING, true, false);
                     }
+                });
+            }
+        } else if (update.getAndSet(false) && !updating.getAndSet(true)) {
+            getPropertyChangeSupport().firePropertyChange(UPDATING, false, true);
+            executor.execute(() -> {
+                try {
+                    modifiedDelta.addAndGet(updatePhysics(modifiedDelta.getAndSet(0L)));
+                } catch (final RuntimeException ex) {
+                    logger.log(Level.WARNING, MessageFormat.format("{0}: Exception thrown while updating the physics engine.", scene), ex);
+                } finally {
+                    updating.set(false);
+                    getPropertyChangeSupport().firePropertyChange(UPDATING, true, false);
                 }
             });
         }

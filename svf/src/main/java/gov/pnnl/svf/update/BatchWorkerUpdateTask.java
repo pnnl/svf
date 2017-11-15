@@ -213,20 +213,17 @@ public class BatchWorkerUpdateTask extends AbstractWorkerTask implements BatchWo
                 synchronized (this) {
                     for (final Iterator<WorkerUpdateTaskRunnable> it = runnables.iterator(); it.hasNext();) {
                         final WorkerUpdateTaskRunnable runnable = it.next();
-                        executor.execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    runnable.run(BatchWorkerUpdateTask.this);
-                                } finally {
-                                    final int remaining;
-                                    synchronized (BatchWorkerUpdateTask.this) {
-                                        runnables.remove(runnable);
-                                        remaining = runnables.size();
-                                    }
-                                    if (remaining <= 0) {
-                                        setStage(Stage.POST_RUN);
-                                    }
+                        executor.execute(() -> {
+                            try {
+                                runnable.run(BatchWorkerUpdateTask.this);
+                            } finally {
+                                final int remaining;
+                                synchronized (BatchWorkerUpdateTask.this) {
+                                    runnables.remove(runnable);
+                                    remaining = runnables.size();
+                                }
+                                if (remaining <= 0) {
+                                    setStage(Stage.POST_RUN);
                                 }
                             }
                         });

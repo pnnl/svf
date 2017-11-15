@@ -47,13 +47,7 @@ public class ShortArrayUtilTest {
             for (int i = 0; i < c.length; i++) {
                 cc.add(c[i]);
             }
-            Collections.sort(cc, new Comparator<Short>() {
-
-                         @Override
-                         public int compare(Short o1, Short o2) {
-                             return o1.compareTo(o2);
-                         }
-                     });
+            Collections.sort(cc, Short::compareTo);
             for (int i = 0; i < cc.size(); i++) {
                 c[i] = cc.get(i);
             }
@@ -63,13 +57,7 @@ public class ShortArrayUtilTest {
             // ShortArrayUtil.sort()
             final short[] d = Arrays.copyOf(a, a.length);
             start = System.currentTimeMillis();
-            ShortArrayUtil.sort(d, new ShortArrayUtil.ShortComparator() {
-
-                            @Override
-                            public int compare(short o1, short o2) {
-                                return Short.compare(o1, o2);
-                            }
-                        });
+            ShortArrayUtil.sort(d, Short::compare);
             stop = System.currentTimeMillis();
             System.out.println("ShortArrayUtil.sort() took " + (stop - start) + " ms to sort " + SIZE + " entries.");
             total += stop - start;

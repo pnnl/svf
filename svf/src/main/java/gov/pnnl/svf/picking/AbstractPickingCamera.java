@@ -43,7 +43,7 @@ public abstract class AbstractPickingCamera extends AbstractActor implements Pic
      */
     public static final String DEFAULT_TYPE = "picking-camera";
     private final static int CAPACITY = 64;
-    private final List<PickingCameraListener> listeners = Collections.synchronizedList(new ArrayList<PickingCameraListener>());
+    private final List<PickingCameraListener> listeners = Collections.synchronizedList(new ArrayList<>());
     private Set<PickingCameraEvent> eventQueue = new LinkedHashSet<>();
     private final Object eventQueueSync = new Object();
     /**
@@ -176,7 +176,7 @@ public abstract class AbstractPickingCamera extends AbstractActor implements Pic
     @Override
     public void checkPickingHit(final GL2 gl, final GLUgl2 glu, final PickingSupport support) {
         // only pick if this actor is viewable in the referenceCamera
-        if ((support.getActor().getCamera() == null) || (support.getActor().getCamera() == referenceCamera)) {
+        if (support.getActor().isCamera(referenceCamera)) {
             gl.glRenderMode(GL2.GL_SELECT);
             gl.glInitNames();
             gl.glPushName(0);

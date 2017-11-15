@@ -154,11 +154,6 @@ public class CountingCamera implements CameraExt<Object> {
     }
 
     @Override
-    public Camera getCamera() {
-        throw new UnsupportedOperationException("Not supported.");
-    }
-
-    @Override
     public String getId() {
         throw new UnsupportedOperationException("Not supported.");
     }
@@ -190,11 +185,6 @@ public class CountingCamera implements CameraExt<Object> {
 
     @Override
     public boolean isWire() {
-        throw new UnsupportedOperationException("Not supported.");
-    }
-
-    @Override
-    public Actor setCamera(Camera camera) {
         throw new UnsupportedOperationException("Not supported.");
     }
 
@@ -335,6 +325,26 @@ public class CountingCamera implements CameraExt<Object> {
 
     @Override
     public void clearListeners() {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public boolean isCamera(Camera camera) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public Actor addCamera(Camera camera) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public Actor removeCamera(Camera camera) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public Actor clearCameras() {
         throw new UnsupportedOperationException("Not supported.");
     }
 

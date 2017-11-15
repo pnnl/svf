@@ -60,27 +60,16 @@ public class FxLabelDemoController implements Initializable {
         scene.construct(builder);
         scene.setWidth(WINDOW_SIZE_WIDTH);
         scene.setHeight(WINDOW_SIZE_HEIGHT);
-        root.widthProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(final ObservableValue<? extends Number> observable, final Number oldValue, final Number newValue) {
-                scene.setWidth((Double) newValue);
-            }
+        root.widthProperty().addListener((final ObservableValue<? extends Number> observable, final Number oldValue, final Number newValue) -> {
+            scene.setWidth((Double) newValue);
         });
-        root.heightProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(final ObservableValue<? extends Number> observable, final Number oldValue, final Number newValue) {
-                scene.setHeight((Double) newValue);
-            }
+        root.heightProperty().addListener((final ObservableValue<? extends Number> observable, final Number oldValue, final Number newValue) -> {
+            scene.setHeight((Double) newValue);
         });
         // initialize and start the demo scene
         scene.initialize();
         scene.start();
-        final Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                scene.load();
-            }
-        });
+        final Thread thread = new Thread(scene::load);
         thread.start();
     }
 }

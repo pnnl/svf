@@ -18,7 +18,7 @@ public class Tuple4Test extends AbstractObjectTestBase<Tuple4<Integer, Integer, 
      */
     @Test
     public void testGet() {
-        final Tuple4<Integer, Integer, Integer, Integer> a = new Tuple4<>(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3), Integer.valueOf(4));
+        final Tuple4<Integer, Integer, Integer, Integer> a = new Tuple4<>(1, 2, 3, 4);
         Assert.assertEquals(1, a.get(0));
         Assert.assertEquals(2, a.get(1));
         Assert.assertEquals(3, a.get(2));
@@ -31,10 +31,10 @@ public class Tuple4Test extends AbstractObjectTestBase<Tuple4<Integer, Integer, 
     @Test
     public void testGetBuilder() {
         final Tuple4<Integer, Integer, Integer, Integer> a = Tuple4.Builder.<Integer, Integer, Integer, Integer>construct()
-                .first(Integer.valueOf(1))
-                .second(Integer.valueOf(2))
-                .third(Integer.valueOf(3))
-                .fourth(Integer.valueOf(4))
+                .first(1)
+                .second(2)
+                .third(3)
+                .fourth(4)
                 .build();
         Assert.assertEquals(1, a.get(0));
         Assert.assertEquals(2, a.get(1));
@@ -47,7 +47,7 @@ public class Tuple4Test extends AbstractObjectTestBase<Tuple4<Integer, Integer, 
      */
     @Test
     public void testSize() {
-        final Tuple4<Integer, Integer, Integer, Integer> a = new Tuple4<>(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3), Integer.valueOf(3));
+        final Tuple4<Integer, Integer, Integer, Integer> a = new Tuple4<>(1, 2, 3, 3);
         Assert.assertEquals(4, a.size());
     }
 

@@ -134,19 +134,16 @@ public class SwtScene extends AbstractScene<GLCanvas> {
 
     @Override
     public void dispose() {
-        getFactory().runOnUiThread(this, new Runnable() {
-                               @Override
-                               public void run() {
-                                   // remove the resize behavior
-                                   try {
-                                       getComponent().removeControlListener(swtListener);
-                                       getComponent().removeDisposeListener(swtListener);
-                                       getComponent().removePaintListener(swtListener);
-                                       getComponent().getShell().removeShellListener(swtListener);
-                                   } catch (final RuntimeException ex) {
-                                       if (getSceneBuilder().isVerbose()) {
-                                           logger.log(Level.WARNING, MessageFormat.format("{0}: Exception while removing shell listener.", SwtScene.this), ex);
-                                       }
+        getFactory().runOnUiThread(this, () -> {
+                               // remove the resize behavior
+                               try {
+                                   getComponent().removeControlListener(swtListener);
+                                   getComponent().removeDisposeListener(swtListener);
+                                   getComponent().removePaintListener(swtListener);
+                                   getComponent().getShell().removeShellListener(swtListener);
+                               } catch (final RuntimeException ex) {
+                                   if (getSceneBuilder().isVerbose()) {
+                                       logger.log(Level.WARNING, MessageFormat.format("{0}: Exception while removing shell listener.", SwtScene.this), ex);
                                    }
                                }
                            });

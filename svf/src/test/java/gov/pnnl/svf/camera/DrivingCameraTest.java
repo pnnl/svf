@@ -21,7 +21,6 @@ public class DrivingCameraTest extends AbstractObjectTestBase<DrivingCamera> {
     @Override
     protected DrivingCamera copyValueObject(final DrivingCamera object) {
         final DrivingCamera copy = new DrivingCamera(object.getScene(), object.getType(), object.getId());
-        copy.setCamera(object.getCamera());
         copy.setDirty(object.isDirty());
         copy.setDrawingPass(object.getDrawingPass());
         copy.setFarClip(object.getFarClip());
@@ -48,6 +47,6 @@ public class DrivingCameraTest extends AbstractObjectTestBase<DrivingCamera> {
 
     @Override
     protected void setFieldsToNull(final DrivingCamera object) {
-        object.setCamera(null);
+        // no fields to set
     }
 }

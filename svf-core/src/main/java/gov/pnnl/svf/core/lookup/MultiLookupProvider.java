@@ -39,8 +39,8 @@ public interface MultiLookupProvider extends LookupProvider {
      * @param objects The objects to add to this lookup provider.
      *
      * @throws NullPointerException     if the lookups parameter is null
-     * @throws IllegalArgumentException if a {@code Class<?>} type is passed as an
-     *                                  objects collection entry
+     * @throws IllegalArgumentException if a {@code Class<?>} type is passed as
+     *                                  an objects collection entry
      */
     <T> void addAll(Collection<T> objects);
 
@@ -54,8 +54,8 @@ public interface MultiLookupProvider extends LookupProvider {
      * @return true if any of the objects were found and removed
      *
      * @throws NullPointerException     if the lookup parameter is null
-     * @throws IllegalArgumentException if a {@code Class<?>} type is passed as an
-     *                                  objects collection entry
+     * @throws IllegalArgumentException if a {@code Class<?>} type is passed as
+     *                                  an objects collection entry
      */
     <T> boolean removeAll(Collection<T> objects);
 

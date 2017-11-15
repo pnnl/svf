@@ -188,23 +188,14 @@ public abstract class FxAbstractScene extends Canvas implements SceneExt {
         synchronized (this) {
             constructed = true;
         }
-        widthProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(final ObservableValue<? extends Number> observable, final Number old, final Number value) {
-                FxAbstractScene.this.reset();
-            }
+        widthProperty().addListener((final ObservableValue<? extends Number> observable, final Number old, final Number value) -> {
+            FxAbstractScene.this.reset();
         });
-        heightProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(final ObservableValue<? extends Number> observable, final Number old, final Number value) {
-                FxAbstractScene.this.reset();
-            }
+        heightProperty().addListener((final ObservableValue<? extends Number> observable, final Number old, final Number value) -> {
+            FxAbstractScene.this.reset();
         });
-        visibleProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(final ObservableValue<? extends Boolean> observable, final Boolean old, final Boolean value) {
-                FxAbstractScene.this.reset();
-            }
+        visibleProperty().addListener((final ObservableValue<? extends Boolean> observable, final Boolean old, final Boolean value) -> {
+            FxAbstractScene.this.reset();
         });
     }
 
@@ -234,14 +225,11 @@ public abstract class FxAbstractScene extends Canvas implements SceneExt {
         if (object instanceof Camera) {
             final Camera camera = (Camera) object;
 
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    final double width = getWidth();
-                    final double height = getHeight();
-                    final Rectangle viewport = new Rectangle(0, 0, (int) width, (int) height);
-                    camera.setViewport(viewport);
-                }
+            Platform.runLater(() -> {
+                final double width1 = getWidth();
+                final double height1 = getHeight();
+                final Rectangle viewport1 = new Rectangle(0, 0, (int) width1, (int) height1);
+                camera.setViewport(viewport1);
             });
         }
     }
@@ -253,14 +241,11 @@ public abstract class FxAbstractScene extends Canvas implements SceneExt {
             if (object instanceof Camera) {
                 final Camera camera = (Camera) object;
 
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        final double width = getWidth();
-                        final double height = getHeight();
-                        final Rectangle viewport = new Rectangle(0, 0, (int) width, (int) height);
-                        camera.setViewport(viewport);
-                    }
+                Platform.runLater(() -> {
+                    final double width1 = getWidth();
+                    final double height1 = getHeight();
+                    final Rectangle viewport1 = new Rectangle(0, 0, (int) width1, (int) height1);
+                    camera.setViewport(viewport1);
                 });
             }
         }
@@ -269,28 +254,20 @@ public abstract class FxAbstractScene extends Canvas implements SceneExt {
     @Override
     public void addListeners(final Object object) {
         if (object instanceof FxEventHandler) {
-            Platform.runLater(new Runnable() {
-                @SuppressWarnings({"unchecked", "rawtypes"})
-                @Override
-                public void run() {
-                    final FxEventHandler handler = (FxEventHandler) object;
-                    for (final Object object : handler.getEventTypes()) {
-                        final EventType<?> eventType = (EventType) object;
-                        addEventHandler(eventType, handler);
-                    }
+            Platform.runLater(() -> {
+                final FxEventHandler handler = (FxEventHandler) object;
+                for (final Object object1 : handler.getEventTypes()) {
+                    final EventType<?> eventType = (EventType) object1;
+                    addEventHandler(eventType, handler);
                 }
             });
         }
         if (object instanceof FxEventFilter) {
-            Platform.runLater(new Runnable() {
-                @SuppressWarnings({"unchecked", "rawtypes"})
-                @Override
-                public void run() {
-                    final FxEventFilter handler = (FxEventFilter) object;
-                    for (final Object object : handler.getEventTypes()) {
-                        final EventType<?> eventType = (EventType) object;
-                        addEventFilter(eventType, handler);
-                    }
+            Platform.runLater(() -> {
+                final FxEventFilter handler = (FxEventFilter) object;
+                for (final Object object1 : handler.getEventTypes()) {
+                    final EventType<?> eventType = (EventType) object1;
+                    addEventFilter(eventType, handler);
                 }
             });
         }
@@ -626,28 +603,20 @@ public abstract class FxAbstractScene extends Canvas implements SceneExt {
     @Override
     public void removeListeners(final Object object) {
         if (object instanceof FxEventHandler) {
-            Platform.runLater(new Runnable() {
-                @SuppressWarnings({"unchecked", "rawtypes"})
-                @Override
-                public void run() {
-                    final FxEventHandler handler = (FxEventHandler) object;
-                    for (final Object object : handler.getEventTypes()) {
-                        final EventType<?> eventType = (EventType) object;
-                        removeEventHandler(eventType, handler);
-                    }
+            Platform.runLater(() -> {
+                final FxEventHandler handler = (FxEventHandler) object;
+                for (final Object object1 : handler.getEventTypes()) {
+                    final EventType<?> eventType = (EventType) object1;
+                    removeEventHandler(eventType, handler);
                 }
             });
         }
         if (object instanceof FxEventFilter) {
-            Platform.runLater(new Runnable() {
-                @SuppressWarnings({"unchecked", "rawtypes"})
-                @Override
-                public void run() {
-                    final FxEventFilter filter = (FxEventFilter) object;
-                    for (final Object object : filter.getEventTypes()) {
-                        final EventType<?> eventType = (EventType) object;
-                        removeEventFilter(eventType, filter);
-                    }
+            Platform.runLater(() -> {
+                final FxEventFilter filter = (FxEventFilter) object;
+                for (final Object object1 : filter.getEventTypes()) {
+                    final EventType<?> eventType = (EventType) object1;
+                    removeEventFilter(eventType, filter);
                 }
             });
         }
@@ -746,12 +715,8 @@ public abstract class FxAbstractScene extends Canvas implements SceneExt {
     @Override
     public boolean waitForLoad(final long timeout) {
         final CountDownLatch latch = new CountDownLatch(1);
-        final PropertyChangeListener listener = new PropertyChangeListener() {
-
-            @Override
-            public void propertyChange(final PropertyChangeEvent evt) {
-                latch.countDown();
-            }
+        final PropertyChangeListener listener = (final PropertyChangeEvent evt) -> {
+            latch.countDown();
         };
         getPropertyChangeSupport().addPropertyChangeListener(Scene.LOADED, listener);
         while (!isLoaded()) {

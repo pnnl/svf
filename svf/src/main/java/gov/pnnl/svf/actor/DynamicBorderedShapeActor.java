@@ -540,13 +540,15 @@ public class DynamicBorderedShapeActor extends DynamicShapeActor {
                     .setColor(color)
                     .setOrigin(origin)
                     .setShape(shape)
-                    .setCamera(camera)
                     .setDirty(dirty)
                     .setDrawingPass(drawingPass)
                     .setPassNumber(passNumber)
                     .setThickness(thickness)
                     .setVisible(visible)
                     .setWire(wire);
+            if (camera != null) {
+                actor.addCamera(camera);
+            }
             if (type != null) {
                 actor.setType(type);
             }

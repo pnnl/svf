@@ -96,13 +96,12 @@ public class CountingHashSet<E> extends HashSet<E> implements CountingSet<E> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean remove(final Object o) {
-        final Integer count = map.get(o);
+        final Integer count = map.get((E) o);
         if (count != null && count > 1) {
             map.put((E) o, count - 1);
         } else {
-            map.remove(o);
+            map.remove((E) o);
         }
         return super.remove(o);
     }

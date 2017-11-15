@@ -50,11 +50,11 @@ public class SceneLookupImpl implements SceneLookup {
      */
     private byte state = StateUtil.NONE;
     protected final MultiLookupProvider lookup = LookupProviderFactory.newMultiLookupProvider();
-    protected final Map<String, Actor> actors = Collections.synchronizedMap(new HashMap<String, Actor>());
-    protected final Set<Actor> root = Collections.synchronizedSet(new LinkedHashSet<Actor>());
-    protected final Set<Actor> visible = Collections.synchronizedSet(new HashSet<Actor>());
+    protected final Map<String, Actor> actors = Collections.synchronizedMap(new HashMap<>());
+    protected final Set<Actor> root = Collections.synchronizedSet(new LinkedHashSet<>());
+    protected final Set<Actor> visible = Collections.synchronizedSet(new HashSet<>());
     // map of disposable objects and whether they have been removed from the scene or not
-    protected final Map<Disposable, Boolean> disposables = Collections.synchronizedMap(new HashMap<Disposable, Boolean>());
+    protected final Map<Disposable, Boolean> disposables = Collections.synchronizedMap(new HashMap<>());
     protected final ChildSupportListener childListener = new ChildSupportListenerImpl();
     protected final PropertyChangeListener rootListener = new RootListenerImpl();
     protected final PropertyChangeListener visibleListener = new VisibleListenerImpl();

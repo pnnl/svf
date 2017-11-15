@@ -29,7 +29,6 @@ public class AbstractActorTest extends AbstractObjectTestBase<AbstractActor> {
     @Override
     protected AbstractActor copyValueObject(final AbstractActor object) {
         final AbstractActor copy = new AbstractActorImpl(object.getScene(), object.getType(), object.getId());
-        copy.setCamera(object.getCamera());
         copy.setDirty(object.isDirty());
         copy.setDrawingPass(object.getDrawingPass());
         copy.setPassNumber(object.getPassNumber());
@@ -43,7 +42,6 @@ public class AbstractActorTest extends AbstractObjectTestBase<AbstractActor> {
     @Override
     protected AbstractActor newValueObject() {
         final AbstractActor object = new AbstractActorImpl(scene, "actor", scene.getFactory().newUuid(scene));
-        object.setCamera(random.nextBoolean() ? scene.lookup(Camera.class) : null);
         object.setDirty(random.nextBoolean());
         object.setDrawingPass(DrawingPass.values()[random.nextInt(DrawingPass.values().length)]);
         object.setPassNumber((byte) random.nextInt(Byte.MAX_VALUE));
@@ -55,21 +53,21 @@ public class AbstractActorTest extends AbstractObjectTestBase<AbstractActor> {
 
     @Override
     protected void setFieldsToNull(final AbstractActor object) {
-        object.setCamera(null);
+        // no fields to set
     }
 
     /**
      * Tests whether the actor is set as dirty when the a property is changed
      */
     @Test
-    public void setCameraTest() {
+    public void addCameraTest() {
         final Camera a = new SimpleCamera(scene);
         final Camera b = new SimpleCamera(scene);
         final AbstractActor actor = newValueObject();
-        actor.setCamera(a);
+        actor.addCamera(a);
         actor.setDirty(false);
         Assert.assertFalse(actor.isDirty());
-        testBoundField(actor, Actor.CAMERA, b, Camera.class);
+        actor.addCamera(b);
         Assert.assertTrue(actor.isDirty());
     }
 

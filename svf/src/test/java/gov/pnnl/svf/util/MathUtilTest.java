@@ -164,14 +164,11 @@ public class MathUtilTest {
                 try {
                     final GL2 gl = scene.getGL().getGL2();
                     gl.getContext().makeCurrent();
-                    for (int t = 0; t < TRANSLATIONS.length; t++) {
-                        final double[] translation = TRANSLATIONS[t];
-                        for (int r = 0; r < ROTATIONS.length; r++) {
-                            final double[] rotation = ROTATIONS[r];
+                    for (double[] translation : TRANSLATIONS) {
+                        for (double[] rotation : ROTATIONS) {
                             for (int a = 0; a < ANGLES.length; a++) {
                                 final double angle = ANGLES[a];
-                                for (int s = 0; s < SCALES.length; s++) {
-                                    final double[] scale = SCALES[s];
+                                for (double[] scale : SCALES) {
                                     // opengl route
                                     final double[] opengl = new double[16];
                                     gl.glPushMatrix();

@@ -420,16 +420,32 @@ public class Color implements ColorConst, Serializable {
 
     public static class Builder {
 
-        private float r;
-        private float g;
-        private float b;
-        private float a;
+        protected float r;
+        protected float g;
+        protected float b;
+        protected float a;
 
         private Builder() {
         }
 
         public static Builder construct() {
             return new Builder();
+        }
+
+        public float r() {
+            return this.r;
+        }
+
+        public float g() {
+            return this.g;
+        }
+
+        public float b() {
+            return this.b;
+        }
+
+        public float a() {
+            return this.a;
         }
 
         public Builder r(final float r) {

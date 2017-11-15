@@ -19,7 +19,6 @@ import gov.pnnl.svf.util.MemLogger;
 import gov.pnnl.svf.util.PerfLogger;
 import java.awt.Font;
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Random;
 import org.apache.commons.math.geometry.Vector3D;
 
@@ -73,12 +72,9 @@ public class TextDemoLoader implements DemoLoader {
                     .setScale(new Vector3D(scale, scale, 1.0));
             final CullingSupport culling = CullingSupport.newInstance(text, transform);
             culling.setScale(Math.max(shape.getWidth(), shape.getHeight()));
-            text.getPropertyChangeSupport().addPropertyChangeListener(ShapeActor.SHAPE, new PropertyChangeListener() {
-                                                                  @Override
-                                                                  public void propertyChange(final PropertyChangeEvent evt) {
-                                                                      final Text3D shape = (Text3D) evt.getNewValue();
-                                                                      culling.setScale(Math.max(shape.getWidth(), shape.getHeight()) / 2.0);
-                                                                  }
+            text.getPropertyChangeSupport().addPropertyChangeListener(ShapeActor.SHAPE, (final PropertyChangeEvent evt) -> {
+                                                                  final Text3D shape1 = (Text3D) evt.getNewValue();
+                                                                  culling.setScale(Math.max(shape1.getWidth(), shape1.getHeight()) / 2.0);
                                                               });
             scene.add(text);
         }

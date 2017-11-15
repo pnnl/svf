@@ -33,7 +33,7 @@ public abstract class AbstractItemPickingCamera extends AbstractPickingCamera im
 
     private static final Logger logger = Logger.getLogger(AbstractItemPickingCamera.class.getName());
 
-    protected final List<ItemPickingCameraListener> listeners = Collections.synchronizedList(new ArrayList<ItemPickingCameraListener>());
+    protected final List<ItemPickingCameraListener> listeners = Collections.synchronizedList(new ArrayList<>());
     private final int maxNameStackDepth[] = {64};
     private IntBuffer nameStackBuffer;
     private boolean initialized = false;
@@ -194,7 +194,7 @@ public abstract class AbstractItemPickingCamera extends AbstractPickingCamera im
         }
         // continue
         // only pick if this actor is viewable in the referenceCamera
-        if (support.getActor().getCamera() == null || support.getActor().getCamera() == referenceCamera) {
+        if (support.getActor().isCamera(referenceCamera)) {
             // check for a pick on the whole actor first
             gl.glRenderMode(GL2.GL_SELECT);
             gl.glInitNames();

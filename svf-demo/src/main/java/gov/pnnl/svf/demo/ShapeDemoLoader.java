@@ -51,7 +51,6 @@ import gov.pnnl.svf.util.PerfLogger;
 import gov.pnnl.svf.util.TextUtil;
 import java.awt.Font;
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
@@ -262,13 +261,9 @@ public class ShapeDemoLoader implements DemoLoader {
         jogl2d.setDrawingPass(DrawingPass.INTERFACE);
         jogl2d.setOrigin(Alignment.RIGHT_BOTTOM);
         jogl2d.setShape(new Text2D(viewport.getWidth(), 0.0, "JOGL 2D Text"));
-        scene.getPropertyChangeSupport().addPropertyChangeListener(Scene.VIEWPORT, new PropertyChangeListener() {
-
-                                                               @Override
-                                                               public void propertyChange(final PropertyChangeEvent evt) {
-                                                                   final Rectangle viewport = (Rectangle) evt.getNewValue();
-                                                                   jogl2d.setShape(new Text2D(viewport.getWidth(), 0.0, "JOGL 2D Text"));
-                                                               }
+        scene.getPropertyChangeSupport().addPropertyChangeListener(Scene.VIEWPORT, (final PropertyChangeEvent evt) -> {
+                                                               final Rectangle viewport1 = (Rectangle) evt.getNewValue();
+                                                               jogl2d.setShape(new Text2D(viewport1.getWidth(), 0.0, "JOGL 2D Text"));
                                                            });
         ColorSupport.newInstance(jogl2d).setColor(palette.next());
         TransformSupport.newInstance(jogl2d);

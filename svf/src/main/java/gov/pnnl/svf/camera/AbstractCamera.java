@@ -36,7 +36,7 @@ public abstract class AbstractCamera extends AbstractActor implements CameraExt<
     private final static CalculateVectorListener vectorListener = new CalculateVectorListener();
     private final static CalculateFrustumListener frustumListener = new CalculateFrustumListener();
     //    private final static ViewportTransformerListener viewportListener = new ViewportTransformerListener();
-    private final List<CameraListener> listeners = Collections.synchronizedList(new ArrayList<CameraListener>());
+    private final List<CameraListener> listeners = Collections.synchronizedList(new ArrayList<>());
     private Rectangle viewport = new Rectangle(0, 0, 100, 100);
     private Transformer<Rectangle> viewportTransformer = new ViewportTransformer();
     private Frustum frustum;

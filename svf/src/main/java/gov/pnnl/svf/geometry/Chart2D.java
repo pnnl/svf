@@ -13,13 +13,7 @@ import java.util.List;
 public class Chart2D extends Shape2D implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private final static Comparator<Point2D> COMPARATOR = new Comparator<Point2D>() {
-
-        @Override
-        public int compare(Point2D o1, Point2D o2) {
-            return Double.compare(o1.getX(), o2.getX());
-        }
-    };
+    private final static Comparator<Point2D> COMPARATOR = (Point2D o1, Point2D o2) -> Double.compare(o1.getX(), o2.getX());
     /**
      * Value that represents no color in a chart.
      */

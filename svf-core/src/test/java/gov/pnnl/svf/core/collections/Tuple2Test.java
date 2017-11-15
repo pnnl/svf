@@ -18,7 +18,7 @@ public class Tuple2Test extends AbstractObjectTestBase<Tuple2<Integer, Integer>>
      */
     @Test
     public void testGet() {
-        final Tuple2<Integer, Integer> a = new Tuple2<>(Integer.valueOf(1), Integer.valueOf(2));
+        final Tuple2<Integer, Integer> a = new Tuple2<>(1, 2);
         Assert.assertEquals(1, a.get(0));
         Assert.assertEquals(2, a.get(1));
     }
@@ -29,8 +29,8 @@ public class Tuple2Test extends AbstractObjectTestBase<Tuple2<Integer, Integer>>
     @Test
     public void testGetBuilder() {
         final Tuple2<Integer, Integer> a = Tuple2.Builder.<Integer, Integer>construct()
-                .first(Integer.valueOf(1))
-                .second(Integer.valueOf(2))
+                .first(1)
+                .second(2)
                 .build();
         Assert.assertEquals(1, a.get(0));
         Assert.assertEquals(2, a.get(1));
@@ -41,7 +41,7 @@ public class Tuple2Test extends AbstractObjectTestBase<Tuple2<Integer, Integer>>
      */
     @Test
     public void testSize() {
-        final Tuple2<Integer, Integer> a = new Tuple2<>(Integer.valueOf(1), Integer.valueOf(2));
+        final Tuple2<Integer, Integer> a = new Tuple2<>(1, 2);
         Assert.assertEquals(2, a.size());
     }
 

@@ -22,7 +22,7 @@ import java.util.Set;
 public class MultiLookupProviderImpl extends LookupProviderImpl implements MultiLookupProvider {
 
     // linked hash set is used to preserve ordering and enable fast searching
-    private final Map<Class<?>, Set<? extends Object>> map = new HashMap<>();
+    private final Map<Class<?>, Set<? extends Object>> map = Collections.synchronizedMap(new HashMap<>());
 
     /**
      * Constructor
@@ -41,20 +41,22 @@ public class MultiLookupProviderImpl extends LookupProviderImpl implements Multi
     public MultiLookupProviderImpl(final MultiLookupProvider multiLookupProvider) {
         super(multiLookupProvider);
         if (multiLookupProvider instanceof MultiLookupProviderImpl) {
-            for (final Entry<Class<?>, Set<? extends Object>> entry : ((MultiLookupProviderImpl) multiLookupProvider).map.entrySet()) {
-                map.put(entry.getKey(), entry.getValue().size() == 1 ? entry.getValue() : new HashSet<>(entry.getValue()));
+            synchronized (((MultiLookupProviderImpl) multiLookupProvider).map) {
+                ((MultiLookupProviderImpl) multiLookupProvider).map.entrySet().forEach((entry) -> {
+                    map.put(entry.getKey(), entry.getValue().size() == 1 ? entry.getValue() : new HashSet<>(entry.getValue()));
+                });
             }
         } else {
-            for (final Object object : multiLookupProvider.lookupAll()) {
+            multiLookupProvider.lookupAll().forEach((object) -> {
                 addSuperclass(object.getClass(), object);
-            }
+            });
         }
     }
 
     @Override
     public void clear() {
-        synchronized (this) {
-            super.clear();
+        super.clear();
+        synchronized (map) {
             for (final Set<? extends Object> list : map.values()) {
                 if (list != null && list.size() > 1) {
                     list.clear();
@@ -72,12 +74,10 @@ public class MultiLookupProviderImpl extends LookupProviderImpl implements Multi
         if (object instanceof Class<?>) {
             throw new IllegalArgumentException("object");
         }
-        synchronized (this) {
-            // add to the single object lookup
-            super.add(object);
-            // add to the multi object lookup
-            addSuperclass(object.getClass(), object);
-        }
+        // add to the single object lookup
+        super.add(object);
+        // add to the multi object lookup
+        addSuperclass(object.getClass(), object);
     }
 
     @Override
@@ -93,13 +93,11 @@ public class MultiLookupProviderImpl extends LookupProviderImpl implements Multi
             throw new IllegalArgumentException("object");
         }
         // iterate through the collection and add them to the lookup
-        synchronized (this) {
-            for (final T object : objects) {
-                // add to the single object lookup
-                super.add(object);
-                // add to the multi object lookup
-                addSuperclass(object.getClass(), object);
-            }
+        for (final T object : objects) {
+            // add to the single object lookup
+            super.add(object);
+            // add to the multi object lookup
+            addSuperclass(object.getClass(), object);
         }
     }
 
@@ -109,7 +107,7 @@ public class MultiLookupProviderImpl extends LookupProviderImpl implements Multi
         if (type == null) {
             throw new NullPointerException("type");
         }
-        synchronized (this) {
+        synchronized (map) {
             // use the multi object lookup
             final Set<?> obj = map.get(type);
             if (obj == null || obj.isEmpty()) {
@@ -136,7 +134,7 @@ public class MultiLookupProviderImpl extends LookupProviderImpl implements Multi
             throw new NullPointerException("out");
         }
         out.clear();
-        synchronized (this) {
+        synchronized (map) {
             // use the multi object lookup
             final Set<?> obj = map.get(type);
             if (obj != null) {
@@ -154,7 +152,7 @@ public class MultiLookupProviderImpl extends LookupProviderImpl implements Multi
             throw new IllegalArgumentException("object");
         }
         boolean removed = false;
-        synchronized (this) {
+        synchronized (map) {
             // remove from the single object lookup
             super.remove(object);
             // remove from the multi object lookup
@@ -185,7 +183,7 @@ public class MultiLookupProviderImpl extends LookupProviderImpl implements Multi
             throw new IllegalArgumentException("object");
         }
         boolean removed = false;
-        synchronized (this) {
+        synchronized (map) {
             for (final T object : objects) {
                 // remove from the single object lookup
                 super.remove(object);

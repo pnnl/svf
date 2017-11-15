@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,9 +56,9 @@ public abstract class AbstractActor implements ActorExt {
     protected final ActorState actorState = new ActorState();
     protected final DrawState drawState = new DrawState();
     private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupportWrapper(this);
-    private final Collection<Disposable> disposables = Collections.synchronizedSet(new HashSet<Disposable>());
+    private final Collection<Disposable> disposables = Collections.synchronizedSet(new HashSet<>());
     private final LookupProvider lookup = LookupProviderFactory.newLookupProvider();
-    private Camera camera = null;
+    private final Set<String> cameras = Collections.synchronizedSet(new HashSet<>());
     private DrawingPass drawingPass = DrawingPass.SCENE;
     private byte passNumber = 0;
     private float thickness = 1.0f;
@@ -178,9 +179,9 @@ public abstract class AbstractActor implements ActorExt {
         // dispose of the children
         final ChildSupport children = lookup.lookup(ChildSupport.class);
         if (children != null) {
-            for (final Actor child : children.getChildren()) {
+            children.getChildren().forEach((child) -> {
                 child.dispose();
-            }
+            });
             children.dispose();
         }
         // dispose of the disposable objects
@@ -188,9 +189,9 @@ public abstract class AbstractActor implements ActorExt {
         synchronized (disposables) {
             copy = new ArrayList<>(disposables);
         }
-        for (final Disposable disposable : copy) {
+        copy.forEach((disposable) -> {
             disposable.dispose();
-        }
+        });
         // clear out the lookup
         lookup.clear();
         // remove from the scene
@@ -217,13 +218,6 @@ public abstract class AbstractActor implements ActorExt {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public Camera getCamera() {
-        synchronized (this) {
-            return camera;
-        }
     }
 
     @Override
@@ -345,13 +339,41 @@ public abstract class AbstractActor implements ActorExt {
     }
 
     @Override
-    public Actor setCamera(final Camera camera) {
-        final Camera old;
-        synchronized (this) {
-            old = this.camera;
-            this.camera = camera;
+    public boolean isCamera(final Camera camera) {
+        Objects.requireNonNull(camera, "camera");
+        if (cameras.isEmpty()) {
+            return true;
         }
-        propertyChangeSupport.firePropertyChange(CAMERA, old, camera);
+        return cameras.contains(camera.getId());
+    }
+
+    @Override
+    public Actor addCamera(final Camera camera) {
+        Objects.requireNonNull(camera, "camera");
+        if (cameras.add(camera.getId())) {
+            propertyChangeSupport.firePropertyChange(CAMERA, null, camera);
+        }
+        return this;
+    }
+
+    @Override
+    public Actor removeCamera(final Camera camera) {
+        Objects.requireNonNull(camera, "camera");
+        if (cameras.remove(camera.getId())) {
+            propertyChangeSupport.firePropertyChange(CAMERA, camera, null);
+        }
+        return this;
+    }
+
+    @Override
+    public Actor clearCameras() {
+        getScene().lookupAll(Camera.class).forEach((camera) -> {
+            if (cameras.remove(camera.getId())) {
+                propertyChangeSupport.firePropertyChange(CAMERA, camera, null);
+            }
+        });
+        // clear out any remaining camera id's
+        cameras.clear();
         return this;
     }
 

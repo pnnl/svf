@@ -18,7 +18,7 @@ public class AbstractTupleTest extends AbstractObjectTestBase<AbstractTuple> {
      */
     @Test
     public void testGet() {
-        final AbstractTuple a = new AbstractTupleImpl(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3));
+        final AbstractTuple a = new AbstractTupleImpl(1, Integer.valueOf(2), Integer.valueOf(3));
         Assert.assertEquals(1, a.get(0));
         Assert.assertEquals(2, a.get(1));
         Assert.assertEquals(3, a.get(2));
@@ -29,7 +29,7 @@ public class AbstractTupleTest extends AbstractObjectTestBase<AbstractTuple> {
      */
     @Test
     public void testSize() {
-        final AbstractTuple a = new AbstractTupleImpl(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3));
+        final AbstractTuple a = new AbstractTupleImpl(1, Integer.valueOf(2), Integer.valueOf(3));
         Assert.assertEquals(3, a.size());
     }
 

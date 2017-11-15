@@ -44,8 +44,8 @@ public abstract class AbstractColorPalette<T> {
             throw new IllegalArgumentException("colors");
         }
         // maintain the initial order and remove duplicates
-        available = new HashSet<>(colors);
-        final List<T> temp = new ArrayList<>(colors);
+        available = (Set<T>) new HashSet<>(colors);
+        final List<T> temp = (List<T>) new ArrayList<>(colors);
         temp.retainAll(available);
         palette = Collections.unmodifiableList(temp);
         index = palette.size() - 1;

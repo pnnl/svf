@@ -46,12 +46,7 @@ public class SwtDemoTest extends AbstractDemoHelper<AbstractSwtDemo, Shell, Scen
         stop.schedule(new TimerTask() {
             @Override
             public void run() {
-                window.getDisplay().asyncExec(new Runnable() {
-                    @Override
-                    public void run() {
-                        window.close();
-                    }
-                });
+                window.getDisplay().asyncExec(window::close);
             }
         }, BEGIN_WAIT_TIME);
         demo.startDemo(window, scene);
@@ -70,12 +65,7 @@ public class SwtDemoTest extends AbstractDemoHelper<AbstractSwtDemo, Shell, Scen
         stop.schedule(new TimerTask() {
             @Override
             public void run() {
-                window.getDisplay().asyncExec(new Runnable() {
-                    @Override
-                    public void run() {
-                        window.close();
-                    }
-                });
+                window.getDisplay().asyncExec(window::close);
             }
         }, BEGIN_WAIT_TIME);
         demo.startDemo(window, scene);
@@ -94,12 +84,7 @@ public class SwtDemoTest extends AbstractDemoHelper<AbstractSwtDemo, Shell, Scen
         stop.schedule(new TimerTask() {
             @Override
             public void run() {
-                window.getDisplay().asyncExec(new Runnable() {
-                    @Override
-                    public void run() {
-                        window.close();
-                    }
-                });
+                window.getDisplay().asyncExec(window::close);
             }
         }, BEGIN_WAIT_TIME);
         demo.startDemo(window, scene);
@@ -109,18 +94,15 @@ public class SwtDemoTest extends AbstractDemoHelper<AbstractSwtDemo, Shell, Scen
 
     @Override
     protected void disposeScene() {
-        Display.getDefault().syncExec(new Runnable() {
-            @Override
-            public void run() {
-                // dispose
-                if (window != null) {
-                    for (final Control control : window.getChildren()) {
-                        control.dispose();
-                    }
+        Display.getDefault().syncExec(() -> {
+            // dispose
+            if (window != null) {
+                for (final Control control : window.getChildren()) {
+                    control.dispose();
                 }
-                if (window != null) {
-                    window.dispose();
-                }
+            }
+            if (window != null) {
+                window.dispose();
             }
         });
     }

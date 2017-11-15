@@ -56,7 +56,7 @@ public class ColorPickingUtils implements Disposable {
     private byte state = StateUtil.NONE;
     private final DrawState drawState = new DrawState();
     private final Map<Color, KeyValuePair<ColorPickingSupport, Object>> mapping = Collections
-            .synchronizedMap(new HashMap<Color, KeyValuePair<ColorPickingSupport, Object>>());
+            .synchronizedMap(new HashMap<>());
     private int counter = STEP_NUMBER;
     private final SceneExt scene;
     // temporary viewport buffer

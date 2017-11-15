@@ -175,10 +175,14 @@ public class ColorUtil {
      *
      * @param hMin minimum hue value for the color {x: 0.0 &le; x &le; 1.0}
      * @param hMax maximum hue value for the color {x: 0.0 &le; x &le; 1.0}
-     * @param sMin minimum saturation value for the color {x: 0.0 &le; x &le; 1.0}
-     * @param sMax maximum saturation value for the color {x: 0.0 &le; x &le; 1.0}
-     * @param lMin minimum lightness value for the color {x: 0.0 &le; x &le; 1.0}
-     * @param lMax maximum lightness value for the color {x: 0.0 &le; x &le; 1.0}
+     * @param sMin minimum saturation value for the color {x: 0.0 &le; x &le;
+     *             1.0}
+     * @param sMax maximum saturation value for the color {x: 0.0 &le; x &le;
+     *             1.0}
+     * @param lMin minimum lightness value for the color {x: 0.0 &le; x &le;
+     *             1.0}
+     * @param lMax maximum lightness value for the color {x: 0.0 &le; x &le;
+     *             1.0}
      *
      * @return a new random color
      */

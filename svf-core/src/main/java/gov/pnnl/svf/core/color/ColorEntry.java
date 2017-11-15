@@ -74,8 +74,8 @@ public class ColorEntry implements Serializable {
     /**
      * Constructor
      *
-     * @param value the relative position value for this entry {x: 0.0 &le; x &le;
-     *              1.0}
+     * @param value the relative position value for this entry {x: 0.0 &le; x
+     *              &le; 1.0}
      * @param color color for this entry
      */
     public ColorEntry(final double value, final Color color) {
@@ -136,14 +136,22 @@ public class ColorEntry implements Serializable {
 
     public static class Builder {
 
-        private double value;
-        private Color color;
+        protected double value;
+        protected Color color;
 
         private Builder() {
         }
 
         public static Builder construct() {
             return new Builder();
+        }
+
+        public double value() {
+            return this.value;
+        }
+
+        public Color color() {
+            return this.color;
         }
 
         public Builder value(final double value) {

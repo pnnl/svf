@@ -34,7 +34,7 @@ public abstract class AbstractColorPickingCamera extends AbstractPickingCamera i
     public static final int WIDTH = 2;
     // viewport height index
     public static final int HEIGHT = 3;
-    protected final List<ColorPickingCameraListener> listeners = Collections.synchronizedList(new ArrayList<ColorPickingCameraListener>());
+    protected final List<ColorPickingCameraListener> listeners = Collections.synchronizedList(new ArrayList<>());
     private final ColorPickingUtils colorUtils = getScene().getExtended().getColorPickingUtils();
     private KeyValuePair<ColorPickingSupport, Object> currentPick;
 

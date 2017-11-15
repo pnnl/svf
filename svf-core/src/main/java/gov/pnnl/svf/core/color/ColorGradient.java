@@ -1,9 +1,11 @@
 package gov.pnnl.svf.core.color;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -160,8 +162,8 @@ public class ColorGradient extends Color implements Serializable {
             throw new NullPointerException("colors");
         }
         final SortedSet<ColorEntry> temp = new TreeSet<>(comparator);
-        for (int i = 0; i < colors.length; i++) {
-            temp.add(colors[i]);
+        for (ColorEntry color : colors) {
+            temp.add(color);
         }
         validate(temp);
         this.colors = Collections.unmodifiableSortedSet(temp);
@@ -318,4 +320,40 @@ public class ColorGradient extends Color implements Serializable {
             return Double.compare(o1.getValue(), o2.getValue());
         }
     }
+
+    public static class Builder {
+
+        protected List<ColorEntry> colors = new ArrayList<>();
+
+        protected Builder() {
+        }
+
+        public static Builder construct() {
+            return new Builder();
+        }
+
+        public List<ColorEntry> colors() {
+            return this.colors;
+        }
+
+        public Builder colors(final Collection<ColorEntry> colors) {
+            this.colors.addAll(colors);
+            return this;
+        }
+
+        public Builder color(final ColorEntry color) {
+            this.colors.add(color);
+            return this;
+        }
+
+        public Builder color(final double value, final Color color) {
+            this.colors.add(new ColorEntry(value, color));
+            return this;
+        }
+
+        public ColorGradient build() {
+            return new ColorGradient(this.colors);
+        }
+    }
+
 }

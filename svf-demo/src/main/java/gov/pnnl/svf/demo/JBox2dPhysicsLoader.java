@@ -17,7 +17,6 @@ import gov.pnnl.svf.geometry.Rectangle2D;
 import gov.pnnl.svf.geometry.Shape;
 import gov.pnnl.svf.geometry.Text3D;
 import gov.pnnl.svf.jbox2d.physics.JBox2dChildTransformSupport;
-import gov.pnnl.svf.jbox2d.physics.JBox2dContactFilter;
 import gov.pnnl.svf.jbox2d.physics.JBox2dContactListener;
 import gov.pnnl.svf.jbox2d.physics.JBox2dMouseJointSupport;
 import gov.pnnl.svf.jbox2d.physics.JBox2dPhysicsEngine;
@@ -67,23 +66,20 @@ public class JBox2dPhysicsLoader implements DemoLoader {
         scene.setBoundary(new Vector3D(50.0, 50.0, 1.0));
         // set up the world physics
         final JBox2dPhysicsEngine physics = new JBox2dPhysicsEngine(scene, new Vector3D(0.0, -10.0, 0.0f), 0.5f, 0.0f, 1.0f);
-        physics.setContactFilter(new JBox2dContactFilter() {
-            @Override
-            public boolean shouldCollide(final JBox2dPhysicsSupport obj1, final JBox2dPhysicsSupport obj2) {
-                if (obj1.getActor() instanceof JBox2dSceneBoundaryActor
-                    || obj2.getActor() instanceof JBox2dSceneBoundaryActor) {
-                    // all objects should collide with the boundary
-                    return true;
-                }
-                final Shape shape1 = obj1.getActor() instanceof ShapeActor ? ((ShapeActor) obj1.getActor()).getShape() : null;
-                final Shape shape2 = obj2.getActor() instanceof ShapeActor ? ((ShapeActor) obj2.getActor()).getShape() : null;
-                if (("disk".equals(obj1.getActor().getId()) && ((shape2 instanceof Circle2D) || (shape2 instanceof Text3D)))
-                    || ("disk".equals(obj2.getActor().getId()) && ((shape1 instanceof Circle2D) || (shape1 instanceof Text3D)))) {
-                    // user controlled disk can't interact with balls or text
-                    return false;
-                }
+        physics.setContactFilter((final JBox2dPhysicsSupport obj1, final JBox2dPhysicsSupport obj2) -> {
+            if (obj1.getActor() instanceof JBox2dSceneBoundaryActor
+                || obj2.getActor() instanceof JBox2dSceneBoundaryActor) {
+                // all objects should collide with the boundary
                 return true;
             }
+            final Shape shape1 = obj1.getActor() instanceof ShapeActor ? ((ShapeActor) obj1.getActor()).getShape() : null;
+            final Shape shape2 = obj2.getActor() instanceof ShapeActor ? ((ShapeActor) obj2.getActor()).getShape() : null;
+            if (("disk".equals(obj1.getActor().getId()) && ((shape2 instanceof Circle2D) || (shape2 instanceof Text3D)))
+                || ("disk".equals(obj2.getActor().getId()) && ((shape1 instanceof Circle2D) || (shape1 instanceof Text3D)))) {
+                // user controlled disk can't interact with balls or text
+                return false;
+            }
+            return true;
         });
         physics.addContactListener(new JBox2dContactListener() {
             @Override
@@ -258,17 +254,14 @@ public class JBox2dPhysicsLoader implements DemoLoader {
                     setScale(new Vector3D(0.5, 0.5, 1.0)).
                     setRotationAxis(Vector3D.PLUS_K).
                     setRotation(0.0);
-            PickingSupport.newInstance(disk).addListener(new PickingSupportListener() {
-                @Override
-                public void picked(final Actor actor, final PickingCameraEvent event) {
-                    if (event.getTypes().contains(CameraEventType.LEFT)) {
-                        final PickingCamera picking = actor.getScene().lookup(PickingCamera.class);
-                        if (picking != null) {
-                            final JBox2dMouseJointSupport mouse = JBox2dMouseJointSupport.newInstance(picking, actor, new Vector3D(event.getX(), actor
-                                                                                                                                   .getScene().getViewport().getHeight()
-                                                                                                                                                 - event.getY(), 0.0));
-                            physics.addJoint(mouse);
-                        }
+            PickingSupport.newInstance(disk).addListener((PickingSupportListener) (final Actor actor, final PickingCameraEvent event) -> {
+                if (event.getTypes().contains(CameraEventType.LEFT)) {
+                    final PickingCamera picking = actor.getScene().lookup(PickingCamera.class);
+                    if (picking != null) {
+                        final JBox2dMouseJointSupport mouse = JBox2dMouseJointSupport.newInstance(picking, actor, new Vector3D(event.getX(), actor
+                                                                                                                               .getScene().getViewport().getHeight()
+                                                                                                                                             - event.getY(), 0.0));
+                        physics.addJoint(mouse);
                     }
                 }
             });
