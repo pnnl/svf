@@ -22,7 +22,7 @@ import java.util.Set;
 public class MultiLookupProviderImpl extends LookupProviderImpl implements MultiLookupProvider {
 
     // linked hash set is used to preserve ordering and enable fast searching
-    private final Map<Class<?>, Set<? extends Object>> map = Collections.synchronizedMap(new HashMap<>());
+    private final Map<Class<?>, Set<? extends Object>> map = new HashMap<>();
 
     /**
      * Constructor
@@ -107,20 +107,23 @@ public class MultiLookupProviderImpl extends LookupProviderImpl implements Multi
         if (type == null) {
             throw new NullPointerException("type");
         }
+        // use the multi object lookup
+        final Set<?> obj;
         synchronized (map) {
-            // use the multi object lookup
-            final Set<?> obj = map.get(type);
-            if (obj == null || obj.isEmpty()) {
-                return Collections.<T>emptySet();
-            } else if (obj.size() == 1) {
-                // this will be an immutable singleton set
-                return (Set<T>) obj;
-            } else {
-                // make a copy of the set
-                final Set<T> newList = new HashSet<>();
+            obj = map.get(type);
+        }
+        if (obj == null || obj.isEmpty()) {
+            return Collections.<T>emptySet();
+        } else if (obj.size() == 1) {
+            // this will be an immutable singleton set
+            return (Set<T>) obj;
+        } else {
+            // make a copy of the set
+            final Set<T> newList = new HashSet<>();
+            synchronized (map) {
                 newList.addAll((Set<T>) obj);
-                return newList;
             }
+            return newList;
         }
     }
 
@@ -134,10 +137,13 @@ public class MultiLookupProviderImpl extends LookupProviderImpl implements Multi
             throw new NullPointerException("out");
         }
         out.clear();
+        // use the multi object lookup
+        final Set<?> obj;
         synchronized (map) {
-            // use the multi object lookup
-            final Set<?> obj = map.get(type);
-            if (obj != null) {
+            obj = map.get(type);
+        }
+        if (obj != null) {
+            synchronized (map) {
                 out.addAll((Set<T>) obj);
             }
         }
@@ -152,10 +158,10 @@ public class MultiLookupProviderImpl extends LookupProviderImpl implements Multi
             throw new IllegalArgumentException("object");
         }
         boolean removed = false;
+        // remove from the single object lookup
+        super.remove(object);
+        // remove from the multi object lookup
         synchronized (map) {
-            // remove from the single object lookup
-            super.remove(object);
-            // remove from the multi object lookup
             final Iterator<Entry<Class<?>, Set<? extends Object>>> iterator = map.entrySet().iterator();
             while (iterator.hasNext()) {
                 final Entry<Class<?>, Set<? extends Object>> entry = iterator.next();
@@ -183,11 +189,11 @@ public class MultiLookupProviderImpl extends LookupProviderImpl implements Multi
             throw new IllegalArgumentException("object");
         }
         boolean removed = false;
-        synchronized (map) {
-            for (final T object : objects) {
-                // remove from the single object lookup
-                super.remove(object);
-                // remove from the multi object lookup
+        for (final T object : objects) {
+            // remove from the single object lookup
+            super.remove(object);
+            // remove from the multi object lookup
+            synchronized (map) {
                 final Iterator<Entry<Class<?>, Set<? extends Object>>> iterator = map.entrySet().iterator();
                 while (iterator.hasNext()) {
                     final Entry<Class<?>, Set<? extends Object>> entry = iterator.next();
@@ -226,17 +232,26 @@ public class MultiLookupProviderImpl extends LookupProviderImpl implements Multi
 
     @SuppressWarnings("unchecked")
     private <T extends Object> void addObjectToList(final Class<? extends T> type, final T object) {
-        final Set<T> list = (Set<T>) map.get(type);
+        final Set<T> list;
+        synchronized (map) {
+            list = (Set<T>) map.get(type);
+        }
         if (list == null) {
             final Set<T> temp = Collections.singleton(object);
-            map.put(type, temp);
+            synchronized (map) {
+                map.put(type, temp);
+            }
         } else if (list.size() == 1) {
             final Set<T> temp = new HashSet<>();
-            temp.addAll(list);
-            temp.add(object);
-            map.put(type, temp);
+            synchronized (map) {
+                temp.addAll(list);
+                temp.add(object);
+                map.put(type, temp);
+            }
         } else {
-            list.add(object);
+            synchronized (map) {
+                list.add(object);
+            }
         }
     }
 }

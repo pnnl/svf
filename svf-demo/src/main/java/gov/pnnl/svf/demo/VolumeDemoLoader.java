@@ -38,6 +38,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import org.apache.commons.math.geometry.Vector3D;
 
@@ -82,6 +83,7 @@ public class VolumeDemoLoader implements DemoLoader {
     }
 
     private final ColorPalette palette = new ColorPalette(COLORS);
+    private final Random random = new Random(0L);
     private final ColorPickingSupportListener listener = new ColorPickingSupportListenerImpl();
 
     /**
@@ -139,7 +141,7 @@ public class VolumeDemoLoader implements DemoLoader {
                     data.put((byte) ((VOLUME_SIZE * 100.0 + x * 155.0) / VOLUME_SIZE)); // red
                     data.put((byte) ((VOLUME_SIZE * 100.0 + y * 155.0) / VOLUME_SIZE)); // green
                     data.put((byte) ((VOLUME_SIZE * 100.0 + z * 155.0) / VOLUME_SIZE)); // blue
-                    data.put((byte) (255 * 0.9)); // alpha
+                    data.put((byte) (255 * random.nextDouble())); // alpha
                 }
             }
         }
