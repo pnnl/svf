@@ -76,8 +76,10 @@ public class MultiLookupProviderImpl extends LookupProviderImpl implements Multi
         }
         // add to the single object lookup
         super.add(object);
-        // add to the multi object lookup
-        addSuperclass(object.getClass(), object);
+        synchronized (map) {
+            // add to the multi object lookup
+            addSuperclass(object.getClass(), object);
+        }
     }
 
     @Override
@@ -96,8 +98,10 @@ public class MultiLookupProviderImpl extends LookupProviderImpl implements Multi
         for (final T object : objects) {
             // add to the single object lookup
             super.add(object);
-            // add to the multi object lookup
-            addSuperclass(object.getClass(), object);
+            synchronized (map) {
+                // add to the multi object lookup
+                addSuperclass(object.getClass(), object);
+            }
         }
     }
 
@@ -107,20 +111,18 @@ public class MultiLookupProviderImpl extends LookupProviderImpl implements Multi
         if (type == null) {
             throw new NullPointerException("type");
         }
-        synchronized (map) {
-            // use the multi object lookup
-            final Set<?> obj = map.get(type);
-            if (obj == null || obj.isEmpty()) {
-                return Collections.<T>emptySet();
-            } else if (obj.size() == 1) {
-                // this will be an immutable singleton set
-                return (Set<T>) obj;
-            } else {
-                // make a copy of the set
-                final Set<T> newList = new HashSet<>();
-                newList.addAll((Set<T>) obj);
-                return newList;
-            }
+        // use the multi object lookup
+        final Set<?> obj = map.get(type);
+        if (obj == null || obj.isEmpty()) {
+            return Collections.<T>emptySet();
+        } else if (obj.size() == 1) {
+            // this will be an immutable singleton set
+            return (Set<T>) obj;
+        } else {
+            // make a copy of the set
+            final Set<T> newList = new HashSet<>();
+            newList.addAll((Set<T>) obj);
+            return newList;
         }
     }
 
@@ -152,9 +154,9 @@ public class MultiLookupProviderImpl extends LookupProviderImpl implements Multi
             throw new IllegalArgumentException("object");
         }
         boolean removed = false;
+        // remove from the single object lookup
+        super.remove(object);
         synchronized (map) {
-            // remove from the single object lookup
-            super.remove(object);
             // remove from the multi object lookup
             final Iterator<Entry<Class<?>, Set<? extends Object>>> iterator = map.entrySet().iterator();
             while (iterator.hasNext()) {
@@ -183,10 +185,10 @@ public class MultiLookupProviderImpl extends LookupProviderImpl implements Multi
             throw new IllegalArgumentException("object");
         }
         boolean removed = false;
-        synchronized (map) {
-            for (final T object : objects) {
-                // remove from the single object lookup
-                super.remove(object);
+        for (final T object : objects) {
+            // remove from the single object lookup
+            super.remove(object);
+            synchronized (map) {
                 // remove from the multi object lookup
                 final Iterator<Entry<Class<?>, Set<? extends Object>>> iterator = map.entrySet().iterator();
                 while (iterator.hasNext()) {
