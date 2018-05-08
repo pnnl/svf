@@ -1,7 +1,6 @@
 package gov.pnnl.svf.core.lookup;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -21,7 +20,7 @@ import java.util.Set;
  */
 public class LookupProviderImpl implements LookupProvider {
 
-    private final Map<Class<?>, Object> map = Collections.synchronizedMap(new HashMap<>());
+    private final Map<Class<?>, Object> map = new HashMap<>();
 
     /**
      * Constructor
@@ -57,7 +56,9 @@ public class LookupProviderImpl implements LookupProvider {
 
     @Override
     public void clear() {
-        map.clear();
+        synchronized (map) {
+            map.clear();
+        }
     }
 
     @Override
@@ -79,7 +80,9 @@ public class LookupProviderImpl implements LookupProvider {
         if (type == null) {
             throw new NullPointerException("type");
         }
-        return (T) map.get(type);
+        synchronized (map) {
+            return (T) map.get(type);
+        }
     }
 
     @Override
@@ -121,7 +124,9 @@ public class LookupProviderImpl implements LookupProvider {
 
     private <T extends Object> void addSuperclass(final Class<? extends T> type, final Object object) {
         if (type != null) {
-            map.put(type, object);
+            synchronized (map) {
+                map.put(type, object);
+            }
             // add additional interfaces if there are any
             for (final Class<?> itype : type.getInterfaces()) {
                 addSuperclass(itype, object);
