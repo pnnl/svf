@@ -5,6 +5,6 @@ Sci-Vis Framework (SVF) is a full featured OpenGL 3d framework that allows for r
 
 Pacific Northwest National Laboratory
 
-Arthur Bleeker
+Amelia Bleeker
 
-arthur.bleeker@pnnl.gov
+amelia.bleeker@pnnl.gov
