@@ -9,7 +9,7 @@ import gov.pnnl.svf.vbo.PreparableItem;
  * Interface used to initialize and create the display lists required for an
  * item.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface DisplayListDrawableItem extends PreparableItem, ImmediateDrawable, ImmediatePickable, ImmediateColorPickable {
 }

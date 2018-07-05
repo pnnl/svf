@@ -7,7 +7,7 @@ import java.awt.Font;
 /**
  * Base implementation of the tooltip actor.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class TooltipActor extends DynamicBorderedShapeActor {
 

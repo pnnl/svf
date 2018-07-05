@@ -11,7 +11,7 @@ import java.util.Objects;
  * is paramount or all rectangles tend to be relatively the same height (such is
  * the case in characters.) This packer is not thread safe.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class SimpleRectanglePacker implements RectanglePacker {
 

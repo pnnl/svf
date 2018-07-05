@@ -47,7 +47,7 @@ import java.util.logging.Logger;
  * There are certain situations where you will want to push state and other
  * complex functionality into an actor for performance. </p>
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractActor implements ActorExt {
 

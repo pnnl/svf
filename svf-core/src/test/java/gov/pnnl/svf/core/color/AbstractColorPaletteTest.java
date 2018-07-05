@@ -11,7 +11,7 @@ import org.junit.Test;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class AbstractColorPaletteTest extends AbstractObjectTestBase<AbstractColorPalette<Color>> {
 

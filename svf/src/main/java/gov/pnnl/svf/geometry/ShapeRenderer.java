@@ -7,7 +7,7 @@ import gov.pnnl.svf.picking.ColorPickingSupport;
 /**
  * Renderer for a geometry shape type.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface ShapeRenderer {
 

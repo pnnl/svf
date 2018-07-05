@@ -9,7 +9,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * This matrix transform support object is for utilizing a transform support
  * object to push the translation to the camera as the location.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class CameraMatrixTransformSupport extends MatrixTransformSupport {
 

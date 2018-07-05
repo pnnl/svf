@@ -5,7 +5,7 @@ import gov.pnnl.svf.actor.Actor;
 /**
  * Listener used to listen for events during a collision.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface CollisionSupportListener {
 

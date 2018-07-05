@@ -6,7 +6,7 @@ import java.util.Random;
  * Utility for working with short arrays and primitive collections.
  * Implementation based on qsort4 from Programming Pearls.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ShortArrayUtil {
 

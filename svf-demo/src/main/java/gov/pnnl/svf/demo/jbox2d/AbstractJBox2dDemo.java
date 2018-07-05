@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 /**
  * Abstract class for a JBox2d demo.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractJBox2dDemo extends AbstractDemo<JFrame, GLCanvas> {
 

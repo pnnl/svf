@@ -3,7 +3,7 @@ package gov.pnnl.svf.shape;
 /**
  * This shape represents a rectangle.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface RectangleShape {
 

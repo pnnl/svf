@@ -15,7 +15,7 @@ import java.util.Set;
  * injection called service lookup. It can also be used for dynamic polymorphism
  * of objects.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class LookupProviderImpl implements LookupProvider {

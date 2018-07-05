@@ -9,7 +9,7 @@ import gov.pnnl.svf.camera.Camera;
  * to mark an item for drawing in the scene lookup. Use the DrawableItem
  * interface instead.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public interface Drawable extends SceneItem {

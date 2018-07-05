@@ -9,7 +9,7 @@ import gov.pnnl.svf.texture.TextureRegionListSupport;
  * support object.
  *
  * @author Lyndsey Franklin
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class TextureAnimationSupport extends AbstractAnimationSupport {

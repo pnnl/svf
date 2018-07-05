@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * A simple immutable key value pair.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  * @param <K> the key type
  * @param <V> the value type
  */

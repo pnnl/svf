@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
  * more than one task of this type running at one time. The previous task will
  * be canceled before a new task is scheduled.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class SingleUpdateTaskManager implements TaskManager {
 

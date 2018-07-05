@@ -32,7 +32,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * NEWT scene implementation used for testing.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class NewtTestScene implements SceneExt {
 

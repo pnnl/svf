@@ -23,7 +23,7 @@ import org.apache.commons.io.FilenameUtils;
  * This class provides texturing of an object. Add this class to actor's that
  * require texturing.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 class Texture2dUrlSupport extends Texture2dSupport {
 

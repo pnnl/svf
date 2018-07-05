@@ -10,7 +10,7 @@ import java.io.Serializable;
  * rectangle. This version just provides a convenience constructor for AWT and
  * Swing.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class AwtRectangle2D extends Rectangle2D implements Serializable {

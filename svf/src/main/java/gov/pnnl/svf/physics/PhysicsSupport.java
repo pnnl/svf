@@ -9,7 +9,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * have TransformSupport in order to be moved by physics. This support object is
  * intended for use by the standard physics engine.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class PhysicsSupport extends AbstractSupport<Object> {

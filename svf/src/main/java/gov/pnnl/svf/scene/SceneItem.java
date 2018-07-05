@@ -3,7 +3,7 @@ package gov.pnnl.svf.scene;
 /**
  * Represents an item that exists in the scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface SceneItem {
 

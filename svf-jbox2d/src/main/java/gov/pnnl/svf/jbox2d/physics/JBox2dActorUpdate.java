@@ -13,7 +13,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * This class will update all of the actors in the scene after physics has
  * determined where the actors should be placed.
  *
- * @author Arthur
+ * @author Amelia
  */
 class JBox2dActorUpdate implements UpdateTaskRunnable {
 

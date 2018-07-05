@@ -10,7 +10,7 @@ import gov.pnnl.svf.event.PickingCameraEvent;
  * object reference. Add and remove item to object references by using the
  * ItemPickingSupport.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface ItemPickable {
 

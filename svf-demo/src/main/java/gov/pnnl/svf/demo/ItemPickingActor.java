@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 class ItemPickingActor extends ShapeActor implements ItemPickableActor {
 

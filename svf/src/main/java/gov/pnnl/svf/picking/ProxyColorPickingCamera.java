@@ -11,7 +11,7 @@ import gov.pnnl.svf.scene.Scene;
  * Picking is only supported on cameras that view the entire scene and fill the
  * viewport.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ProxyColorPickingCamera extends AbstractColorPickingCamera {
 

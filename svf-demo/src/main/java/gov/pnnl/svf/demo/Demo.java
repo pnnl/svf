@@ -10,7 +10,7 @@ import gov.pnnl.svf.scene.SceneBuilder;
  * @param <W> the window type
  * @param <C> the component type
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface Demo<W, C extends GLAutoDrawable> {
 

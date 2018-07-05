@@ -20,7 +20,7 @@ import javax.swing.JFrame;
 /**
  * Abstract class for an AWT panel demo.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractAwtPanelDemo extends AbstractDemo<JFrame, GLJPanel> {
 

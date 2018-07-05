@@ -9,7 +9,7 @@ import java.awt.Font;
  * implementation of this class to the scene and then retrieve the instance of
  * it by using the scene lookup.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface TextService extends DrawableService, Disposable {
 

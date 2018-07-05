@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * A generic tree node for implementing a basic list tree.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  * @param <T> The type of value contained in this node
  */
 public class ListTreeNode<T> extends AbstractTreeNode<T, List<ListTreeNode<T>>, ListTreeNode<T>> {

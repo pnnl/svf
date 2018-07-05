@@ -17,7 +17,7 @@ import java.util.NoSuchElementException;
  *
  * @param <E> the type of elements maintained by this set
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class CountingHashSet<E> extends HashSet<E> implements CountingSet<E> {
 

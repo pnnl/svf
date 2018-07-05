@@ -8,7 +8,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * A simple camera that allows movement within a scene. This class should be
  * overridden in order to implement user interaction with the camera.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class SimpleCamera extends AbstractCamera implements DrawingCamera {

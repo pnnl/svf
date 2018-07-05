@@ -12,7 +12,7 @@ import java.awt.event.KeyListener;
  * the scene. This camera is intended to be used as a test view for the
  * SimpleCamera class.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class AwtDrivingCamera extends DrivingCamera implements KeyListener, AwtCamera {
 

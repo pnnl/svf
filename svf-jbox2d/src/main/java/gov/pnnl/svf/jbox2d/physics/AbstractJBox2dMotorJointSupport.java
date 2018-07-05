@@ -6,7 +6,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Abstract support object for joints between two actors that utilize a motor.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractJBox2dMotorJointSupport extends JBox2dJointSupport {
 

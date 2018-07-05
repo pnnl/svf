@@ -4,7 +4,7 @@ package gov.pnnl.svf.jbox2d.physics;
  * This interface provides a means for physics objects to filter who they
  * collide with.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface JBox2dContactFilter {
 

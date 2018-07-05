@@ -7,7 +7,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * This class provides animation of the actor's scale over a period of time.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class ScaleAnimationSupport extends AbstractAnimationSupport {

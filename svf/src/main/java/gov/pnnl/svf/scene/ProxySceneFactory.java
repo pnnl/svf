@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Scene factory for use with proxy scenes.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ProxySceneFactory implements SceneFactory {
 

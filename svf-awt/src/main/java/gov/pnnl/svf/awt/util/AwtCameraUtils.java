@@ -16,7 +16,7 @@ import java.util.Set;
 /**
  * Utilities for AWT cameras.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class AwtCameraUtils {
 

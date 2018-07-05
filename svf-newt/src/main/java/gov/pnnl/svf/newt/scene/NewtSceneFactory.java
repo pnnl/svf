@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Scene factory for NEWT scene types.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class NewtSceneFactory implements SceneFactory {
 

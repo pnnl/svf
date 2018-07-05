@@ -8,7 +8,7 @@ import gov.pnnl.svf.scene.TooltipActor;
 /**
  * NEWT implementation of the tooltip actor.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class NewtTooltipActor extends TooltipActor implements MouseListener {
 

@@ -6,7 +6,7 @@ import gov.pnnl.svf.actor.Actor;
  * This class is used to provide a reference to the parent of a class that is
  * added as a child with ChildSupport.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ParentSupport extends AbstractSupport<Object> {
 

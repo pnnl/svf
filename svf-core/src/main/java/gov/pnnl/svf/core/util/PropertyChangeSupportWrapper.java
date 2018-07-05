@@ -14,7 +14,7 @@ import java.beans.PropertyChangeSupport;
  *
  * This wrapper will not fire events when both arguments are null.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class PropertyChangeSupportWrapper extends PropertyChangeSupport {
 

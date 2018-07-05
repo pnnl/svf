@@ -8,7 +8,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * This class provides a means to animate the translation (location) of the
  * actor over a period of time.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class TranslationAnimationSupport extends AbstractAnimationSupport {

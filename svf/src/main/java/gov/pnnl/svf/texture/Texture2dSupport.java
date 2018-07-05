@@ -15,7 +15,7 @@ import java.nio.ByteBuffer;
  * This class provides texturing of an object. Add this class to actor's that
  * require texturing.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class Texture2dSupport extends TextureSupport {
 

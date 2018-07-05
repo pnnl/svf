@@ -27,7 +27,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * TransformSupport object exists then this object utilizes the offset and scale
  * directly to determine location and radius.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class CullingSupport extends AbstractSupport<Object> implements Drawable {
 

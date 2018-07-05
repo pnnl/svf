@@ -3,7 +3,7 @@ package gov.pnnl.svf.scene;
 /**
  * Performance and debug related metrics for a scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface SceneMetrics {
 

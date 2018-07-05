@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 /**
  * Support for a 2d texture.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 class Texture2dByteSupport extends Texture2dSupport {
 

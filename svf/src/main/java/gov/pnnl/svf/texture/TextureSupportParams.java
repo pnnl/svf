@@ -6,7 +6,7 @@ import com.jogamp.opengl.GL2;
  * Interface used for overriding the texture parameters during texture
  * initialization.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface TextureSupportParams {
 

@@ -17,7 +17,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * Helper class used to encapsulate the functionality for getting scene
  * coordinates. This class is not thread safe.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class SceneCoordsHelper {
 

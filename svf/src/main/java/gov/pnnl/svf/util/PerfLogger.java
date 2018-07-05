@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * This class will log the average number of rendered vertices per second at the
  * specified interval.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class PerfLogger extends AbstractLogger implements DrawableItem {
 

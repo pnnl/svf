@@ -7,7 +7,7 @@ import com.jogamp.opengl.glu.gl2.GLUgl2;
  * Interface for a camera that is used for item picking. Item picking only works
  * for scene objects.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface ItemPickingCamera extends PickingCamera {
 

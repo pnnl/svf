@@ -28,7 +28,7 @@ import org.apache.commons.collections.primitives.DoubleList;
 /**
  * Utility class containing all of the 2D VBO shape methods.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class VboShape2DUtil extends VboUtil implements DimensionConst {
 

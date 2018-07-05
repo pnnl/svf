@@ -8,7 +8,7 @@ import gov.pnnl.svf.vbo.PreparableItem;
 /**
  * Interface used to draw an item using immediate mode.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface ImmediateDrawableItem extends PreparableItem, ImmediateDrawable, ImmediatePickable, ImmediateColorPickable {
 }

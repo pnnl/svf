@@ -6,7 +6,7 @@ import gov.pnnl.svf.scene.Scene;
  * A simple camera that allows movement within a scene. This class should be
  * overridden in order to implement user interaction with the camera.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class DrivingCamera extends SimpleCamera {
 

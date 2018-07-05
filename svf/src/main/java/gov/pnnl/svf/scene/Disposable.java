@@ -3,7 +3,7 @@ package gov.pnnl.svf.scene;
 /**
  * Interface used to mark a class as disposable in the scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface Disposable {
 

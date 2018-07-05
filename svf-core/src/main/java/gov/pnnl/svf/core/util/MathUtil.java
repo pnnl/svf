@@ -6,7 +6,7 @@ import java.text.MessageFormat;
 /**
  * Utility class for math related methods.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class MathUtil {
 

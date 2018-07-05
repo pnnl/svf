@@ -10,7 +10,7 @@ import gov.pnnl.svf.picking.PickableActor;
 /**
  * Interface for all scrollbar actor implementations.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface ScrollbarActor extends Actor, PickableActor, ItemPickableActor, ColorPickableActor, ColorPickingSupportListener, ItemPickingSupportListener {
 

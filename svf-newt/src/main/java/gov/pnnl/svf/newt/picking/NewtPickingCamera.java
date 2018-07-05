@@ -14,7 +14,7 @@ import gov.pnnl.svf.scene.Scene;
  * is attached to this picking camera. Picking is only supported on cameras that
  * view the entire scene and fill the viewport.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class NewtPickingCamera extends AbstractPickingCamera implements MouseListener, KeyListener {
 

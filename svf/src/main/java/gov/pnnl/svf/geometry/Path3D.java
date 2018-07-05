@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Immutable shape that represents a path in 3d space.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class Path3D extends Shape3D implements Serializable {
 

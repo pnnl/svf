@@ -3,7 +3,7 @@ package gov.pnnl.svf.scene;
 /**
  * Enumeration indicating the type of drawing pass.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public enum DrawingPass {

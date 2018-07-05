@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * This class provides texturing of an object. Add this class to actor's that
  * require texturing.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 class Texture2dDataSupport extends Texture2dSupport {

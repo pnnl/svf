@@ -20,7 +20,7 @@ import javax.swing.JFrame;
 /**
  * Abstract class for an AWT canvas demo.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractAwtDemo extends AbstractDemo<JFrame, GLCanvas> {
 

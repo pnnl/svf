@@ -5,7 +5,7 @@ import gov.pnnl.svf.event.CameraEvent;
 /**
  * Event listener for a camera.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface CameraListener {
 

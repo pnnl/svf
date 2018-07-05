@@ -30,7 +30,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * receive picking events for it. The instance must also be added as a listener
  * to item or color picking support.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractScrollbarActor extends AbstractActor implements ScrollbarActor {
 

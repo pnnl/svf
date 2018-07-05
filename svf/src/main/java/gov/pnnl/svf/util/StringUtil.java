@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 /**
  * Utility for working with strings.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class StringUtil {
 

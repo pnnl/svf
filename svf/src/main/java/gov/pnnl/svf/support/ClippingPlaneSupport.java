@@ -17,7 +17,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * Support for adding clipping planes to an actor. Clipping planes are used to
  * prevent sections of an actor from drawing.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ClippingPlaneSupport extends AbstractSupport<Object> implements Drawable {
 

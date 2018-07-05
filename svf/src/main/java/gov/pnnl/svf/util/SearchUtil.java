@@ -15,7 +15,7 @@ import org.apache.commons.lang.StringUtils;
 /**
  * Utility class for searching objects.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class SearchUtil {
 

@@ -6,7 +6,7 @@ import gov.pnnl.svf.core.geometry.Border;
 /**
  * This shape represents a border, with optional padding, around a shape.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface BorderShape {
 

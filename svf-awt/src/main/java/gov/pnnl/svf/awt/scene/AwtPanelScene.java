@@ -13,7 +13,7 @@ import gov.pnnl.svf.scene.SceneBuilder;
  * cameras during runtime. It also allows for a single place of reference for
  * access to these objects.</P>
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class AwtPanelScene extends AbstractAwtScene<GLJPanel> {
 

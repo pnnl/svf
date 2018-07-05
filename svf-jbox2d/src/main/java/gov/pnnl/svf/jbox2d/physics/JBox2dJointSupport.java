@@ -7,7 +7,7 @@ import java.beans.PropertyChangeListener;
 /**
  * Abstract support object for working with JBox2d physics.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class JBox2dJointSupport extends AbstractJBox2dSupport<Object> {
 

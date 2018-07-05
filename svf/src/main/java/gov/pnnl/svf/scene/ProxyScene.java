@@ -5,7 +5,7 @@ import com.jogamp.opengl.GL2;
 /**
  * Dummy implementation of a scene. This object is mainly used for testing.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ProxyScene extends AbstractScene<ProxyGLCanvas> {
 

@@ -14,7 +14,7 @@ import java.util.Set;
  *
  * @param <T> type of color object for the palette
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractColorPalette<T> {
 

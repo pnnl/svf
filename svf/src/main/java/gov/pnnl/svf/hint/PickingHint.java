@@ -14,7 +14,7 @@ import gov.pnnl.svf.picking.PickingCamera;
  * than one hint is specified the system will attempt to create multiple picking
  * cameras.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public enum PickingHint {
 

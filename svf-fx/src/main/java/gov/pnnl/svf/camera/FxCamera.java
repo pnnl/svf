@@ -6,7 +6,7 @@ import javafx.scene.input.InputEvent;
 /**
  * Interface for consolidating all of the JavaFX camera interfaces.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface FxCamera extends FxEventHandler<InputEvent> {
 }

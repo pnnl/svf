@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Support object for creating a list of texture regions.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class TextureRegionListSupport extends TextureRegionSupport implements Drawable {
 

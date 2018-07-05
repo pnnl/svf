@@ -5,7 +5,7 @@ import com.jogamp.newt.event.MouseListener;
 /**
  * Interface for consolidating all of the NEWT camera interfaces.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface NewtCamera extends MouseListener {
 }

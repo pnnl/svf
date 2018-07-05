@@ -9,7 +9,7 @@ import java.beans.PropertyChangeListener;
 /**
  * Listener used to respond to camera events that trigger cursor changes.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class CameraCursorListener implements PropertyChangeListener {
 

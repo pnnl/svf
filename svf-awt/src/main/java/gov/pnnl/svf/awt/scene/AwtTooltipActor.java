@@ -9,7 +9,7 @@ import java.awt.event.MouseMotionListener;
 /**
  * AWT implementation of the tooltip actor.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class AwtTooltipActor extends TooltipActor implements MouseMotionListener, MouseListener {
 

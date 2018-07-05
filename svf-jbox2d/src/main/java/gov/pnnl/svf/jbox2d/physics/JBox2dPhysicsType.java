@@ -3,7 +3,7 @@ package gov.pnnl.svf.jbox2d.physics;
 /**
  * Type of physics actor. These types are close to the Box2d definitions.
  *
- * @author Arthur
+ * @author Amelia
  */
 public enum JBox2dPhysicsType {
 

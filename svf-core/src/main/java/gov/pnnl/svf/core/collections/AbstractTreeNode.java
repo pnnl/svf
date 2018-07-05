@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
  * A generic tree node for implementing a basic tree. This class is not thread
  * safe.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  * @param <T> The type of value contained in this node
  * @param <C> The type of collection for the children nodes
  * @param <N> The type of node

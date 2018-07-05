@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * is found the object will be uninitialized as soon as possible. This task will
  * get removed from the scene after it has been uninitialized.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class UninitializeTask implements Initializable {
 

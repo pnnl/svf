@@ -13,7 +13,7 @@ import java.util.Set;
  *
  * @param <T>
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 @SuppressWarnings("rawtypes")
 public abstract class AbstractStateSupport<T extends Enum> extends AbstractSupport<StateSupportListener<T>> {

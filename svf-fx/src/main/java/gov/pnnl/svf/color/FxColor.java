@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Immutable color class optimized for use with JOGL. This class provides a
  * convenience constructor for use with JavaFX.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class FxColor extends Color implements Serializable {
 

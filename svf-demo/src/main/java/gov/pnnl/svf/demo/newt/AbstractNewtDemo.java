@@ -11,7 +11,7 @@ import gov.pnnl.svf.util.StringUtil;
 /**
  * Abstract class for an NEWT demo.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractNewtDemo extends AbstractDemo<GLWindow, GLWindow> {
 

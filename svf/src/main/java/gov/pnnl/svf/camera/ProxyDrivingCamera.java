@@ -9,7 +9,7 @@ import gov.pnnl.svf.util.ProxyCameraUtils;
  * the scene. This camera is intended to be used as a test view for the
  * SimpleCamera class.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ProxyDrivingCamera extends DrivingCamera {
 

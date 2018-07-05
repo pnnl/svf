@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 /**
  * Utility for working with the Color classes.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class ColorUtil {

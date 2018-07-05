@@ -13,7 +13,7 @@ import java.util.Set;
  * for scene items. Picking is only supported on cameras that view the entire
  * scene and fill the viewport.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface PickingCamera extends CameraExt<PickingCameraListener> {
 

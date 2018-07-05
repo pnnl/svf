@@ -3,7 +3,7 @@ package gov.pnnl.svf.core.util;
 /**
  * Class used to evaluate Bezier curves. This class is not thread safe.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class BezierCurveEvaluator {
 

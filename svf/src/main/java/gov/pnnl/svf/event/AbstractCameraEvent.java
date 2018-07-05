@@ -9,7 +9,7 @@ import org.apache.commons.math.geometry.Vector3D;
  *
  * @param <C> the camera type the generates this event
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractCameraEvent<C extends Camera> {
 

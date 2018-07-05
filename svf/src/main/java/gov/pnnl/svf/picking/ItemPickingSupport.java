@@ -17,7 +17,7 @@ import java.util.Set;
  * in the items list in order to be picked. Items must be contained within the
  * drawable area of an actor. Item picking only works for scene items.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ItemPickingSupport extends AbstractSupport<ItemPickingSupportListener> implements ItemPickable, Pickable {
 

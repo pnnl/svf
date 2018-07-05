@@ -3,7 +3,7 @@ package gov.pnnl.svf.jbox2d.physics;
 /**
  * Type of physics joint.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public enum JBox2dJointType {
 

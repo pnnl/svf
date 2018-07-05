@@ -27,7 +27,7 @@ import java.util.logging.Logger;
  * picking support will be notified when clicked or double clicked in a
  * referenceCamera view that is attached to this picking referenceCamera.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractItemPickingCamera extends AbstractPickingCamera implements ItemPickingCamera, Initializable {
 

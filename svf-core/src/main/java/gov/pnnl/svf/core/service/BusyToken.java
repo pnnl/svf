@@ -3,7 +3,7 @@ package gov.pnnl.svf.core.service;
 /**
  * Token used with the busy service.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface BusyToken {
 }

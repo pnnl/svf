@@ -11,7 +11,7 @@ import javafx.scene.input.MouseEvent;
 /**
  * JavaFX implementation of the tooltip actor.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class FxTooltipActor extends TooltipActor implements FxEventHandler<InputEvent> {
 

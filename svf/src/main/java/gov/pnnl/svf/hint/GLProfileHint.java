@@ -3,7 +3,7 @@ package gov.pnnl.svf.hint;
 /**
  * Hint used to request a specific GL profile.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public enum GLProfileHint {
 

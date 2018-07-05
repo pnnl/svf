@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class JBox2dRevoluteJointDemo extends AbstractAwtDemo {
 

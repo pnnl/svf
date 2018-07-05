@@ -1,7 +1,7 @@
 package gov.pnnl.svf.texture;
 
 /**
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface TextureSupportListener {
 

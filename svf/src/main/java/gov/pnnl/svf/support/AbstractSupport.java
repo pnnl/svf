@@ -20,7 +20,7 @@ import java.util.Set;
  * Abstract class for support classes that need reference to the enclosing actor
  * or listeners.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  * @param <I> The type of listener that this support object supports.
  *
  */

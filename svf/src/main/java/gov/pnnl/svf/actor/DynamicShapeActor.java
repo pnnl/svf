@@ -31,7 +31,7 @@ import java.util.Set;
 /**
  * Draws a geometry shape.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class DynamicShapeActor extends AbstractDynamicActor {

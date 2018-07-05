@@ -3,7 +3,7 @@ package gov.pnnl.svf.support;
 /**
  * Enumeration for the default implementation of StateSupport.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public enum SelectionState {
 

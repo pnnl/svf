@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutorService;
  * should remain in the scene lookup until finished. Issues will occur if tasks
  * are removed by any means other than the task itself.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class WorkerUpdateTask extends AbstractWorkerTask {

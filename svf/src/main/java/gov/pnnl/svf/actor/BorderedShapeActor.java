@@ -18,7 +18,7 @@ import java.util.Set;
 /**
  * Draws a geometry shape with a border.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class BorderedShapeActor extends ShapeActor {

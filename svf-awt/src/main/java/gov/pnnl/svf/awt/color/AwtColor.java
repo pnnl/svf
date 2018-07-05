@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Immutable color class optimized for use with JOGL. This class provides a
  * convenience constructor for use with AWT.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class AwtColor extends Color implements Serializable {
 

@@ -17,7 +17,7 @@ import java.awt.event.MouseWheelListener;
  * is attached to this picking camera. Picking is only supported on cameras that
  * view the entire scene and fill the viewport.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class AwtItemPickingCamera extends AbstractItemPickingCamera implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
 

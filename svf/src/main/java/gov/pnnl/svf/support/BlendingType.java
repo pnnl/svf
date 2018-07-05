@@ -5,7 +5,7 @@ import com.jogamp.opengl.GL2;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public enum BlendingType {
 

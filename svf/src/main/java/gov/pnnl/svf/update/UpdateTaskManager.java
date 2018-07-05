@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
 /**
  * Update task manager is used to schedule a task on the update thread.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class UpdateTaskManager implements TaskManager {
 

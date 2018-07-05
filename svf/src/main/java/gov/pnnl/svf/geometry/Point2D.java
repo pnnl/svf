@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Immutable shape that represents a point in 2d space.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class Point2D extends Shape2D implements Serializable {
 

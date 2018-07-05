@@ -5,7 +5,7 @@ import gov.pnnl.svf.core.util.StateUtil;
 /**
  * Event type used for a proxy camera.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ProxyMouseEvent {
 

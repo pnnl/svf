@@ -5,7 +5,7 @@ package gov.pnnl.svf.support;
  *
  * @param <T> the state type enumeration
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 @SuppressWarnings("rawtypes")
 public class StateEvent<T extends Enum> {

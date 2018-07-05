@@ -7,7 +7,7 @@ import gov.pnnl.svf.support.ColorSupport;
 /**
  * This class provides the ability to transition a color over a period of time.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class ColorAnimationSupport extends AbstractAnimationSupport {

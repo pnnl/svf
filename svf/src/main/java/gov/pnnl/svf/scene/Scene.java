@@ -10,7 +10,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Interface for a OpenGL scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public interface Scene extends SceneLookup, Disposable, Observable {

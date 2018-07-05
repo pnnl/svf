@@ -6,7 +6,7 @@ import gov.pnnl.svf.actor.Actor;
  * This class provides the ability to transition a certain line thickness over a
  * period of time.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class ThicknessAnimationSupport extends AbstractAnimationSupport {

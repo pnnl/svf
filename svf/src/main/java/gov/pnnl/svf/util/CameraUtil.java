@@ -11,7 +11,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Utility class for working with the various cameras.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class CameraUtil {
 

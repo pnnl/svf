@@ -12,7 +12,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Immutable shape that represents a path in 3d space.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class PathVector3D extends Shape3D implements Serializable {
 

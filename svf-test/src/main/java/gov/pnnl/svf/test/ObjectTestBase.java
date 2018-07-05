@@ -3,7 +3,7 @@ package gov.pnnl.svf.test;
 /**
  * Class that can be used as a helper for testing objects.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  * @param <T>
  */
 public class ObjectTestBase<T extends Object> extends AbstractObjectTestBase<T> {

@@ -45,7 +45,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Demo loader for various shape types in a scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class VolumeDemoLoader implements DemoLoader {
 

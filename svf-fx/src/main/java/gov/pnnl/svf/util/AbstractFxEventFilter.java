@@ -13,7 +13,7 @@ import javafx.event.EventType;
  *
  * @param <T> the event type
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractFxEventFilter<T extends Event> implements FxEventFilter<T> {
 

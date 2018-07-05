@@ -8,7 +8,7 @@ import java.awt.event.InputEvent;
 /**
  * Utility class for getting the current state of modifier keys.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class AwtKeyUtil implements AWTEventListener {
 

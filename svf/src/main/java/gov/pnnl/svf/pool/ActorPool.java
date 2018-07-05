@@ -8,7 +8,7 @@ import gov.pnnl.svf.actor.Actor;
  *
  * @param <T> the type of actor contained in this pool
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface ActorPool<T extends Actor> extends Pool<T> {
 

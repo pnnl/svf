@@ -7,7 +7,7 @@ import java.awt.Font;
 /**
  * Shape used to represent text.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface TextShape {
 

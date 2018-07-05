@@ -6,7 +6,7 @@ import gov.pnnl.svf.scene.Scene;
 /**
  * Abstract implementation of a drawable service.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractDrawableService implements DrawableService {
 

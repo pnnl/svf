@@ -12,7 +12,7 @@ import java.util.Arrays;
  * Support for objects that can be transformed in a GLScene. This transform
  * support sub type stores the current transformation matrices.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class MatrixTransformSupport extends TransformSupport {

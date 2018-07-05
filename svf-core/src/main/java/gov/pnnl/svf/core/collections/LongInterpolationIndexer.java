@@ -10,7 +10,7 @@ import gov.pnnl.svf.core.util.MathUtil;
  * supply a value of 7 to start then the indexes returned will be something
  * like: 6, 5, 7, 4, 8, 3, 9, 2, 1, 0. This class is not thread safe.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class LongInterpolationIndexer extends AbstractInterpolationIndexer {
 

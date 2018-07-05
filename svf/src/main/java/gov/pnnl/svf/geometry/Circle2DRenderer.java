@@ -9,7 +9,7 @@ import gov.pnnl.svf.util.Shape2DUtil;
 /**
  * Shape renderer implementation.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class Circle2DRenderer extends AbstractShapeRenderer {
 

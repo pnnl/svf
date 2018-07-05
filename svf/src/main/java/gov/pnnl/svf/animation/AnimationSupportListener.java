@@ -3,7 +3,7 @@ package gov.pnnl.svf.animation;
 /**
  * Listener used to listen for events during animation.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface AnimationSupportListener {
 

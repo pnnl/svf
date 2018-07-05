@@ -5,7 +5,7 @@ package gov.pnnl.svf.core.service;
  * service should be encapsulated within a try and finally to prevent orphaned
  * busy tokens.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface BusyService {
 

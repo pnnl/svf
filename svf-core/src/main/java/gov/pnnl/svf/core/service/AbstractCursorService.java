@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @param <C> cursor type is the cursor type used by the scene user interface
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractCursorService<C> implements CursorService, PropertyChangeListener {
 

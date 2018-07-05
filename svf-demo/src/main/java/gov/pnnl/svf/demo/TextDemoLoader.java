@@ -25,7 +25,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Demo loader for displaying a lot of text in a scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class TextDemoLoader implements DemoLoader {
 

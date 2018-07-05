@@ -10,7 +10,7 @@ import gov.pnnl.svf.util.ShapeUtil;
 /**
  * Abstract base class for a shape renderer.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractShapeRenderer implements ShapeRenderer {
 

@@ -3,7 +3,7 @@ package gov.pnnl.svf.geometry;
 /**
  * Service for working with shape renderers.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface ShapeService {
 

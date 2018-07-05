@@ -16,7 +16,7 @@ import jogamp.opengl.windows.wgl.WGLExt;
 /**
  * This class will log the memory usage for GPUs at the specified interval.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class MemLogger extends AbstractLogger implements DrawableItem {
 

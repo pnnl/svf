@@ -16,7 +16,7 @@ import org.apache.commons.collections.primitives.DoubleList;
 /**
  * VBO implementation of the GLUtessellatorCallback.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class TessellatorCallbackVbo extends GLUtessellatorCallbackAdapter {
 

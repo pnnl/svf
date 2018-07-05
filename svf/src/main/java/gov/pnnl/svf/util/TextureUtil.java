@@ -22,7 +22,7 @@ import org.apache.commons.io.FilenameUtils;
 /**
  * Utility for working with textures.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class TextureUtil {
 

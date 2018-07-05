@@ -5,7 +5,7 @@ package gov.pnnl.svf.core.util;
  *
  * @param <T> the type of value that is being transformed
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface Transformer<T> {
 

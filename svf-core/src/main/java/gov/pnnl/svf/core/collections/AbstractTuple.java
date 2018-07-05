@@ -6,7 +6,7 @@ import java.util.Arrays;
 /**
  * Base class for a heterogeneous tuple class. This class type is immutable.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractTuple implements Serializable {
 

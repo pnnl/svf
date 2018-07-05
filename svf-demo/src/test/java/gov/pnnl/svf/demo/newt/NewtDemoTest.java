@@ -13,7 +13,7 @@ import org.junit.runner.Description;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class NewtDemoTest extends AbstractDemoHelper<AbstractNewtDemo, GLWindow, SceneBuilder, AbstractScene<GLWindow>> {
 

@@ -8,7 +8,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * Immutable shape that represents a frustum mainly used for camera visible
  * bounds.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class Frustum extends Shape3D implements Serializable {
 

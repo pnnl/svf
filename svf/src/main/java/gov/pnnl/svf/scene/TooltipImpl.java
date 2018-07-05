@@ -22,7 +22,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Class for creating and working with the toolip in a scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class TooltipImpl implements Tooltip {
 

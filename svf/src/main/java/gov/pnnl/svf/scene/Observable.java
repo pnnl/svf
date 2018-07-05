@@ -5,7 +5,7 @@ import java.beans.PropertyChangeSupport;
 /**
  * Interface for classes that use the observer pattern.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface Observable {
 

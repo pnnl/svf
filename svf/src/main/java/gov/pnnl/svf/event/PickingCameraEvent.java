@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Event pushed by a picking camera.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class PickingCameraEvent extends AbstractCameraEvent<PickingCamera> {
 

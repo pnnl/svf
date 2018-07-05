@@ -6,7 +6,7 @@ import java.awt.Font;
 /**
  * Interface for working with the toolip in a scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface Tooltip extends Observable, Disposable {
 

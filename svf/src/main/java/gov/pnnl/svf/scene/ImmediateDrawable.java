@@ -7,7 +7,7 @@ import gov.pnnl.svf.camera.Camera;
 /**
  * Interface for classes that require drawing using immediate mode.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public interface ImmediateDrawable {

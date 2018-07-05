@@ -5,7 +5,7 @@ import gov.pnnl.svf.scene.Disposable;
 /**
  * Interface used to represent a pool of objects.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  * @param <T> type of object managed by this pool
  */

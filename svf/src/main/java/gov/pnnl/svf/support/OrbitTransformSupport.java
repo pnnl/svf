@@ -10,7 +10,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * Support for objects that can be transformed in a GLScene. This transform
  * subtype allows for the separation of orbit from orbit.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class OrbitTransformSupport extends TransformSupport {

@@ -3,7 +3,7 @@ package gov.pnnl.svf.hint;
 /**
  * Hints related to OpenGL.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public enum OpenGLHint {
 

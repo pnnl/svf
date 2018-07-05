@@ -9,7 +9,7 @@ import gov.pnnl.svf.camera.Camera;
  * object reference. Add and remove color to object references by using the
  * ColorPickingCamera.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface ColorPickable {
 

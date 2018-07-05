@@ -7,7 +7,7 @@ import gov.pnnl.svf.geometry.Shape2D;
  *
  * @param <T> The 2D shape represented
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface BoundsShape<T extends Shape2D> {
 

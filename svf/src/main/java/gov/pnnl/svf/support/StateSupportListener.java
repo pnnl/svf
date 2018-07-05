@@ -5,7 +5,7 @@ package gov.pnnl.svf.support;
  *
  * @param <T>
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 @SuppressWarnings("rawtypes")
 public interface StateSupportListener<T extends Enum> {

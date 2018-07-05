@@ -16,7 +16,7 @@ import org.apache.commons.collections.primitives.IntList;
 /**
  * Utility class for working with Apache Commons Math and SVF geometry.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class VboUtil extends AbstractGLUtil implements DimensionConst {
 

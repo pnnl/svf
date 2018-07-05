@@ -15,7 +15,7 @@ import org.eclipse.swt.widgets.Shell;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class SwtPickingDemo extends AbstractSwtDemo {
 

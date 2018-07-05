@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class AwtTextDemo extends AbstractAwtDemo {
 

@@ -3,7 +3,7 @@ package gov.pnnl.svf.input;
 /**
  * The state of the key.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public enum KeyState {
 

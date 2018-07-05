@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 /**
  * Default implementation of the Screenshot interface.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ScreenshotImpl implements Screenshot {
 

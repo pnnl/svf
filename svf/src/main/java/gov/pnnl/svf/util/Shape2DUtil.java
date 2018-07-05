@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 /**
  * Utility class containing all of the 2D shape methods.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class Shape2DUtil extends ShapeUtil {
 

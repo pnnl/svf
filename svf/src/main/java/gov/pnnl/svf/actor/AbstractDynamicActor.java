@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * Abstract base class for actors that need to draw that require performance
  * enhancement through the use of call lists or vertex array buffers.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractDynamicActor extends AbstractActor implements VboDrawableItem, DisplayListDrawableItem, ImmediateDrawableItem {
 

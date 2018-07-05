@@ -3,7 +3,7 @@ package gov.pnnl.svf.support;
 import gov.pnnl.svf.actor.Actor;
 
 /**
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface SelectionSupportListener {
 

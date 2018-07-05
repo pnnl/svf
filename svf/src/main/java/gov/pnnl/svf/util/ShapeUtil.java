@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 /**
  * Utility class for working with Apache Commons Math and SVF geometry.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ShapeUtil extends AbstractGLUtil {
 

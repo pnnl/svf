@@ -3,7 +3,7 @@ package gov.pnnl.svf.jbox2d.physics;
 /**
  * Listener used to listen for contact events.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface JBox2dContactListener {
 

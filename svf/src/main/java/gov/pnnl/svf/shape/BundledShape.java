@@ -3,7 +3,7 @@ package gov.pnnl.svf.shape;
 /**
  * Shape that allows points to be bundles.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface BundledShape {
 
