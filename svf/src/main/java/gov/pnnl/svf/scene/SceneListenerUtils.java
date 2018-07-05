@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 /**
  * Utility for working with native listeners for a scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class SceneListenerUtils implements Disposable {
 

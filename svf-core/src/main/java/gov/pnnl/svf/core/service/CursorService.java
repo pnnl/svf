@@ -5,7 +5,7 @@ import java.util.Set;
 /**
  * Service for changing the cursor according to the current state.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface CursorService {
 

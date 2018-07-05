@@ -35,7 +35,7 @@ import java.util.logging.Logger;
  * Utility class for working with color picking in a scene. This class is not
  * intended to be instantiated or used directly.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ColorPickingUtils implements Disposable {
 

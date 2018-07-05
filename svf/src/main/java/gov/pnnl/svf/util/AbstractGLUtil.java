@@ -17,7 +17,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Abstract utility class that has common methods and constants for GL drawing.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 abstract class AbstractGLUtil implements NurbsConst, CartesianConst {
 

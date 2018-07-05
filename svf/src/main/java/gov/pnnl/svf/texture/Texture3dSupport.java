@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 /**
  * Support for a volumetric 3d texture.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class Texture3dSupport extends TextureSupport {
 

@@ -7,7 +7,7 @@ import gov.pnnl.svf.scene.Scene;
 /**
  * This actor is used to represent a scene boundary when using JBox2d physics.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class JBox2dSceneBoundaryActor extends DynamicShapeActor {
 

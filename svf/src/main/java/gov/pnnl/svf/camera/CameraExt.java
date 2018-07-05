@@ -6,7 +6,7 @@ import com.jogamp.opengl.glu.gl2.GLUgl2;
 /**
  * Extended interface for a camera.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  * @param <T> Listener type for this camera
  */

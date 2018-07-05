@@ -10,7 +10,7 @@ import gov.pnnl.svf.service.AbstractDrawableService;
 /**
  * Abstract class for all logger services.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractLogger extends AbstractDrawableService implements Updatable {
 

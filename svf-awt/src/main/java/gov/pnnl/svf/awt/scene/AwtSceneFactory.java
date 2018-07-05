@@ -38,7 +38,7 @@ import javax.swing.SwingUtilities;
 /**
  * Scene factory for AWT scene types.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class AwtSceneFactory implements SceneFactory {
 

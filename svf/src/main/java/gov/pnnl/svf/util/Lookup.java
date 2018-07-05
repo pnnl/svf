@@ -7,7 +7,7 @@ import gov.pnnl.svf.core.lookup.MultiLookupProvider;
  * The global lookup. This can be used to locate scenes that have been started
  * within the current class loader.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class Lookup {
 

@@ -21,7 +21,7 @@ import org.jbox2d.common.Vec2;
 /**
  * Class for drawing debug information in the scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class JBox2dDebugDraw extends DebugDraw {
 

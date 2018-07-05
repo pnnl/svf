@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Shell;
 /**
  * Abstract class for an SWT demo.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractSwtDemo extends AbstractDemo<Shell, GLCanvas> {
 

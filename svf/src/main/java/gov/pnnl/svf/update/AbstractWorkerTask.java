@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 /**
  * Abstract task type for all worker tasks.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractWorkerTask extends AbstractTask implements WorkerTask {
 

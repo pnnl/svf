@@ -6,7 +6,7 @@ import gov.pnnl.svf.actor.Actor;
  * Add this class to actor's that can be selected in a scene. It's up to the
  * individual actor to decide what a selection actually means.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class SelectionSupport extends AbstractSupport<SelectionSupportListener> {
 

@@ -4,7 +4,7 @@ package gov.pnnl.svf.shape;
  * This shape represents an arc or segment of a circle which may or may not
  * originate from the center.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface ArcShape {
 

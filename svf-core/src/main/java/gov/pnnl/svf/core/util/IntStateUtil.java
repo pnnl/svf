@@ -3,7 +3,7 @@ package gov.pnnl.svf.core.util;
 /**
  * Utility class for working with int boolean state.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class IntStateUtil {
 

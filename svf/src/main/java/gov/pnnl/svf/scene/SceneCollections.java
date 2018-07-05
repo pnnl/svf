@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Interface for container that holds all of the scene collections.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface SceneCollections extends Disposable {
 

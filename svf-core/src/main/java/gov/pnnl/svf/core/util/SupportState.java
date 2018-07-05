@@ -4,7 +4,7 @@ package gov.pnnl.svf.core.util;
  * Support for utilizing state values to indicate current support state. This
  * class is not thread safe.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class SupportState extends AbstractState {
 

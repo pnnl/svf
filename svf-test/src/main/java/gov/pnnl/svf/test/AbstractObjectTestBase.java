@@ -35,7 +35,7 @@ import org.junit.runner.Description;
  * Base class for testing a value object. Provides helper functionality for
  * testing common methods such as equals and hashcode.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  * @param <T> Object type to be tested
  *
  */

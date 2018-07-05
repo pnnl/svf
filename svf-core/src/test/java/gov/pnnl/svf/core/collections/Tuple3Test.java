@@ -7,7 +7,7 @@ import org.junit.Test;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class Tuple3Test extends AbstractObjectTestBase<Tuple3<Integer, Integer, Integer>> {
 

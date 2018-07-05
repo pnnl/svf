@@ -3,7 +3,7 @@ package gov.pnnl.svf.core.lookup;
 /**
  * Static factory class for creating lookup providers.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class LookupProviderFactory {
 

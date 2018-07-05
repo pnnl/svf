@@ -71,7 +71,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Demo loader for various chart types in a scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class DynamicDemoLoader implements DemoLoader {
 

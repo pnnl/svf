@@ -10,7 +10,7 @@ import java.lang.reflect.Constructor;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class NewtPickingDemo extends AbstractNewtDemo {
 

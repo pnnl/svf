@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutorService;
  * This task is meant to be scheduled on the update thread by adding it to a
  * scene. This task will only run once and then remove itself from the scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class BatchWorkerUpdateTask extends AbstractWorkerTask implements BatchWorkerTask {

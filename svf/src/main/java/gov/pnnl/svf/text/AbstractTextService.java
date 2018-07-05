@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * Abstract base class for text services.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractTextService extends AbstractDrawableService implements TextService {
 

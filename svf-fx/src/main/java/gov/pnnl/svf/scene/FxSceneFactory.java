@@ -31,7 +31,7 @@ import javafx.application.Platform;
 /**
  * Scene factory for FX scene types.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class FxSceneFactory implements SceneFactory {
 

@@ -3,7 +3,7 @@ package gov.pnnl.svf.test;
 /**
  * Interface that creates objects used for testing.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface ObjectFactory<T> {
 

@@ -6,7 +6,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Support object for creating a revolute joint between two actors.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class JBox2dRevoluteJointSupport extends AbstractJBox2dMotorJointSupport {
 

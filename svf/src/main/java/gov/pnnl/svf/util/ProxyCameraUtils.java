@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * Utilities for proxy cameras.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ProxyCameraUtils {
 

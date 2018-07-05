@@ -32,7 +32,7 @@ import org.apache.commons.pool.impl.StackObjectPool;
 /**
  * Class that provides additional functionality for a scene lookup.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class SceneLookupImpl implements SceneLookup {
 

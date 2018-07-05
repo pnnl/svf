@@ -11,7 +11,7 @@ import java.beans.PropertyChangeSupport;
  * until finished. Issues will occur if tasks are removed by any means other
  * than the task itself.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractTask implements Task {
 

@@ -22,7 +22,7 @@ import jogamp.common.util.locks.RecursiveLockImplJava5;
  * Mock canvas used in a proxy scene. Override annotations are commented out to
  * allow for reverse compatibility with JOGL.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ProxyGLCanvas implements GLAutoDrawable {
 

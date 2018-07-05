@@ -4,7 +4,7 @@ package gov.pnnl.svf.scene;
  * Scene timers that retain references to times and stages of the scene
  * renderer.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface SceneTimers extends SceneMetrics {
 

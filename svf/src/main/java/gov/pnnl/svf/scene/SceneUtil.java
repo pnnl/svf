@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Class for containing common utility methods and fields for a scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class SceneUtil implements Disposable {
 

@@ -3,7 +3,7 @@ package gov.pnnl.svf.shape;
 /**
  * Shape that contains points.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface PointsShape {
 

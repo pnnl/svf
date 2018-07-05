@@ -5,7 +5,7 @@ import java.util.Collection;
 /**
  * Color palette is a container and repository for a set of colors.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ColorPalette extends AbstractColorPalette<Color> {
 

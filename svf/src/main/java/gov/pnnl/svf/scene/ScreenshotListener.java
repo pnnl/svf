@@ -5,7 +5,7 @@ import java.io.File;
 /**
  * Listener utilized for screen shot callback.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface ScreenshotListener {
 

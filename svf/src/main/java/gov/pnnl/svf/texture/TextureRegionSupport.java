@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Support object for mapping specific texture regions.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class TextureRegionSupport extends AbstractSupport<Object> {
 

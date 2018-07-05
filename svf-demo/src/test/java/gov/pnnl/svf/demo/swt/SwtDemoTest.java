@@ -18,7 +18,7 @@ import org.junit.runner.Description;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class SwtDemoTest extends AbstractDemoHelper<AbstractSwtDemo, Shell, SceneBuilder, AbstractScene<GLCanvas>> {
 

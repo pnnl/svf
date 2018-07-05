@@ -6,7 +6,7 @@ import com.jogamp.opengl.glu.gl2.GLUgl2;
 /**
  * Interface for classes that require initialization.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public interface Initializable extends SceneItem {

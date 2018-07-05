@@ -9,7 +9,7 @@ import java.util.Set;
  * selected, highlighted, and related. This class can be used at a template for
  * creating your own state support classes.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class SelectionStateSupport extends AbstractStateSupport<SelectionState> {
 

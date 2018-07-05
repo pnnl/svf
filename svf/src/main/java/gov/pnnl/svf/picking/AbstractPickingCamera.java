@@ -34,7 +34,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * support will be notified when clicked or double clicked in a reference camera
  * view that is attached to this picking camera.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractPickingCamera extends AbstractActor implements PickingCamera, Updatable {
 

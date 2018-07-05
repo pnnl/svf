@@ -3,7 +3,7 @@ package gov.pnnl.svf.core.geometry;
 /**
  * Represents a chart style in a dimensional environment.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public enum Chart {
 

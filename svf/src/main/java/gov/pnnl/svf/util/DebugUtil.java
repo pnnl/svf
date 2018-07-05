@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 /**
  * Utility class for working with the GLScene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class DebugUtil {

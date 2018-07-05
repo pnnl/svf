@@ -6,7 +6,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Support object for creating a distance joint between two actors.
  *
- * @author Arthur
+ * @author Amelia
  */
 public class JBox2dDistanceJointSupport extends JBox2dJointSupport {
 

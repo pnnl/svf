@@ -7,7 +7,7 @@ package gov.pnnl.svf.scene;
  * for convenience only. If more scene passes are required then you should
  * create your own drawing pass enumeration.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public enum SceneDrawingPass {
 

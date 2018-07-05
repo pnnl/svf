@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Marker for a geometry shape.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class Shape implements Serializable {
 

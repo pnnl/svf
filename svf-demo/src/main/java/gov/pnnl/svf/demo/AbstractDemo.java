@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * Abstract base class for an SVF demo.
  *
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  * @param <W> the window type
  * @param <C> the auto drawable type
  */

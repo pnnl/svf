@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class LookupProviderImplTest {

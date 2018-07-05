@@ -37,7 +37,7 @@ import org.apache.commons.lang.StringUtils;
 /**
  * Utility for working with text strings.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class TextUtil {
 

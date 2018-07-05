@@ -16,7 +16,7 @@ import org.jbox2d.dynamics.joints.MouseJoint;
 /**
  * Support object for creating a mouse joint between an actor and a mouse.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class JBox2dMouseJointSupport extends JBox2dJointSupport {
 

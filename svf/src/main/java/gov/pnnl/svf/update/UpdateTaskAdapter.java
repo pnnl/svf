@@ -3,7 +3,7 @@ package gov.pnnl.svf.update;
 /**
  * Runnable interface used to perform work on the update thread.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class UpdateTaskAdapter implements UpdateTaskRunnable {
 

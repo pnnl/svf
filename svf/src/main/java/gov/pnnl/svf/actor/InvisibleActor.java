@@ -11,7 +11,7 @@ import gov.pnnl.svf.scene.Scene;
  * contain support objects. Typical use is for holding common support objects.
  * Invisible actors will not dirty the scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class InvisibleActor extends AbstractActor {
 

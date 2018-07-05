@@ -7,7 +7,7 @@ import java.awt.event.MouseWheelListener;
 /**
  * Interface for consolidating all of the AWT camera interfaces.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface AwtCamera extends MouseListener, MouseMotionListener, MouseWheelListener {
 }

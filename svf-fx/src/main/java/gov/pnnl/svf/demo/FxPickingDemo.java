@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class FxPickingDemo extends Application {
 

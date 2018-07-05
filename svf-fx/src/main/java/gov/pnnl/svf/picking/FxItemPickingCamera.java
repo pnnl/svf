@@ -14,7 +14,7 @@ import javafx.scene.input.InputEvent;
  * is attached to this picking camera. Picking is only supported on cameras that
  * view the entire scene and fill the viewport.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class FxItemPickingCamera extends AbstractItemPickingCamera implements FxEventHandler<InputEvent> {

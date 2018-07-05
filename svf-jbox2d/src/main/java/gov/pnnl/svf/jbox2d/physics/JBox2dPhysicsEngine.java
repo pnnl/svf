@@ -60,7 +60,7 @@ import org.jbox2d.dynamics.joints.RevoluteJointDef;
  * This is a 2D physics engine that is responsible for updating any objects with
  * JBox2D support.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class JBox2dPhysicsEngine extends AbstractActor implements Updatable {
 

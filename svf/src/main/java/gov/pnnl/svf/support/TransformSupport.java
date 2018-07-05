@@ -9,7 +9,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Support for objects that can be transformed in a GLScene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class TransformSupport extends AbstractSupport<Object> {

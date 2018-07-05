@@ -26,7 +26,7 @@ import javax.imageio.ImageIO;
 /**
  * Newt implementation of the cursor service.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class NewtCursorService extends AbstractCursorService<Cursor> implements PropertyChangeListener, KeyListener, MouseListener {
 
@@ -144,7 +144,7 @@ public class NewtCursorService extends AbstractCursorService<Cursor> implements 
     /**
      * Runnable that will show the active cursor.
      *
-     * @author Arthur Bleeker
+     * @author Amelia Bleeker
      */
     protected static class ShowCursorRunnable implements Runnable {
 

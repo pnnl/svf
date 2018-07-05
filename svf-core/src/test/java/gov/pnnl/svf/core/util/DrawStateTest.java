@@ -6,7 +6,7 @@ import org.junit.Test;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class DrawStateTest extends AbstractObjectTestBase<DrawState> {
 

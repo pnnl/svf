@@ -14,7 +14,7 @@ import javafx.scene.input.ScrollEvent;
 /**
  * Utilities for JavaFX cameras.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class FxCameraUtils {
 

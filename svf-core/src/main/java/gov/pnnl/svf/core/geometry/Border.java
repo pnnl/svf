@@ -3,7 +3,7 @@ package gov.pnnl.svf.core.geometry;
 /**
  * Represents a border style in a two dimensional environment.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public enum Border {
 

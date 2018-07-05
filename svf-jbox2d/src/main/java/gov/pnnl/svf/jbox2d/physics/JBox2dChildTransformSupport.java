@@ -17,7 +17,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * necessary for use in physics objects. The get function return the values of a
  * child as if it was a root actor in the scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class JBox2dChildTransformSupport extends MatrixTransformSupport {

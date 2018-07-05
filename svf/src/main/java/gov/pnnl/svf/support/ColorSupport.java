@@ -14,7 +14,7 @@ import gov.pnnl.svf.scene.Scene;
 /**
  * This class provides vertex coloring or texture tinting for actors.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class ColorSupport extends AbstractSupport<Object> implements Drawable {

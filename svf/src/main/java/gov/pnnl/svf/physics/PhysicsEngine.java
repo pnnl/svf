@@ -14,7 +14,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * the scene to enable physics. This physics engine currently only supports
  * keeping an object inside of the scene boundaries.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class PhysicsEngine implements Updatable, Disposable {

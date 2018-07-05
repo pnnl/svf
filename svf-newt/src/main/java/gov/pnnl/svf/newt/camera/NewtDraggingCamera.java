@@ -9,7 +9,7 @@ import gov.pnnl.svf.scene.Scene;
  * Camera used to view a 3d scene from one direction and allow the user to drag
  * the camera on the x/y plane using the mouse.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class NewtDraggingCamera extends DraggingCamera implements NewtCamera {
 

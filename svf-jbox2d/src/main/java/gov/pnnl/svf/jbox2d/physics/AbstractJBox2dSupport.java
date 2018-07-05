@@ -6,7 +6,7 @@ import gov.pnnl.svf.support.AbstractSupport;
 /**
  * Abstract base support object for JBox2d support objects.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 abstract class AbstractJBox2dSupport<I> extends AbstractSupport<I> {
 

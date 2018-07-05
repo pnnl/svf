@@ -14,7 +14,7 @@ import javafx.scene.input.ScrollEvent;
  * Camera used to view a 3d scene from one direction and allow the user to drag
  * the camera on the x/y plane using the mouse.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class FxDraggingCamera extends DraggingCamera implements FxCamera {
 

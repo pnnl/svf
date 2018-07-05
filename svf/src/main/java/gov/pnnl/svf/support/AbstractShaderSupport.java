@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  * You must override this class in order to provide functionality for setting
  * the uniform fields.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractShaderSupport extends AbstractSupport<Object> implements Drawable, Initializable {
 

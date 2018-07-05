@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * Event listener for a item picking support object.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface ItemPickingSupportListener {
 

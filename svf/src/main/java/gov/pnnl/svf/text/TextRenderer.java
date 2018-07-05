@@ -12,7 +12,7 @@ import java.awt.Font;
  * Interface for drawing text in a scene using either orthographic or 3D
  * transformation.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface TextRenderer extends Initializable, Disposable {
 

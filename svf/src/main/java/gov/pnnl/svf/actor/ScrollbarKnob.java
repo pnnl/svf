@@ -4,7 +4,7 @@ package gov.pnnl.svf.actor;
  * This class represents the visible scrollbar extent of a scrollbar actor. Its
  * primary use it as a placeholder for picking events.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ScrollbarKnob {
 

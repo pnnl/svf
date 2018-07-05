@@ -20,7 +20,7 @@ import javax.swing.Timer;
 /**
  * Listener used to listen for picking events.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 class FxPickingCameraListener implements FxEventHandler<InputEvent> {
 

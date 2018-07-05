@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 /**
  * Interface for a rectangle packer implementation.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface RectanglePacker {
 

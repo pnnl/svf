@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * This class manages all of the actor pools. This class is thread safe.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ActorPoolManagerImpl implements ActorPoolManager {
 

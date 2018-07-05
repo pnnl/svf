@@ -8,7 +8,7 @@ import java.awt.Font;
 /**
  * Abstract implementation of text.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractText implements TextRenderer {
 

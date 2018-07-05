@@ -23,7 +23,7 @@ import javax.swing.SwingUtilities;
  * cameras during runtime. It also allows for a single place of reference for
  * access to these objects.</P>
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class AwtScene extends AbstractAwtScene<GLCanvas> {
 

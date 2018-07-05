@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Implementation of scene collections.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class SceneCollectionsImpl implements SceneCollections {
 

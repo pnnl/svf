@@ -16,7 +16,7 @@ import gov.pnnl.svf.scene.Scene;
 /**
  * Interface that represents an object that can be drawn in a scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public interface Actor extends LookupProvider, Drawable, Disposable, Observable {

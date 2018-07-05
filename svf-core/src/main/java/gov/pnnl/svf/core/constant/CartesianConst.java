@@ -3,7 +3,7 @@ package gov.pnnl.svf.core.constant;
 /**
  * Constant interface related to Cartesian coordinates.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface CartesianConst {
 

@@ -5,7 +5,7 @@ import gov.pnnl.svf.actor.Actor;
 /**
  * Listener for listening to events from a child support object.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface ChildSupportListener {
 

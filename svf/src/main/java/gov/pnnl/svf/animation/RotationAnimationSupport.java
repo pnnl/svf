@@ -8,7 +8,7 @@ import gov.pnnl.svf.support.TransformSupport;
  * The rotation axis should be set on the transformation object before creating
  * this animation effect.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class RotationAnimationSupport extends AbstractAnimationSupport {

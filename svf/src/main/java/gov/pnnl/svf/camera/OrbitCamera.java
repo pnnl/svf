@@ -9,7 +9,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Camera used to orbit around a target in scene space.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class OrbitCamera extends SimpleCamera {
 

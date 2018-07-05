@@ -6,7 +6,7 @@ import java.util.Collection;
 /**
  * Manager for tasks that perform work off the UI thread in a scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface TaskManager extends Disposable {
 

@@ -3,7 +3,7 @@ package gov.pnnl.svf.scene;
 /**
  * Interface for classes that require updating.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public interface Updatable {

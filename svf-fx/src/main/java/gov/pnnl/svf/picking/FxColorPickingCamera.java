@@ -15,7 +15,7 @@ import javafx.scene.input.InputEvent;
  * Picking is only supported on cameras that view the entire scene and fill the
  * viewport.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class FxColorPickingCamera extends AbstractColorPickingCamera implements FxEventHandler<InputEvent> {
 

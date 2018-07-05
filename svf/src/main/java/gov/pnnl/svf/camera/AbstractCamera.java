@@ -21,7 +21,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Abstract class for creating a view into a scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public abstract class AbstractCamera extends AbstractActor implements CameraExt<CameraListener>, Updatable {

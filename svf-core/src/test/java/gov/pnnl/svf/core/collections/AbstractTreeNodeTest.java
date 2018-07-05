@@ -11,7 +11,7 @@ import org.junit.Test;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class AbstractTreeNodeTest extends AbstractObjectTestBase<AbstractTreeNode<Long, List<ListTreeNode<Long>>, ListTreeNode<Long>>> {
 

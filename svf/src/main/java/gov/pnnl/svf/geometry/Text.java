@@ -6,7 +6,7 @@ import org.apache.commons.collections.primitives.DoubleList;
 /**
  * Represents text.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface Text {
 

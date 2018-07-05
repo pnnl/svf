@@ -45,7 +45,7 @@ import org.apache.commons.io.IOUtils;
 /**
  * Utility for working with configuration for a scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ConfigUtil {
 
@@ -809,7 +809,7 @@ public class ConfigUtil {
     /**
      * Default scene builder for use with AbstractScene.
      *
-     * @author Arthur Bleeker
+     * @author Amelia Bleeker
      */
     protected static class SceneBuilderImpl extends AbstractSceneBuilder<SceneBuilderImpl> {
 

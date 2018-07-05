@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Will draw the current fps of the scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class FpsActor extends DynamicBorderedShapeActor implements DrawableService, Updatable {
 

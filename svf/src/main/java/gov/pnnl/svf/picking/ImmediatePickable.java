@@ -8,7 +8,7 @@ import gov.pnnl.svf.camera.Camera;
  * Interface for objects that perform a picking render for an actor using
  * immediate mode.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface ImmediatePickable {
 

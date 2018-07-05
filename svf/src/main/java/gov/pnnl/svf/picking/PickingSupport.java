@@ -12,7 +12,7 @@ import gov.pnnl.svf.support.AbstractSupport;
  * present in the scene for picking to occur. Picking only works for scene
  * items.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class PickingSupport extends AbstractSupport<PickingSupportListener> implements Pickable {

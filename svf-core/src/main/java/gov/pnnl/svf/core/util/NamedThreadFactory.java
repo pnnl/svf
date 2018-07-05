@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * will append an underscore along with a number to the supplied name. It will
  * also handle and log uncaught exceptions.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class NamedThreadFactory implements ThreadFactory {
 

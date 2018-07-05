@@ -9,7 +9,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Support object for enabling physics on an actor.
  *
- * @author Arthur
+ * @author Amelia
  */
 public class JBox2dPhysicsSupport extends AbstractJBox2dSupport<Object> {
 

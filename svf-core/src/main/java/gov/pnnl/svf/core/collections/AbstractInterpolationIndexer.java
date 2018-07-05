@@ -7,7 +7,7 @@ package gov.pnnl.svf.core.collections;
  * be something like: 6, 5, 7, 4, 8, 3, 9, 2, 1, 0. This class is not thread
  * safe.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractInterpolationIndexer implements Indexer {
 

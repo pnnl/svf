@@ -64,7 +64,7 @@ import org.apache.commons.math.geometry.Vector3D;
  *
  * @param <C> the component type that's used to render this scene
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractScene<C extends GLAutoDrawable> implements SceneExt {
 

@@ -17,7 +17,7 @@ import java.util.List;
  * object added to their lookup. Child actors should not be added directly to
  * the scene. Equals will not compare children elements.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class ChildSupport extends AbstractSupport<ChildSupportListener> {

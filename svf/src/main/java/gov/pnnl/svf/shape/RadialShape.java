@@ -3,7 +3,7 @@ package gov.pnnl.svf.shape;
 /**
  * Shape that represents an item with a radius.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface RadialShape {
 

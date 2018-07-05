@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Abstract base class for working with state.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class AbstractState implements Serializable {

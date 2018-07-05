@@ -25,7 +25,7 @@ import java.util.Set;
  * aligned with a Euler axis. The direction of draw will be determined by the
  * viewing camera.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class VolumeActor extends ShapeActor {
 

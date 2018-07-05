@@ -5,7 +5,7 @@ package gov.pnnl.svf.hint;
  * configuration properties specified will override any default and auto
  * configuration. These hints should be supported by the scene creator.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public enum FileConfigHint {
 

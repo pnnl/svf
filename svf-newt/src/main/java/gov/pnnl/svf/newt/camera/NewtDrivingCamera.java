@@ -13,7 +13,7 @@ import gov.pnnl.svf.scene.Scene;
  * the scene. This camera is intended to be used as a test view for the
  * SimpleCamera class.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class NewtDrivingCamera extends DrivingCamera implements NewtCamera, KeyListener {
 

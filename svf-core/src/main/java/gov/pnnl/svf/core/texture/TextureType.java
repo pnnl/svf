@@ -3,7 +3,7 @@ package gov.pnnl.svf.core.texture;
 /**
  * Type of texture.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public enum TextureType {
 

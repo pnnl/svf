@@ -13,7 +13,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Demo loader for multiple cameras in a scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class CameraDemoLoader extends ShapeDemoLoader implements DemoLoader {
 

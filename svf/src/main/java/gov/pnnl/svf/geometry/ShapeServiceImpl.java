@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Standard implementation of the shape service.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ShapeServiceImpl implements ShapeService {
 

@@ -9,7 +9,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * TransformSupport. Typically animating the rotation axis is not recommended
  * for smooth rotation animation.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class RotationAxisAnimationSupport extends AbstractAnimationSupport {

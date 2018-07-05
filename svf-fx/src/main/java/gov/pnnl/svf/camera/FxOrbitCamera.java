@@ -16,7 +16,7 @@ import javafx.scene.input.ScrollEvent;
  * mouse button will zoom the camera. Holding control with the left mouse button
  * will drag the camera.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class FxOrbitCamera extends OrbitCamera implements FxCamera {
 

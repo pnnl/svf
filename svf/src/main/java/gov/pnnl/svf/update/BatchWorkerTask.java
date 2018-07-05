@@ -3,7 +3,7 @@ package gov.pnnl.svf.update;
 /**
  * Interface used for a batch worker task.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface BatchWorkerTask extends WorkerTask {
 

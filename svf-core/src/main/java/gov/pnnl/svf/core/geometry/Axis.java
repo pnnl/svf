@@ -8,7 +8,7 @@ package gov.pnnl.svf.core.geometry;
 /**
  * Represents an axis in 2D or 3D space.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public enum Axis {
 

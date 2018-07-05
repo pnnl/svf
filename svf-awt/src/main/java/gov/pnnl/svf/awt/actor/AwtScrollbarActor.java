@@ -18,7 +18,7 @@ import java.awt.event.MouseWheelListener;
  * receive picking events for it. The instance must also be added as a listener
  * to item or color picking support.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class AwtScrollbarActor extends AbstractScrollbarActor implements MouseListener, MouseMotionListener, MouseWheelListener {
 

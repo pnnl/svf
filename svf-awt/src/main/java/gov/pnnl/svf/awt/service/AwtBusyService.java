@@ -12,7 +12,7 @@ import java.awt.Cursor;
 /**
  * AWT implementation of the busy service.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class AwtBusyService extends AbstractBusyService {
 
@@ -73,7 +73,7 @@ public class AwtBusyService extends AbstractBusyService {
     /**
      * Runnable that will show or hide the busy cursor.
      *
-     * @author Arthur Bleeker
+     * @author Amelia Bleeker
      */
     protected static class BusyRunnable implements Runnable {
 

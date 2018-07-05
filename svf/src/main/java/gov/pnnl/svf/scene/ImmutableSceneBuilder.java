@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * Immutable scene builder.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ImmutableSceneBuilder implements SceneBuilder {
 

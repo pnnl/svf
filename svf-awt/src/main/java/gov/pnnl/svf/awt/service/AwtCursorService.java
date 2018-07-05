@@ -27,7 +27,7 @@ import javax.imageio.ImageIO;
 /**
  * AWT implementation of the cursor service.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class AwtCursorService extends AbstractCursorService<Cursor> implements PropertyChangeListener, KeyListener, MouseListener {
 
@@ -161,7 +161,7 @@ public class AwtCursorService extends AbstractCursorService<Cursor> implements P
     /**
      * Runnable that will show the active cursor.
      *
-     * @author Arthur Bleeker
+     * @author Amelia Bleeker
      */
     protected static class ShowCursorRunnable implements Runnable {
 

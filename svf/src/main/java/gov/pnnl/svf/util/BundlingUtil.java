@@ -9,7 +9,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Utility for creating and working with hierarchical edge bundled points.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class BundlingUtil {
 

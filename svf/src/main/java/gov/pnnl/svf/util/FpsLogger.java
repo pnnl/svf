@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * This class will log the average frame per second (FPS) at the specified
  * interval.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class FpsLogger extends AbstractLogger {
 

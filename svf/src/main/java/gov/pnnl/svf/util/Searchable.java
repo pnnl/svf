@@ -6,7 +6,7 @@ import java.util.Set;
  * Interface type for objects that can be searched based on label and/or
  * keywords.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface Searchable {
 

@@ -4,7 +4,7 @@ package gov.pnnl.svf.core.util;
  * Support for utilizing state values to indicate current text state. This class
  * is not thread safe.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class TextState extends AbstractState {
 

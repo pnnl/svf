@@ -22,7 +22,7 @@ import java.util.Set;
  * the actor's drawing pass will prevent the actor from being color pickable in
  * the scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ColorPickingSupport extends AbstractSupport<ColorPickingSupportListener> implements ColorPickable {
 

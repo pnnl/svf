@@ -10,7 +10,7 @@ import gov.pnnl.svf.event.PickingCameraEvent;
  * interface can be implemented for actors that wish to pick using different
  * geometry than they use to render.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface Pickable {
 

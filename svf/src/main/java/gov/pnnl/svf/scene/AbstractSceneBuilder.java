@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 /**
  * Builder object used for instantiating a new GLScene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  * @param <T> type of GL scene builder object
  */
 @SuppressWarnings({"rawtypes", "unchecked"})

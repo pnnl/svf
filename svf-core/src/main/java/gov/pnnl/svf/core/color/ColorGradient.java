@@ -13,7 +13,7 @@ import java.util.TreeSet;
  * A color gradient for specifying a series of colors that have a relative
  * position. This implementation will not be efficient for large sets of colors.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ColorGradient extends Color implements Serializable {
 

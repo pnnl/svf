@@ -13,7 +13,7 @@ import java.util.Map;
  * Initial key states will be set to UP when this class is instantiated
  * regardless of actual key state.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class AwtInputKeyAdapter implements KeyListener, FocusListener {

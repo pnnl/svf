@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  * picking support will be notified when clicked or double clicked in a camera
  * view that is attached to this picking camera.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractColorPickingCamera extends AbstractPickingCamera implements ColorPickingCamera {
 

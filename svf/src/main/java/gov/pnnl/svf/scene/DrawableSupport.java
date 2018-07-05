@@ -7,7 +7,7 @@ import gov.pnnl.svf.picking.Pickable;
 /**
  * Interface used to mark an object as a drawable support item.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface DrawableSupport extends Drawable, Pickable, ItemPickable, ColorPickable {
 

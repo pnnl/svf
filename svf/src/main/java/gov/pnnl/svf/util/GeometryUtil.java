@@ -7,7 +7,7 @@ import gov.pnnl.svf.core.geometry.Border;
 /**
  * Utility class for working with Apache Commons Math and SVF geometry.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class GeometryUtil extends AbstractGLUtil {
 

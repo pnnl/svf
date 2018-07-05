@@ -5,7 +5,7 @@ import java.io.File;
 /**
  * Interface for working with screenshots in a scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface Screenshot {
 

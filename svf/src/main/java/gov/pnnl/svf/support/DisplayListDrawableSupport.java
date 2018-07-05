@@ -23,7 +23,7 @@ import java.util.Set;
  * Support for dynamic actors that need to draw that require performance
  * enhancement through the use of display lists.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class DisplayListDrawableSupport extends AbstractSupport<Object> implements Initializable, DrawableSupport {
 

@@ -8,7 +8,7 @@ import java.awt.Font;
  * Implementation of the text renderer service that utilizes textures and
  * regions for individual characters.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class TextServiceImpl extends AbstractTextService {
 

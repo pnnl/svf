@@ -5,7 +5,7 @@ import gov.pnnl.svf.actor.Actor;
 /**
  * Interface used to define a color pickable actor.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface ColorPickableActor extends ColorPickable, PickableActor, Actor {
 }

@@ -16,7 +16,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Camera used to count vertices.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class CountingCamera implements CameraExt<Object> {
 

@@ -3,7 +3,7 @@ package gov.pnnl.svf.core.util;
 /**
  * Utility class for working with long boolean state.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class LongStateUtil {
 

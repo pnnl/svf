@@ -7,7 +7,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * This class provides a means to animate the location of the camera over a
  * period of time.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class LocationAnimationSupport extends AbstractAnimationSupport {

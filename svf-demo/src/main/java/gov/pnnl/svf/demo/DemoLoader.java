@@ -5,7 +5,7 @@ import gov.pnnl.svf.scene.Scene;
 /**
  * Interface used to implement a demo type that will load the scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface DemoLoader {
 

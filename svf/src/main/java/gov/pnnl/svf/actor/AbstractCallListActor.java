@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * Abstract base class for actors that need to draw that require performance
  * enhancement through the use of call lists.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractCallListActor extends AbstractActor implements Initializable {
 

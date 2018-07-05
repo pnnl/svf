@@ -9,7 +9,7 @@ import java.util.Set;
  *
  * @param <E> the type of elements maintained by this set
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface CountingSet<E> extends Set<E> {
 

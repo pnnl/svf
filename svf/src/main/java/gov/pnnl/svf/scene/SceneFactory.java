@@ -6,7 +6,7 @@ import gov.pnnl.svf.picking.PickingCamera;
 /**
  * Interface for a factory that can create implementation specific scene items.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface SceneFactory {
 

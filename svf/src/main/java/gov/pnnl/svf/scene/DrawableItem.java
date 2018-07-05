@@ -8,7 +8,7 @@ package gov.pnnl.svf.scene;
  * however, be rendered using the base transforms of any cameras in the scene.
  * They also get rendered before all other actors.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface DrawableItem extends Drawable {
 }

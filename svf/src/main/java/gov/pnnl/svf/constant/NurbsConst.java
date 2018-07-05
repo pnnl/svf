@@ -3,7 +3,7 @@ package gov.pnnl.svf.constant;
 /**
  * Constant interface related to NURBS.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface NurbsConst {
 

@@ -6,7 +6,7 @@ import gov.pnnl.svf.scene.Disposable;
  * This interface is a marker for a manager that manages one of the pools. This
  * interface should be subclassed to mark a specific pool type.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  * @param <P> Type of object stored in pool
  */
 public interface PoolManager<P extends Pool<?>> extends Disposable {

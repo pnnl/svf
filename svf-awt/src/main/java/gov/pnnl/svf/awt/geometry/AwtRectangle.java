@@ -10,7 +10,7 @@ import java.io.Serializable;
  * bottom left of the rectangle. This version just provides a convenience
  * constructor for AWT and Swing.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class AwtRectangle extends Rectangle implements Serializable {

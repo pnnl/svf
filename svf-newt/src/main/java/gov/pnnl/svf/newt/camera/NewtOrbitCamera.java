@@ -12,7 +12,7 @@ import gov.pnnl.svf.scene.Scene;
  * mouse button will zoom the camera. Holding control with the left mouse button
  * will drag the camera.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class NewtOrbitCamera extends OrbitCamera implements NewtCamera, KeyListener {
 

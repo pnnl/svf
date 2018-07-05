@@ -15,7 +15,7 @@ import gov.pnnl.svf.update.UninitializeTask;
 /**
  * Abstract base class for textures.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class TextureSupport extends AbstractSupport<TextureSupportListener> implements Drawable, Initializable {
 

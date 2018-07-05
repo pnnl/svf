@@ -4,7 +4,7 @@ package gov.pnnl.svf.core.util;
  * Support for utilizing state values to indicate current draw state. This class
  * is not thread safe.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class DrawState extends AbstractState {
 

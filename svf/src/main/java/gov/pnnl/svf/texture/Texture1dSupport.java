@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 /**
  * Support for a lookup 1d texture.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class Texture1dSupport extends TextureSupport {
 

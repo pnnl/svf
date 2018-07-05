@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * Abstract base implementation of the busy service. This service will need to
  * be extended by individual framework implementations.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractBusyService implements BusyService {
 
@@ -84,7 +84,7 @@ public abstract class AbstractBusyService implements BusyService {
     /**
      * Task used to check whether to display a busy cursor.
      *
-     * @author Arthur Bleeker
+     * @author Amelia Bleeker
      */
     protected static final class TimerTaskImpl extends TimerTask {
 

@@ -13,7 +13,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * Actors can also define which camera they are visible in or choose to be
  * visible in all cameras by not specifying a camera.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface Camera extends Actor {
 

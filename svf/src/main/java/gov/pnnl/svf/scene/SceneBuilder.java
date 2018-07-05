@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * Interface for the scene builder object.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface SceneBuilder {
 

@@ -5,7 +5,7 @@ import gov.pnnl.svf.scene.FxAbstractScene;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class FxCameraDemoScene extends FxAbstractScene {
 

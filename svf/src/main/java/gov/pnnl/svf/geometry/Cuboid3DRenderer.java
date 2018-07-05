@@ -8,7 +8,7 @@ import gov.pnnl.svf.util.Shape3DUtil;
 /**
  * Shape renderer implementation.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class Cuboid3DRenderer extends AbstractShapeRenderer {
 

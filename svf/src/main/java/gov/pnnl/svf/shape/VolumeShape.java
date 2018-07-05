@@ -3,7 +3,7 @@ package gov.pnnl.svf.shape;
 /**
  * Shape that represents a volumetric area.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface VolumeShape {
 

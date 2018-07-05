@@ -7,7 +7,7 @@ import gov.pnnl.svf.scene.Drawable;
  * mark an item for drawing in the scene lookup. Services will run before any
  * drawing or picking occurs in the scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface DrawableService extends Drawable, Comparable<DrawableService> {
 

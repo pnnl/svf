@@ -9,7 +9,7 @@ import gov.pnnl.svf.geometry.Shape3D;
 /**
  * Utility for working with text strings.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class LayoutUtil {
 

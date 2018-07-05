@@ -4,7 +4,7 @@ package gov.pnnl.svf.core.service;
  * Token used with the busy service. This object encapsulates state for busy
  * method calls.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class BusyTokenImpl implements BusyToken {
 

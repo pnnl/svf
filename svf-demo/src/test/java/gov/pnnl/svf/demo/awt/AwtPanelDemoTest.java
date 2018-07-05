@@ -14,7 +14,7 @@ import org.junit.runner.Description;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class AwtPanelDemoTest extends AbstractDemoHelper<AbstractAwtPanelDemo, JFrame, SceneBuilder, AbstractScene<GLJPanel>> {
 

@@ -13,7 +13,7 @@ import gov.pnnl.svf.scene.Scene;
  * This class provides a way to specify how to blend colors using alpha for
  * actors. Blending must be enabled to use this support object.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class BlendingSupport extends AbstractSupport<Object> implements Drawable {

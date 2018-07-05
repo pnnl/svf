@@ -75,7 +75,7 @@ import org.apache.commons.math.geometry.Vector3D;
  *
  * FIXME This class is not being maintained and currently may not work.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class FxAbstractScene extends Canvas implements SceneExt {
 

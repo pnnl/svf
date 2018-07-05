@@ -15,7 +15,7 @@ import org.junit.runner.Description;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class JBox2dDemoTest extends AbstractDemoHelper<AbstractAwtDemo, JFrame, SceneBuilder, AbstractScene<GLCanvas>> {
 

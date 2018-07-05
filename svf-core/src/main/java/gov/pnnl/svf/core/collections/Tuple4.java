@@ -8,7 +8,7 @@ package gov.pnnl.svf.core.collections;
  * @param <C> third type
  * @param <D> fourth type
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 @SuppressWarnings("unchecked")
 public class Tuple4<A, B, C, D> extends AbstractTuple {

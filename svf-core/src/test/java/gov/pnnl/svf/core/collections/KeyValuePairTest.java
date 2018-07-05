@@ -8,7 +8,7 @@ import org.junit.Test;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class KeyValuePairTest extends AbstractObjectTestBase<KeyValuePair<String, Integer>> {
 

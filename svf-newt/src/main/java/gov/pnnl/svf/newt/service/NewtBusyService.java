@@ -10,7 +10,7 @@ import gov.pnnl.svf.scene.Scene;
 /**
  * Newt implementation of the busy service.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class NewtBusyService extends AbstractBusyService {
 
@@ -46,7 +46,7 @@ public class NewtBusyService extends AbstractBusyService {
     /**
      * Runnable that will show or hide the busy cursor.
      *
-     * @author Arthur Bleeker
+     * @author Amelia Bleeker
      */
     protected static class BusyRunnable implements Runnable {
 

@@ -17,7 +17,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Utility class containing all of the 3D VBO shape methods.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class VboShape3DUtil extends VboUtil {
 

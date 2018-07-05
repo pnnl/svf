@@ -22,7 +22,7 @@ import org.apache.commons.math.geometry.Vector3D;
 /**
  * Utility class containing all of the 3D shape methods.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class Shape3DUtil extends ShapeUtil {
 

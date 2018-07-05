@@ -6,7 +6,7 @@ import gov.pnnl.svf.event.PickingCameraEvent;
 /**
  * Event listener for a picking camera.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface ColorPickingCameraListener extends PickingCameraListener {
 

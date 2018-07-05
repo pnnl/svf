@@ -10,7 +10,7 @@ import com.jogamp.opengl.GLOffscreenAutoDrawable;
  * <p>
  * <code>GLDrawableFactory.getDesktopFactory().createOffscreenAutoDrawable(null, builder.getGLCapabilities(), null, width, height);</code>
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class OffscreenScene extends AbstractScene<GLOffscreenAutoDrawable> {
 

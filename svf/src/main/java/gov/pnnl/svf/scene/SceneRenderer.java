@@ -56,7 +56,7 @@ import org.apache.commons.math.geometry.Vector3D;
  * Renderer class for the scene. This is to separate rendering functionality
  * that is common to various implementations of the abstract scenes.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class SceneRenderer implements Disposable {

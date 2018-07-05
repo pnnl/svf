@@ -6,7 +6,7 @@ import gov.pnnl.svf.event.PickingCameraEvent;
 /**
  * Listener used to listen to picking events.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface PickingSupportListener {
 

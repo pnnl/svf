@@ -4,7 +4,7 @@ import gov.pnnl.svf.geometry.Rectangle2D;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public enum Quadrant {
 

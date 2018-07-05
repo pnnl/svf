@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 /**
  * Default implementation of the GLUtessellatorCallback.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class TessellatorCallbackGl extends GLUtessellatorCallbackAdapter {
 

@@ -3,7 +3,7 @@ package gov.pnnl.svf.update;
 /**
  * Runnable used for work done in an external thread and during an update task.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class WorkerUpdateTaskAdapter implements WorkerUpdateTaskRunnable {
 

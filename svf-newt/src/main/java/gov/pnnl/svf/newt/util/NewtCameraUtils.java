@@ -15,7 +15,7 @@ import java.util.Set;
 /**
  * Utilities for working with Newt cameras.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class NewtCameraUtils {
 

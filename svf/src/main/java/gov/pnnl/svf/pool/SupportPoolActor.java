@@ -9,7 +9,7 @@ import gov.pnnl.svf.scene.Scene;
 /**
  * Actor used as a parent for a support object that can be shared in a scene.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class SupportPoolActor extends AbstractActor {
 

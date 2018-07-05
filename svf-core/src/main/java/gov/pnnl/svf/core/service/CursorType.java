@@ -4,7 +4,7 @@ package gov.pnnl.svf.core.service;
  * Cursor types in priority order. Multi types are used for referencing cursors
  * only.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public enum CursorType {
 

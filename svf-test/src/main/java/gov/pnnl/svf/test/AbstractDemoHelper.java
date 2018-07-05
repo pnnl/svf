@@ -10,7 +10,7 @@ import org.junit.Before;
  * @param <B> Builder
  * @param <S> Scene
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public abstract class AbstractDemoHelper<D, W, B, S> {
 

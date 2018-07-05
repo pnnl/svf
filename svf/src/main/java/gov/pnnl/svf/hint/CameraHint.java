@@ -13,7 +13,7 @@ import gov.pnnl.svf.camera.SimpleCamera;
  * priority order. If more than one hint is specified the system will utilize
  * the highest priority.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public enum CameraHint {
 

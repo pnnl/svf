@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class AwtDynamicImmediateDrawDemo extends AbstractAwtDemo {
 

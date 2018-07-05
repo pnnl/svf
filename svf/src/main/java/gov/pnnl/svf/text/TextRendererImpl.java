@@ -48,7 +48,7 @@ import org.apache.commons.collections.primitives.DoubleList;
  * Implementation of text that utilizes textures and regions for individual
  * characters.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class TextRendererImpl extends AbstractText {
 

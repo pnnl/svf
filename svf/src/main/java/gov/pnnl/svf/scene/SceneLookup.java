@@ -6,7 +6,7 @@ import gov.pnnl.svf.core.lookup.MultiLookupProvider;
 /**
  * Interface that provides additional functionality for a scene lookup.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface SceneLookup extends Disposable, MultiLookupProvider {
 

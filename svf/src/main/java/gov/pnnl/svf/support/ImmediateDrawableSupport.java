@@ -20,7 +20,7 @@ import java.util.Set;
 /**
  * Support for dynamic actors that need to draw using immediate mode.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class ImmediateDrawableSupport extends AbstractSupport<Object> implements Initializable, DrawableSupport {
 

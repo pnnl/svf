@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  * Class is used to pool actors for scenes that need to destroy and recreate
  * actors often. This class is thread safe.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  * @param <T> the type of actor that this pool manages
  */
 public abstract class AbstractActorPool<T extends Actor> implements ActorPool<T> {

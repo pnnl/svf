@@ -11,7 +11,7 @@ import gov.pnnl.svf.scene.Scene;
  * contain support objects. Typical use is to have children that inherit from
  * it's transform. This is analogous to a node in other game style scene graphs.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class NodeActor extends AbstractActor {
 

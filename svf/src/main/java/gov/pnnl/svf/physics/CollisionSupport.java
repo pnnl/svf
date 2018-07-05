@@ -14,7 +14,7 @@ import java.util.Set;
  * At this time rotations of the collision boundaries according to the actor
  * rotations is not supported.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  *
  */
 public class CollisionSupport extends AbstractSupport<CollisionSupportListener> {

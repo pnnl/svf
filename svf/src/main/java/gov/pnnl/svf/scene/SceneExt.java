@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * Extended interface for the scene that exposes less used properties.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface SceneExt extends Scene {
 

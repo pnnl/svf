@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * Multi-texture support object allows an actor to select various texture
  * objects.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  * @author Lyndsey Franklin
  *
  */

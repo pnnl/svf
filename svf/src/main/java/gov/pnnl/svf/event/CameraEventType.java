@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * Type of camera event that occurred.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public enum CameraEventType {
 

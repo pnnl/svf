@@ -18,7 +18,7 @@ import javafx.scene.layout.AnchorPane;
 
 /**
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public class FxCameraDemoController implements Initializable {
 

@@ -7,7 +7,7 @@ import gov.pnnl.svf.core.collections.KeyValuePair;
  * Interface that represents a color picking camera in the scene. Color picking
  * works for both scene and user interface items.
  *
- * @author Arthur Bleeker
+ * @author Amelia Bleeker
  */
 public interface ColorPickingCamera extends PickingCamera {
 
