@@ -56,7 +56,9 @@ public abstract class AbstractVboShapeFactory implements VboShapeFactory {
         if (color != null) {
             final List<VertexBufferObject> vbos = new ArrayList<>();
             vbos.addAll(createColorPickingVbos(shape, support));
-            vbos.addAll(createBorderVbos(shape, border, thickness, color));
+            if (border != Border.NONE && thickness > 0.0) {
+                vbos.addAll(createBorderVbos(shape, border, thickness, color));
+            }
             return vbos;
         }
         return Collections.emptyList();

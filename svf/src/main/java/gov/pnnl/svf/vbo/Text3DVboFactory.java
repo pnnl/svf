@@ -72,7 +72,9 @@ public class Text3DVboFactory extends AbstractVboShapeFactory {
         if (color != null) {
             final List<VertexBufferObject> vbos = new ArrayList<>();
             vbos.add(VboShape3DUtil.createShape((Text3D) shape, color, false));
-            vbos.addAll(createBorderVbos(shape, border, thickness, color));
+            if (border != Border.NONE && thickness > 0.0) {
+                vbos.addAll(createBorderVbos(shape, border, thickness, color));
+            }
             return vbos;
         }
         return Collections.emptyList();
