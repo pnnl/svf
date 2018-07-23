@@ -202,7 +202,9 @@ public class DynamicBorderedShapeActor extends DynamicShapeActor {
                 vbos.addAll(vboShapeFactory.createBackgroundVbos(shape, backgroundColor));
             }
             vbos.addAll(vboShapeFactory.createShapeVbos(shape, color, texCoords));
-            vbos.addAll(vboShapeFactory.createBorderVbos(shape, border, borderThickness, borderColor));
+            if (border != Border.NONE && borderThickness > 0.0) {
+                vbos.addAll(vboShapeFactory.createBorderVbos(shape, border, borderThickness, borderColor));
+            }
             // add the offset
             for (int i = 0; i < vbos.size(); i++) {
                 final VertexBufferObject vbo = vbos.get(i);
@@ -238,7 +240,9 @@ public class DynamicBorderedShapeActor extends DynamicShapeActor {
         if (vboShapeFactory != null && shape != null) {
             final List<VertexBufferObject> vbos = new ArrayList<>();
             vbos.addAll(vboShapeFactory.createPickingVbos(shape));
-            vbos.addAll(vboShapeFactory.createBorderVbos(shape, border, borderThickness, null));
+            if (border != Border.NONE && borderThickness > 0.0) {
+                vbos.addAll(vboShapeFactory.createBorderVbos(shape, border, borderThickness, null));
+            }
             // add the offset
             for (int i = 0; i < vbos.size(); i++) {
                 final VertexBufferObject vbo = vbos.get(i);
@@ -327,9 +331,11 @@ public class DynamicBorderedShapeActor extends DynamicShapeActor {
             v += shapeRenderer.drawShape(gl, shape);
             ShapeUtil.popColor(gl, color);
             // draw the border
-            ShapeUtil.pushColor(gl, borderColor);
-            v += shapeRenderer.drawBorder(gl, shape, border, borderThickness);
-            ShapeUtil.popColor(gl, borderColor);
+            if (border != Border.NONE && borderThickness > 0.0) {
+                ShapeUtil.pushColor(gl, borderColor);
+                v += shapeRenderer.drawBorder(gl, shape, border, borderThickness);
+                ShapeUtil.popColor(gl, borderColor);
+            }
             // pop offset
             if (!offset.equals(Point2D.ZERO)) {
                 gl.glPopMatrix();
@@ -361,7 +367,9 @@ public class DynamicBorderedShapeActor extends DynamicShapeActor {
                 gl.glTranslated(offset.getX(), offset.getY(), 0.0);
             }
             int v = shapeRenderer.pickingDrawShape(gl, shape);
-            v += shapeRenderer.drawBorder(gl, shape, border, borderThickness);
+            if (border != Border.NONE && borderThickness > 0.0) {
+                v += shapeRenderer.drawBorder(gl, shape, border, borderThickness);
+            }
             // pop offset
             if (!offset.equals(Point2D.ZERO)) {
                 gl.glPopMatrix();

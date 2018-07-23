@@ -62,7 +62,9 @@ public abstract class AbstractShapeRenderer implements ShapeRenderer {
         if (color != null) {
             ShapeUtil.pushColor(gl, color);
             int v = pickingDrawShape(gl, shape);
-            v += drawBorder(gl, shape, border, thickness);
+            if (border != Border.NONE && thickness > 0.0) {
+                v += drawBorder(gl, shape, border, thickness);
+            }
             ShapeUtil.popColor(gl, color);
             return v;
         }

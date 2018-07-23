@@ -213,9 +213,11 @@ public class BorderedShapeActor extends ShapeActor {
             v += shapeRenderer.drawShape(gl, shape);
             ShapeUtil.popColor(gl, color);
             // draw the border
-            ShapeUtil.pushColor(gl, borderColor);
-            v += shapeRenderer.drawBorder(gl, shape, border, borderThickness);
-            ShapeUtil.popColor(gl, borderColor);
+            if (border != Border.NONE && borderThickness > 0.0) {
+                ShapeUtil.pushColor(gl, borderColor);
+                v += shapeRenderer.drawBorder(gl, shape, border, borderThickness);
+                ShapeUtil.popColor(gl, borderColor);
+            }
             // pop offset
             if (!offset.equals(Point2D.ZERO)) {
                 gl.glPopMatrix();
