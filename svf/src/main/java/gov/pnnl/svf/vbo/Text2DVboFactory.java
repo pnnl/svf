@@ -72,7 +72,9 @@ public class Text2DVboFactory extends AbstractVboShapeFactory {
         if (color != null) {
             final List<VertexBufferObject> vbos = new ArrayList<>();
             vbos.add(VboShape2DUtil.createShape((Text2D) shape, color, false));
-            vbos.addAll(createBorderVbos(shape, border, thickness, color));
+            if (border != Border.NONE && thickness > 0.0) {
+                vbos.addAll(createBorderVbos(shape, border, thickness, color));
+            }
             return vbos;
         }
         return Collections.emptyList();
