@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gov.pnnl.svf.core.collections;
 
 /**
  * An indexer is used to iterate through a series of indices. An indexer is
  * guaranteed to iterate through every index one time.
  *
- * @author D3X573
+ * @author Amelia Bleeker
  */
 public interface Indexer {
 
