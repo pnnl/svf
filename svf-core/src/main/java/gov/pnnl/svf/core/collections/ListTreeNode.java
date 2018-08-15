@@ -24,6 +24,10 @@ public class ListTreeNode<T> extends AbstractTreeNode<T, List<ListTreeNode<T>>, 
         children = Collections.emptyList();
     }
 
+    protected ListTreeNode(final Builder<T> builder) {
+        this(builder.value());
+    }
+
     /**
      * Constructor used to copy this node and all children. This will copy the
      * tree structure but reuse references for values. The copy will become a
@@ -39,6 +43,34 @@ public class ListTreeNode<T> extends AbstractTreeNode<T, List<ListTreeNode<T>>, 
             children.add(new ListTreeNode<>(child));
         }
         this.children = children;
+    }
+
+    public static class Builder<T> extends AbstractTreeNode.Builder<T, List<ListTreeNode<T>>, ListTreeNode<T>> {
+
+        protected Builder() {
+        }
+
+        public static <T> Builder<T> construct() {
+            return new Builder();
+        }
+
+        public static <T> Builder<T> construct(final Class<T> type) {
+            return new Builder();
+        }
+
+        @Override
+        public T value() {
+            return super.value();
+        }
+
+        @Override
+        public Builder<T> value(final T value) {
+            return (Builder) super.value(value);
+        }
+
+        public ListTreeNode<T> build() {
+            return new ListTreeNode<>(this);
+        }
     }
 
 }

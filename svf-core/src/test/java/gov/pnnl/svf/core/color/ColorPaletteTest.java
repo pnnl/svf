@@ -1,6 +1,7 @@
 package gov.pnnl.svf.core.color;
 
 import gov.pnnl.svf.test.AbstractObjectTestBase;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +21,22 @@ public class ColorPaletteTest extends AbstractObjectTestBase<ColorPalette> {
 
     public ColorPaletteTest() {
         acceptableCollisions = 1000;
+    }
+
+    /**
+     * Test of peek method, of class ColorPalette.
+     */
+    @Test
+    public void testConstructor() {
+        final List<ColorImpl> colors = new ArrayList<>();
+        for (final Color color : COLORS) {
+            colors.add(new ColorImpl(color));
+        }
+        final ColorPalette a = new ColorPalette(COLORS);
+        final ColorPalette b = new ColorPalette(colors);
+        for (int i = 0; i < COLORS.size(); i++) {
+            Assert.assertEquals(a.next().toInt(), b.next().toInt());
+        }
     }
 
     /**
@@ -79,5 +96,13 @@ public class ColorPaletteTest extends AbstractObjectTestBase<ColorPalette> {
     @Override
     protected void setFieldsToNull(final ColorPalette object) {
         // no operation
+    }
+
+    private static class ColorImpl extends Color {
+
+        private ColorImpl(Color color) {
+            super(color, color.getAlpha());
+        }
+
     }
 }
