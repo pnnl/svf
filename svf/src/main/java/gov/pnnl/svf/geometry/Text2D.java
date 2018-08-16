@@ -1,14 +1,24 @@
 package gov.pnnl.svf.geometry;
 
+import gov.pnnl.svf.core.geometry.TextAlign;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.font.GlyphVector;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import org.apache.commons.collections.primitives.ArrayDoubleList;
 import org.apache.commons.collections.primitives.DoubleCollections;
 import org.apache.commons.collections.primitives.DoubleList;
 
+/**
+ * Shape for displaying 2D text in a scene. Justify is not currently supported.
+ *
+ * @author Amelia Bleeker
+ */
 public class Text2D extends Shape2D implements Text, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,8 +33,12 @@ public class Text2D extends Shape2D implements Text, Serializable {
      */
     public final static Text2D ZERO = new Text2D();
     protected final String text;
+    protected final List<String> textLines;
     protected final Font font;
+    protected final TextAlign align;
     protected final DoubleList offsets;
+    protected final DoubleList lineOffsets;
+    protected final double lineHeight;
     protected final double width;
     protected final double height;
 
@@ -34,8 +48,12 @@ public class Text2D extends Shape2D implements Text, Serializable {
     public Text2D() {
         super();
         text = "";
+        textLines = Collections.singletonList("");
         font = DEFAULT_FONT;
+        align = TextAlign.CENTER;
         offsets = ZERO_OFFSETS;
+        lineOffsets = ZERO_OFFSETS;
+        lineHeight = 0.0;
         width = 0.0;
         height = 0.0;
     }
@@ -50,8 +68,12 @@ public class Text2D extends Shape2D implements Text, Serializable {
     public Text2D(final double x, final double y, final Text2D copy) {
         super(x, y);
         text = copy.text;
+        textLines = copy.textLines;
         font = copy.font;
+        align = copy.align;
         offsets = copy.offsets;
+        lineOffsets = copy.lineOffsets;
+        lineHeight = copy.lineHeight;
         width = copy.width;
         height = copy.height;
     }
@@ -65,8 +87,12 @@ public class Text2D extends Shape2D implements Text, Serializable {
     public Text2D(final double x, final double y) {
         super(x, y);
         text = "";
+        textLines = Collections.singletonList("");
         font = DEFAULT_FONT;
+        align = TextAlign.CENTER;
         offsets = ZERO_OFFSETS;
+        lineOffsets = ZERO_OFFSETS;
+        lineHeight = 0.0;
         width = 0.0;
         height = 0.0;
     }
@@ -118,6 +144,21 @@ public class Text2D extends Shape2D implements Text, Serializable {
      * @throws NullPointerException if any arguments are null
      */
     public Text2D(final double x, final double y, final Font font, final String text) {
+        this(x, y, font, TextAlign.CENTER, text);
+    }
+
+    /**
+     * Constructor
+     *
+     * @param x     the x offset for this shape
+     * @param y     the y offset for this shape
+     * @param font  the font for the text
+     * @param align the text align
+     * @param text  the text
+     *
+     * @throws NullPointerException if any arguments are null
+     */
+    public Text2D(final double x, final double y, final Font font, final TextAlign align, final String text) {
         super(x, y);
         if (font == null) {
             throw new NullPointerException("font");
@@ -125,24 +166,56 @@ public class Text2D extends Shape2D implements Text, Serializable {
         if (text == null) {
             throw new NullPointerException("text");
         }
+        this.align = Objects.requireNonNull(align, "align");
         this.font = font;
         this.text = text;
         if (text.isEmpty()) {
+            textLines = Collections.singletonList("");
             offsets = ZERO_OFFSETS;
+            lineOffsets = ZERO_OFFSETS;
+            lineHeight = 0.0;
             width = 0.0;
             height = 0.0;
         } else {
             final FontMetrics fm = IMAGE.getGraphics().getFontMetrics(font);
-            final GlyphVector gv = font.createGlyphVector(fm.getFontRenderContext(), text);
-            final java.awt.geom.Rectangle2D bounds = gv.getLogicalBounds();
-            final double offset = bounds.getX();
-            final double padding = font.getSize() * 0.2;
-            width = padding + offset + bounds.getWidth() + padding;
-            height = fm.getHeight();
+            textLines = Collections.unmodifiableList(Arrays.asList(text.split("\\r?\\n")));
             offsets = new ArrayDoubleList(text.length());
-            final float[] positions = gv.getGlyphPositions(0, text.length(), new float[text.length() * 2]);
-            for (int i = 0; i < text.length() * 2; i += 2) {
-                offsets.add(padding + offset + positions[i]);
+            final DoubleList widths = new ArrayDoubleList(textLines.size());
+            final DoubleList heights = new ArrayDoubleList(textLines.size());
+            for (final String textLine : textLines) {
+                final GlyphVector gv = font.createGlyphVector(fm.getFontRenderContext(), textLine);
+                final java.awt.geom.Rectangle2D bounds = gv.getLogicalBounds();
+                final double offset = bounds.getX();
+                final double padding = font.getSize() * 0.2;
+                widths.add(padding + offset + bounds.getWidth() + padding);
+                heights.add(fm.getHeight());
+                final float[] positions = gv.getGlyphPositions(0, textLine.length(), new float[textLine.length() * 2]);
+                for (int i = 0; i < textLine.length() * 2; i += 2) {
+                    offsets.add(padding + offset + positions[i]);
+                }
+            }
+            // find the max width and the total height
+            double maxWidth = 0.0;
+            for (int i = 0; i < widths.size(); i++) {
+                maxWidth = Math.max(maxWidth, widths.get(i));
+            }
+            width = maxWidth;
+            double maxHeight = 0.0;
+            for (int i = 0; i < heights.size(); i++) {
+                maxHeight = Math.max(maxHeight, heights.get(i));
+            }
+            height = maxHeight * textLines.size();
+            // calculate the line offsets
+            lineHeight = maxHeight;
+            lineOffsets = new ArrayDoubleList(textLines.size());
+            for (int i = 0; i < widths.size(); i++) {
+                if (align.containsTextAlign(TextAlign.CENTER)) {
+                    lineOffsets.add((maxWidth - widths.get(i)) / 2.0);
+                } else if (align.containsTextAlign(TextAlign.LEFT)) {
+                    lineOffsets.add(0.0);
+                } else if (align.containsTextAlign(TextAlign.RIGHT)) {
+                    lineOffsets.add(maxWidth - widths.get(i));
+                }
             }
         }
     }
@@ -150,6 +223,26 @@ public class Text2D extends Shape2D implements Text, Serializable {
     @Override
     public String getText() {
         return text;
+    }
+
+    @Override
+    public List<String> getTextLines() {
+        return textLines;
+    }
+
+    @Override
+    public DoubleList getLineOffsets() {
+        return DoubleCollections.unmodifiableDoubleList(lineOffsets);
+    }
+
+    @Override
+    public double getLineHeight() {
+        return lineHeight;
+    }
+
+    @Override
+    public TextAlign getAlign() {
+        return align;
     }
 
     @Override
@@ -183,6 +276,7 @@ public class Text2D extends Shape2D implements Text, Serializable {
         int hash = super.hashCode();
         hash = 41 * hash + (text != null ? text.hashCode() : 0);
         hash = 41 * hash + (font != null ? font.hashCode() : 0);
+        hash = 41 * hash + (align != null ? align.hashCode() : 0);
         hash = 41 * hash + (int) (Double.doubleToLongBits(width) ^ (Double.doubleToLongBits(width) >>> 32));
         hash = 41 * hash + (int) (Double.doubleToLongBits(height) ^ (Double.doubleToLongBits(height) >>> 32));
         return hash;
@@ -203,6 +297,9 @@ public class Text2D extends Shape2D implements Text, Serializable {
         if (font != other.font && (font == null || !font.equals(other.font))) {
             return false;
         }
+        if (align != other.align && (align == null || !align.equals(other.align))) {
+            return false;
+        }
         if (Double.doubleToLongBits(width) != Double.doubleToLongBits(other.width)) {
             return false;
         }
@@ -214,7 +311,7 @@ public class Text2D extends Shape2D implements Text, Serializable {
 
     @Override
     public String toString() {
-        return "Text2D{" + "x=" + x + ", y=" + y + ", width=" + width + ", height=" + height + ", font=" + font + '}';
+        return "Text2D{" + "x=" + x + ", y=" + y + ", width=" + width + ", height=" + height + ", font=" + font + ", align=" + align + '}';
     }
 
     public static class Builder {
@@ -222,13 +319,34 @@ public class Text2D extends Shape2D implements Text, Serializable {
         private double x = 0.0;
         private double y = 0.0;
         private String text = "";
-        private Font font = null;
+        private Font font = DEFAULT_FONT;
+        private TextAlign align = TextAlign.CENTER;
 
         private Builder() {
         }
 
         public static Builder construct() {
             return new Builder();
+        }
+
+        public double x() {
+            return this.x;
+        }
+
+        public double y() {
+            return this.y;
+        }
+
+        public String text() {
+            return this.text;
+        }
+
+        public Font font() {
+            return this.font;
+        }
+
+        public TextAlign align() {
+            return this.align;
         }
 
         public Builder x(final double x) {
@@ -251,12 +369,13 @@ public class Text2D extends Shape2D implements Text, Serializable {
             return this;
         }
 
+        public Builder align(final TextAlign align) {
+            this.align = align;
+            return this;
+        }
+
         public Text2D build() {
-            if (font == null) {
-                return new Text2D(x, y, text);
-            } else {
-                return new Text2D(x, y, font, text);
-            }
+            return new Text2D(x, y, font, align, text);
         }
     }
 
