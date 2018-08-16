@@ -168,7 +168,7 @@ public class Text2D extends Shape2D implements Text, Serializable {
         }
         this.align = Objects.requireNonNull(align, "align");
         this.font = font;
-        this.text = text;
+        this.text = text.replaceAll("\\r?\\n", "");
         if (text.isEmpty()) {
             textLines = Collections.singletonList("");
             offsets = ZERO_OFFSETS;

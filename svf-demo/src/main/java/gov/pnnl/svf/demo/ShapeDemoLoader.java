@@ -260,10 +260,10 @@ public class ShapeDemoLoader implements DemoLoader {
         final TextRendererActor jogl2d = new TextRendererActor(scene);
         jogl2d.setDrawingPass(DrawingPass.INTERFACE);
         jogl2d.setOrigin(Alignment.RIGHT_BOTTOM);
-        jogl2d.setShape(new Text2D(viewport.getWidth(), 0.0, "JOGL 2D Text"));
+        jogl2d.setShape(new Text2D(viewport.getWidth() - 10.0, 10.0, "JOGL 2D Text"));
         scene.getPropertyChangeSupport().addPropertyChangeListener(Scene.VIEWPORT, (final PropertyChangeEvent evt) -> {
                                                                final Rectangle viewport1 = (Rectangle) evt.getNewValue();
-                                                               jogl2d.setShape(new Text2D(viewport1.getWidth(), 0.0, "JOGL 2D Text"));
+                                                               jogl2d.setShape(new Text2D(viewport1.getWidth() - 10.0, 10.0, "JOGL 2D Text"));
                                                            });
         ColorSupport.newInstance(jogl2d).setColor(palette.next());
         TransformSupport.newInstance(jogl2d);
@@ -276,6 +276,32 @@ public class ShapeDemoLoader implements DemoLoader {
         TransformSupport.newInstance(jogl3d);
         ColorPickingSupport.newInstance(jogl3d).addListener(listener);
         scene.add(jogl3d);
+        // test for jogl bordered text implementations
+        final BorderedShapeActor jogl2db = new BorderedShapeActor(scene);
+        jogl2db.setBorder(Border.ALL);
+        jogl2db.setBorderColor(new Color(Color.GRAY, 0.5f));
+        jogl2db.setBorderThickness(3.0f);
+        jogl2db.setDrawingPass(DrawingPass.INTERFACE);
+        jogl2db.setOrigin(Alignment.RIGHT_BOTTOM);
+        jogl2db.setShape(new Text2D(viewport.getWidth() - 100.0, 10.0, "JOGL 2D \n Text"));
+        scene.getPropertyChangeSupport().addPropertyChangeListener(Scene.VIEWPORT, (final PropertyChangeEvent evt) -> {
+                                                               final Rectangle viewport1 = (Rectangle) evt.getNewValue();
+                                                               jogl2db.setShape(new Text2D(viewport1.getWidth() - 100.0, 10.0, "JOGL 2D \n Text"));
+                                                           });
+        ColorSupport.newInstance(jogl2db).setColor(palette.next());
+        TransformSupport.newInstance(jogl2db);
+        ColorPickingSupport.newInstance(jogl2db).addListener(listener);
+        scene.add(jogl2db);
+
+        final BorderedShapeActor jogl3db = new BorderedShapeActor(scene);
+        jogl3db.setBorder(Border.ALL);
+        jogl3db.setBorderColor(new Color(Color.GRAY, 0.5f));
+        jogl3db.setBorderThickness(0.05f);
+        jogl3db.setShape(new Text3D(3.0 * PADDING, -2.5 * PADDING, 0.0, "JOGL 3D \n Text"));
+        ColorSupport.newInstance(jogl3db).setColor(palette.next());
+        TransformSupport.newInstance(jogl3db);
+        ColorPickingSupport.newInstance(jogl3db).addListener(listener);
+        scene.add(jogl3db);
     }
 
     private ShapeActor newActor(final Scene scene, final Shape shape) {
