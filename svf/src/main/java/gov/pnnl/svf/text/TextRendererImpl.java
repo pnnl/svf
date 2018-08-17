@@ -35,7 +35,6 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -148,12 +147,10 @@ public class TextRendererImpl extends AbstractText {
                     final double y = t.getY() + ((t.getHeight() - t.getLineHeight()) / 2.0) - (t.getLineHeight() * i);
                     final double w = t.getWidth();
                     final double h = t.getLineHeight();
-                    System.out.println(MessageFormat.format("Rendering line: {0}", str));
                     draw(gl, str, x, y, 0.0, w, h, t.getOffsets(), s, 1.0);
                     s += str.length();
                 }
             } else {
-                System.out.println(MessageFormat.format("Rendering text: {0}", text.getText()));
                 draw(gl, t.getText(), t.getX(), t.getY(), 0.0, t.getWidth(), t.getHeight(), t.getOffsets(), 0, 1.0);
             }
         } else if (text instanceof Text3D) {

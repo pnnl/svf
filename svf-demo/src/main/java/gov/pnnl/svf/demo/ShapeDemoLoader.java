@@ -55,6 +55,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import org.apache.commons.math.geometry.Vector3D;
 
@@ -278,18 +279,19 @@ public class ShapeDemoLoader implements DemoLoader {
         scene.add(jogl3d);
         // test for jogl bordered text implementations
         final BorderedShapeActor jogl2db = new BorderedShapeActor(scene);
+        jogl2db.setVisible(true);
         jogl2db.setBorder(Border.ALL);
         jogl2db.setBorderColor(new Color(Color.GRAY, 0.5f));
         jogl2db.setBorderThickness(3.0f);
-        jogl2db.setDrawingPass(DrawingPass.INTERFACE);
+        jogl2db.setDrawingPass(DrawingPass.OVERLAY_PICKING);
         jogl2db.setOrigin(Alignment.RIGHT_BOTTOM);
-        jogl2db.setShape(new Text2D(viewport.getWidth() - 100.0, 10.0, "JOGL\n2D\nText"));
+        jogl2db.setShape(new Text2D("JOGL\n2D\nText"));
         scene.getPropertyChangeSupport().addPropertyChangeListener(Scene.VIEWPORT, (final PropertyChangeEvent evt) -> {
                                                                final Rectangle viewport1 = (Rectangle) evt.getNewValue();
-                                                               jogl2db.setShape(new Text2D(viewport1.getWidth() - 100.0, 10.0, "JOGL\n2D\nText"));
+                                                               Optional.ofNullable(jogl2db.lookup(TransformSupport.class)).ifPresent((t) -> t.setTranslation(new Vector3D(viewport1.getWidth() - 200.0, 10.0, 0.0)));
                                                            });
         ColorSupport.newInstance(jogl2db).setColor(palette.next());
-        TransformSupport.newInstance(jogl2db);
+        TransformSupport.newInstance(jogl2db).setTranslation(new Vector3D(viewport.getWidth() - 200.0, 10.0, 0.0));
         ColorPickingSupport.newInstance(jogl2db).addListener(listener);
         scene.add(jogl2db);
 
@@ -297,7 +299,7 @@ public class ShapeDemoLoader implements DemoLoader {
         jogl3db.setBorder(Border.ALL);
         jogl3db.setBorderColor(new Color(Color.GRAY, 0.5f));
         jogl3db.setBorderThickness(0.05f);
-        jogl3db.setShape(new Text3D(3.0 * PADDING, -2.5 * PADDING, 0.0, "JOGL\n3D\nText"));
+        jogl3db.setShape(new Text3D(3.0 * PADDING, -2.75 * PADDING, 0.0, "JOGL\n3D\nText"));
         ColorSupport.newInstance(jogl3db).setColor(palette.next());
         TransformSupport.newInstance(jogl3db);
         ColorPickingSupport.newInstance(jogl3db).addListener(listener);
