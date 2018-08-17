@@ -31,6 +31,10 @@ public class KeyValuePair<K, V> implements Serializable {
         this.value = value;
     }
 
+    protected KeyValuePair(final Builder<K, V> builder) {
+        this(builder.key(), builder.value());
+    }
+
     /**
      * @return the key
      */
@@ -81,10 +85,14 @@ public class KeyValuePair<K, V> implements Serializable {
         protected K key;
         protected V value;
 
-        private Builder() {
+        protected Builder() {
         }
 
         public static <K, V> Builder<K, V> construct() {
+            return new Builder<>();
+        }
+
+        public static <K, V> Builder<K, V> construct(final Class<K> keyType, final Class<V> valueType) {
             return new Builder<>();
         }
 
@@ -107,7 +115,7 @@ public class KeyValuePair<K, V> implements Serializable {
         }
 
         public KeyValuePair<K, V> build() {
-            return new KeyValuePair<>(key, value);
+            return new KeyValuePair<>(this);
         }
     }
 

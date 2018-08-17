@@ -42,6 +42,10 @@ public class DoubleInterpolationIndexer extends AbstractInterpolationIndexer {
         reset(value);
     }
 
+    protected DoubleInterpolationIndexer(final Builder builder) {
+        this(builder.min(), builder.max(), builder.value(), builder.size());
+    }
+
     /**
      * Reset the indexer to a starting state.
      *
@@ -82,6 +86,61 @@ public class DoubleInterpolationIndexer extends AbstractInterpolationIndexer {
      */
     public double getValue() {
         return value;
+    }
+
+    public static class Builder extends AbstractInterpolationIndexer.Builder {
+
+        protected double min;
+        protected double max;
+        protected double value;
+
+        protected Builder() {
+        }
+
+        public static Builder construct() {
+            return new Builder();
+        }
+
+        @Override
+        public int size() {
+            return super.size();
+        }
+
+        @Override
+        public Builder size(final int size) {
+            return (Builder) super.size(size);
+        }
+
+        public double min() {
+            return this.min;
+        }
+
+        public double max() {
+            return this.max;
+        }
+
+        public double value() {
+            return this.value;
+        }
+
+        public Builder min(final double min) {
+            this.min = min;
+            return this;
+        }
+
+        public Builder max(final double max) {
+            this.max = max;
+            return this;
+        }
+
+        public Builder value(final double value) {
+            this.value = value;
+            return this;
+        }
+
+        public DoubleInterpolationIndexer build() {
+            return new DoubleInterpolationIndexer(this);
+        }
     }
 
 }

@@ -29,6 +29,10 @@ public class ReverseIndexer implements Indexer {
         this.index = this.size - 1;
     }
 
+    protected ReverseIndexer(final Builder builder) {
+        this(builder.size());
+    }
+
     @Override
     public int peek() {
         return prev;
@@ -52,6 +56,31 @@ public class ReverseIndexer implements Indexer {
     @Override
     public int size() {
         return size;
+    }
+
+    public static class Builder {
+
+        protected int size;
+
+        protected Builder() {
+        }
+
+        public static Builder construct() {
+            return new Builder();
+        }
+
+        public int size() {
+            return this.size;
+        }
+
+        public Builder size(final int size) {
+            this.size = size;
+            return this;
+        }
+
+        public ReverseIndexer build() {
+            return new ReverseIndexer(this);
+        }
     }
 
 }

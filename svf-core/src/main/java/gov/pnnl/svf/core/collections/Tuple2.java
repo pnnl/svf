@@ -48,6 +48,10 @@ public class Tuple2<A, B> extends AbstractTuple {
             return new Builder<>();
         }
 
+        public static <A, B> Builder<A, B> construct(final Class<A> aType, final Class<B> bType) {
+            return new Builder<>();
+        }
+
         public A first() {
             return this.first;
         }

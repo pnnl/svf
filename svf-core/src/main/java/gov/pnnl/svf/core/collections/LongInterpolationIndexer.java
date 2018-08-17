@@ -42,6 +42,10 @@ public class LongInterpolationIndexer extends AbstractInterpolationIndexer {
         reset(value);
     }
 
+    protected LongInterpolationIndexer(final Builder builder) {
+        this(builder.min(), builder.max(), builder.value(), builder.size());
+    }
+
     /**
      * Reset the indexer to a starting state.
      *
@@ -82,6 +86,61 @@ public class LongInterpolationIndexer extends AbstractInterpolationIndexer {
      */
     public long getValue() {
         return value;
+    }
+
+    public static class Builder extends AbstractInterpolationIndexer.Builder {
+
+        protected long min;
+        protected long max;
+        protected long value;
+
+        protected Builder() {
+        }
+
+        public static Builder construct() {
+            return new Builder();
+        }
+
+        @Override
+        public int size() {
+            return super.size();
+        }
+
+        @Override
+        public Builder size(final int size) {
+            return (Builder) super.size(size);
+        }
+
+        public long min() {
+            return this.min;
+        }
+
+        public long max() {
+            return this.max;
+        }
+
+        public long value() {
+            return this.value;
+        }
+
+        public Builder min(final long min) {
+            this.min = min;
+            return this;
+        }
+
+        public Builder max(final long max) {
+            this.max = max;
+            return this;
+        }
+
+        public Builder value(final long value) {
+            this.value = value;
+            return this;
+        }
+
+        public LongInterpolationIndexer build() {
+            return new LongInterpolationIndexer(this);
+        }
     }
 
 }

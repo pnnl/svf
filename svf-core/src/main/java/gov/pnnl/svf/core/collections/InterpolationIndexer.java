@@ -47,6 +47,10 @@ public class InterpolationIndexer<T extends Number & Comparable<T>> extends Abst
         reset(value);
     }
 
+    protected InterpolationIndexer(final Builder<T> builder) {
+        this(builder.min(), builder.max(), builder.value(), builder.size());
+    }
+
     /**
      * Reset the indexer to a starting state.
      *
@@ -95,6 +99,65 @@ public class InterpolationIndexer<T extends Number & Comparable<T>> extends Abst
      */
     public T getValue() {
         return (T) value;
+    }
+
+    public static class Builder<T extends Number & Comparable<T>> extends AbstractInterpolationIndexer.Builder {
+
+        protected T min;
+        protected T max;
+        protected T value;
+
+        protected Builder() {
+        }
+
+        public static <T extends Number & Comparable<T>> Builder<T> construct() {
+            return new Builder<>();
+        }
+
+        public static <T extends Number & Comparable<T>> Builder<T> construct(final Class<T> type) {
+            return new Builder<>();
+        }
+
+        @Override
+        public int size() {
+            return super.size();
+        }
+
+        @Override
+        public Builder size(final int size) {
+            return (Builder) super.size(size);
+        }
+
+        public T min() {
+            return this.min;
+        }
+
+        public T max() {
+            return this.max;
+        }
+
+        public T value() {
+            return this.value;
+        }
+
+        public Builder min(final T min) {
+            this.min = min;
+            return this;
+        }
+
+        public Builder max(final T max) {
+            this.max = max;
+            return this;
+        }
+
+        public Builder value(final T value) {
+            this.value = value;
+            return this;
+        }
+
+        public InterpolationIndexer<T> build() {
+            return new InterpolationIndexer<>(this);
+        }
     }
 
 }

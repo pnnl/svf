@@ -1,10 +1,13 @@
 package gov.pnnl.svf.demo;
 
+import gov.pnnl.svf.actor.BorderedShapeActor;
 import gov.pnnl.svf.actor.ShapeActor;
 import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.camera.DraggingCamera;
 import gov.pnnl.svf.core.color.Color;
 import gov.pnnl.svf.core.geometry.Alignment;
+import gov.pnnl.svf.core.geometry.Border;
+import gov.pnnl.svf.core.geometry.TextAlign;
 import gov.pnnl.svf.core.util.ColorUtil;
 import gov.pnnl.svf.geometry.Text3D;
 import gov.pnnl.svf.picking.ColorPickingCamera;
@@ -58,14 +61,29 @@ public class TextDemoLoader implements DemoLoader {
         scene.setBoundary(new Vector3D(40.0, 40.0, 40.0));
         // text actors
         for (int i = 0; i < TEXT_COUNT; i++) {
-            final ShapeActor text = new ShapeActor(scene);
+            final BorderedShapeActor text = new BorderedShapeActor(scene);
             text.setOrigin(Alignment.CENTER);
             text.setDrawingPass(DrawingPass.SCENE);
             text.setPassNumber(0);
-            final Text3D shape = new Text3D(random.nextDouble() * 2.0 - 1.0, random.nextDouble() * 2.0 - 1.0, random.nextDouble() * 2.0 - 1.0, FONT,
-                                            " Text Actor ");
+            final double x = random.nextDouble() * 2.0 - 1.0;
+            final double y = random.nextDouble() * 2.0 - 1.0;
+            final double z = random.nextDouble() * 2.0 - 1.0;
+            final String str = i % 2 == 0 ? " Text Actor " : " Text \n Actor ";
+            final Border border = random.nextBoolean() ? Border.NONE : Border.ALL;
+            final TextAlign align = TextAlign.values()[random.nextInt(TextAlign.values().length)];
+            final Text3D shape = Text3D.Builder.construct()
+                    .x(x)
+                    .y(y)
+                    .z(z)
+                    .text(str)
+                    .font(FONT)
+                    .align(align)
+                    .build();
+            text.setBorder(border);
+            text.setBorderColor(new Color(Color.GRAY, 0.5f));
+            text.setBorderThickness(0.05);
             text.setShape(shape);
-            ColorSupport.newInstance(text).setColor(ColorUtil.createRandomColor(0.2f, 0.8f));//new Color(1.0f, 1.0f, 1.0f, 0.3f));
+            ColorSupport.newInstance(text).setColor(new Color(ColorUtil.createRandomColor(0.2f, 0.8f), 0.5f));
             final double scale = random.nextDouble() * 0.2 + 0.05;
             final TransformSupport transform = TransformSupport.newInstance(text)
                     .setTranslation(new Vector3D(random.nextDouble() * 10.0 - 5.0, random.nextDouble() * 10.0 - 5.0, random.nextDouble() * 10.0 - 5.0))
