@@ -139,10 +139,36 @@ public class TextRendererImpl extends AbstractText {
     public void draw(final GL2 gl, final Text text) {
         if (text instanceof Text2D) {
             final Text2D t = (Text2D) text;
-            draw(gl, t.getText(), t.getX(), t.getY(), 0.0, t.getWidth(), t.getHeight(), t.getOffsets(), 1.0);
+            if (t.getLineOffsets().size() > 1) {
+                int s = 0;
+                for (int i = 0; i < t.getTextLines().size(); i++) {
+                    final String str = t.getTextLines().get(i);
+                    final double x = t.getX() + t.getLineOffsets().get(i);
+                    final double y = t.getY() + ((t.getHeight() - t.getLineHeight()) / 2.0) - (t.getLineHeight() * i);
+                    final double w = t.getWidth();
+                    final double h = t.getLineHeight();
+                    draw(gl, str, x, y, 0.0, w, h, t.getOffsets(), s, 1.0);
+                    s += str.length();
+                }
+            } else {
+                draw(gl, t.getText(), t.getX(), t.getY(), 0.0, t.getWidth(), t.getHeight(), t.getOffsets(), 0, 1.0);
+            }
         } else if (text instanceof Text3D) {
             final Text3D t = (Text3D) text;
-            draw(gl, t.getText(), t.getX(), t.getY(), t.getZ(), t.getWidth(), t.getHeight(), t.getOffsets(), Text3D.TEXT_SCALE);
+            if (t.getLineOffsets().size() > 1) {
+                int s = 0;
+                for (int i = 0; i < t.getTextLines().size(); i++) {
+                    final String str = t.getTextLines().get(i);
+                    final double x = t.getX() + t.getLineOffsets().get(i);
+                    final double y = t.getY() + ((t.getHeight() - t.getLineHeight()) / 2.0) - (t.getLineHeight() * i);
+                    final double w = t.getWidth();
+                    final double h = t.getLineHeight();
+                    draw(gl, str, x, y, t.getZ(), w, h, t.getOffsets(), s, Text3D.TEXT_SCALE);
+                    s += str.length();
+                }
+            } else {
+                draw(gl, t.getText(), t.getX(), t.getY(), t.getZ(), t.getWidth(), t.getHeight(), t.getOffsets(), 0, Text3D.TEXT_SCALE);
+            }
         }
     }
 
@@ -151,11 +177,37 @@ public class TextRendererImpl extends AbstractText {
         if (text instanceof Text2D) {
             final Text2D t = (Text2D) text;
             final Point2D offset = LayoutUtil.findOrigin(t, alignment);
-            draw(gl, t.getText(), offset.getX(), offset.getY(), 0.0, t.getWidth(), t.getHeight(), t.getOffsets(), 1.0);
+            if (t.getLineOffsets().size() > 1) {
+                int s = 0;
+                for (int i = 0; i < t.getTextLines().size(); i++) {
+                    final String str = t.getTextLines().get(i);
+                    final double x = offset.getX() + t.getLineOffsets().get(i);
+                    final double y = offset.getY() - (t.getLineHeight() * i);
+                    final double w = t.getWidth();
+                    final double h = t.getLineHeight();
+                    draw(gl, str, x, y, 0.0, w, h, t.getOffsets(), s, 1.0);
+                    s += str.length();
+                }
+            } else {
+                draw(gl, t.getText(), offset.getX(), offset.getY(), 0.0, t.getWidth(), t.getHeight(), t.getOffsets(), 0, 1.0);
+            }
         } else if (text instanceof Text3D) {
             final Text3D t = (Text3D) text;
             final Point2D offset = LayoutUtil.findOrigin(t, alignment);
-            draw(gl, t.getText(), offset.getX(), offset.getY(), t.getZ(), t.getWidth(), t.getHeight(), t.getOffsets(), Text3D.TEXT_SCALE);
+            if (t.getLineOffsets().size() > 1) {
+                int s = 0;
+                for (int i = 0; i < t.getTextLines().size(); i++) {
+                    final String str = t.getTextLines().get(i);
+                    final double x = offset.getX() + t.getLineOffsets().get(i);
+                    final double y = offset.getY() - (t.getLineHeight() * i);
+                    final double w = t.getWidth();
+                    final double h = t.getLineHeight();
+                    draw(gl, str, x, y, t.getZ(), w, h, t.getOffsets(), s, Text3D.TEXT_SCALE);
+                    s += str.length();
+                }
+            } else {
+                draw(gl, t.getText(), offset.getX(), offset.getY(), t.getZ(), t.getWidth(), t.getHeight(), t.getOffsets(), 0, Text3D.TEXT_SCALE);
+            }
         }
     }
 
@@ -164,16 +216,42 @@ public class TextRendererImpl extends AbstractText {
         if (text instanceof Text2D) {
             final Text2D t = (Text2D) text;
             final Point2D offset = LayoutUtil.findOrigin(t, area, alignment);
-            draw(gl, t.getText(), offset.getX(), offset.getY(), 0.0, t.getWidth(), t.getHeight(), t.getOffsets(), 1.0);
+            if (t.getLineOffsets().size() > 1) {
+                int s = 0;
+                for (int i = 0; i < t.getTextLines().size(); i++) {
+                    final String str = t.getTextLines().get(i);
+                    final double x = offset.getX() + t.getLineOffsets().get(i);
+                    final double y = offset.getY() - (t.getLineHeight() * i);
+                    final double w = t.getWidth();
+                    final double h = t.getLineHeight();
+                    draw(gl, str, x, y, 0.0, w, h, t.getOffsets(), s, 1.0);
+                    s += str.length();
+                }
+            } else {
+                draw(gl, t.getText(), offset.getX(), offset.getY(), 0.0, t.getWidth(), t.getHeight(), t.getOffsets(), 0, 1.0);
+            }
         } else if (text instanceof Text3D) {
             final Text3D t = (Text3D) text;
             final Point2D offset = LayoutUtil.findOrigin(t, area, alignment);
-            draw(gl, t.getText(), offset.getX(), offset.getY(), t.getZ(), t.getWidth(), t.getHeight(), t.getOffsets(), Text3D.TEXT_SCALE);
+            if (t.getLineOffsets().size() > 1) {
+                int s = 0;
+                for (int i = 0; i < t.getTextLines().size(); i++) {
+                    final String str = t.getTextLines().get(i);
+                    final double x = offset.getX() + t.getLineOffsets().get(i);
+                    final double y = offset.getY() - (t.getLineHeight() * i);
+                    final double w = t.getWidth();
+                    final double h = t.getLineHeight();
+                    draw(gl, str, x, y, t.getZ(), w, h, t.getOffsets(), s, Text3D.TEXT_SCALE);
+                    s += str.length();
+                }
+            } else {
+                draw(gl, t.getText(), offset.getX(), offset.getY(), t.getZ(), t.getWidth(), t.getHeight(), t.getOffsets(), 0, Text3D.TEXT_SCALE);
+            }
         }
     }
 
-    private void draw(final GL2 gl, final String str, final double x, final double y, final double z, final double w, final double h, final DoubleList offsets,
-                      final double scale) {
+    private void draw(final GL2 gl, final String str, final double x, final double y, final double z, final double w, final double h,
+                      final DoubleList offsets, final int start, final double scale) {
         // ensure it's initialized
         if (index.equals(UNINITIALIZED)) {
             newTextImage(gl);
@@ -216,7 +294,7 @@ public class TextRendererImpl extends AbstractText {
             }
             final Rectangle region = item.getSecond();
             // verts
-            xLeft = x - (w / 2.0) + offsets.get(i);
+            xLeft = x - (w / 2.0) + offsets.get(start + i);
             verts[0][0] = xLeft;
             verts[1][0] = xLeft;
             xLeft += region.getWidth() * scale;

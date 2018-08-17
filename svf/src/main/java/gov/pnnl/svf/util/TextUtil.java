@@ -107,7 +107,7 @@ public class TextUtil {
                 } else {
                     str = text.getText().substring(0, length);
                 }
-                final Text2D ret = new Text2D(text.getX(), text.getY(), text.getFont(), str);
+                final Text2D ret = new Text2D(text.getX(), text.getY(), text.getFont(), text.getAlign(), str);
                 // verify
                 if (ret.getWidth() <= width) {
                     return ret;
@@ -115,7 +115,7 @@ public class TextUtil {
             }
         }
         // no characters fit
-        return new Text2D(text.getX(), text.getY(), text.getFont(), "");
+        return new Text2D(text.getX(), text.getY(), text.getFont(), text.getAlign(), "");
     }
 
     /**
@@ -144,7 +144,7 @@ public class TextUtil {
                 } else {
                     str = text.getText().substring(0, length);
                 }
-                final Text3D ret = new Text3D(text.getX(), text.getY(), text.getZ(), text.getFont(), str);
+                final Text3D ret = new Text3D(text.getX(), text.getY(), text.getZ(), text.getFont(), text.getAlign(), str);
                 // verify
                 if (ret.getWidth() <= width) {
                     return ret;
@@ -152,7 +152,7 @@ public class TextUtil {
             }
         }
         // no characters fit
-        return new Text3D(text.getX(), text.getY(), text.getZ(), text.getFont(), "");
+        return new Text3D(text.getX(), text.getY(), text.getZ(), text.getFont(), text.getAlign(), "");
     }
 
     /**

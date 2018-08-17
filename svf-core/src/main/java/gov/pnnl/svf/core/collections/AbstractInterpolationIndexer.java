@@ -92,4 +92,21 @@ public abstract class AbstractInterpolationIndexer implements Indexer {
         return index;
     }
 
+    public static class Builder {
+
+        protected int size;
+
+        protected Builder() {
+        }
+
+        public int size() {
+            return this.size;
+        }
+
+        public Builder size(final int size) {
+            this.size = size;
+            return this;
+        }
+    }
+
 }

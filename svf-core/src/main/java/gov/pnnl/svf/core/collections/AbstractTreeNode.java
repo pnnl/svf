@@ -32,6 +32,10 @@ public abstract class AbstractTreeNode<T, C extends Collection<N>, N extends Abs
         this.value = value;
     }
 
+    protected AbstractTreeNode(final Builder<T, C, N> builder) {
+        this(builder.value());
+    }
+
     /**
      * The current root of the tree for this node.
      *
@@ -197,6 +201,33 @@ public abstract class AbstractTreeNode<T, C extends Collection<N>, N extends Abs
         @Override
         public void remove() {
             throw new UnsupportedOperationException("Not supported.");
+        }
+    }
+
+    public static class Builder<T, C extends Collection<N>, N extends AbstractTreeNode<T, C, N>> {
+
+        protected C children;
+        protected T value;
+
+        protected Builder() {
+        }
+
+        public C children() {
+            return this.children;
+        }
+
+        public T value() {
+            return this.value;
+        }
+
+        public Builder children(final C children) {
+            this.children = children;
+            return this;
+        }
+
+        public Builder value(final T value) {
+            this.value = value;
+            return this;
         }
     }
 

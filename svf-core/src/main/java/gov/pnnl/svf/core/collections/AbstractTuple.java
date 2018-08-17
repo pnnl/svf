@@ -84,4 +84,5 @@ public abstract class AbstractTuple implements Serializable {
     public String toString() {
         return "Tuple" + values.length + " [" + Arrays.toString(values) + "]";
     }
+
 }
