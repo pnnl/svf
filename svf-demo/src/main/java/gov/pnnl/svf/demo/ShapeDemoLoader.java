@@ -283,10 +283,10 @@ public class ShapeDemoLoader implements DemoLoader {
         jogl2db.setBorderThickness(3.0f);
         jogl2db.setDrawingPass(DrawingPass.INTERFACE);
         jogl2db.setOrigin(Alignment.RIGHT_BOTTOM);
-        jogl2db.setShape(new Text2D(viewport.getWidth() - 100.0, 10.0, "JOGL 2D \n Text"));
+        jogl2db.setShape(new Text2D(viewport.getWidth() - 100.0, 10.0, "JOGL\n2D\nText"));
         scene.getPropertyChangeSupport().addPropertyChangeListener(Scene.VIEWPORT, (final PropertyChangeEvent evt) -> {
                                                                final Rectangle viewport1 = (Rectangle) evt.getNewValue();
-                                                               jogl2db.setShape(new Text2D(viewport1.getWidth() - 100.0, 10.0, "JOGL 2D \n Text"));
+                                                               jogl2db.setShape(new Text2D(viewport1.getWidth() - 100.0, 10.0, "JOGL\n2D\nText"));
                                                            });
         ColorSupport.newInstance(jogl2db).setColor(palette.next());
         TransformSupport.newInstance(jogl2db);
@@ -297,7 +297,7 @@ public class ShapeDemoLoader implements DemoLoader {
         jogl3db.setBorder(Border.ALL);
         jogl3db.setBorderColor(new Color(Color.GRAY, 0.5f));
         jogl3db.setBorderThickness(0.05f);
-        jogl3db.setShape(new Text3D(3.0 * PADDING, -2.5 * PADDING, 0.0, "JOGL 3D \n Text"));
+        jogl3db.setShape(new Text3D(3.0 * PADDING, -2.5 * PADDING, 0.0, "JOGL\n3D\nText"));
         ColorSupport.newInstance(jogl3db).setColor(palette.next());
         TransformSupport.newInstance(jogl3db);
         ColorPickingSupport.newInstance(jogl3db).addListener(listener);
