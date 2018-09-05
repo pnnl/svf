@@ -1,11 +1,13 @@
 package gov.pnnl.svf.util;
 
 import gov.pnnl.svf.animation.LocationAnimationSupport;
-import gov.pnnl.svf.camera.DraggingCamera;
+import gov.pnnl.svf.camera.Camera;
 import gov.pnnl.svf.geometry.Rectangle;
+import gov.pnnl.svf.geometry.Rectangle2D;
 import gov.pnnl.svf.geometry.Shape;
 import gov.pnnl.svf.geometry.Shape2D;
 import gov.pnnl.svf.geometry.Shape3D;
+import java.util.Objects;
 import org.apache.commons.math.geometry.Vector3D;
 
 /**
@@ -31,7 +33,7 @@ public class CameraUtil {
      *
      * @throws NullPointerException if any arguments are null
      */
-    public static void fitInViewport(final DraggingCamera camera, final Shape shape, final boolean animate) {
+    public static void fitInViewport(final Camera camera, final Shape shape, final boolean animate) {
         if (camera == null) {
             throw new NullPointerException("camera");
         }
@@ -77,5 +79,28 @@ public class CameraUtil {
         } else {
             camera.setLocation(location);
         }
+    }
+
+    /**
+     * Find the width and height at the center of the scene that this camera is
+     * viewing.
+     *
+     * @param camera the camera
+     *
+     * @return the view area
+     */
+    public static Rectangle2D findViewArea(final Camera camera) {
+        Objects.requireNonNull(camera, "Camera is required");
+        final Rectangle viewport = camera.getViewport();
+        if (viewport.getWidth() == 0.0 || viewport.getHeight() == 0.0) {
+            return Rectangle2D.ZERO;
+        }
+        // if shape aspect ratio is equal or greater than camera then use width, otherwise use height, to calculate the dimensions
+        final double ar = (double) viewport.getWidth() / (double) viewport.getHeight();
+        final double fov = Math.toRadians(camera.getFieldOfView() / 2.0);
+        final double z = camera.getLocation().subtract(Vector3D.ZERO).getNorm();
+        final double h = Math.tan(fov) * 2.0 * z;
+        final double w = h * ar;
+        return new Rectangle2D(0.0, 0.0, w, h);
     }
 }
