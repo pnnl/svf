@@ -14,6 +14,7 @@ import org.junit.Test;
 public class LookupTest {
 
     public LookupTest() {
+        Lookup.getLookup().clear();
     }
 
     /**

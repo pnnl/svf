@@ -86,6 +86,7 @@ public abstract class AbstractCamera extends AbstractActor implements CameraExt<
 
     private void initialize() {
         setDrawingPass(DrawingPass.SCENE_INTERFACE);
+        viewport = getScene().getViewport();
         // calculate vectors
         // calculate the perpendicular vector
         perp = Vector3D.crossProduct(up, look);

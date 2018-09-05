@@ -37,11 +37,25 @@ public class ProxyGLCanvas implements GLAutoDrawable {
     private boolean realized = true;
     private boolean autoSwapBufferMode = false;
     private int contextCreationFlags = 0;
+    private int width;
+    private int height;
 
     /**
      * Constructor
      */
     public ProxyGLCanvas() {
+        this(WIDTH, HEIGHT);
+    }
+
+    /**
+     * Constructor
+     *
+     * @param width  the canvas width
+     * @param height the canvas height
+     */
+    public ProxyGLCanvas(final int width, final int height) {
+        this.width = width;
+        this.height = height;
     }
 
     @Override
@@ -57,13 +71,13 @@ public class ProxyGLCanvas implements GLAutoDrawable {
     @Override
     public void addGLEventListener(final GLEventListener gl) {
         glEventListeners.add(gl);
-        gl.reshape(this, 0, 0, WIDTH, HEIGHT);
+        gl.reshape(this, 0, 0, width, height);
     }
 
     @Override
     public void addGLEventListener(final int i, final GLEventListener gl) throws IndexOutOfBoundsException {
         glEventListeners.add(i, gl);
-        gl.reshape(this, 0, 0, WIDTH, HEIGHT);
+        gl.reshape(this, 0, 0, width, height);
     }
 
     @Override
@@ -264,12 +278,12 @@ public class ProxyGLCanvas implements GLAutoDrawable {
 
     @Override
     public int getSurfaceWidth() {
-        return WIDTH;
+        return width;
     }
 
     @Override
     public int getSurfaceHeight() {
-        return HEIGHT;
+        return height;
     }
 
     @Override
