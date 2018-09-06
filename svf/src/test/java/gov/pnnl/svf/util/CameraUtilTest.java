@@ -86,10 +86,11 @@ public class CameraUtilTest {
         final Scene scene = new ProxyScene(new ProxyGLCanvas(), ConfigUtil.configure());
         Assert.assertEquals(new Rectangle(0, 0, 1200, 800), scene.getViewport());
         final Camera camera = new ProxyDraggingCamera(scene);
+        camera.setLook(Vector3D.PLUS_I);
         scene.start();
         try {
             Assert.assertEquals(new Rectangle(0, 0, 1200, 800), camera.getViewport());
-            camera.setLocation(new Vector3D(1.0, 0.0, 0.0));
+            camera.setLocation(new Vector3D(-1.0, 0.0, 0.0));
             final Rectangle2D view = CameraUtil.findViewArea(camera);
             Assert.assertEquals(0.6650839879288196, view.getWidth(), 0.0);
             Assert.assertEquals(0.44338932528587977, view.getHeight(), 0.0);

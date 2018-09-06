@@ -2,6 +2,7 @@ package gov.pnnl.svf.util;
 
 import gov.pnnl.svf.animation.LocationAnimationSupport;
 import gov.pnnl.svf.camera.Camera;
+import gov.pnnl.svf.camera.OrbitCamera;
 import gov.pnnl.svf.geometry.Rectangle;
 import gov.pnnl.svf.geometry.Rectangle2D;
 import gov.pnnl.svf.geometry.Shape;
@@ -25,7 +26,8 @@ public class CameraUtil {
     }
 
     /**
-     * Moves the camera so that the entire shape is visible.
+     * Moves the camera so that the entire shape is visible. This only works for
+     * default camera orientation and shapes on the 0 z plane.
      *
      * @param camera  the camera to relocate
      * @param shape   the shape
@@ -82,8 +84,8 @@ public class CameraUtil {
     }
 
     /**
-     * Find the width and height at the center of the scene that this camera is
-     * viewing.
+     * Find the width and height of the viewable area at the distance of this
+     * camera from the scene 0 plane.
      *
      * @param camera the camera
      *
@@ -98,7 +100,16 @@ public class CameraUtil {
         // if shape aspect ratio is equal or greater than camera then use width, otherwise use height, to calculate the dimensions
         final double ar = (double) viewport.getWidth() / (double) viewport.getHeight();
         final double fov = Math.toRadians(camera.getFieldOfView() / 2.0);
-        final double z = camera.getLocation().subtract(Vector3D.ZERO).getNorm();
+        final double z;
+        if (camera instanceof OrbitCamera) {
+            z = camera.getLocation().subtract(Vector3D.ZERO).getNorm();
+        } else if (camera.getLook().equals(Vector3D.PLUS_I) || camera.getLook().equals(Vector3D.MINUS_I)) {
+            z = Math.abs(camera.getLocation().getX());
+        } else if (camera.getLook().equals(Vector3D.PLUS_J) || camera.getLook().equals(Vector3D.MINUS_J)) {
+            z = Math.abs(camera.getLocation().getY());
+        } else {
+            z = Math.abs(camera.getLocation().getZ());
+        }
         final double h = Math.tan(fov) * 2.0 * z;
         final double w = h * ar;
         return new Rectangle2D(0.0, 0.0, w, h);
