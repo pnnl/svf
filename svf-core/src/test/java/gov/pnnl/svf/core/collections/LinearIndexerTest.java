@@ -1,5 +1,6 @@
 package gov.pnnl.svf.core.collections;
 
+import gov.pnnl.svf.test.WeakEqualsHelper;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,6 +11,16 @@ import org.junit.Test;
 public class LinearIndexerTest {
 
     public LinearIndexerTest() {
+    }
+
+    /**
+     * Test of Builder method, of class LinearIndexer.
+     */
+    @Test
+    public void testBuilder() {
+        Assert.assertTrue(WeakEqualsHelper.weakEquals(new LinearIndexer(10),
+                LinearIndexer.Builder.construct().size(10).build()
+        ));
     }
 
     /**
