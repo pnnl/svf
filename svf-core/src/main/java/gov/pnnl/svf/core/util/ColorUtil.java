@@ -34,7 +34,6 @@ public class ColorUtil {
     private static final float HUE_INCREMENT = 1.0f / HUE_COUNT;
     private static final float HUE_SHIFT = HUE_INCREMENT * GOLDEN_RATIO_CONJUGATE;
     private static final float DISTANCE_DELTA = 0.01f;
-    private static final float HUE_DELTA = 0.01f;
     private static final Logger logger = Logger.getLogger(ColorUtil.class.toString());
     private final static Random random = new Random();
 
@@ -101,10 +100,7 @@ public class ColorUtil {
         if (type == null) {
             throw new NullPointerException("type");
         }
-        if (length < 1) {
-            throw new IllegalArgumentException("length");
-        }
-        if (length > 1024) {
+        if (length < 1 || length > 1024) {
             throw new IllegalArgumentException("length");
         }
         logger.log(Level.INFO, "Creating an {0} gradient texture of length {1}.", new Object[]{type, length});

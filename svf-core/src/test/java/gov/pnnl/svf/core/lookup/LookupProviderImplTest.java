@@ -1,6 +1,8 @@
 package gov.pnnl.svf.core.lookup;
 
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,6 +13,26 @@ import org.junit.Test;
 public class LookupProviderImplTest {
 
     public LookupProviderImplTest() {
+    }
+
+    @Test
+    public void testClear() {
+        final LookupProvider lookup = new LookupProviderImpl();
+        lookup.add("foo");
+        Assert.assertEquals("foo", lookup.lookup(String.class));
+        lookup.clear();
+        Assert.assertNull(lookup.lookup(String.class));
+    }
+
+    @Test
+    public void testLookupAll() {
+        final LookupProvider lookup = new LookupProviderImpl();
+        lookup.add("foo");
+        Assert.assertEquals("foo", lookup.lookup(String.class));
+        final List<Object> out = new ArrayList<>();
+        lookup.lookupAll(out);
+        Assert.assertTrue(out.contains("foo"));
+        Assert.assertTrue(lookup.lookupAll().contains("foo"));
     }
 
     /**

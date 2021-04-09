@@ -1,5 +1,6 @@
 package gov.pnnl.svf.core.collections;
 
+import gov.pnnl.svf.test.AbstractObjectTestBase;
 import gov.pnnl.svf.test.PerformanceStats;
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,6 +8,7 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.UUID;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -14,16 +16,29 @@ import org.junit.Test;
  *
  * @author Amelia Bleeker
  */
-public class CountingHashSetTest {
+public class CountingHashSetTest extends AbstractObjectTestBase<CountingHashSet<String>> {
 
     private static final int PERFORMANCE_TEST_SIZE = 1000000;
     private static final Long[] LIST = new Long[PERFORMANCE_TEST_SIZE];
+
+    private final Random random = new Random(0L);
 
     static {
         final Random random = new Random(0);
         for (int i = 0; i < PERFORMANCE_TEST_SIZE; i++) {
             LIST[i] = random.nextLong();
         }
+    }
+
+    @Override
+    public void testSerializable() throws Exception {
+        // skip this test
+//        super.testSerializable(); 
+    }
+
+    @Test
+    public void testConstructor() {
+        Assert.assertNotNull(new CountingHashSet<>(100, 0.5f));
     }
 
     @Test
@@ -184,6 +199,25 @@ public class CountingHashSetTest {
         final CountingSet<Integer> expResult = new CountingHashSet<>(Collections.singletonList(o));
         final CountingSet<Integer> result = CountingHashSet.singleton(o);
         Assert.assertEquals(expResult, result);
+    }
+
+    @Override
+    protected CountingHashSet<String> copyValueObject(CountingHashSet<String> object) {
+        return new CountingHashSet<>(object);
+    }
+
+    @Override
+    protected CountingHashSet<String> newValueObject() {
+        final CountingHashSet<String> instance = new CountingHashSet<>();
+        for (int i = 0; i < random.nextInt(10) + 1; i++) {
+            instance.add(UUID.randomUUID().toString());
+        }
+        return instance;
+    }
+
+    @Override
+    protected void setFieldsToNull(CountingHashSet<String> object) {
+        object.clear();
     }
 
     private enum CameraEventType {

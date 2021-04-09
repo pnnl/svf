@@ -60,6 +60,29 @@ public class AbstractTreeNodeTest extends AbstractObjectTestBase<AbstractTreeNod
     }
 
     @Test
+    public void testIsRoot() {
+        final AbstractTreeNode<Long, List<ListTreeNode<Long>>, ListTreeNode<Long>> a = newValueObject();
+        Assert.assertTrue(a.isRoot());
+        Assert.assertFalse(a.getChildren().get(0).isRoot());
+    }
+
+    @Test
+    public void testIsLeaf() {
+        final AbstractTreeNode<Long, List<ListTreeNode<Long>>, ListTreeNode<Long>> a = newValueObject();
+        Assert.assertFalse(a.isLeaf());
+        Assert.assertFalse(a.getChildren().get(0).isLeaf());
+        Assert.assertFalse(a.getChildren().get(0).getChildren().get(0).isLeaf());
+        Assert.assertFalse(a.getChildren().get(0).getChildren().get(0).getChildren().get(0).isLeaf());
+        Assert.assertTrue(a.getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).isLeaf());
+    }
+
+    @Test
+    public void testGetParent() {
+        final AbstractTreeNode<Long, List<ListTreeNode<Long>>, ListTreeNode<Long>> a = newValueObject();
+        Assert.assertTrue(a.getChildren().get(0).getParent().equals(a));
+    }
+
+    @Test
     public void testGetRoot() {
         final AbstractTreeNode<Long, List<ListTreeNode<Long>>, ListTreeNode<Long>> a = newValueObject();
         Assert.assertTrue(a.equals(a));

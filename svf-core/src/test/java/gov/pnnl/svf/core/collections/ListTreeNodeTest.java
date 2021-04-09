@@ -1,6 +1,7 @@
 package gov.pnnl.svf.core.collections;
 
 import gov.pnnl.svf.test.AbstractObjectTestBase;
+import gov.pnnl.svf.test.WeakEqualsHelper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,6 +21,12 @@ public class ListTreeNodeTest extends AbstractObjectTestBase<ListTreeNode<Long>>
 
     public ListTreeNodeTest() {
         ignore.put(AbstractTreeNode.class.getName(), Collections.singletonList("parent"));
+    }
+
+    @Test
+    public void testBuilder() {
+        Assert.assertTrue(WeakEqualsHelper.weakEquals(new ListTreeNode<>("foo"),
+                ListTreeNode.Builder.construct(String.class).value("foo").build()));
     }
 
     @Test

@@ -34,7 +34,17 @@ public class MathUtilTest {
      */
     @Test
     public void testToString() {
+        Assert.assertNotNull(MathUtil.toString(new double[]{0.0, 0.0, 0.0}));
+        Assert.assertNotNull(MathUtil.toString(new double[]{0.0, 0.0, 0.0, 0.0}));
         Assert.assertNotNull(MathUtil.toString(MathUtil.newIdentityMatrix()));
+    }
+
+    /**
+     * Test of toString method, of class MathUtil.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testToStringExc() {
+        Assert.assertNotNull(MathUtil.toString(new double[]{0.0, 0.0}));
     }
 
     /**
@@ -71,7 +81,7 @@ public class MathUtilTest {
      * Test of rotate method, of class MathUtil.
      */
     @Test
-    public void testRotate() {
+    public void testRotateX() {
         final double[] matrix = MathUtil.newIdentityMatrix();
         MathUtil.rotate(matrix, 90, 1, 0, 0);
         Assert.assertArrayEquals(new double[]{
@@ -83,12 +93,72 @@ public class MathUtilTest {
     }
 
     /**
+     * Test of rotate method, of class MathUtil.
+     */
+    @Test
+    public void testRotateY() {
+        final double[] matrix = MathUtil.newIdentityMatrix();
+        MathUtil.rotate(matrix, 90, 0, 1, 0);
+        Assert.assertArrayEquals(new double[]{
+            0.0, 0.0, -1.0, 0.0,
+            0.0, 1.0, 0.0, 0.0,
+            1.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 1.0
+        }, matrix, 0.000000001);
+    }
+
+    /**
+     * Test of rotate method, of class MathUtil.
+     */
+    @Test
+    public void testRotateZ() {
+        final double[] matrix = MathUtil.newIdentityMatrix();
+        MathUtil.rotate(matrix, 90, 0, 0, 1);
+        Assert.assertArrayEquals(new double[]{
+            0.0, 1.0, 0.0, 0.0,
+            -1.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 1.0, 0.0,
+            0.0, 0.0, 0.0, 1.0
+        }, matrix, 0.000000001);
+    }
+
+    /**
+     * Test of rotate method, of class MathUtil.
+     */
+    @Test
+    public void testRotateA() {
+        final double[] matrix = MathUtil.newIdentityMatrix();
+        MathUtil.rotate(matrix, 90, 0.25, 0.25, 0.25);
+        Assert.assertArrayEquals(new double[]{
+            0.333333333, 0.9106836025, -0.2440169358, 0.0,
+            -0.2440169358, 0.333333333, 0.9106836025, 0.0,
+            0.9106836025, -0.2440169358, 0.333333333, 0.0,
+            0.0, 0.0, 0.0, 1.0
+        }, matrix, 0.000000001);
+    }
+
+    /**
      * Test of multiply method, of class MathUtil.
      */
     @Test
     public void testMultiply() {
         final double[] matrix = MathUtil.newIdentityMatrix();
         MathUtil.multiply(MathUtil.newIdentityMatrix(), MathUtil.newIdentityMatrix(), matrix);
+        Assert.assertArrayEquals(new double[]{
+            1.0, 0.0, 0.0, 0.0,
+            0.0, 1.0, 0.0, 0.0,
+            0.0, 0.0, 1.0, 0.0,
+            0.0, 0.0, 0.0, 1.0
+        }, matrix, 0.0);
+    }
+
+    /**
+     * Test of multiply method, of class MathUtil.
+     */
+    @Test
+    public void testMultiplyV() {
+        final double[] matrix = MathUtil.newIdentityMatrix();
+        MathUtil.multiply(MathUtil.newIdentityMatrix(), new double[]{1.0, 0.0, 0.0, 0.0}, matrix);
         Assert.assertArrayEquals(new double[]{
             1.0, 0.0, 0.0, 0.0,
             0.0, 1.0, 0.0, 0.0,
@@ -118,7 +188,7 @@ public class MathUtilTest {
     @Test
     public void testMultiplyMatrixByVector() {
         final double[] matrix = MathUtil.newIdentityMatrix();
-        MathUtil.multiplyMatrixByVector(MathUtil.newIdentityMatrix(), MathUtil.newIdentityMatrix(), matrix);
+        MathUtil.multiplyMatrixByVector(MathUtil.newIdentityMatrix(), new double[]{1.0, 0.0, 0.0, 0.0}, matrix);
         Assert.assertArrayEquals(new double[]{
             1.0, 0.0, 0.0, 0.0,
             0.0, 1.0, 0.0, 0.0,

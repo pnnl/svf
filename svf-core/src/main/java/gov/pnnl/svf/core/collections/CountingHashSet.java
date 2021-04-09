@@ -62,11 +62,10 @@ public class CountingHashSet<E> extends HashSet<E> implements CountingSet<E> {
      * factor.
      *
      * @param initialCapacity the initial capacity of the hash map
-     * @param loadFactor      the load factor of the hash map
+     * @param loadFactor the load factor of the hash map
      *
      * @throws IllegalArgumentException if the initial capacity is less than
-     *                                  zero, or if the load factor is
-     *                                  nonpositive
+     * zero, or if the load factor is nonpositive
      */
     public CountingHashSet(final int initialCapacity, final float loadFactor) {
         super(initialCapacity, loadFactor);
@@ -81,7 +80,7 @@ public class CountingHashSet<E> extends HashSet<E> implements CountingSet<E> {
      * @param initialCapacity the initial capacity of the hash table
      *
      * @throws IllegalArgumentException if the initial capacity is less than
-     *                                  zero
+     * zero
      */
     public CountingHashSet(final int initialCapacity) {
         super(initialCapacity);
@@ -184,7 +183,7 @@ public class CountingHashSet<E> extends HashSet<E> implements CountingSet<E> {
      * Returns an immutable counting set containing only the specified object.
      * The returned set is serializable.
      *
-     * @param o   the sole object to be stored in the returned counting set.
+     * @param o the sole object to be stored in the returned counting set.
      *
      * @return an immutable counting set containing only the specified object.
      *
