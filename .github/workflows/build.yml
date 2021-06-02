@@ -19,8 +19,8 @@ jobs:
         run: mvn -B -P cicd -f sci-vis-framework install -DskipTests=true
       - name: mvn test
         run: |
-          apt-get update
-          apt-get install -y libgtk2.0-0
+          sudo apt-get update
+          sudo apt-get install -y libgtk2.0-0
           xvfb-run --auto-servernum -s "-screen 0 1024x768x24" mvn -B -P cicd -f sci-vis-framework test -Dsurefire.excludesFile=${GITHUB_WORKSPACE}/.mvn/cicd-test-excludes
       - name: Cleanup xvfb
         uses: bcomnes/cleanup-xvfb@v1
