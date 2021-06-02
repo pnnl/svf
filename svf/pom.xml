@@ -14,7 +14,7 @@
     <name>svf</name>
 
     <properties>
-        <findbugs.excludeFilterFile>${basedir}/findbugs-exclude.xml</findbugs.excludeFilterFile>
+        <spotbugs.excludeFilterFile>${basedir}/spotbugs-exclude.xml</spotbugs.excludeFilterFile>
     </properties>
 
     <dependencies>
