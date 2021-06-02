@@ -54,7 +54,7 @@
             </build>
         </profile>
         <profile>
-            <id>travis</id>
+            <id>cicd</id>
             <build>
                 <plugins>
                     <plugin>
@@ -267,9 +267,9 @@
 
     <distributionManagement>
         <repository>
-            <id>bintray</id>
-            <name>bintray</name>
-            <url>https://api.bintray.com/maven/pnnl/maven/svf/;publish=1</url>
+            <id>github</id>
+            <name>GitHub PNNL Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/pnnl/svf</url>
         </repository>
     </distributionManagement>
 

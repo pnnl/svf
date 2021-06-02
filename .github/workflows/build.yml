@@ -1,0 +1,29 @@
+name: Build
+on:
+  push:
+    branches:
+      - master
+      - develop
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: "adopt"
+          java-version: "8"
+      - name: mvn Install
+        run: mvn -B -P cicd -f sci-vis-framework install -DskipTests=true
+      - name: mvn test
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: mvn -B -P cicd -f sci-vis-framework test -Dsurefire.excludesFile=$GITHUB_WORKSPACE/.mvn/cicd-test-excludes
+          options: -screen 0 1024x768x24
+      - name: Publish to GitHub Packages Apache Maven
+        if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop' }}
+        run: mvn -B -P cicd -f sci-vis-framework deploy -DskipTests=true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
