@@ -20,7 +20,7 @@ jobs:
       - name: mvn test
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: mvn -B -P cicd -f sci-vis-framework test -Dsurefire.excludesFile=$GITHUB_WORKSPACE/.mvn/cicd-test-excludes
+          run: mvn -B -P cicd -f sci-vis-framework test -Dsurefire.excludesFile=${GITHUB_WORKSPACE}/.mvn/cicd-test-excludes
           options: -screen 0 1024x768x24
       - name: Publish to GitHub Packages Apache Maven
         if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop' }}
