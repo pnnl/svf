@@ -32,7 +32,7 @@ public class CountingHashSet<E> extends HashSet<E> implements CountingSet<E> {
     private HashMap<E, Integer> map;
 
     /**
-     * Constructs a new, empty counting set; the backing <tt>HashMap</tt>
+     * Constructs a new, empty counting set; the backing {@code HashMap}
      * instance has default initial capacity (16) and load factor (0.75).
      */
     public CountingHashSet() {
@@ -42,7 +42,7 @@ public class CountingHashSet<E> extends HashSet<E> implements CountingSet<E> {
 
     /**
      * Constructs a new counting set containing the elements in the specified
-     * collection. The <tt>HashMap</tt> is created with default load factor
+     * collection. The {@code HashMap} is created with default load factor
      * (0.75) and an initial capacity sufficient to contain the elements in the
      * specified collection.
      *
@@ -57,7 +57,7 @@ public class CountingHashSet<E> extends HashSet<E> implements CountingSet<E> {
     }
 
     /**
-     * Constructs a new, empty counting set; the backing <tt>HashMap</tt>
+     * Constructs a new, empty counting set; the backing {@code HashMap}
      * instance has the specified initial capacity and the specified load
      * factor.
      *
@@ -73,7 +73,7 @@ public class CountingHashSet<E> extends HashSet<E> implements CountingSet<E> {
     }
 
     /**
-     * Constructs a new, empty counting set; the backing <tt>HashMap</tt>
+     * Constructs a new, empty counting set; the backing {@code HashMap}
      * instance has the specified initial capacity and default load factor
      * (0.75).
      *
@@ -163,7 +163,7 @@ public class CountingHashSet<E> extends HashSet<E> implements CountingSet<E> {
      * <pre>
      *     CountingSet&lt;String&gt; s = CountingHashSet.emptySet();
      * </pre> Implementation note: Implementations of this method need not
-     * create a separate <tt>CountingSet</tt> object for each call. Using this
+     * create a separate {@code CountingSet} object for each call. Using this
      * method is likely to have comparable cost to using the like-named field.
      * (Unlike this method, the field does not provide type safety.)
      *

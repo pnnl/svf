@@ -98,29 +98,29 @@ public class LongArrayUtil {
          * to, or greater than the second.<p>
          *
          * In the foregoing description, the notation
-         * <tt>sgn(</tt><i>expression</i><tt>)</tt> designates the mathematical
+         * {@code sgn(}<i>expression</i>{@code )} designates the mathematical
          * <i>signum</i> function, which is defined to return one of
-         * <tt>-1</tt>,
-         * <tt>0</tt>, or <tt>1</tt> according to whether the value of
+         * {@code -1},
+         * {@code 0}, or {@code 1} according to whether the value of
          * <i>expression</i> is negative, zero or positive.<p>
          *
-         * The implementor must ensure that <tt>sgn(compare(x, y)) ==
-         * -sgn(compare(y, x))</tt> for all <tt>x</tt> and <tt>y</tt>. (This
-         * implies that <tt>compare(x, y)</tt> must throw an exception if and
-         * only if <tt>compare(y, x)</tt> throws an exception.)
+         * The implementor must ensure that {@code sgn(compare(x, y)) ==
+         * -sgn(compare(y, x))} for all {@code x} and {@code y}. (This
+         * implies that {@code compare(x, y)} must throw an exception if and
+         * only if {@code compare(y, x)} throws an exception.)
          * <p>
          *
          * The implementor must also ensure that the relation is transitive:
-         * <tt>((compare(x, y)&gt;0) &amp;&amp; (compare(y, z)&gt;0))</tt>
+         * {@code ((compare(x, y)&gt;0) &amp;&amp; (compare(y, z)&gt;0))}
          * implies
-         * <tt>compare(x, z)&gt;0</tt>.<p>
+         * {@code compare(x, z)&gt;0}.<p>
          *
-         * Finally, the implementor must ensure that <tt>compare(x, y)==0</tt>
-         * implies that <tt>sgn(compare(x, z))==sgn(compare(y, z))</tt> for all
-         * <tt>z</tt>.<p>
+         * Finally, the implementor must ensure that {@code compare(x, y)==0}
+         * implies that {@code sgn(compare(x, z))==sgn(compare(y, z))} for all
+         * {@code z}.<p>
          *
          * It is generally the case, but <i>not</i> strictly required that
-         * <tt>(compare(x, y)==0) == (x.equals(y))</tt>. Generally speaking, any
+         * {@code (compare(x, y)==0) == (x.equals(y))}. Generally speaking, any
          * comparator that violates this condition should clearly indicate this
          * fact. The recommended language is "Note: this comparator imposes
          * orderings that are inconsistent with equals."
