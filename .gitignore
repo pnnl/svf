@@ -1,19 +1,24 @@
-/svf-test/target/
-/svf-core/target/
-/svf/target/
-/svf-awt/target/
-/svf-jbox2d/target/
-/svf-fx/target/
-/svf-newt/target/
-/svf-swt/target/
-/svf-demo/target/
-/svf/performance.properties
-/svf-core/performance.properties
-/sci-vis-framework/nbactions.xml
+# maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# https://github.com/takari/maven-wrapper#usage-without-binary-jar
+.mvn/wrapper/maven-wrapper.jar
 
+# netbeans
+nbproject/
+nbactions.xml
+
+# eclipse
 .project
 .classpath
 .settings/
-/svf-core/nbproject/
-/svf/nbproject/
-/svf-test/nbproject/
+
+# other
+performance.properties
