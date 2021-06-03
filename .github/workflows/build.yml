@@ -2,8 +2,7 @@ name: Build
 on:
   push:
     branches:
-      - master
-      - develop
+      - "**"
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -16,16 +15,16 @@ jobs:
           distribution: "adopt"
           java-version: "8"
       - name: mvn Install
-        run: mvn -B -P cicd -f sci-vis-framework install -DskipTests=true
+        run: mvn -B -P cicd install -DskipTests=true
       - name: mvn test
         run: |
           sudo apt-get update
           sudo apt-get install -y libgtk2.0-0
-          xvfb-run --auto-servernum -s "-screen 0 1024x768x24" mvn -B -P cicd -f sci-vis-framework test -Dsurefire.excludesFile=${GITHUB_WORKSPACE}/.mvn/cicd-test-excludes
+          xvfb-run --auto-servernum -s "-screen 0 1024x768x24" mvn -B -P cicd test -Dsurefire.excludesFile=${GITHUB_WORKSPACE}/.mvn/cicd-test-excludes
       - name: Cleanup xvfb
         uses: bcomnes/cleanup-xvfb@v1
       - name: Publish to GitHub Packages Apache Maven
         if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop' }}
-        run: mvn -B -P cicd -f sci-vis-framework deploy -DskipTests=true
+        run: mvn -B -P cicd deploy -DskipTests=true
         env:
           GITHUB_TOKEN: ${{ github.token }}
