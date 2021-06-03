@@ -155,17 +155,7 @@ public class LongStateUtil {
      * @return the state as a string
      */
     public static String toString(final long state) {
-        String binary = Long.toBinaryString(state);
-        binary = binary.substring(binary.lastIndexOf('1'), binary.length());
-        binary = LongStateUtil.leftPad(binary);
-        return binary;
-    }
-
-    private static String leftPad(final String binary) {
-        final StringBuilder sb = new StringBuilder(binary);
-        while (sb.length() < 64) {
-            sb.insert(0, '0');
-        }
-        return sb.toString();
+        final String temp = String.format("%64s", Long.toBinaryString(state & ALL)).replace(' ', '0');
+        return temp;
     }
 }

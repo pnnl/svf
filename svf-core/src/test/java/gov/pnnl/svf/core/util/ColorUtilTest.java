@@ -22,6 +22,51 @@ public class ColorUtilTest {
     public ColorUtilTest() {
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testCreateBlendedColorExc_1() {
+        Assert.assertNotNull(ColorUtil.createBlendedColor(null, Color.YELLOW, DELTA));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testCreateBlendedColorExc_2() {
+        Assert.assertNotNull(ColorUtil.createBlendedColor(Color.YELLOW, null, DELTA));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateBlendedColorExc_3() {
+        Assert.assertNotNull(ColorUtil.createBlendedColor(Color.YELLOW, Color.YELLOW, -1.0f));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testCreateLookupTextureExc_1() {
+        Assert.assertNotNull(ColorUtil.createLookupTexture(null, TextureType.ALPHA, 32));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testCreateLookupTextureExc_2() {
+        Assert.assertNotNull(ColorUtil.createLookupTexture(ColorGradient.Builder.construct().color(0.5, Color.BLUE).build(), null, 32));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateLookupTextureExc_3() {
+        Assert.assertNotNull(ColorUtil.createLookupTexture(ColorGradient.Builder.construct().color(0.5, Color.BLUE).build(), TextureType.ALPHA, 0));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateRandomColorExc_1() {
+        Assert.assertNotNull(ColorUtil.createRandomColor(-1.0f, 1.0f));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateRandomColorExc_2() {
+        Assert.assertNotNull(ColorUtil.createRandomColor(0.0f, 1.5f));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateRandomColorExc_3() {
+        Assert.assertNotNull(ColorUtil.createRandomColor(0.7f, 0.2f));
+    }
+
     /**
      * Test of createRandomColor method, of class ColorUtil.
      */
@@ -95,7 +140,7 @@ public class ColorUtilTest {
     @Test
     public void testCreateLookupTextureAlpha() {
         final ColorGradient gradient = new ColorGradient(new ColorEntry(0.0, new Color(0.0f, 0.0f, 0.0f, 0.0f)),
-                                                         new ColorEntry(1.0, Color.WHITE));
+                new ColorEntry(1.0, Color.WHITE));
         final TextureType type = TextureType.ALPHA;
         final int length = 9;
         final ByteBuffer result = ColorUtil.createLookupTexture(gradient, type, length);
@@ -117,7 +162,7 @@ public class ColorUtilTest {
     @Test
     public void testCreateLookupTextureRgb() {
         final ColorGradient gradient = new ColorGradient(new ColorEntry(0.0, new Color(0.0f, 0.0f, 0.0f, 0.0f)),
-                                                         new ColorEntry(1.0, Color.INDIGO));
+                new ColorEntry(1.0, Color.INDIGO));
         final TextureType type = TextureType.RGB;
         final int length = 3;
         final ByteBuffer result = ColorUtil.createLookupTexture(gradient, type, length);
@@ -139,7 +184,7 @@ public class ColorUtilTest {
     @Test
     public void testCreateLookupTextureRgba() {
         final ColorGradient gradient = new ColorGradient(new ColorEntry(0.0, new Color(0.0f, 0.0f, 0.0f, 0.0f)),
-                                                         new ColorEntry(1.0, Color.INDIGO));
+                new ColorEntry(1.0, Color.INDIGO));
         final TextureType type = TextureType.RGBA;
         final int length = 3;
         final ByteBuffer result = ColorUtil.createLookupTexture(gradient, type, length);
@@ -161,8 +206,8 @@ public class ColorUtilTest {
     @Test
     public void testCreateLookupTextureRgba2() {
         final ColorGradient gradient = new ColorGradient(new ColorEntry(0.0, Color.RED),
-                                                         new ColorEntry(0.5, Color.WHITE),
-                                                         new ColorEntry(1.0, Color.BLUE));
+                new ColorEntry(0.5, Color.WHITE),
+                new ColorEntry(1.0, Color.BLUE));
         final TextureType type = TextureType.RGBA;
         final int length = 10;
         final ByteBuffer result = ColorUtil.createLookupTexture(gradient, type, length);
@@ -192,8 +237,8 @@ public class ColorUtilTest {
     @Test
     public void testCreateLookupTextureRgba3() {
         final ColorGradient gradient = new ColorGradient(new ColorEntry(0.0, Color.BLACK),
-                                                         new ColorEntry(0.5, new Color("FFBF00")),
-                                                         new ColorEntry(1.0, Color.WHITE));
+                new ColorEntry(0.5, new Color("FFBF00")),
+                new ColorEntry(1.0, Color.WHITE));
         final TextureType type = TextureType.RGBA;
         final int length = 10;
         final ByteBuffer result = ColorUtil.createLookupTexture(gradient, type, length);

@@ -10,6 +10,17 @@ import org.junit.Test;
 public class ByteStateUtilTest {
 
     /**
+     * Test of toString method, of class FlagUtil.
+     */
+    @Test
+    public void testToString() {
+        Assert.assertEquals("00000000", ByteStateUtil.toString(ByteStateUtil.NONE));
+        Assert.assertEquals("11111111", ByteStateUtil.toString(ByteStateUtil.ALL));
+        Assert.assertEquals("00000010", ByteStateUtil.toString((byte) 2));
+        Assert.assertEquals("00000010", ByteStateUtil.toString(ByteStateUtil.setValue((byte) 0, ByteStateUtil.getMasks()[1])));
+    }
+
+    /**
      * Test of isFlag method, of class FlagUtil.
      */
     @Test

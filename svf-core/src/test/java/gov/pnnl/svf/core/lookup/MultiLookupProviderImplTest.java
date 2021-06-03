@@ -1,6 +1,7 @@
 package gov.pnnl.svf.core.lookup;
 
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -16,12 +17,32 @@ public class MultiLookupProviderImplTest {
     public MultiLookupProviderImplTest() {
     }
 
+    @Test
+    public void testClear() {
+        final MultiLookupProvider lookup = new MultiLookupProviderImpl();
+        lookup.add("foo");
+        Assert.assertEquals("foo", lookup.lookup(String.class));
+        lookup.clear();
+        Assert.assertNull(lookup.lookup(String.class));
+    }
+
+    @Test
+    public void testLookupAll() {
+        final MultiLookupProviderImpl lookup = new MultiLookupProviderImpl();
+        lookup.add("foo");
+        Assert.assertEquals("foo", lookup.lookup(String.class));
+        final List<Object> out = new ArrayList<>();
+        lookup.lookupAll(out);
+        Assert.assertTrue(out.contains("foo"));
+        Assert.assertTrue(lookup.lookupAll().contains("foo"));
+    }
+
     /**
      * Test method for
      * {@link gov.pnnl.canopy.jogl.ui.lookup.MultiLookupProviderImpl#lookupAll(java.lang.Class)}.
      */
     @Test
-    public void testLookupAll() {
+    public void testLookupAllMulti() {
         final MultiLookupProvider lookup = new MultiLookupProviderImpl();
         Assert.assertNotNull(lookup);
         // add a bunch of strings to the lookup

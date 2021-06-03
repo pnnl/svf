@@ -143,17 +143,7 @@ public class ShortStateUtil {
      * @return the state as a string
      */
     public static String toString(final short state) {
-        String binary = Integer.toBinaryString(state);
-        binary = binary.substring(binary.lastIndexOf('1'), binary.length());
-        binary = ShortStateUtil.leftPad(binary);
-        return binary;
-    }
-
-    private static String leftPad(final String binary) {
-        final StringBuilder sb = new StringBuilder(binary);
-        while (sb.length() < 16) {
-            sb.insert(0, '0');
-        }
-        return sb.toString();
+        final String temp = String.format("%32s", Integer.toBinaryString(state & ALL)).replace(' ', '0');
+        return temp.substring(16);
     }
 }

@@ -10,6 +10,17 @@ import org.junit.Test;
 public class IntStateUtilTest {
 
     /**
+     * Test of toString method, of class FlagUtil.
+     */
+    @Test
+    public void testToString() {
+        Assert.assertEquals("00000000000000000000000000000000", IntStateUtil.toString(IntStateUtil.NONE));
+        Assert.assertEquals("11111111111111111111111111111111", IntStateUtil.toString(IntStateUtil.ALL));
+        Assert.assertEquals("00000000000000000000000000000010", IntStateUtil.toString(2));
+        Assert.assertEquals("00000000000000000000000000000010", IntStateUtil.toString(IntStateUtil.setValue(0, IntStateUtil.getMasks()[1])));
+    }
+
+    /**
      * Test of isFlag method, of class FlagUtil.
      */
     @Test

@@ -13,6 +13,18 @@ public class Tuple2Test extends AbstractObjectTestBase<Tuple2<Integer, Integer>>
 
     private final Random random = new Random();
 
+    @Test
+    public void testConstructor() {
+        Assert.assertEquals(new Tuple2<Integer, Integer>(), 
+                new Tuple2<Integer, Integer>(null, null));
+    }
+
+    @Test
+    public void testBuilder() {
+        Assert.assertEquals(new Tuple2<Integer, Integer>(), 
+                Tuple2.Builder.construct(Integer.class, Integer.class).build());
+    }
+
     /**
      * Test of get method, of class Tuple2.
      */

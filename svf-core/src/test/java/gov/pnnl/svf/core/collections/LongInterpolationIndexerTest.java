@@ -1,5 +1,6 @@
 package gov.pnnl.svf.core.collections;
 
+import gov.pnnl.svf.test.WeakEqualsHelper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -18,6 +19,16 @@ public class LongInterpolationIndexerTest {
     private static final List<Long> VALUES = Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L);
 
     public LongInterpolationIndexerTest() {
+    }
+
+    /**
+     * Test of Builder method, of class LongInterpolationIndexer.
+     */
+    @Test
+    public void testBuilder() {
+        Assert.assertTrue(WeakEqualsHelper.weakEquals(new LongInterpolationIndexer(0, 10, 7, VALUES.size()),
+                LongInterpolationIndexer.Builder.construct().min(0).max(10).value(7).size(VALUES.size()).build()
+        ));
     }
 
     /**
