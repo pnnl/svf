@@ -1,7 +1,9 @@
 package gov.pnnl.svf.core.color;
 
 import gov.pnnl.svf.test.AbstractObjectTestBase;
+import gov.pnnl.svf.test.WeakEqualsHelper;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import org.junit.Assert;
@@ -18,6 +20,63 @@ public class ColorGradientTest extends AbstractObjectTestBase<ColorGradient> {
     private final Random random = new Random();
 
     public ColorGradientTest() {
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testConstructorExc1() {
+        Assert.assertNotNull(new ColorGradient((Collection<ColorEntry>) null));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testConstructorExc2() {
+        Assert.assertNotNull(new ColorGradient((Color) null));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testConstructorExc3() {
+        Assert.assertNotNull(new ColorGradient((ColorGradient) null));
+    }
+
+    @Test
+    public void testGetColors() {
+        Assert.assertNotNull(new ColorGradient().getColors());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetColorExc1() {
+        Assert.assertNotNull(new ColorGradient().getColor(-0.1));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetColorExc2() {
+        Assert.assertNotNull(new ColorGradient().getColor(1.1));
+    }
+
+    @Test
+    public void testConstructor() {
+        Assert.assertTrue(WeakEqualsHelper.weakEquals(new ColorGradient(Color.BLACK),
+                new ColorGradient("#000000")));
+        Assert.assertTrue(WeakEqualsHelper.weakEquals(new ColorGradient(Color.BLACK),
+                new ColorGradient("#000000FF")));
+        Assert.assertTrue(WeakEqualsHelper.weakEquals(new ColorGradient(Color.BLACK),
+                new ColorGradient((byte) 0, (byte) 0, (byte) 0)));
+        Assert.assertTrue(WeakEqualsHelper.weakEquals(new ColorGradient(Color.BLACK),
+                new ColorGradient((float) 0.0, (float) 0.0, (float) 0.0)));
+        Assert.assertTrue(WeakEqualsHelper.weakEquals(new ColorGradient(Color.BLACK),
+                new ColorGradient(0, 0, 0)));
+        Assert.assertTrue(WeakEqualsHelper.weakEquals(new ColorGradient(Color.BLACK),
+                new ColorGradient((byte) 0, (byte) 0, (byte) 0, (byte) 255)));
+        Assert.assertTrue(WeakEqualsHelper.weakEquals(new ColorGradient(Color.BLACK),
+                new ColorGradient((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0)));
+        Assert.assertTrue(WeakEqualsHelper.weakEquals(new ColorGradient(Color.BLACK),
+                new ColorGradient(0, 0, 0, 255)));
+    }
+
+    @Test
+    public void testBuilder() {
+        Assert.assertTrue(WeakEqualsHelper.weakEquals(
+                new ColorGradient(new ColorEntry(0.2343243, Color.WHITE), new ColorEntry(0.8, Color.BLUE)),
+                ColorGradient.Builder.construct().color(new ColorEntry(0.2343243, Color.WHITE)).color(0.8, Color.BLUE).build()));
     }
 
     @Test
@@ -69,7 +128,7 @@ public class ColorGradientTest extends AbstractObjectTestBase<ColorGradient> {
     @Test
     public void testGetColorRed() {
         final ColorGradient instance = new ColorGradient(ColorEntry.WHITE,
-                                                         new ColorEntry(1.0, Color.RED));
+                new ColorEntry(1.0, Color.RED));
         // anywhere in the gradient should be white for this gradient
         Assert.assertEquals(Color.WHITE, instance.getColor(0.0));
         Assert.assertEquals(new Color(1.0f, 0.5f, 0.5f, 1.0f), instance.getColor(0.5));
@@ -79,7 +138,7 @@ public class ColorGradientTest extends AbstractObjectTestBase<ColorGradient> {
     @Test
     public void testGetColorGreen() {
         final ColorGradient instance = new ColorGradient(ColorEntry.WHITE,
-                                                         new ColorEntry(1.0, Color.GREEN));
+                new ColorEntry(1.0, Color.GREEN));
         // anywhere in the gradient should be white for this gradient
         Assert.assertEquals(Color.WHITE, instance.getColor(0.0));
         Assert.assertEquals(new Color(0.5f, 1.0f, 0.5f, 1.0f), instance.getColor(0.5));
@@ -89,7 +148,7 @@ public class ColorGradientTest extends AbstractObjectTestBase<ColorGradient> {
     @Test
     public void testGetColorBlue() {
         final ColorGradient instance = new ColorGradient(ColorEntry.WHITE,
-                                                         new ColorEntry(1.0, Color.BLUE));
+                new ColorEntry(1.0, Color.BLUE));
         // anywhere in the gradient should be white for this gradient
         Assert.assertEquals(Color.WHITE, instance.getColor(0.0));
         Assert.assertEquals(new Color(0.5f, 0.5f, 1.0f, 1.0f), instance.getColor(0.5));
@@ -99,7 +158,7 @@ public class ColorGradientTest extends AbstractObjectTestBase<ColorGradient> {
     @Test
     public void testGetColorAlpha() {
         final ColorGradient instance = new ColorGradient(ColorEntry.WHITE,
-                                                         new ColorEntry(1.0, new Color(1.0f, 1.0f, 1.0f, 0.0f)));
+                new ColorEntry(1.0, new Color(1.0f, 1.0f, 1.0f, 0.0f)));
         // anywhere in the gradient should be white for this gradient
         Assert.assertEquals(Color.WHITE, instance.getColor(0.0));
         Assert.assertEquals(new Color(1.0f, 1.0f, 1.0f, 0.5f), instance.getColor(0.5));

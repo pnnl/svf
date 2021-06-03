@@ -10,6 +10,17 @@ import org.junit.Test;
 public class LongStateUtilTest {
 
     /**
+     * Test of toString method, of class FlagUtil.
+     */
+    @Test
+    public void testToString() {
+        Assert.assertEquals("0000000000000000000000000000000000000000000000000000000000000000", LongStateUtil.toString(LongStateUtil.NONE));
+        Assert.assertEquals("1111111111111111111111111111111111111111111111111111111111111111", LongStateUtil.toString(LongStateUtil.ALL));
+        Assert.assertEquals("0000000000000000000000000000000000000000000000000000000000000010", LongStateUtil.toString(2L));
+        Assert.assertEquals("0000000000000000000000000000000000000000000000000000000000000010", LongStateUtil.toString(LongStateUtil.setValue(0L, LongStateUtil.getMasks()[1])));
+    }
+
+    /**
      * Test of isFlag method, of class FlagUtil.
      */
     @Test

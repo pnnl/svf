@@ -10,6 +10,17 @@ import org.junit.Test;
 public class ShortStateUtilTest {
 
     /**
+     * Test of toString method, of class FlagUtil.
+     */
+    @Test
+    public void testToString() {
+        Assert.assertEquals("0000000000000000", ShortStateUtil.toString(ShortStateUtil.NONE));
+        Assert.assertEquals("1111111111111111", ShortStateUtil.toString(ShortStateUtil.ALL));
+        Assert.assertEquals("0000000000000010", ShortStateUtil.toString((short) 2));
+        Assert.assertEquals("0000000000000010", ShortStateUtil.toString(ShortStateUtil.setValue((short) 0, ShortStateUtil.getMasks()[1])));
+    }
+
+    /**
      * Test of isFlag method, of class FlagUtil.
      */
     @Test

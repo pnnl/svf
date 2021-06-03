@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -194,7 +195,7 @@ public abstract class AbstractObjectTestBase<T extends Object> {
         // consistent
         for (int i = 0; i < iterateLength; i++) {
             Assert.assertEquals("Failed hash code iterate consistency test.", hash,
-                                muppet.hashCode());
+                    muppet.hashCode());
         }
         // equals and hash are equal
         final T a = this.newValueObject();
@@ -255,8 +256,8 @@ public abstract class AbstractObjectTestBase<T extends Object> {
      * asynchronous events.
      *
      * @param object object with the bound field
-     * @param field  name of the field to test
-     * @param value  value to test the field with
+     * @param field name of the field to test
+     * @param value value to test the field with
      */
     protected void testBoundField(final T object, final String field, final Object value) {
         testBoundField(object, field, value, value.getClass());
@@ -268,8 +269,8 @@ public abstract class AbstractObjectTestBase<T extends Object> {
      * asynchronous events.
      *
      * @param object object with the bound field
-     * @param field  name of the field to test
-     * @param value  value to test the field with
+     * @param field name of the field to test
+     * @param value value to test the field with
      */
     protected void testBoundField(final T object, final String field, final int value) {
         testBoundField(object, field, value, int.class);
@@ -281,8 +282,8 @@ public abstract class AbstractObjectTestBase<T extends Object> {
      * asynchronous events.
      *
      * @param object object with the bound field
-     * @param field  name of the field to test
-     * @param value  value to test the field with
+     * @param field name of the field to test
+     * @param value value to test the field with
      */
     protected void testBoundField(final T object, final String field, final long value) {
         testBoundField(object, field, value, long.class);
@@ -294,8 +295,8 @@ public abstract class AbstractObjectTestBase<T extends Object> {
      * asynchronous events.
      *
      * @param object object with the bound field
-     * @param field  name of the field to test
-     * @param value  value to test the field with
+     * @param field name of the field to test
+     * @param value value to test the field with
      */
     protected void testBoundField(final T object, final String field, final short value) {
         testBoundField(object, field, value, short.class);
@@ -307,8 +308,8 @@ public abstract class AbstractObjectTestBase<T extends Object> {
      * asynchronous events.
      *
      * @param object object with the bound field
-     * @param field  name of the field to test
-     * @param value  value to test the field with
+     * @param field name of the field to test
+     * @param value value to test the field with
      */
     protected void testBoundField(final T object, final String field, final byte value) {
         testBoundField(object, field, value, byte.class);
@@ -320,8 +321,8 @@ public abstract class AbstractObjectTestBase<T extends Object> {
      * asynchronous events.
      *
      * @param object object with the bound field
-     * @param field  name of the field to test
-     * @param value  value to test the field with
+     * @param field name of the field to test
+     * @param value value to test the field with
      */
     protected void testBoundField(final T object, final String field, final double value) {
         testBoundField(object, field, value, double.class);
@@ -333,8 +334,8 @@ public abstract class AbstractObjectTestBase<T extends Object> {
      * asynchronous events.
      *
      * @param object object with the bound field
-     * @param field  name of the field to test
-     * @param value  value to test the field with
+     * @param field name of the field to test
+     * @param value value to test the field with
      */
     protected void testBoundField(final T object, final String field, final float value) {
         testBoundField(object, field, value, float.class);
@@ -346,8 +347,8 @@ public abstract class AbstractObjectTestBase<T extends Object> {
      * asynchronous events.
      *
      * @param object object with the bound field
-     * @param field  name of the field to test
-     * @param value  value to test the field with
+     * @param field name of the field to test
+     * @param value value to test the field with
      */
     protected void testBoundField(final T object, final String field, final boolean value) {
         testBoundField(object, field, value, boolean.class);
@@ -359,8 +360,8 @@ public abstract class AbstractObjectTestBase<T extends Object> {
      * asynchronous events.
      *
      * @param object object with the bound field
-     * @param field  name of the field to test
-     * @param value  value to test the field with
+     * @param field name of the field to test
+     * @param value value to test the field with
      */
     protected void testBoundField(final T object, final String field, final char value) {
         testBoundField(object, field, value, char.class);
@@ -372,16 +373,16 @@ public abstract class AbstractObjectTestBase<T extends Object> {
      * asynchronous events.
      *
      * @param object object with the bound field
-     * @param field  name of the field to test
-     * @param value  value to test the field with
-     * @param clazz  the exact class type for the field
+     * @param field name of the field to test
+     * @param value value to test the field with
+     * @param clazz the exact class type for the field
      */
     protected void testBoundField(final T object, final String field, final Object value, final Class<?> clazz) {
         try {
             // get value object methods and current value
-            final String prefix = (value instanceof Boolean) ? "is" : "get";
+            final String prefix = (value instanceof Boolean || clazz.equals(boolean.class)) ? "is" : "get";
             final Method getter = object.getClass().getMethod(prefix + field.substring(0, 1).toUpperCase(Locale.US) + field.substring(1, field.length()),
-                                                              (Class<?>[]) null);
+                    (Class<?>[]) null);
             final Method setter = object.getClass().getMethod("set" + field.substring(0, 1).toUpperCase(Locale.US) + field.substring(1, field.length()), clazz);
             final Object current = getter.invoke(object, (Object[]) null);
             // event has been fired
@@ -392,10 +393,14 @@ public abstract class AbstractObjectTestBase<T extends Object> {
             final PropertyChangeListener listener = (final PropertyChangeEvent evt) -> {
                 try {
                     if (object == evt.getSource() && field.equals(evt.getPropertyName())
-                        && current == null ? evt.getOldValue() == null : current.equals(evt.getOldValue())
-                                                                         && value == null ? evt.getNewValue() == null : value.equals(evt.getNewValue())) {
+                            && (Objects.equals(current, evt.getOldValue())
+                            && Objects.equals(value, evt.getNewValue()))
+                            || (Objects.equals(String.valueOf(current), String.valueOf(evt.getOldValue()))
+                            && Objects.equals(String.valueOf(value), String.valueOf(evt.getNewValue())))) {
                         passed.set(true);
                     }
+                } catch (final Exception ex) {
+                    logger.log(Level.WARNING, ex.getMessage());
                 } finally {
                     latch.countDown();
                 }
@@ -411,11 +416,11 @@ public abstract class AbstractObjectTestBase<T extends Object> {
                 } catch (final NoSuchMethodException ex) {
                     // ignore and look for next method
                     logger.log(Level.FINE,
-                               "Methods addPropertyChangeListener or removePropertyChangeListener not found.  Looking for next observable method type...");
+                            "Methods addPropertyChangeListener or removePropertyChangeListener not found.  Looking for next observable method type...");
                 } catch (final SecurityException ex) {
                     // ignore and look for next method
                     logger.log(Level.FINE,
-                               "Unable to access methods addPropertyChangeListener or removePropertyChangeListener.  Looking for next observable method type...");
+                            "Unable to access methods addPropertyChangeListener or removePropertyChangeListener.  Looking for next observable method type...");
                 }
             }
             if (!passed.get()) {

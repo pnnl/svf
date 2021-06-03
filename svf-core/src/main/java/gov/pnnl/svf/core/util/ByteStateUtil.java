@@ -147,17 +147,7 @@ public class ByteStateUtil {
      * @return the state as a string
      */
     public static String toString(final byte state) {
-        String binary = Integer.toBinaryString(state);
-        binary = binary.substring(binary.lastIndexOf('1'), binary.length());
-        binary = ByteStateUtil.leftPad(binary);
-        return binary;
-    }
-
-    private static String leftPad(final String binary) {
-        final StringBuilder sb = new StringBuilder(binary);
-        while (sb.length() < 8) {
-            sb.insert(0, '0');
-        }
-        return sb.toString();
+        final String temp = String.format("%32s", Integer.toBinaryString(state & ALL)).replace(' ', '0');
+        return temp.substring(24);
     }
 }
